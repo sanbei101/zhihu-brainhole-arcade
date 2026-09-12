@@ -1,0 +1,213 @@
+"use server";
+
+import { z } from "zod";
+
+import { runCouncilAction, type ActionResult } from "@/app/world/action-result";
+import { generateStructured } from "@/lib/deepseek";
+import { JUDGE_INSTRUCTIONS, buildJudgePrompt } from "@/lib/prompts";
+import { worldCastSchema } from "@/lib/world-cast";
+import {
+  addDeltas,
+  advanceCrisis,
+  agentRelationSchema,
+  applyMetricDeltas,
+  applyTrustDeltas,
+  checkEnding,
+  clampAppliedDeltas,
+  crisisBodySchema,
+  crisisSchema,
+  entropyDeltasForRound,
+  metricDeltasSchema,
+  metricReasonsSchema,
+  metricsSchema,
+  penaltyAsDeltas,
+  retortRecordSchema,
+  settleUltimatum,
+  turnReactionRecordSchema,
+  turnRecordSchema,
+  ultimatumOutcomeSchema,
+  ultimatumSchema,
+  worldMutationSchema,
+  judgeResultSchema,
+  type JudgeResult,
+  type UltimatumDraft,
+} from "@/lib/world-ending";
+import { worldEventSchema } from "@/lib/world-turn";
+
+const judgeTurnInputSchema = z.object({
+  cast: worldCastSchema,
+  playerId: z.string().min(1),
+  metrics: metricsSchema,
+  round: z.number().int().min(1),
+  situation: z.string().trim().min(1).max(600),
+  decision: z.string().trim().min(1).max(600),
+  reactions: z.array(turnReactionRecordSchema).max(8),
+  retorts: z.array(retortRecordSchema).max(4),
+  history: z.array(turnRecordSchema),
+  relations: z.array(agentRelationSchema),
+  crisis: crisisSchema.nullable(),
+  ultimatum: ultimatumSchema.nullable(),
+});
+
+const normalizeCrisisOutcome = (raw: unknown): unknown => {
+  if (typeof raw === "string") {
+    const s = raw.trim().toLowerCase();
+    if (s === "resolved" || s === "已解决" || s === "true" || s === "解决" || s === "yes") {
+      return "resolved";
+    }
+    if (s === "unresolved" || s === "未解决" || s === "false" || s === "未完成" || s === "no") {
+      return "unresolved";
+    }
+  }
+  if (typeof raw === "boolean") {
+    return raw ? "resolved" : "unresolved";
+  }
+  return "unresolved";
+};
+
+const crisisOutcomeSchema = z
+  .preprocess(normalizeCrisisOutcome, z.enum(["resolved", "unresolved"]))
+  .describe("当前危机处理状态: resolved(已解决) | unresolved(未解决)");
+
+const judgeDraftSchema = z.object({
+  deltas: metricDeltasSchema.describe("四维指标的单回合增量,每项 -20 到 20 之间"),
+  metricReasons: metricReasonsSchema.describe(
+    "逐项说明本回合指标为什么变化,必须引用具体行动或事件",
+  ),
+  events: z
+    .array(worldEventSchema)
+    .min(1)
+    .max(6)
+    .describe("一到三个本回合真正发生的公开世界事件,不能只是情绪描述"),
+  narration: z.string().min(1).max(1000).describe("不超过三百字的世界旁白,承上启下"),
+  nextSituation: z.string().min(1).max(800).describe("下一回合最先逼近玩家的具体危机或待处理后果"),
+  timeLeap: z.string().max(100).nullish().describe("时代跃迁纪元标尺,如'【建安十六年 · 三年后】'"),
+  mutation: worldMutationSchema.nullish().describe("本回合世界线异化突变与群星风史诗判词"),
+  crisisOutcome: crisisOutcomeSchema,
+  newCrisis: crisisBodySchema.nullish(),
+  ultimatumOutcome: ultimatumOutcomeSchema,
+});
+
+export async function judgeTurnAction(input: unknown): Promise<ActionResult<JudgeResult>> {
+  return runCouncilAction({
+    name: "回合冲突裁决",
+    schema: judgeTurnInputSchema,
+    input,
+    handler: async (data) => {
+      const {
+        cast,
+        playerId,
+        metrics,
+        round,
+        situation,
+        decision,
+        reactions,
+        retorts,
+        history,
+        relations,
+        crisis,
+        ultimatum,
+      } = data;
+
+      const player = cast.playerCharacters.find((character) => character.id === playerId);
+      if (!player) throw new Error("玩家角色不存在");
+
+      const draft = await generateStructured({
+        label: `judge:第${round}回合`,
+        instructions: JUDGE_INSTRUCTIONS,
+        prompt: buildJudgePrompt({
+          cast,
+          player,
+          round,
+          metrics,
+          situation,
+          decision,
+          reactions,
+          retorts,
+          history,
+          relations,
+          crisis,
+          ultimatum,
+        }),
+        schema: judgeDraftSchema,
+        temperature: 0.45,
+        maxOutputTokens: 3200,
+      });
+
+      const allEntries = [...reactions, ...retorts];
+      const withTrust = applyTrustDeltas(
+        relations,
+        allEntries.map((entry) => ({
+          agentId: entry.agentId,
+          trustDelta: entry.reaction.trustDelta,
+        })),
+      );
+
+      const incomingUltimatum =
+        allEntries
+          .map((entry): { agentId: string; draft: UltimatumDraft } | null =>
+            entry.reaction.ultimatum
+              ? { agentId: entry.agentId, draft: entry.reaction.ultimatum }
+              : null,
+          )
+          .find((entry): entry is { agentId: string; draft: UltimatumDraft } => entry !== null) ??
+        null;
+
+      const ultimatumStep = settleUltimatum({
+        pending: ultimatum,
+        outcome: draft.ultimatumOutcome,
+        round,
+        relations: withTrust,
+        incoming: incomingUltimatum,
+      });
+
+      const crisisResolved =
+        crisis !== null && decision.startsWith("[处理当前危机]")
+          ? true
+          : draft.crisisOutcome === "resolved";
+
+      const crisisStep = advanceCrisis({
+        pending: crisis,
+        resolved: crisisResolved,
+        incoming: draft.newCrisis ?? null,
+        round,
+      });
+
+      const entropy = entropyDeltasForRound(metrics, round);
+      const deltas = clampAppliedDeltas(
+        addDeltas(draft.deltas, entropy, penaltyAsDeltas(crisisStep.penalty)),
+        metrics,
+      );
+      const nextMetrics = applyMetricDeltas(metrics, deltas);
+      const systemEnding = checkEnding(nextMetrics, round);
+      const ending = systemEnding
+        ? {
+            type: systemEnding.type,
+            title: systemEnding.title,
+            reason: systemEnding.reason,
+          }
+        : null;
+
+      return judgeResultSchema.parse({
+        round,
+        metrics: nextMetrics,
+        deltas,
+        entropy,
+        crisisPenalty: penaltyAsDeltas(crisisStep.penalty),
+        metricReasons: draft.metricReasons,
+        events: draft.events.slice(0, 3),
+        narration: draft.narration,
+        nextSituation: draft.nextSituation,
+        relations: ultimatumStep.relations,
+        crisis: crisisStep.crisis,
+        crisisResolved: crisisStep.expired === false && crisisResolved,
+        ultimatum: ultimatumStep.ultimatum,
+        ultimatumOutcome: ultimatumStep.defectedAgentId ? "defied" : draft.ultimatumOutcome,
+        isEnded: systemEnding !== null,
+        ending,
+        timeLeap: draft.timeLeap ?? undefined,
+        mutation: draft.mutation ?? null,
+      });
+    },
+  });
+}
