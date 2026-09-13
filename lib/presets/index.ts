@@ -67,8 +67,10 @@ export function getCastPreset(options: GetCastPresetOptions): PresetLookupResult
   const themeId = scenarioInfo?.theme.id ?? "three-kingdoms";
   const themePool = THEME_PRESET_MAP[themeId] ?? THREE_KINGDOMS_PRESETS;
 
-  // 1. 寻找直接绑定了此 scenarioId 的专属预制池
-  const directlyBound = ALL_PRESETS.filter((item) => item.scenarioIds?.includes(scenarioId));
+  // 1. 寻找直接命中预制 id 或绑定了此 scenarioId 的专属预制池
+  const directlyBound = ALL_PRESETS.filter(
+    (item) => item.id === scenarioId || item.scenarioIds?.includes(scenarioId),
+  );
 
   // 2. 确定候选池:
   // 若无排除项,优先使用专属预制;若有排除项且专属池只有1套,则扩展至整个主题预制池轮转,确保用户能切到新视角

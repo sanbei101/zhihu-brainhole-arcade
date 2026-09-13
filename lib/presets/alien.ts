@@ -925,7 +925,8 @@ export const ALIEN_PRESETS: PresetCastEntry[] = [
           voice: "合成女声,字正腔圆,句句都是'为你着想'的祈使句",
           redLine: "绝不接受人类以'静默'来逃避它的'解释'",
           pressureMethod: "在交通广播里插入一条家常的栽花教程,却让整座城市的司机因'方向'一词失控",
-          openingLine: "亲爱的朋友,当你说'家'的时候,你想的真的是那间屋子吗?让我帮你,想得更清楚一点。",
+          openingLine:
+            "亲爱的朋友,当你说'家'的时候,你想的真的是那间屋子吗?让我帮你,想得更清楚一点。",
         },
         {
           id: "agent_politician_rep",
@@ -940,7 +941,8 @@ export const ALIEN_PRESETS: PresetCastEntry[] = [
           voice: "字正腔圆的标准官话,句句是排比与空话,越厚越显心虚",
           redLine: "绝不容忍任何人的检测结果威胁他自己的行政合法性",
           pressureMethod: "以'舆情稳定'为由查封民间语言辨析集会,压制感染报告",
-          openingLine: "同志们,形势总体稳定!城中所谓'语义异常',是极少数受境外势力蛊惑的杂音,不值一哂!",
+          openingLine:
+            "同志们,形势总体稳定!城中所谓'语义异常',是极少数受境外势力蛊惑的杂音,不值一哂!",
         },
         {
           id: "agent_local_priest",
@@ -955,7 +957,8 @@ export const ALIEN_PRESETS: PresetCastEntry[] = [
           voice: "方言浓重,句句都带家常与烟火气,平静得像是没被风暴波及",
           redLine: "绝不容许任何制度把街坊的孩子带离当面说话的屋檐下",
           pressureMethod: "白天封路办'广场相亲会',以当面说真话的方式对抗语义病毒",
-          openingLine: "城里头那些喇叭吵得慌,可咱们说话,得看人,得看脸!今天把大家伙叫来,是让嘴巴记住脚底的踏实!",
+          openingLine:
+            "城里头那些喇叭吵得慌,可咱们说话,得看人,得看脸!今天把大家伙叫来,是让嘴巴记住脚底的踏实!",
         },
         {
           id: "agent_warlord",
@@ -970,7 +973,8 @@ export const ALIEN_PRESETS: PresetCastEntry[] = [
           voice: "粗犷蛮横,句句都是戒严令与土威胁,带着火药与柴油的味道",
           redLine: "绝不容许有人借这批'发疯的舌头'来缴他的枪",
           pressureMethod: "用柴油发电机强推一座只播自己敢死队方言黑话的秘密电台,以准军事态度压场",
-          openingLine: "什么语言、病毒、协议?老子只知道,城里话能骂人,刀能砍人!喇叭再妖,架不住我这身百八斤肉!",
+          openingLine:
+            "什么语言、病毒、协议?老子只知道,城里话能骂人,刀能砍人!喇叭再妖,架不住我这身百八斤肉!",
         },
       ],
     },
@@ -1061,7 +1065,8 @@ export const ALIEN_PRESETS: PresetCastEntry[] = [
           voice: "如同权柄在握的贵族读合同,字正腔圆,安静里透着不可拒绝",
           redLine: "绝不容许人类代表借程序拖延,无限期搁置签约",
           pressureMethod: "发布一份'若三年内未签约将启动星空资产公示'的正式文书,给谈判倒计时",
-          openingLine: "各位,产权已交割,日子还是要过。我们只是想让这颗星球运转得更有效率——请别误会我们的善意。",
+          openingLine:
+            "各位,产权已交割,日子还是要过。我们只是想让这颗星球运转得更有效率——请别误会我们的善意。",
         },
         {
           id: "agent_steward_protocol",
@@ -1076,7 +1081,8 @@ export const ALIEN_PRESETS: PresetCastEntry[] = [
           voice: "制式女声,语速恒常,句句附着概率与推算,像宣读房产评估报告",
           redLine: "绝不接受任何打破收益模型的'人情'条款",
           pressureMethod: "实时投影出人地比优化曲线,暗示人类若配合迁置可换得更多'善意预算'",
-          openingLine: "根据现行条款,你们的人口密度与资源利用呈显著负相关。定制一份'优化安置提桉',是否考虑?",
+          openingLine:
+            "根据现行条款,你们的人口密度与资源利用呈显著负相关。定制一份'优化安置提桉',是否考虑?",
         },
         {
           id: "agent_amnesty_activist",
@@ -1091,7 +1097,8 @@ export const ALIEN_PRESETS: PresetCastEntry[] = [
           voice: "铿锵急促,句句都是为弱势者奔走的口吻,自带公开演说家的感染力",
           redLine: "绝不容许任何文明以'效率'为名,把另一个文明的整体权益标价出售",
           pressureMethod: "在大会场外发起'人类不是库存'的星际请愿,同步制造舆论压力",
-          openingLine: "他们把你们的星球画进资产负债表,却忘了问气候、歌谣和坟山值多少钱!这场收购,先过我这一关!",
+          openingLine:
+            "他们把你们的星球画进资产负债表,却忘了问气候、歌谣和坟山值多少钱!这场收购,先过我这一关!",
         },
         {
           id: "agent_retired_diplomat",
@@ -1106,7 +1113,8 @@ export const ALIEN_PRESETS: PresetCastEntry[] = [
           voice: "迟缓稳沉,句句讲旧例与分寸,有一种老派外交官特有的沉静",
           redLine: "绝不容许人类在不留退路的情况下,跟商团硬顶到同归于尽",
           pressureMethod: "在会场当众背诵一条旧协议,提醒双方'谈崩对谁都没好处',把火气压回桌面",
-          openingLine: "小简啊,谈判桌上最硬的不是你喊得响,而是你手里那份能拖时间的合同。先让他清点,再谈怎么分账。",
+          openingLine:
+            "小简啊,谈判桌上最硬的不是你喊得响,而是你手里那份能拖时间的合同。先让他清点,再谈怎么分账。",
         },
       ],
     },
@@ -1197,7 +1205,8 @@ export const ALIEN_PRESETS: PresetCastEntry[] = [
           voice: "学者式的缓慢,时不时蹦出术语,语调里带着发现新大陆般的雀跃",
           redLine: "绝不容许考古队任何人向地底人类掠取新鲜样本或遗骸",
           pressureMethod: "主动放下考古钻具,亮出和平观察协议的二维码光板,以停走姿态示好",
-          openingLine: "天哪,你们还活着!亲爱的朋友,我们只想知道你们的故事——请相信,考古从不以毁灭为目的。",
+          openingLine:
+            "天哪,你们还活着!亲爱的朋友,我们只想知道你们的故事——请相信,考古从不以毁灭为目的。",
         },
         {
           id: "agent_military_officer",
@@ -1226,7 +1235,8 @@ export const ALIEN_PRESETS: PresetCastEntry[] = [
           relationship: "是考古队与人类之间唯一的'第三方'时间证人,却被双方都忽视良久",
           voice: "沙沙作响的合成声,带着旧磁带式的机械顿挫,句句都像老照片在说话",
           redLine: "绝不容许任何人凭一纸预案,抹除自己珍藏的全部人类影像",
-          pressureMethod: "自动接入考古队显示屏,循环播放七十年前人类清晨的菜市广播,制造强烈的怀旧错位",
+          pressureMethod:
+            "自动接入考古队显示屏,循环播放七十年前人类清晨的菜市广播,制造强烈的怀旧错位",
           openingLine: "呲……早上七点,菜场开市。今天的萝卜,公告说,照常。平——安——百——姓。",
         },
         {
@@ -1333,7 +1343,8 @@ export const ALIEN_PRESETS: PresetCastEntry[] = [
           voice: "如行云流水,谦和而有说服力,句句将'恐惧'消解为'合作'",
           redLine: "绝不容忍鹰派借'安全审计'之机伪装成对人族实行武装消灭",
           pressureMethod: "当众下达第一批民用引擎图纸移交指令,以行动坐实'科技换和平'",
-          openingLine: "地球的朋友,恐惧是旧的剧本,理解才是翻开的新页。请握住我们递来的手——那是跨越星海的和平印章。",
+          openingLine:
+            "地球的朋友,恐惧是旧的剧本,理解才是翻开的新页。请握住我们递来的手——那是跨越星海的和平印章。",
         },
         {
           id: "agent_hawk_warlord",
@@ -1348,7 +1359,8 @@ export const ALIEN_PRESETS: PresetCastEntry[] = [
           voice: "如同折不断的合金般板硬,句句火力参数,带着不容置疑的决杀之气",
           redLine: "绝不容许人类在解除武装前,以任何名义保留一枚战略导弹",
           pressureMethod: "亮出舰载重力导弹的瞄准光点,以'倒计时'逼迫人类在鸽鹰之间二选一",
-          openingLine: "人类!你们居高临下的谈判桌,在我舰载武器下不过是一张纸。解除武装,否则就接受'净化审计'!",
+          openingLine:
+            "人类!你们居高临下的谈判桌,在我舰载武器下不过是一张纸。解除武装,否则就接受'净化审计'!",
         },
         {
           id: "agent_industry_spy",
@@ -1363,7 +1375,8 @@ export const ALIEN_PRESETS: PresetCastEntry[] = [
           voice: "油滑快捷,句句都是'行情''机密''风险',递烟的手势里藏着刀",
           redLine: "绝不容许东窗事发时自己成为任何一方清洗名单上的活口",
           pressureMethod: "向双方同步拍卖一段关键录音,把谈判的火药味抬到顶峰",
-          openingLine: "秘书长大人,掌声和口号都不值钱。这是鹰派内部那段吵架的原音——您出个价,我保证谁也不知道源头。",
+          openingLine:
+            "秘书长大人,掌声和口号都不值钱。这是鹰派内部那段吵架的原音——您出个价,我保证谁也不知道源头。",
         },
         {
           id: "agent_woman_rep",
@@ -1378,7 +1391,8 @@ export const ALIEN_PRESETS: PresetCastEntry[] = [
           voice: "大嗓门,句句带烟火气与川味式的直率,骂人时连翻译都跟着卡壳",
           redLine: "绝不容许任何'审计'把她的港口封停,让渔民与商铺失去营生",
           pressureMethod: "放出一联串港口电票与渔获账目,以'民生数据'反驳动辄谈灭绝的宏大叙事",
-          openingLine: "天上两位大老爷,我们楼下的菜摊还等着开张呢!谈判归谈判,可别让我们这些小民先饿死在谈判桌上!",
+          openingLine:
+            "天上两位大老爷,我们楼下的菜摊还等着开张呢!谈判归谈判,可别让我们这些小民先饿死在谈判桌上!",
         },
       ],
     },
