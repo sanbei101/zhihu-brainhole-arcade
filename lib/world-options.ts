@@ -39,8 +39,39 @@ export const impactHintSchema = z.object({
 });
 export type ImpactHint = z.infer<typeof impactHintSchema>;
 
-export const leanSchema = z.enum(["back", "doubt", "oppose"]);
-export type Lean = z.infer<typeof leanSchema>;
+// 同样是防呆设计,同义词替换,不要重试
+export const rawLeanEnum = z.enum(["back", "doubt", "oppose"]);
+export type Lean = z.infer<typeof rawLeanEnum>;
+
+const LEAN_SYNONYMS: Record<string, Lean> = {
+  back: "back",
+  support: "back",
+  agree: "back",
+  favor: "back",
+  赞成: "back",
+  支持: "back",
+
+  doubt: "doubt",
+  neutral: "doubt",
+  hesitate: "doubt",
+  wait: "doubt",
+  observe: "doubt",
+  观望: "doubt",
+  中立: "doubt",
+
+  oppose: "oppose",
+  against: "oppose",
+  reject: "oppose",
+  disagree: "oppose",
+  反对: "oppose",
+};
+
+export const leanSchema = z
+  .string()
+  .trim()
+  .toLowerCase()
+  .transform((val) => LEAN_SYNONYMS[val] ?? val)
+  .pipe(rawLeanEnum);
 
 export const leanLabels: Record<Lean, string> = {
   back: "赞成",
