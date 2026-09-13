@@ -9,7 +9,7 @@ import type { AgentStatus } from "@/components/world-council/seats-panel";
 import type { StageBeat, StagePhase } from "@/components/world-council/speech-stage";
 import { collectWorldTurn } from "@/components/world-council/turn-stream";
 import { userErrorMessage } from "@/lib/app-error";
-import { getInitialRoundOptions } from "@/lib/presets/initial-options";
+import { getInitialRoundOptions } from "@/lib/presets";
 import { type WorldCast, worldCouncilStorageKey } from "@/lib/world-cast";
 import {
   MIN_ROUND_TO_CLOSE,

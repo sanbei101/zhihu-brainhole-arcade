@@ -1,5 +1,6 @@
 import { findScenario } from "@/lib/scenario-library";
 import { type WorldCast } from "@/lib/world-cast";
+import { type RoundOptions } from "@/lib/world-options";
 
 import { AFTER_HUMAN_PRESETS } from "./after-human";
 import { ALIEN_PRESETS } from "./alien";
@@ -107,4 +108,31 @@ export function getCastPreset(options: GetCastPresetOptions): PresetLookupResult
 export function getPresetCast(scenarioId: string): WorldCast | null {
   const result = getCastPreset({ scenarioId });
   return result.preset.cast;
+}
+
+/**
+ * 获取玩家角色在指定世界线/剧本下的预制第一回合选项
+ * 优先从匹配的 preset.initialOptions 中读取
+ */
+export function getInitialRoundOptions(options: {
+  scenarioId: string;
+  playerId: string;
+  fallbackSituation?: string;
+}): RoundOptions | null {
+  const { scenarioId, playerId, fallbackSituation } = options;
+  const lookup = getCastPreset({ scenarioId });
+  const raw = lookup?.preset?.initialOptions?.[playerId];
+  if (!raw) return null;
+
+  if (Array.isArray(raw)) {
+    return {
+      situation:
+        fallbackSituation ||
+        lookup.preset.cast.setting.crisis ||
+        "面对当前的突发局势，作为关键决策者，你必须做出抉择。",
+      options: raw,
+    };
+  }
+
+  return raw;
 }
