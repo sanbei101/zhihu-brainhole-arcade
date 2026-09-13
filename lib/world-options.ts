@@ -44,34 +44,58 @@ export const rawLeanEnum = z.enum(["back", "doubt", "oppose"]);
 export type Lean = z.infer<typeof rawLeanEnum>;
 
 const LEAN_SYNONYMS: Record<string, Lean> = {
+  // back
   back: "back",
   support: "back",
   agree: "back",
   favor: "back",
+  approve: "back",
+  endorse: "back",
   赞成: "back",
   支持: "back",
+  同意: "back",
+  拥护: "back",
 
+  // doubt
   doubt: "doubt",
   neutral: "doubt",
   hesitate: "doubt",
   wait: "doubt",
   observe: "doubt",
+  watch: "doubt",
+  negotiate: "doubt",
+  bargain: "doubt",
+  exploit: "doubt",
   观望: "doubt",
   中立: "doubt",
+  犹豫: "doubt",
+  谈判: "doubt",
+  协商: "doubt",
+  利用: "doubt",
+  投机: "doubt",
 
+  // oppose
   oppose: "oppose",
   against: "oppose",
   reject: "oppose",
   disagree: "oppose",
+  resist: "oppose",
+  refuse: "oppose",
+  deny: "oppose",
   反对: "oppose",
+  拒绝: "oppose",
+  抵抗: "oppose",
+  否决: "oppose",
+};
+const normalizeLean = (raw: unknown): unknown => {
+  if (typeof raw !== "string") return raw;
+  const text = raw.trim().toLowerCase();
+  return LEAN_SYNONYMS[text] ?? text;
 };
 
 export const leanSchema = z
-  .string()
-  .trim()
-  .toLowerCase()
-  .transform((val) => LEAN_SYNONYMS[val] ?? val)
-  .pipe(rawLeanEnum);
+  .preprocess(normalizeLean, rawLeanEnum)
+  .describe("对玩家决策的态度倾向: back (赞成) | doubt (观望/中立) | oppose (反对)");
 
 export const leanLabels: Record<Lean, string> = {
   back: "赞成",
