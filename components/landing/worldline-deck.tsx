@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import { ZhihuVoteButton } from "@/components/auth/zhihu-vote-button";
 import { CoverPanel, OutroPanel } from "@/components/landing/cover-panels";
 import { ThemePanel } from "@/components/landing/theme-panel";
 import { Button } from "@/components/ui/button";
@@ -54,28 +55,31 @@ function TopBar({ activeIndex, onJump }: { activeIndex: number; onJump: (index: 
           </span>
         </a>
 
-        <nav className="hidden items-center gap-0.5 xl:flex" aria-label="主题乐园">
-          {SCENARIO_THEMES.map((theme, index) => {
-            const current = activeIndex === index + 1;
-            return (
-              <Button
-                key={theme.id}
-                variant="ghost"
-                size="xs"
-                onClick={() => onJump(index + 1)}
-                aria-current={current ? "true" : undefined}
-                className={cn("text-[11px]", current && "bg-muted")}
-              >
-                <span
-                  className="size-1.5 rounded-full"
-                  style={{ backgroundColor: getSkin(theme.id).accent }}
-                  aria-hidden="true"
-                />
-                {getSkin(theme.id).name}
-              </Button>
-            );
-          })}
-        </nav>
+        <div className="flex items-center gap-3">
+          <nav className="hidden items-center gap-0.5 xl:flex" aria-label="主题乐园">
+            {SCENARIO_THEMES.map((theme, index) => {
+              const current = activeIndex === index + 1;
+              return (
+                <Button
+                  key={theme.id}
+                  variant="ghost"
+                  size="xs"
+                  onClick={() => onJump(index + 1)}
+                  aria-current={current ? "true" : undefined}
+                  className={cn("text-[11px]", current && "bg-muted")}
+                >
+                  <span
+                    className="size-1.5 rounded-full"
+                    style={{ backgroundColor: getSkin(theme.id).accent }}
+                    aria-hidden="true"
+                  />
+                  {getSkin(theme.id).name}
+                </Button>
+              );
+            })}
+          </nav>
+          <ZhihuVoteButton />
+        </div>
       </div>
 
       {/* 整屏进度:滚动到第几屏一眼可见 */}

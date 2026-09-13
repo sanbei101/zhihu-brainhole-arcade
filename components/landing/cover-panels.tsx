@@ -1,6 +1,7 @@
 import { ArrowUp, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
+import { LiuKanshanMascot } from "@/components/landing/liu-kanshan-mascot";
 import { spritesForSkin } from "@/components/pixel/sprites";
 import {
   StageBackdrop,
@@ -82,16 +83,16 @@ export function CoverPanel({
 
       <div className="relative flex h-full flex-col items-center px-5 pt-14 pb-14 text-center">
         {/* 上簇:贴着大字的上沿,把大字顶到页心 */}
-        <div className="flex flex-1 flex-col items-center justify-end gap-3">
+        <div className="flex flex-1 flex-col items-center justify-end gap-2.5">
           <Badge variant="outline" className="font-mono text-[10px] tracking-[0.25em]">
             WORLDLINE ARCADE
           </Badge>
-          <p className="max-w-2xl text-base leading-8 font-medium tracking-tight text-balance sm:text-xl">
+          <p className="max-w-2xl text-base leading-7 font-medium tracking-tight text-balance sm:text-xl">
             一句'如果',值得用<span className="text-primary">一整个世界</span>来回答。
           </p>
-          <p className="text-muted-foreground max-w-xl text-xs leading-6 sm:text-sm">
-            知乎那些最出格的假设,在这里长成了可以走进去的副本。你下决定,世界接着写。
-          </p>
+          <div className="w-full max-w-lg">
+            <LiuKanshanMascot />
+          </div>
         </div>
 
         {/* 页心大字:整页最大的字,打字机逐字敲出来。用 flex 居中,逐字出现时由中间向外长,

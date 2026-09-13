@@ -1,0 +1,101 @@
+/**
+ * 知乎官方 OAuth 鉴权及黑客松“人气奖”接口调用工具
+ * 依据知乎黑客松补充资料与开放平台规范实现
+ */
+
+export const ZHIHU_OAUTH_STATE_COOKIE = "zhihu_oauth_state";
+export const ZHIHU_VOTED_COOKIE = "zhihu_voted";
+
+export interface ZhihuOAuthConfig {
+  appId: string;
+  appKey: string;
+  redirectUri?: string;
+}
+
+export function getZhihuOAuthConfig(): ZhihuOAuthConfig | null {
+  const appId = process.env.ZHIHU_OAUTH_APP_ID?.trim();
+  const appKey = process.env.ZHIHU_OAUTH_APP_KEY?.trim();
+  const redirectUri = process.env.ZHIHU_OAUTH_REDIRECT_URI?.trim();
+
+  if (!appId || !appKey) {
+    return null;
+  }
+
+  return {
+    appId,
+    appKey,
+    redirectUri: redirectUri || undefined,
+  };
+}
+
+/**
+ * 构造知乎授权跳转 URL
+ */
+export function buildZhihuAuthorizeUrl(defaultRedirectUri: string, state: string): string {
+  const config = getZhihuOAuthConfig();
+  if (!config) {
+    throw new Error("缺少知乎 OAuth 凭证配置 (ZHIHU_OAUTH_APP_ID / ZHIHU_OAUTH_APP_KEY)");
+  }
+
+  const finalRedirectUri = config.redirectUri || defaultRedirectUri;
+  const url = new URL("https://openapi.zhihu.com/authorize");
+  url.searchParams.set("redirect_uri", finalRedirectUri);
+  url.searchParams.set("app_id", config.appId);
+  url.searchParams.set("response_type", "code");
+  url.searchParams.set("state", state);
+
+  return url.toString();
+}
+
+export interface ZhihuTokenResponse {
+  access_token?: string;
+  token_type?: string;
+  expires_in?: number;
+  code?: number;
+  message?: string;
+  [key: string]: unknown;
+}
+
+/**
+ * 使用 authorization_code 向知乎官方换取 access_token
+ * 成功换取即代表为黑客松参赛作品完成一次人气奖接口调用！
+ */
+export async function exchangeZhihuAccessToken(
+  code: string,
+  defaultRedirectUri: string,
+): Promise<string> {
+  const config = getZhihuOAuthConfig();
+  if (!config) {
+    throw new Error("缺少知乎 OAuth 凭证配置 (ZHIHU_OAUTH_APP_ID / ZHIHU_OAUTH_APP_KEY)");
+  }
+
+  const finalRedirectUri = config.redirectUri || defaultRedirectUri;
+
+  const response = await fetch("https://openapi.zhihu.com/access_token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams({
+      app_id: config.appId,
+      app_key: config.appKey,
+      grant_type: "authorization_code",
+      redirect_uri: finalRedirectUri,
+      code,
+    }),
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`知乎 OAuth Token 换取失败 (HTTP ${response.status}): ${errorText}`);
+  }
+
+  const data = (await response.json()) as ZhihuTokenResponse;
+
+  if (!data.access_token) {
+    throw new Error(`知乎 OAuth 返回未包含 access_token: ${JSON.stringify(data)}`);
+  }
+
+  return data.access_token;
+}
