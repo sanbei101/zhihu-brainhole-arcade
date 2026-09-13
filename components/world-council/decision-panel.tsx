@@ -167,10 +167,13 @@ function OptionsLoadingState() {
                   </span>
                   <span className="text-foreground/85 text-xs font-medium">{branch.archetype}</span>
                 </div>
-                <span className="text-muted-foreground flex items-center gap-1 font-mono text-[10px]">
-                  <span className="bg-primary/70 inline-block size-1.5 animate-ping rounded-full" />
-                  生成中
-                </span>
+                <div className="text-muted-foreground flex items-center gap-1.5 text-[10px]">
+                  <span className="relative flex size-1.5 shrink-0">
+                    <span className="bg-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
+                    <span className="bg-primary relative inline-flex size-1.5 rounded-full" />
+                  </span>
+                  <span className="leading-none">生成中</span>
+                </div>
               </div>
               <div className="space-y-1.5">
                 <div className="bg-muted-foreground/15 h-3 w-4/5 rounded" />
