@@ -4,6 +4,7 @@ import { z } from "zod";
 
 import { runCouncilAction, type ActionResult } from "@/app/world/action-result";
 import { generateStructured } from "@/lib/deepseek";
+import { getInitialRoundOptions } from "@/lib/presets";
 import { OPTIONS_INSTRUCTIONS, buildOptionsPrompt } from "@/lib/prompts";
 import { worldCastSchema } from "@/lib/world-cast";
 import {
@@ -13,9 +14,10 @@ import {
   turnRecordSchema,
   ultimatumSchema,
 } from "@/lib/world-ending";
-import { roundOptionsSchema, type RoundOptions } from "@/lib/world-options";
+import { decisionOptionSchema, roundOptionsSchema, type RoundOptions } from "@/lib/world-options";
 
 const generateOptionsInputSchema = z.object({
+  scenarioId: z.string().optional(),
   cast: worldCastSchema,
   playerId: z.string().min(1),
   metrics: metricsSchema,
@@ -24,6 +26,7 @@ const generateOptionsInputSchema = z.object({
   relations: z.array(agentRelationSchema),
   crisis: crisisSchema.nullable(),
   ultimatum: ultimatumSchema.nullable(),
+  exemplarOptions: z.array(decisionOptionSchema).optional(),
 });
 
 export async function generateOptionsAction(input: unknown): Promise<ActionResult<RoundOptions>> {
@@ -32,9 +35,35 @@ export async function generateOptionsAction(input: unknown): Promise<ActionResul
     schema: generateOptionsInputSchema,
     input,
     handler: async (data) => {
-      const { cast, playerId, metrics, round, history, relations, crisis, ultimatum } = data;
+      const {
+        scenarioId,
+        cast,
+        playerId,
+        metrics,
+        round,
+        history,
+        relations,
+        crisis,
+        ultimatum,
+        exemplarOptions,
+      } = data;
       const player = cast.playerCharacters.find((character) => character.id === playerId);
       if (!player) throw new Error("玩家角色不存在");
+
+      // 提取本世界线第一回合的典范选项作为 Few-Shot 样本,供后续回合对齐文风、梯度与群星金句质感
+      let exemplar = exemplarOptions;
+      if (!exemplar?.length && history.length > 0) {
+        const round1Turn = history.find((t) => t.round === 1);
+        if (round1Turn?.branchOptions?.length) {
+          exemplar = round1Turn.branchOptions;
+        }
+      }
+      if (!exemplar?.length && scenarioId) {
+        const presetInitial = getInitialRoundOptions({ scenarioId, playerId });
+        if (presetInitial?.options?.length) {
+          exemplar = presetInitial.options;
+        }
+      }
 
       const object = await generateStructured({
         instructions: OPTIONS_INSTRUCTIONS,
@@ -47,6 +76,7 @@ export async function generateOptionsAction(input: unknown): Promise<ActionResul
           relations,
           crisis,
           ultimatum,
+          exemplarOptions: exemplar,
         }),
         schema: roundOptionsSchema,
         temperature: 0.85,

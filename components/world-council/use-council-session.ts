@@ -426,6 +426,7 @@ export function useCouncilSession({ initial, worldId }: UseCouncilSessionOptions
     setIsGeneratingOptions(true);
     setOptionsError("");
     void generateOptionsAction({
+      scenarioId: worldId,
       cast,
       playerId: player.id,
       metrics,
@@ -544,6 +545,7 @@ export function useCouncilSession({ initial, worldId }: UseCouncilSessionOptions
             },
           ];
           void generateOptionsAction({
+            scenarioId: worldId,
             cast,
             playerId: player.id,
             metrics: result.data.metrics,
