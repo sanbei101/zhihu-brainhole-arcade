@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useCallback, type HTMLAttributes } from "react";
+import React, { useRef, useCallback, type HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 interface SpotlightCardProps extends HTMLAttributes<HTMLDivElement> {
@@ -11,8 +11,8 @@ interface SpotlightCardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * ReactBits SpotlightCard 组件
- * 随鼠标移动在卡片表面投射细腻的微光反光，无需复杂渐变 CSS，提升卡片交互质感
+ * SpotlightCard
+ * 使用 CSS 变量与 requestAnimationFrame 驱动聚光灯反射
  */
 export function SpotlightCard({
   children,
@@ -22,24 +22,44 @@ export function SpotlightCard({
   ...props
 }: SpotlightCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
+  const spotlightRef = useRef<HTMLDivElement>(null);
+  const rectRef = useRef<DOMRect | null>(null);
+  const rafRef = useRef<number | null>(null);
+
+  const handleMouseEnter = useCallback(() => {
+    if (cardRef.current) {
+      rectRef.current = cardRef.current.getBoundingClientRect();
+    }
+    if (spotlightRef.current) {
+      spotlightRef.current.style.opacity = "1";
+    }
+  }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    setPosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
+    if (!rectRef.current && cardRef.current) {
+      rectRef.current = cardRef.current.getBoundingClientRect();
+    }
+    const rect = rectRef.current;
+    if (!rect || !spotlightRef.current) return;
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      if (spotlightRef.current) {
+        spotlightRef.current.style.setProperty("--spot-x", `${x}px`);
+        spotlightRef.current.style.setProperty("--spot-y", `${y}px`);
+      }
     });
   }, []);
 
-  const handleMouseEnter = useCallback(() => {
-    setIsHovered(true);
-  }, []);
-
   const handleMouseLeave = useCallback(() => {
-    setIsHovered(false);
+    rectRef.current = null;
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    if (spotlightRef.current) {
+      spotlightRef.current.style.opacity = "0";
+    }
   }, []);
 
   return (
@@ -49,17 +69,17 @@ export function SpotlightCard({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "relative rounded-xl border border-border bg-card text-card-foreground overflow-hidden transition-all",
+        "group relative rounded-xl border border-border bg-card text-card-foreground overflow-hidden transition-all",
         className,
       )}
       {...props}
     >
       {/* 聚光灯微光层 */}
       <div
-        className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300"
+        ref={spotlightRef}
+        className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300"
         style={{
-          opacity: isHovered ? 1 : 0,
-          background: `radial-gradient(${spotlightRadius}px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 80%)`,
+          background: `radial-gradient(${spotlightRadius}px circle at var(--spot-x, -999px) var(--spot-y, -999px), ${spotlightColor}, transparent 80%)`,
         }}
         aria-hidden="true"
       />

@@ -1,13 +1,26 @@
-interface PixelRect {
-  x: number;
-  y: number;
-  width: number;
+interface ColorPath {
   fill: string;
+  d: string;
 }
 
-/** 同一行连续同色像素合并成一个 rect,节点数直接砍一个量级 */
-function frameToRects(frame: readonly string[], palette: Record<string, string>): PixelRect[] {
-  const rects: PixelRect[] = [];
+/** 缓存精灵帧路径,避免重复解析与 GC 压力 */
+const PATHS_CACHE = new Map<string, ColorPath[]>();
+
+/**
+ * 将一帧画面中所有相同颜色的连续像素块合并为单一 SVG path 路径
+ * 节点数量从以往的数百个 `<rect>` 锐降为每色仅 1 个 `<path>`
+ * 极大降低浏览器 SVG 渲染树深度与重绘面积
+ */
+function frameToPaths(frame: readonly string[], palette: Record<string, string>): ColorPath[] {
+  const paletteKey = Object.entries(palette)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([k, v]) => `${k}:${v}`)
+    .join(",");
+  const cacheKey = `${frame.join("/")}|${paletteKey}`;
+  const cached = PATHS_CACHE.get(cacheKey);
+  if (cached) return cached;
+
+  const colorMap: Record<string, string[]> = {};
 
   frame.forEach((row, y) => {
     let x = 0;
@@ -20,12 +33,22 @@ function frameToRects(frame: readonly string[], palette: Record<string, string>)
       }
       let width = 1;
       while (x + width < row.length && row[x + width] === key) width += 1;
-      rects.push({ x, y, width, fill });
+      if (!colorMap[fill]) colorMap[fill] = [];
+      colorMap[fill].push(`M${x} ${y}h${width}v1h-${width}Z`);
       x += width;
     }
   });
 
-  return rects;
+  const result: ColorPath[] = Object.entries(colorMap).map(([fill, dList]) => ({
+    fill,
+    d: dList.join(""),
+  }));
+
+  if (PATHS_CACHE.size > 500) {
+    PATHS_CACHE.clear();
+  }
+  PATHS_CACHE.set(cacheKey, result);
+  return result;
 }
 
 interface PixelSpriteProps {
@@ -37,6 +60,8 @@ interface PixelSpriteProps {
   duration?: number;
   className?: string;
   label: string;
+  /** 是否播放多帧轮播动画,离屏或非聚焦时设为 false */
+  animated?: boolean;
 }
 
 export function PixelSprite({
@@ -46,6 +71,7 @@ export function PixelSprite({
   duration = 720,
   className,
   label,
+  animated = true,
 }: PixelSpriteProps) {
   if (!frames.length) return null;
 
@@ -53,6 +79,7 @@ export function PixelSprite({
   const height = frames[0].length;
   const total = frames.length;
   const keyTimes = frames.map((_, index) => index / total).join(";");
+  const renderedFrames = animated ? frames : [frames[0]];
 
   return (
     <svg
@@ -66,12 +93,12 @@ export function PixelSprite({
       style={{ imageRendering: "pixelated", flexShrink: 0 }}
     >
       <title>{label}</title>
-      {frames.map((frame, frameIndex) => {
+      {renderedFrames.map((frame, frameIndex) => {
         const values = frames.map((_, index) => (index === frameIndex ? 1 : 0)).join(";");
+        const paths = frameToPaths(frame, palette);
         return (
           <g key={frameIndex} opacity={frameIndex === 0 ? 1 : 0}>
-            {/* 单帧不退化成动画:立绘的律动交给外层 CSS,别在这里空转一条 SMIL */}
-            {total > 1 ? (
+            {total > 1 && animated ? (
               <animate
                 attributeName="opacity"
                 values={values}
@@ -81,15 +108,8 @@ export function PixelSprite({
                 repeatCount="indefinite"
               />
             ) : null}
-            {frameToRects(frame, palette).map((rect) => (
-              <rect
-                key={`${rect.x}-${rect.y}-${rect.width}`}
-                x={rect.x}
-                y={rect.y}
-                width={rect.width}
-                height={1}
-                fill={rect.fill}
-              />
+            {paths.map((p) => (
+              <path key={p.fill} d={p.d} fill={p.fill} />
             ))}
           </g>
         );

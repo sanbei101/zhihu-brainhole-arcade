@@ -49,12 +49,15 @@ export function StageSprite({
   targetHeight,
   fit,
   className,
+  animated = true,
 }: {
   sprite: SpriteDef;
   targetHeight: number;
   /** 高度上限,防止精灵越过后面的浮动层 */
   fit?: string;
   className?: string;
+  /** 是否播放多帧动画,非活跃屏传 false 停用后台 SMIL 运算 */
+  animated?: boolean;
 }) {
   return (
     <div className={`${SPRITE_FIT} ${className ?? ""}`}>
@@ -65,6 +68,7 @@ export function StageSprite({
         duration={sprite.duration}
         scale={stagePixelSize(sprite, targetHeight)}
         className={fit}
+        animated={animated}
       />
     </div>
   );
@@ -156,13 +160,15 @@ interface ThemeStageProps {
   /** 文案在右侧时整幅演出镜像,给文字让出左上与右上空间 */
   reversed?: boolean;
   className?: string;
+  /** 是否为当前活动屏,离屏挂载时置 false 暂停动画 */
+  active?: boolean;
 }
 
 /**
  * 一整屏的像素演出:天空精灵落在地平线上、其余悬空,地面精灵一线排开踩在地台上。
  * 每个主题只需要在 spritesForSkin 里补一组精灵,这里自动排布。
  */
-export function ThemeStage({ skin, reversed = false, className }: ThemeStageProps) {
+export function ThemeStage({ skin, reversed = false, className, active = true }: ThemeStageProps) {
   const sprites = spritesForSkin(skin);
   const ground = sprites.filter((sprite) => sprite.slot !== "sky");
   const [landmark, ...floating] = sprites.filter((sprite) => sprite.slot === "sky");
@@ -178,7 +184,7 @@ export function ThemeStage({ skin, reversed = false, className }: ThemeStageProp
           className={`absolute ${GROUND_LINE} ${reversed ? "left-[6%]" : "right-[6%]"}`}
           aria-hidden="true"
         >
-          <StageSprite sprite={landmark} targetHeight={228} fit={FIT.landmark} />
+          <StageSprite sprite={landmark} targetHeight={228} fit={FIT.landmark} animated={active} />
         </div>
       ) : null}
 
@@ -191,7 +197,7 @@ export function ThemeStage({ skin, reversed = false, className }: ThemeStageProp
           }`}
           aria-hidden="true"
         >
-          <StageSprite sprite={sprite} targetHeight={126} fit={FIT.floating} />
+          <StageSprite sprite={sprite} targetHeight={126} fit={FIT.floating} animated={active} />
         </div>
       ))}
 
@@ -206,6 +212,7 @@ export function ThemeStage({ skin, reversed = false, className }: ThemeStageProp
             sprite={sprite}
             targetHeight={index === 0 ? 288 : 168}
             fit={index === 0 ? FIT.hero : FIT.prop}
+            animated={active}
           />
         ))}
       </div>

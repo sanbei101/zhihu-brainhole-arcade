@@ -33,7 +33,7 @@ const PARADE: Array<{ id: string; height: number }> = [
  */
 const PARADE_FIT = "w-auto max-h-[calc((100dvh_-_440px)/2_-_56px)]";
 
-function WorldParade() {
+function WorldParade({ active = true }: { active?: boolean }) {
   return (
     <div
       className={`absolute inset-x-0 ${GROUND_LINE} flex items-end justify-between gap-3 px-[6%] sm:px-[9%]`}
@@ -49,6 +49,7 @@ function WorldParade() {
             sprite={sprite}
             targetHeight={entry.height}
             fit={PARADE_FIT}
+            animated={active}
           />
         );
       })}
@@ -56,7 +57,13 @@ function WorldParade() {
   );
 }
 
-export function CoverPanel({ onJump }: { onJump: (index: number) => void }) {
+export function CoverPanel({
+  onJump,
+  active = true,
+}: {
+  onJump: (index: number) => void;
+  active?: boolean;
+}) {
   const skin = getSkin(undefined);
 
   return (
@@ -68,7 +75,7 @@ export function CoverPanel({ onJump }: { onJump: (index: number) => void }) {
     >
       <div className="absolute inset-0">
         <StageBackdrop skin={skin} />
-        <WorldParade />
+        <WorldParade active={active} />
       </div>
 
       <div className="from-background/95 via-background/75 pointer-events-none absolute inset-0 bg-gradient-to-b to-transparent" />
@@ -146,9 +153,11 @@ export function CoverPanel({ onJump }: { onJump: (index: number) => void }) {
 export function OutroPanel({
   onJump,
   mounted,
+  active = true,
 }: {
   onJump: (index: number) => void;
   mounted: boolean;
+  active?: boolean;
 }) {
   const skin = getSkin(undefined);
 
@@ -159,7 +168,7 @@ export function OutroPanel({
       aria-label="游园结束"
       className={`bg-background text-foreground relative h-dvh w-full snap-start snap-always overflow-hidden ${isDarkSkin(skin) ? "dark" : ""}`}
     >
-      {mounted ? <ThemeStage skin={skin} /> : null}
+      {mounted ? <ThemeStage skin={skin} active={active} /> : null}
 
       <div className="from-background/95 via-background/75 pointer-events-none absolute inset-0 bg-gradient-to-b to-transparent" />
 

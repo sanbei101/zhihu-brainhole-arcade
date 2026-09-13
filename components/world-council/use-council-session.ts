@@ -9,7 +9,6 @@ import type { AgentStatus } from "@/components/world-council/seats-panel";
 import type { StageBeat, StagePhase } from "@/components/world-council/speech-stage";
 import { collectWorldTurn } from "@/components/world-council/turn-stream";
 import { userErrorMessage } from "@/lib/app-error";
-import { getInitialRoundOptions } from "@/lib/presets";
 import { type WorldCast, worldCouncilStorageKey } from "@/lib/world-cast";
 import {
   MIN_ROUND_TO_CLOSE,
@@ -397,23 +396,10 @@ export function useCouncilSession({ initial, worldId }: UseCouncilSessionOptions
     worldId,
   ]);
 
-  // 回合选项生成 (优先查预制，次查预取，最后拉取 API)
+  // 回合选项生成
   useEffect(() => {
     if (!player) return;
     if (ended || currentTurnSettled || submittedDecision || options) return;
-
-    if (round === 1) {
-      const presetOptions = getInitialRoundOptions({
-        scenarioId: worldId,
-        playerId: player.id,
-        fallbackSituation: cast.setting.crisis,
-      });
-      if (presetOptions) {
-        setOptions(presetOptions);
-        setIsGeneratingOptions(false);
-        return;
-      }
-    }
 
     if (prefetchedOptionsRef.current) {
       setOptions(prefetchedOptionsRef.current);

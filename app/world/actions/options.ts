@@ -50,6 +50,30 @@ export async function generateOptionsAction(input: unknown): Promise<ActionResul
       const player = cast.playerCharacters.find((character) => character.id === playerId);
       if (!player) throw new Error("玩家角色不存在");
 
+      // 第一回合优先命中预制选项,免除大模型调用并确保 100% 精品开局
+      if (round === 1 && scenarioId) {
+        const presetInitial = getInitialRoundOptions({
+          scenarioId,
+          playerId,
+          fallbackSituation: cast.setting.crisis,
+        });
+        if (presetInitial?.options?.length) {
+          const agentIds = cast.agentCharacters.map((character) => character.id);
+          const options = presetInitial.options.slice(0, 4).map((option) => {
+            const covered = new Set(option.forecast.map((entry) => entry.agentId));
+            const missing = agentIds.filter((id) => !covered.has(id));
+            if (!missing.length) return option;
+            return Object.assign({}, option, {
+              forecast: [
+                ...option.forecast,
+                ...missing.map((agentId) => ({ agentId, lean: "doubt" as const })),
+              ],
+            });
+          });
+          return { ...presetInitial, options };
+        }
+      }
+
       // 提取本世界线第一回合的典范选项作为 Few-Shot 样本,供后续回合对齐文风、梯度与群星金句质感
       let exemplar = exemplarOptions;
       if (!exemplar?.length && history.length > 0) {

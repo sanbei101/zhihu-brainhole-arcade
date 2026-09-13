@@ -33,7 +33,7 @@ const NAV_ITEMS: NavItem[] = [
 
 function TopBar({ activeIndex, onJump }: { activeIndex: number; onJump: (index: number) => void }) {
   return (
-    <header className="border-border bg-background/75 absolute inset-x-0 top-0 z-40 border-b backdrop-blur-md">
+    <header className="border-border bg-background/95 md:bg-background/80 absolute inset-x-0 top-0 z-40 border-b md:backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-5 sm:px-8">
         <a
           href="#top"
@@ -113,7 +113,7 @@ function DotRail({
             aria-current={current ? "true" : undefined}
             className="group flex items-center gap-2 py-0.5"
           >
-            <span className="bg-background/85 rounded px-2 py-0.5 font-mono text-[10px] whitespace-nowrap opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
+            <span className="bg-background/95 md:bg-background/85 rounded px-2 py-0.5 font-mono text-[10px] whitespace-nowrap opacity-0 transition-opacity group-hover:opacity-100 md:backdrop-blur-sm">
               {item.label}
             </span>
             <span
@@ -149,14 +149,24 @@ export function WorldlineDeck() {
     }
   }, []);
 
-  // 整屏吸附:滚动位置直接换算当前屏序号
+  // 整屏吸附:使用 rAF 节流滚动位置换算，杜绝高频滚动引发 forced layout
   useEffect(() => {
     const scroller = scrollerRef.current;
     if (!scroller) return;
+    let ticking = false;
     const sync = () => {
-      const step = scroller.clientHeight || 1;
-      const index = Math.min(PANEL_COUNT - 1, Math.max(0, Math.round(scroller.scrollTop / step)));
-      setActiveIndex((current) => (current === index ? current : index));
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        if (!scroller) {
+          ticking = false;
+          return;
+        }
+        const step = scroller.clientHeight || 1;
+        const index = Math.min(PANEL_COUNT - 1, Math.max(0, Math.round(scroller.scrollTop / step)));
+        setActiveIndex((current) => (current === index ? current : index));
+        ticking = false;
+      });
     };
     scroller.addEventListener("scroll", sync, { passive: true });
     sync();
@@ -193,14 +203,14 @@ export function WorldlineDeck() {
     const onWheel = (event: WheelEvent) => {
       // 横向滚动交给题库架自己处理
       if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
-      if (Math.abs(event.deltaY) < 3) return;
+      if (Math.abs(event.deltaY) < 15) return;
       event.preventDefault();
       if (wheelLockRef.current) return;
       wheelLockRef.current = true;
       jumpTo(activeIndexRef.current + (event.deltaY > 0 ? 1 : -1));
       window.setTimeout(() => {
         wheelLockRef.current = false;
-      }, 650);
+      }, 400);
     };
 
     scroller.addEventListener("wheel", onWheel, { passive: false });
@@ -259,7 +269,7 @@ export function WorldlineDeck() {
         ref={scrollerRef}
         className="h-dvh snap-y snap-mandatory scrollbar-none overflow-y-auto overscroll-y-contain"
       >
-        <CoverPanel onJump={jumpTo} />
+        <CoverPanel onJump={jumpTo} active={activeIndex === 0} />
 
         {SCENARIO_THEMES.map((theme, index) => (
           <ThemePanel
@@ -272,7 +282,11 @@ export function WorldlineDeck() {
           />
         ))}
 
-        <OutroPanel onJump={jumpTo} mounted={isMounted(PANEL_COUNT - 1)} />
+        <OutroPanel
+          onJump={jumpTo}
+          mounted={isMounted(PANEL_COUNT - 1)}
+          active={activeIndex === PANEL_COUNT - 1}
+        />
       </div>
 
       <TopBar activeIndex={activeIndex} onJump={jumpTo} />
