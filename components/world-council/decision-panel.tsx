@@ -16,11 +16,9 @@ import {
   type WorldUltimatum,
 } from "@/lib/world-ending";
 import {
-  leanLabels,
   type DecisionOption,
   type ForecastEntry,
   type ImpactHint,
-  type Lean,
   type RoundOptions,
 } from "@/lib/world-options";
 
@@ -52,13 +50,6 @@ interface DecisionPanelProps {
   ultimatum: WorldUltimatum | null;
   idleOption: DecisionOption | null;
 }
-
-const leanStyles: Record<Lean, string> = {
-  back: "border-emerald-500/60 bg-emerald-50 text-emerald-700 dark:border-emerald-700/60 dark:bg-emerald-950/40 dark:text-emerald-300",
-  doubt: "border-border bg-muted/60 text-muted-foreground",
-  oppose:
-    "border-red-500/60 bg-red-50 text-red-700 dark:border-red-700/60 dark:bg-red-950/40 dark:text-red-300",
-};
 
 function ImpactRow({ impact }: { impact: ImpactHint }) {
   return (
@@ -92,18 +83,31 @@ function ForecastRow({
   nameById: Map<string, string>;
 }) {
   if (!forecast.length) return null;
+
+  const backs = forecast.filter((e) => e.lean === "back");
+  const opposes = forecast.filter((e) => e.lean === "oppose");
+  const doubts = forecast.filter((e) => e.lean === "doubt");
+
   return (
-    <span className="flex flex-wrap items-center gap-1.5">
-      <span className="text-muted-foreground text-[11px]">预测</span>
-      {forecast.map((entry) => (
-        <span
-          key={entry.agentId}
-          className={`inline-flex items-center gap-1 rounded-full border px-1.5 py-0.5 text-[11px] ${leanStyles[entry.lean]}`}
-        >
-          {nameById.get(entry.agentId) ?? entry.agentId}
-          <span className="opacity-80">{leanLabels[entry.lean]}</span>
+    <span className="text-muted-foreground flex flex-wrap items-center gap-x-2.5 gap-y-1 pt-0.5 text-[11px] leading-tight">
+      {backs.length ? (
+        <span className="inline-flex items-center gap-1 font-medium text-emerald-700 dark:text-emerald-400">
+          <span>赞成:</span>
+          <span>{backs.map((e) => nameById.get(e.agentId) ?? e.agentId).join("、")}</span>
         </span>
-      ))}
+      ) : null}
+      {opposes.length ? (
+        <span className="inline-flex items-center gap-1 font-medium text-red-700 dark:text-red-400">
+          <span>反对:</span>
+          <span>{opposes.map((e) => nameById.get(e.agentId) ?? e.agentId).join("、")}</span>
+        </span>
+      ) : null}
+      {doubts.length ? (
+        <span className="inline-flex items-center gap-1 opacity-80">
+          <span>观望:</span>
+          <span>{doubts.map((e) => nameById.get(e.agentId) ?? e.agentId).join("、")}</span>
+        </span>
+      ) : null}
     </span>
   );
 }

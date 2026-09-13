@@ -308,6 +308,29 @@ export function DirectorNarrationMessage({
       </MessageAvatar>
       <MessageContent>
         <MessageHeader>{title}</MessageHeader>
+        {deltas ? (
+          <div className="flex flex-wrap items-center gap-1.5 pb-1">
+            <span className="text-muted-foreground text-xs font-medium">四维增量:</span>
+            {metricKeys
+              .filter((key) => deltas[key] !== 0)
+              .map((key) => {
+                const val = deltas[key];
+                const isPositive = val > 0;
+                return (
+                  <Badge
+                    key={key}
+                    variant={isPositive ? "secondary" : "destructive"}
+                    className="font-mono text-xs"
+                  >
+                    {metricLabels[key]} {isPositive ? `+${val}` : val}
+                  </Badge>
+                );
+              })}
+            {!metricKeys.some((key) => deltas[key] !== 0) ? (
+              <span className="text-muted-foreground font-mono text-xs">各项指标持平</span>
+            ) : null}
+          </div>
+        ) : null}
         <div className="bg-muted max-w-4xl rounded-lg px-4 py-3 leading-7">{narration}</div>
         {events.length ? (
           <div className="mt-3 max-w-4xl space-y-3">
@@ -316,11 +339,6 @@ export function DirectorNarrationMessage({
             ))}
           </div>
         ) : null}
-        {deltas ? (
-          <MessageFooter className="max-w-4xl items-start leading-5">
-            四维净变化:{deltaSummary(deltas) || "四维指标持平"}
-          </MessageFooter>
-        ) : null}
         {entropyText || penaltyText ? (
           <p className="text-muted-foreground max-w-4xl text-xs leading-5">
             {entropyText ? `大势流失:${entropyText}` : null}
@@ -328,20 +346,28 @@ export function DirectorNarrationMessage({
             {penaltyText ? `突发事件逾期:${penaltyText}` : null}
           </p>
         ) : null}
-        {metricReasons ? (
-          <div className="text-muted-foreground mt-2 grid max-w-4xl gap-1 text-xs leading-5 sm:grid-cols-2">
-            {metricKeys.map((key) => (
-              <p key={key}>
-                <span className="text-foreground">{metricLabels[key]}:</span>
-                {metricReasons[key]}
-              </p>
-            ))}
+        {nextSituation ? (
+          <div className="mt-3 max-w-4xl rounded-md border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs leading-5 text-amber-950 dark:text-amber-200">
+            <span className="font-semibold">下一回合逼近: </span>
+            {nextSituation}
           </div>
         ) : null}
-        {nextSituation ? (
-          <MessageFooter className="max-w-4xl items-start leading-5">
-            下一回合逼近:{nextSituation}
-          </MessageFooter>
+        {metricReasons ? (
+          <details className="group mt-2 max-w-4xl">
+            <summary className="text-muted-foreground hover:text-foreground flex cursor-pointer items-center gap-1.5 text-xs select-none">
+              <span className="font-medium">指标变化溯源</span>
+              <span className="text-[11px] opacity-70 group-open:hidden">(点击查看逐项因果)</span>
+              <span className="hidden text-[11px] opacity-70 group-open:inline">(收起)</span>
+            </summary>
+            <div className="bg-background text-muted-foreground mt-2 grid gap-1.5 rounded-md border p-3 text-xs leading-5 sm:grid-cols-2">
+              {metricKeys.map((key) => (
+                <p key={key}>
+                  <span className="text-foreground font-medium">{metricLabels[key]}:</span>{" "}
+                  {metricReasons[key]}
+                </p>
+              ))}
+            </div>
+          </details>
         ) : null}
       </MessageContent>
     </Message>

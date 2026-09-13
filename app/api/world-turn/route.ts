@@ -33,7 +33,7 @@ const stanceWeight: Record<AgentReaction["stance"], number> = {
 /**
  * 从第一轮表态里挑出一对最该吵起来的人:
  * 优先选互相点名的,其次选立场冲突最大的。
- * 若全场均为 support 或 negotiate(无实质反抗或剥削)，返回 null，避免无意义争吵。
+ * 若全场均为 support 或 negotiate(无实质反抗或剥削),返回 null,避免无意义争吵。
  */
 function pickConflictPair(
   entries: RoundEntry[],
@@ -232,8 +232,8 @@ export async function POST(request: Request) {
                   character,
                   cooperationHint:
                     character.id === allyId
-                      ? "你是当前最信任玩家的一方。只要没有触碰底线,请用 support 表态,并提出一项具体的援助办法。"
-                      : "你可以支持、协商或反对,但必须先承认玩家决策中合理的部分,不要无条件唱反调。",
+                      ? "立足你的阵营利益与对玩家的信任,旗帜鲜明地给予声援或提出关键援助,切忌虚伪官僚套话。"
+                      : "立足你的阵营利益和个人底线,直接亮明态度(支持/反对/协商/借机利用)。严禁千篇一律地使用'这个我认,那个我不认'或'某某虽好,但我不赞同'等辩论套话!说话必须极具个人性格印记。",
                 }),
                 schema: agentReactionSchema,
                 temperature: 0.85,
@@ -256,7 +256,7 @@ export async function POST(request: Request) {
           }),
         );
 
-        // 表态全部完成后，如有实质冲突，生成二人交锋
+        // 表态全部完成后,如有实质冲突,生成二人交锋
         if (!hasAgentFailure) {
           const pair = pickConflictPair(firstRound, nameById);
           if (pair) {

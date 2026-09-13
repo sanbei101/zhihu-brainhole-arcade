@@ -159,9 +159,14 @@ export function WorldCouncil({ initial, worldId, onBack, skin }: WorldCouncilPro
               ) : null}
             </div>
             <h2 className="mt-2 text-xl font-semibold">危机议事</h2>
-            <p className="text-muted-foreground mt-1 line-clamp-1 text-sm">
-              {initial.scenarioTitle}
-            </p>
+            <div className="text-muted-foreground mt-1 flex flex-wrap items-center gap-2 text-sm">
+              <span className="text-foreground font-medium">{initial.scenarioTitle}</span>
+              <span>·</span>
+              <span className="bg-muted/80 text-muted-foreground inline-flex max-w-xl items-center gap-1.5 truncate rounded border px-2 py-0.5 text-xs">
+                <span className="text-foreground shrink-0 font-medium">主线焦点:</span>
+                <span className="truncate">{crisis ? crisis.title : cast.setting.crisis}</span>
+              </span>
+            </div>
           </div>
         </div>
         <div className="text-muted-foreground flex items-center gap-2 text-sm">
