@@ -29,6 +29,21 @@
   --animate-portrait-work: portrait-work 2.8s ease-in-out infinite;
   --animate-portrait-work-talk: portrait-work-talk 1.25s ease-in-out infinite;
   --animate-cursor-blink: cursor-blink 0.9s step-end infinite;
+  --animate-badge-marquee: badge-marquee 28s linear infinite;
+}
+
+@keyframes badge-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-badge-marquee:hover,
+.animate-badge-marquee:active {
+  animation-play-state: paused;
 }
 
 @keyframes cursor-blink {

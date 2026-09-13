@@ -116,8 +116,36 @@ export function CoverPanel({
         </h1>
 
         {/* 下簇:贴着大字的下沿 */}
-        <div className="flex flex-1 flex-col items-center justify-start gap-3">
-          <div className="-mx-5 flex w-[calc(100%+2.5rem)] snap-x scrollbar-none gap-2 overflow-x-auto px-5 sm:mx-0 sm:w-auto sm:max-w-5xl sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0">
+        <div className="flex w-full flex-1 flex-col items-center justify-start gap-3">
+          {/* 移动端: 无缝平滑自动轮转跑马灯 */}
+          <div className="relative w-full overflow-hidden sm:hidden">
+            <div className="from-background pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r to-transparent" />
+            <div className="from-background pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l to-transparent" />
+            <div className="animate-badge-marquee flex w-max gap-2 py-1 motion-reduce:animate-none">
+              {[...SCENARIO_THEMES, ...SCENARIO_THEMES].map((theme, loopIndex) => {
+                const themeSkin = getSkin(theme.id);
+                const themeIndex = loopIndex % SCENARIO_THEMES.length;
+                return (
+                  <button
+                    key={`${theme.id}-${loopIndex}`}
+                    type="button"
+                    onClick={() => onJump(themeIndex + 1)}
+                    className={cn(buttonVariants({ variant: "outline", size: "xs" }), "shrink-0")}
+                  >
+                    <span
+                      className="size-2 rounded-full"
+                      style={{ backgroundColor: themeSkin.accent }}
+                      aria-hidden="true"
+                    />
+                    {themeSkin.name}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* 桌面端 (sm+): 保持整齐居中多行展示 */}
+          <div className="hidden gap-2 sm:flex sm:max-w-5xl sm:flex-wrap sm:justify-center">
             {SCENARIO_THEMES.map((theme, index) => {
               const themeSkin = getSkin(theme.id);
               return (
@@ -125,10 +153,7 @@ export function CoverPanel({
                   key={theme.id}
                   type="button"
                   onClick={() => onJump(index + 1)}
-                  className={cn(
-                    buttonVariants({ variant: "outline", size: "xs" }),
-                    "shrink-0 snap-center",
-                  )}
+                  className={cn(buttonVariants({ variant: "outline", size: "xs" }), "shrink-0")}
                 >
                   <span
                     className="size-2 rounded-full"
