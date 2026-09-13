@@ -56,10 +56,10 @@ const judgeDraftSchema = z.object({
   events: z
     .array(worldEventSchema)
     .min(1)
-    .max(3)
+    .max(6)
     .describe("一到三个本回合真正发生的公开世界事件,不能只是情绪描述"),
-  narration: z.string().min(1).max(320).describe("不超过三百字的世界旁白,承上启下"),
-  nextSituation: z.string().min(1).max(300).describe("下一回合最先逼近玩家的具体危机或待处理后果"),
+  narration: z.string().min(1).max(1000).describe("不超过三百字的世界旁白,承上启下"),
+  nextSituation: z.string().min(1).max(800).describe("下一回合最先逼近玩家的具体危机或待处理后果"),
   crisisOutcome: z.enum(["resolved", "unresolved"]),
   newCrisis: crisisBodySchema.nullish(),
   ultimatumOutcome: ultimatumOutcomeSchema,
@@ -170,7 +170,7 @@ export async function judgeTurnAction(input: unknown): Promise<ActionResult<Judg
         entropy,
         crisisPenalty: penaltyAsDeltas(crisisStep.penalty),
         metricReasons: draft.metricReasons,
-        events: draft.events,
+        events: draft.events.slice(0, 3),
         narration: draft.narration,
         nextSituation: draft.nextSituation,
         relations: ultimatumStep.relations,

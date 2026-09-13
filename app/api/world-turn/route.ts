@@ -69,14 +69,14 @@ function pickConflictPair(
 }
 
 const agentClashSchema = z.object({
-  challengerSpeech: z.string().min(1).max(140).describe("挑起交锋方当场驳斥的话,不超过一百四十字"),
-  challengerAction: z.string().min(1).max(80).describe("挑起交锋方随之采取的小动作"),
+  challengerSpeech: z.string().min(1).max(400).describe("挑起交锋方当场驳斥的话,不超过一百四十字"),
+  challengerAction: z.string().min(1).max(300).describe("挑起交锋方随之采取的小动作"),
   defenderSpeech: z
     .string()
     .min(1)
-    .max(140)
+    .max(400)
     .describe("被动反驳方针锋相对回击的话,不超过一百四十字"),
-  defenderAction: z.string().min(1).max(80).describe("被动反驳方随之采取的小动作"),
+  defenderAction: z.string().min(1).max(300).describe("被动反驳方随之采取的小动作"),
 });
 
 export async function POST(request: Request) {

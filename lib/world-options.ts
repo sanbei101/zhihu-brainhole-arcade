@@ -29,8 +29,8 @@ export type ForecastEntry = z.infer<typeof forecastEntrySchema>;
 
 export const decisionOptionSchema = z.object({
   id: z.string().describe("选项唯一短 id,如 A/B/C/D"),
-  title: z.string().min(1).max(30).describe("选项标题,不超过三十字"),
-  desc: z.string().min(1).max(120).describe("选项具体做法与代价,不超过一百二十字"),
+  title: z.string().min(1).max(80).describe("选项标题,不超过三十字"),
+  desc: z.string().min(1).max(300).describe("选项具体做法与代价,不超过一百二十字"),
   risk: z.enum(["稳", "险", "赌"]).describe("选项风险等级"),
   crisisAction: z
     .boolean()
@@ -38,17 +38,17 @@ export const decisionOptionSchema = z.object({
   impact: impactHintSchema.describe("这个选项大致会拉动哪几维指标,只给定性方向"),
   forecast: z
     .array(forecastEntrySchema)
-    .min(2)
-    .max(6)
+    .min(1)
+    .max(12)
     .describe("你对在场各方在此选项下会站到哪一边的预判,覆盖全部在场角色"),
 });
 export type DecisionOption = z.infer<typeof decisionOptionSchema>;
 
 export const roundOptionsSchema = z.object({
-  situation: z.string().min(1).max(300).describe("本回合突发处境,不超过三百字"),
+  situation: z.string().min(1).max(800).describe("本回合突发处境,不超过三百字"),
   options: z
     .array(decisionOptionSchema)
-    .min(4)
+    .min(1)
     .describe("恰好四个立场与代价明显不同的抉择,按 A/B/C/D 顺序排列"),
 });
 export type RoundOptions = z.infer<typeof roundOptionsSchema>;

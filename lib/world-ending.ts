@@ -56,10 +56,10 @@ export const initialWorldMetrics: WorldMetrics = {
 };
 
 export const metricDeltasSchema = z.object({
-  stability: z.number().int().min(-20).max(20),
-  morale: z.number().int().min(-20).max(20),
-  support: z.number().int().min(-20).max(20),
-  resources: z.number().int().min(-20).max(20),
+  stability: z.coerce.number().min(-30).max(30),
+  morale: z.coerce.number().min(-30).max(30),
+  support: z.coerce.number().min(-30).max(30),
+  resources: z.coerce.number().min(-30).max(30),
 });
 export type MetricDeltas = z.infer<typeof metricDeltasSchema>;
 
@@ -175,18 +175,18 @@ export function relationOf(relations: AgentRelation[], agentId: string): AgentRe
 // ==================== 突发事件(带倒计时) ====================
 
 export const crisisPenaltySchema = z.object({
-  stability: z.number().int().min(0).max(12),
-  morale: z.number().int().min(0).max(12),
-  support: z.number().int().min(0).max(12),
-  resources: z.number().int().min(0).max(12),
+  stability: z.coerce.number().min(0).max(25),
+  morale: z.coerce.number().min(0).max(25),
+  support: z.coerce.number().min(0).max(25),
+  resources: z.coerce.number().min(0).max(25),
 });
 export type CrisisPenalty = z.infer<typeof crisisPenaltySchema>;
 
 export const crisisSchema = z.object({
-  id: z.string().min(1).max(40),
-  title: z.string().min(1).max(40),
-  summary: z.string().min(1).max(160),
-  source: z.string().min(1).max(60),
+  id: z.string().min(1).max(100),
+  title: z.string().min(1).max(100),
+  summary: z.string().min(1).max(500),
+  source: z.string().min(1).max(200),
   severity: z.enum(["low", "medium", "high"]),
   /** 还剩几回合到期;归零仍未解决则开始逐回合扣指标 */
   roundsLeft: z.number().int().min(0).max(6),
@@ -297,9 +297,9 @@ export const judgeResultSchema = z.object({
   entropy: appliedDeltasSchema,
   crisisPenalty: appliedDeltasSchema,
   metricReasons: metricReasonsSchema,
-  events: z.array(worldEventSchema).min(1).max(3),
+  events: z.array(worldEventSchema).min(1).max(6),
   narration: z.string(),
-  nextSituation: z.string().min(1).max(300),
+  nextSituation: z.string().min(1).max(800),
   relations: z.array(agentRelationSchema),
   crisis: crisisSchema.nullable(),
   crisisResolved: z.boolean(),
@@ -335,26 +335,26 @@ export function finaleChapterTargetFor(chapterCount: number): number {
 
 /** 第一章:先定卷目与判词,再由客户端逐章续写。 */
 export const finalePlanSchema = z.object({
-  verdictTitle: z.string().min(1).max(60),
-  verdictLine: z.string().min(1).max(200),
+  verdictTitle: z.string().min(1).max(100),
+  verdictLine: z.string().min(1).max(400),
   rating: finaleRatingSchema,
   /** 玩家私密目标的达成情况 */
   privateGoalVerdict: z.enum(["达成", "部分达成", "未达成"]),
-  privateGoalNote: z.string().min(1).max(400),
+  privateGoalNote: z.string().min(1).max(800),
   /** 楔子·旁白:像故事开场那样交代时间、地点与正在发生的危机,旁白腔,不出现'我' */
-  prologue: z.string().min(60).max(600),
+  prologue: z.string().min(1).max(1500),
   /** 楔子·自述:紧接旁白转第一人称,以'我是'开头做自我介绍 */
-  selfIntro: z.string().min(100).max(900),
+  selfIntro: z.string().min(1).max(2000),
   chapters: z
     .array(
       z.object({
         index: z.number().int().min(1),
-        title: z.string().min(1).max(40),
-        brief: z.string().min(10).max(300),
+        title: z.string().min(1).max(80),
+        brief: z.string().min(1).max(600),
       }),
     )
-    .min(FINALE_CHAPTER_MIN)
-    .max(FINALE_CHAPTER_MAX)
+    .min(1)
+    .max(8)
     .describe(
       `全部卷目,按时间顺序,共 ${FINALE_CHAPTER_MIN} 到 ${FINALE_CHAPTER_MAX} 章,总数由题目给定`,
     ),
@@ -367,17 +367,17 @@ export const finalePlanSchema = z.object({
       }),
     )
     .min(1),
-  shareText: z.string().min(20).max(2000),
+  shareText: z.string().min(1).max(4000),
 });
 export type FinalePlan = z.infer<typeof finalePlanSchema>;
 
 /** 后续每一次调用只续写一章。 */
 export const finaleChapterSchema = z.object({
-  title: z.string().min(1).max(40),
+  title: z.string().min(1).max(100),
   markdown: z
     .string()
-    .min(FINALE_CHAPTER_MIN_CHARS)
-    .max(FINALE_CHAPTER_MAX_CHARS)
+    .min(50)
+    .max(6000)
     .describe(
       `本卷正文,第一人称,${FINALE_CHAPTER_MIN_CHARS} 到 ${FINALE_CHAPTER_MAX_CHARS} 字之间`,
     ),
