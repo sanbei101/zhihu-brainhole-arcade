@@ -1,8 +1,35 @@
 import { z } from "zod";
 
-/** 定性代价提示:只给方向,不给确切数字,避免玩家把推演玩成算分。 */
-export const metricHintSchema = z.enum(["↑↑", "↑", "-", "↓", "↓↓"]);
-export type MetricHint = z.infer<typeof metricHintSchema>;
+const METRIC_LEVELS = ["↑↑", "↑", "-", "↓", "↓↓"] as const;
+export type MetricHint = (typeof METRIC_LEVELS)[number];
+
+/** 常见空写法,统一视为持平 */
+const EMPTY_ALIASES: ReadonlySet<string> = new Set([
+  "",
+  "空",
+  "无",
+  "0",
+  "—",
+  "－",
+  "持平",
+  "不变",
+]);
+
+/** AI 防呆设计,实测会输出语义相同的不同答案造成无报错 */
+/** 把任意输入洗成合法的 MetricHint */
+const normalizeMetricHint = (raw: unknown): MetricHint => {
+  const text = typeof raw === "string" ? raw.trim() : "";
+
+  if (EMPTY_ALIASES.has(text)) return "-";
+  if ((METRIC_LEVELS as readonly string[]).includes(text)) return text as MetricHint;
+
+  if (/^↑+$/.test(text)) return text.length >= 2 ? "↑↑" : "↑";
+  if (/^↓+$/.test(text)) return text.length >= 2 ? "↓↓" : "↓";
+
+  return "-";
+};
+
+export const metricHintSchema = z.preprocess(normalizeMetricHint, z.enum(METRIC_LEVELS));
 
 export const impactHintSchema = z.object({
   stability: metricHintSchema.describe("政权稳定"),
