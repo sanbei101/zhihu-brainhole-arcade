@@ -51,6 +51,12 @@ interface DecisionPanelProps {
   idleOption: DecisionOption | null;
 }
 
+function formatQuote(text: string): string {
+  const trimmed = text.trim();
+  const clean = trimmed.replace(/^[“"「]\s*/, "").replace(/\s*[”"」]$/, "");
+  return `“${clean}”`;
+}
+
 function ImpactRow({ impact }: { impact: ImpactHint }) {
   return (
     <span className="flex flex-wrap gap-1.5">
@@ -188,7 +194,7 @@ export function DecisionPanel({
                       variant="outline"
                       disabled={choiceDisabled}
                       onClick={() => onChooseOption(option)}
-                      className={`h-auto min-w-0 flex-col items-start gap-2 p-4 text-left transition-all ${
+                      className={`h-auto w-full min-w-0 flex-col items-start gap-2 p-4 text-left whitespace-normal transition-all ${
                         isWild
                           ? "border-amber-500/40 bg-amber-500/5 hover:border-amber-500/70 hover:bg-amber-500/10 dark:border-amber-400/40 dark:bg-amber-950/20"
                           : ""
@@ -208,7 +214,7 @@ export function DecisionPanel({
                           {option.title}
                         </span>
                       </span>
-                      <span className="flex w-full flex-wrap items-center gap-1.5 pl-7">
+                      <span className="flex w-full flex-wrap items-center gap-1.5 pl-8">
                         {option.crisisAction ? <Badge variant="destructive">处理危机</Badge> : null}
                         {isWild ? (
                           <Badge className="border-amber-500/40 bg-amber-500/20 text-amber-800 dark:text-amber-300">
@@ -220,16 +226,16 @@ export function DecisionPanel({
                       </span>
                       {option.epigraph ? (
                         <div
-                          className={`w-full rounded px-2.5 py-1.5 font-serif text-xs leading-relaxed italic ${
+                          className={`w-full min-w-0 rounded px-2.5 py-1.5 font-serif text-xs leading-relaxed text-pretty break-words whitespace-normal italic ${
                             isWild
-                              ? "border-l-2 border-amber-500/70 bg-amber-500/10 text-amber-900 dark:text-amber-200"
+                              ? "border-l-2 border-amber-500/70 bg-amber-500/15 text-amber-800 dark:text-amber-200"
                               : "border-primary/50 bg-muted/50 text-muted-foreground border-l-2"
                           }`}
                         >
-                          “{option.epigraph}”
+                          {formatQuote(option.epigraph)}
                         </div>
                       ) : null}
-                      <span className="text-muted-foreground text-xs leading-5 font-normal whitespace-normal">
+                      <span className="text-muted-foreground w-full min-w-0 text-xs leading-5 font-normal break-words whitespace-normal">
                         {option.desc}
                       </span>
                       <ImpactRow impact={option.impact} />
@@ -281,8 +287,8 @@ export function DecisionPanel({
             </p>
             <p className="text-muted-foreground mt-1 text-xs leading-5">{submittedBranch.title}</p>
             {submittedBranch.epigraph ? (
-              <p className="mt-1 font-serif text-xs text-amber-700 italic dark:text-amber-300">
-                “{submittedBranch.epigraph}”
+              <p className="mt-1 font-serif text-xs break-words whitespace-normal text-amber-800 italic dark:text-amber-200">
+                {formatQuote(submittedBranch.epigraph)}
               </p>
             ) : null}
           </div>

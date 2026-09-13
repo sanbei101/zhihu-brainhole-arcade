@@ -49,10 +49,13 @@ interface WorldTabsProps {
 }
 
 const attitudeTone = {
-  loyal: "border-emerald-500/60 bg-emerald-100 text-emerald-700",
+  loyal:
+    "border-emerald-500/60 bg-emerald-100 text-emerald-700 dark:border-emerald-700/60 dark:bg-emerald-950/60 dark:text-emerald-300",
   wary: "border-border bg-muted text-muted-foreground",
-  pressuring: "border-amber-500/60 bg-amber-100 text-amber-800",
-  defected: "border-red-500/60 bg-red-100 text-red-700",
+  pressuring:
+    "border-amber-500/60 bg-amber-100 text-amber-800 dark:border-amber-700/60 dark:bg-amber-950/60 dark:text-amber-300",
+  defected:
+    "border-red-500/60 bg-red-100 text-red-700 dark:border-red-700/60 dark:bg-red-950/60 dark:text-red-300",
 } as const;
 
 function deltaText(deltas: MetricDeltas | AppliedDeltas | null): string {

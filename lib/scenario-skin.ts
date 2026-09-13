@@ -196,6 +196,11 @@ export function getSkin(themeId: string | undefined): ScenarioSkin {
   return SCENARIO_SKINS.find((skin) => skin.id === themeId) ?? FALLBACK_SKIN;
 }
 
+/** 判断该皮肤是否为暗色系背景 */
+export function isDarkSkin(skin: ScenarioSkin): boolean {
+  return skin.id !== "three-kingdoms" && skin.id !== "tang-song-ming";
+}
+
 /** 把皮肤转成可直接挂到容器上的 shadcn 语义变量覆盖 */
 export function skinStyleVars(skin: ScenarioSkin): CSSProperties {
   return {

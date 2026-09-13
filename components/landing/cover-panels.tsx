@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import TextType from "@/components/ui/TextType";
 import { SCENARIO_THEMES } from "@/lib/scenario-library";
-import { getSkin, skinStyleVars } from "@/lib/scenario-skin";
+import { getSkin, isDarkSkin, skinStyleVars } from "@/lib/scenario-skin";
 import { cn } from "@/lib/utils";
 
 const BRAND = "知乎脑洞游乐园";
@@ -64,7 +64,7 @@ export function CoverPanel({ onJump }: { onJump: (index: number) => void }) {
       id="top"
       style={skinStyleVars(skin)}
       aria-label="知乎脑洞游乐园入口"
-      className="bg-background text-foreground relative h-dvh w-full snap-start snap-always overflow-hidden"
+      className={`bg-background text-foreground relative h-dvh w-full snap-start snap-always overflow-hidden ${isDarkSkin(skin) ? "dark" : ""}`}
     >
       <div className="absolute inset-0">
         <StageBackdrop skin={skin} />
@@ -157,7 +157,7 @@ export function OutroPanel({
       id="end"
       style={skinStyleVars(skin)}
       aria-label="游园结束"
-      className="bg-background text-foreground relative h-dvh w-full snap-start snap-always overflow-hidden"
+      className={`bg-background text-foreground relative h-dvh w-full snap-start snap-always overflow-hidden ${isDarkSkin(skin) ? "dark" : ""}`}
     >
       {mounted ? <ThemeStage skin={skin} /> : null}
 

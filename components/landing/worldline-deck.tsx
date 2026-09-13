@@ -6,7 +6,7 @@ import { ThemePanel } from "@/components/landing/theme-panel";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { SCENARIO_THEMES } from "@/lib/scenario-library";
-import { getSkin, skinStyleVars } from "@/lib/scenario-skin";
+import { getSkin, isDarkSkin, skinStyleVars } from "@/lib/scenario-skin";
 import { cn } from "@/lib/utils";
 
 const THEME_COUNT = SCENARIO_THEMES.length;
@@ -253,7 +253,7 @@ export function WorldlineDeck() {
   return (
     <div
       style={skinStyleVars(activeSkin)}
-      className="bg-background text-foreground font-pixel relative h-dvh w-full overflow-hidden"
+      className={`bg-background text-foreground font-pixel relative h-dvh w-full overflow-hidden ${isDarkSkin(activeSkin) ? "dark" : ""}`}
     >
       <div
         ref={scrollerRef}

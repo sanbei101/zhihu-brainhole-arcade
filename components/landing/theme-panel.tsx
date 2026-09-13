@@ -10,7 +10,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
 import type { ScenarioTheme, ScenarioTopic } from "@/lib/scenario-library";
-import { getSkin, skinStyleVars } from "@/lib/scenario-skin";
+import { getSkin, isDarkSkin, skinStyleVars } from "@/lib/scenario-skin";
 import { cn } from "@/lib/utils";
 
 const numberFormatter = new Intl.NumberFormat("zh-CN", {
@@ -90,7 +90,7 @@ export function ThemePanel({ theme, index, total, active, mounted }: ThemePanelP
       id={theme.id}
       style={skinStyleVars(skin)}
       aria-label={`${skin.name}副本分区`}
-      className="bg-background text-foreground relative h-dvh w-full snap-start snap-always overflow-hidden"
+      className={`bg-background text-foreground relative h-dvh w-full snap-start snap-always overflow-hidden ${isDarkSkin(skin) ? "dark" : ""}`}
     >
       {/* 底:整屏像素演出 */}
       {mounted ? (

@@ -354,8 +354,8 @@ export function DirectorNarrationMessage({
                 {mutation.tag}
               </Badge>
             </div>
-            <blockquote className="my-1.5 border-l-2 border-amber-500/60 pl-2.5 font-serif text-xs leading-relaxed text-amber-950/90 italic dark:text-amber-100/90">
-              “{mutation.epigraph}”
+            <blockquote className="my-1.5 border-l-2 border-amber-500/60 pl-2.5 font-serif text-xs leading-relaxed break-words whitespace-normal text-amber-950/90 italic dark:text-amber-100/90">
+              “{mutation.epigraph.replace(/^[“"「]\s*/, "").replace(/\s*[”"」]$/, "")}”
             </blockquote>
             <p className="text-muted-foreground text-[11px] leading-normal">{mutation.summary}</p>
           </div>

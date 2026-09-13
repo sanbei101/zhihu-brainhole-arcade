@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { WorldCastPanel } from "@/components/world-cast";
 import { findScenario } from "@/lib/scenario-library";
-import { getSkin, skinStyleVars } from "@/lib/scenario-skin";
+import { getSkin, isDarkSkin, skinStyleVars } from "@/lib/scenario-skin";
 
 interface WorldPageProps {
   params: Promise<{ id: string }>;
@@ -27,7 +27,10 @@ export default async function WorldPage({ params }: WorldPageProps) {
     const skin = getSkin(undefined);
 
     return (
-      <main style={skinStyleVars(skin)} className="bg-background text-foreground min-h-screen">
+      <main
+        style={skinStyleVars(skin)}
+        className={`bg-background text-foreground min-h-screen ${isDarkSkin(skin) ? "dark" : ""}`}
+      >
         <header className="border-border bg-background border-b">
           <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-5 px-5 sm:px-8">
             <Link href="/" className="flex items-center gap-3" aria-label="返回知乎脑洞游乐园首页">
@@ -66,7 +69,10 @@ export default async function WorldPage({ params }: WorldPageProps) {
   const skin = getSkin(theme.id);
 
   return (
-    <main style={skinStyleVars(skin)} className="bg-background text-foreground min-h-screen">
+    <main
+      style={skinStyleVars(skin)}
+      className={`bg-background text-foreground min-h-screen ${isDarkSkin(skin) ? "dark" : ""}`}
+    >
       <header className="border-border bg-background/80 sticky top-0 z-40 border-b backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-5 px-5 sm:px-8">
           <Link href="/" className="flex items-center gap-3" aria-label="返回知乎脑洞游乐园首页">

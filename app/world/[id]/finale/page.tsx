@@ -1,4 +1,6 @@
 import { WorldFinaleView } from "@/components/world-finale";
+import { findScenario } from "@/lib/scenario-library";
+import { getSkin, isDarkSkin, skinStyleVars } from "@/lib/scenario-skin";
 
 interface FinalePageProps {
   params: Promise<{ id: string }>;
@@ -6,9 +8,13 @@ interface FinalePageProps {
 
 export default async function FinalePage({ params }: FinalePageProps) {
   const { id } = await params;
+  const skin = getSkin(findScenario(id)?.theme.id);
 
   return (
-    <main className="bg-muted/30 text-foreground min-h-screen">
+    <main
+      style={skinStyleVars(skin)}
+      className={`bg-background text-foreground min-h-screen ${isDarkSkin(skin) ? "dark" : ""}`}
+    >
       <section className="mx-auto max-w-7xl px-4 py-5 sm:px-8 sm:py-7">
         <WorldFinaleView worldId={id} />
       </section>
