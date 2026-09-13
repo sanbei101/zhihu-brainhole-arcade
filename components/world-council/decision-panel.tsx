@@ -59,7 +59,7 @@ function formatQuote(text: string): string {
 
 function ImpactRow({ impact }: { impact: ImpactHint }) {
   return (
-    <span className="flex flex-wrap gap-1.5">
+    <span className="flex w-full min-w-0 flex-wrap gap-1.5">
       {metricKeys.map((key) => {
         const hint = impact[key];
         const tone = hint.startsWith("↑")
@@ -70,7 +70,7 @@ function ImpactRow({ impact }: { impact: ImpactHint }) {
         return (
           <span
             key={key}
-            className="bg-muted/70 inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px]"
+            className="bg-muted/70 inline-flex shrink-0 items-center gap-1 rounded px-1.5 py-0.5 text-[11px]"
           >
             <span className="text-muted-foreground">{metricLabels[key].slice(0, 2)}</span>
             <span className={`font-mono font-medium ${tone}`}>{hint}</span>
@@ -95,23 +95,29 @@ function ForecastRow({
   const doubts = forecast.filter((e) => e.lean === "doubt");
 
   return (
-    <span className="text-muted-foreground flex flex-wrap items-center gap-x-2.5 gap-y-1 pt-0.5 text-[11px] leading-tight">
+    <span className="text-muted-foreground flex w-full min-w-0 flex-wrap items-center gap-x-2.5 gap-y-1 pt-0.5 text-[11px] leading-tight">
       {backs.length ? (
-        <span className="inline-flex items-center gap-1 font-medium text-emerald-700 dark:text-emerald-400">
-          <span>赞成:</span>
-          <span>{backs.map((e) => nameById.get(e.agentId) ?? e.agentId).join("、")}</span>
+        <span className="inline-flex min-w-0 flex-wrap items-center gap-1 font-medium text-emerald-700 dark:text-emerald-400">
+          <span className="shrink-0">赞成:</span>
+          <span className="break-words">
+            {backs.map((e) => nameById.get(e.agentId) ?? e.agentId).join("、")}
+          </span>
         </span>
       ) : null}
       {opposes.length ? (
-        <span className="inline-flex items-center gap-1 font-medium text-red-700 dark:text-red-400">
-          <span>反对:</span>
-          <span>{opposes.map((e) => nameById.get(e.agentId) ?? e.agentId).join("、")}</span>
+        <span className="inline-flex min-w-0 flex-wrap items-center gap-1 font-medium text-red-700 dark:text-red-400">
+          <span className="shrink-0">反对:</span>
+          <span className="break-words">
+            {opposes.map((e) => nameById.get(e.agentId) ?? e.agentId).join("、")}
+          </span>
         </span>
       ) : null}
       {doubts.length ? (
-        <span className="inline-flex items-center gap-1 opacity-80">
-          <span>观望:</span>
-          <span>{doubts.map((e) => nameById.get(e.agentId) ?? e.agentId).join("、")}</span>
+        <span className="inline-flex min-w-0 flex-wrap items-center gap-1 opacity-80">
+          <span className="shrink-0">观望:</span>
+          <span className="break-words">
+            {doubts.map((e) => nameById.get(e.agentId) ?? e.agentId).join("、")}
+          </span>
         </span>
       ) : null}
     </span>
@@ -150,7 +156,7 @@ export function DecisionPanel({
   const agentCount = cast.agentCharacters.length;
 
   return (
-    <div className="space-y-3 border-t p-4 sm:p-5">
+    <div className="space-y-3 border-t p-3 sm:p-5">
       {!ended && crisis ? <CrisisBanner crisis={crisis} /> : null}
       {!ended && ultimatum ? <UltimatumBanner ultimatum={ultimatum} /> : null}
 
@@ -175,11 +181,11 @@ export function DecisionPanel({
           ) : null}
           {options && !isGeneratingOptions ? (
             <div className="space-y-3">
-              <div className="border-primary/30 bg-primary/5 flex items-start gap-3 rounded-md border p-3">
+              <div className="border-primary/30 bg-primary/5 flex items-start gap-2.5 rounded-md border p-3 sm:gap-3">
                 <GitFork className="text-primary mt-0.5 size-4 shrink-0" />
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <p className="text-sm font-medium">世界线分叉点</p>
-                  <p className="text-muted-foreground mt-1 text-xs leading-5">
+                  <p className="text-muted-foreground mt-1 text-xs leading-5 text-pretty break-words">
                     {options.situation}
                   </p>
                 </div>
@@ -194,7 +200,7 @@ export function DecisionPanel({
                       variant="outline"
                       disabled={choiceDisabled}
                       onClick={() => onChooseOption(option)}
-                      className={`h-auto w-full min-w-0 flex-col items-start gap-2 p-4 text-left whitespace-normal transition-all ${
+                      className={`h-auto w-full min-w-0 shrink flex-col items-start gap-2 p-3 text-left whitespace-normal transition-all sm:p-4 ${
                         isWild
                           ? "border-amber-500/40 bg-amber-500/5 hover:border-amber-500/70 hover:bg-amber-500/10 dark:border-amber-400/40 dark:bg-amber-950/20"
                           : ""
@@ -261,7 +267,7 @@ export function DecisionPanel({
                       {idleOption.risk}
                     </Badge>
                   </span>
-                  <span className="text-muted-foreground text-xs leading-5 font-normal whitespace-normal">
+                  <span className="text-muted-foreground text-xs leading-5 font-normal break-words whitespace-normal">
                     {idleOption.desc}
                   </span>
                 </Button>
@@ -276,16 +282,18 @@ export function DecisionPanel({
 
       {submittedBranch ? (
         <div
-          className="border-primary/30 bg-primary/5 flex items-start gap-3 rounded-md border p-3"
+          className="border-primary/30 bg-primary/5 flex items-start gap-2.5 rounded-md border p-3 sm:gap-3"
           aria-live="polite"
         >
           <GitFork className="text-primary mt-0.5 size-4 shrink-0" />
-          <div className="min-w-0">
-            <p className="text-sm font-medium">
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-medium break-words">
               已进入世界线分支{" "}
               {submittedBranch.id === "idle" ? "停驻" : submittedBranch.id.toUpperCase()}
             </p>
-            <p className="text-muted-foreground mt-1 text-xs leading-5">{submittedBranch.title}</p>
+            <p className="text-muted-foreground mt-1 text-xs leading-5 break-words">
+              {submittedBranch.title}
+            </p>
             {submittedBranch.epigraph ? (
               <p className="mt-1 font-serif text-xs break-words whitespace-normal text-amber-800 italic dark:text-amber-200">
                 {formatQuote(submittedBranch.epigraph)}

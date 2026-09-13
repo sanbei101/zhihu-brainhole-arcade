@@ -159,8 +159,8 @@ export function WorldTabs({
 
             {crisis ? (
               <div className="border-destructive/40 bg-destructive/5 rounded-md border p-3">
-                <p className="text-xs font-medium">{crisis.title}</p>
-                <p className="text-muted-foreground mt-1 text-xs leading-5">
+                <p className="text-xs font-medium break-words">{crisis.title}</p>
+                <p className="text-muted-foreground mt-1 text-xs leading-5 break-words">
                   {crisis.roundsLeft > 0
                     ? `还剩 ${crisis.roundsLeft} 回合到期`
                     : "已逾期,每回合持续扣减指标"}

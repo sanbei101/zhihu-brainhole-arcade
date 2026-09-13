@@ -151,7 +151,7 @@ export function SpeechStage({
 
   return (
     <section className="bg-card relative overflow-hidden rounded-lg border" aria-label="议事舞台">
-      <div className="flex min-w-0 flex-wrap items-center gap-2 border-b px-5 py-3">
+      <div className="flex min-w-0 flex-wrap items-center gap-2 border-b px-3.5 py-2.5 sm:px-5 sm:py-3">
         <span className="min-w-0 text-sm font-medium">{figureName}</span>
         {beat && figureIdentity ? (
           <span className="text-muted-foreground text-xs">{figureIdentity}</span>
@@ -190,9 +190,9 @@ export function SpeechStage({
         </div>
       </div>
 
-      <div className="flex flex-col items-center gap-5 px-5 py-6 lg:px-8">
+      <div className="flex flex-col items-center gap-4 px-3.5 py-4 sm:gap-5 sm:px-5 sm:py-6 lg:px-8">
         <div
-          className={`min-h-18 w-full max-w-4xl rounded-lg border border-l-4 px-4 py-3 leading-7 ${bubbleTone}`}
+          className={`min-h-18 w-full max-w-4xl rounded-lg border border-l-4 px-3.5 py-2.5 text-sm leading-6 break-words sm:px-4 sm:py-3 sm:text-base sm:leading-7 ${bubbleTone}`}
           aria-hidden="true"
         >
           {beat ? (
@@ -231,7 +231,7 @@ export function SpeechStage({
         </div>
 
         {note ? (
-          <p className="text-muted-foreground w-full border-t pt-3 text-center text-xs leading-6">
+          <p className="text-muted-foreground w-full border-t pt-3 text-center text-xs leading-6 break-words">
             {note}
           </p>
         ) : null}

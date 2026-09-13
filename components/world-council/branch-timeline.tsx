@@ -77,10 +77,10 @@ export function BranchTimeline({
                     </Badge>
                   </div>
                   <div className="border-border bg-muted/40 rounded-md border px-4 py-3">
-                    <p className="leading-6 font-medium">
+                    <p className="leading-6 font-medium break-words">
                       {turn.branchTitle ?? turn.decision.split(":")[0]}
                     </p>
-                    <p className="text-muted-foreground mt-1 line-clamp-3 text-xs leading-5">
+                    <p className="text-muted-foreground mt-1 line-clamp-3 text-xs leading-5 break-words">
                       {turn.decision}
                     </p>
                   </div>
@@ -99,14 +99,14 @@ export function BranchTimeline({
                                 <span className="text-muted-foreground shrink-0 font-mono text-xs">
                                   {option.id.toUpperCase()}
                                 </span>
-                                <p className="min-w-0 flex-1 text-xs leading-5 font-medium">
+                                <p className="min-w-0 flex-1 text-xs leading-5 font-medium break-words">
                                   {option.title}
                                 </p>
                                 <Badge variant="outline" className="shrink-0">
                                   {option.risk}
                                 </Badge>
                               </div>
-                              <p className="text-muted-foreground mt-2 line-clamp-3 text-xs leading-5">
+                              <p className="text-muted-foreground mt-2 line-clamp-3 text-xs leading-5 break-words">
                                 {option.desc}
                               </p>
                             </div>
@@ -130,8 +130,8 @@ export function BranchTimeline({
                     <Badge variant="secondary">{branchLabel(submittedBranch.id)}</Badge>
                   </div>
                   <div className="border-primary/30 bg-primary/5 rounded-md border px-4 py-3">
-                    <p className="leading-6 font-medium">{submittedBranch.title}</p>
-                    <p className="text-muted-foreground mt-1 text-xs leading-5">
+                    <p className="leading-6 font-medium break-words">{submittedBranch.title}</p>
+                    <p className="text-muted-foreground mt-1 text-xs leading-5 break-words">
                       Agent 正在根据这条分支推演后果。
                     </p>
                   </div>
@@ -150,7 +150,7 @@ export function BranchTimeline({
                       <span className="text-sm font-medium">第 {round} 回合分叉点</span>
                       <Badge variant="outline">选择一条未来</Badge>
                     </div>
-                    <p className="text-muted-foreground mt-1 text-xs leading-5">
+                    <p className="text-muted-foreground mt-1 text-xs leading-5 break-words">
                       {options.situation}
                     </p>
                   </div>
@@ -162,7 +162,7 @@ export function BranchTimeline({
                         variant="outline"
                         disabled={choiceDisabled}
                         onClick={() => onChooseOption(option)}
-                        className="h-auto min-w-0 flex-col items-start gap-2 p-4 text-left whitespace-normal"
+                        className="h-auto w-full min-w-0 shrink flex-col items-start gap-2 p-3 text-left whitespace-normal sm:p-4"
                       >
                         <span className="flex w-full min-w-0 items-start gap-2">
                           <span className="bg-primary text-primary-foreground grid size-6 shrink-0 place-items-center rounded font-mono text-xs">
@@ -175,7 +175,7 @@ export function BranchTimeline({
                             {option.risk}
                           </Badge>
                         </span>
-                        <span className="text-muted-foreground pl-8 text-xs leading-5">
+                        <span className="text-muted-foreground w-full min-w-0 pl-8 text-xs leading-5 break-words">
                           {option.desc}
                         </span>
                       </Button>

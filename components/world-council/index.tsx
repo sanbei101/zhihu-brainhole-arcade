@@ -132,13 +132,19 @@ export function WorldCouncil({ initial, worldId, onBack, skin }: WorldCouncilPro
           onDone={() => setShowIntro(false)}
         />
       ) : null}
-      <div className="flex flex-col justify-between gap-4 border-b pb-5 sm:flex-row sm:items-center">
-        <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" onClick={onBack} aria-label="返回角色选择">
+      <div className="flex flex-col justify-between gap-3 border-b pb-4 sm:flex-row sm:items-center sm:pb-5">
+        <div className="flex min-w-0 items-start gap-2.5 sm:items-center sm:gap-3">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onBack}
+            aria-label="返回角色选择"
+            className="shrink-0"
+          >
             <ArrowLeft />
           </Button>
-          <div>
-            <div className="flex flex-wrap items-center gap-2">
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
               <Badge>{`回合 ${String(round).padStart(2, "0")}`}</Badge>
               <Badge variant="outline">
                 <CircleDot data-icon="inline-start" />
@@ -158,42 +164,46 @@ export function WorldCouncil({ initial, worldId, onBack, skin }: WorldCouncilPro
                 <Badge variant="secondary">{endingLabels[ending.type]}</Badge>
               ) : null}
             </div>
-            <h2 className="mt-2 text-xl font-semibold">危机议事</h2>
-            <div className="text-muted-foreground mt-1 flex flex-wrap items-center gap-2 text-sm">
-              <span className="text-foreground font-medium">{initial.scenarioTitle}</span>
-              <span>·</span>
-              <span className="bg-muted/80 text-muted-foreground inline-flex max-w-xl items-center gap-1.5 truncate rounded border px-2 py-0.5 text-xs">
+            <h2 className="mt-1.5 text-lg font-semibold sm:mt-2 sm:text-xl">危机议事</h2>
+            <div className="text-muted-foreground mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+              <span className="text-foreground shrink-0 font-medium break-words">
+                {initial.scenarioTitle}
+              </span>
+              <span className="hidden sm:inline">·</span>
+              <span className="bg-muted/80 text-muted-foreground inline-flex max-w-full min-w-0 items-center gap-1.5 rounded border px-2 py-0.5 text-xs">
                 <span className="text-foreground shrink-0 font-medium">主线焦点:</span>
                 <span className="truncate">{crisis ? crisis.title : cast.setting.crisis}</span>
               </span>
             </div>
           </div>
         </div>
-        <div className="text-muted-foreground flex items-center gap-2 text-sm">
-          <Clock3 className="size-4" />
-          {cast.setting.time} · {cast.setting.location}
+        <div className="text-muted-foreground flex shrink-0 items-center gap-1.5 text-xs sm:text-sm">
+          <Clock3 className="size-4 shrink-0" />
+          <span className="break-words">
+            {cast.setting.time} · {cast.setting.location}
+          </span>
         </div>
       </div>
 
-      <Tabs defaultValue="council" className="gap-4">
+      <Tabs defaultValue="council" className="w-full min-w-0 gap-4">
         <TabsList className="grid h-10 w-full grid-cols-3 sm:w-fit sm:min-w-96">
-          <TabsTrigger value="council">
+          <TabsTrigger value="council" className="text-xs sm:text-sm">
             <Users data-icon="inline-start" />
             议事现场
           </TabsTrigger>
-          <TabsTrigger value="messages">
+          <TabsTrigger value="messages" className="text-xs sm:text-sm">
             <ScrollText data-icon="inline-start" />
             消息记录
           </TabsTrigger>
-          <TabsTrigger value="branches">
+          <TabsTrigger value="branches" className="text-xs sm:text-sm">
             <GitFork data-icon="inline-start" />
             世界线
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="council" className="mt-0">
-          <div className="grid items-start gap-4 lg:grid-cols-[15rem_minmax(0,1fr)_17rem]">
-            <div className="order-2 lg:order-1">
+        <TabsContent value="council" className="mt-0 w-full min-w-0">
+          <div className="grid w-full min-w-0 items-start gap-4 lg:grid-cols-[15rem_minmax(0,1fr)_17rem]">
+            <div className="order-2 w-full min-w-0 lg:order-1">
               <SeatsPanel
                 cast={cast}
                 activePlayer={activePlayer}
@@ -206,7 +216,7 @@ export function WorldCouncil({ initial, worldId, onBack, skin }: WorldCouncilPro
               />
             </div>
 
-            <div className="order-1 min-w-0 space-y-4 lg:order-2">
+            <div className="order-1 w-full min-w-0 space-y-4 lg:order-2">
               <SpeechStage
                 skin={skin}
                 beat={currentBeat}
@@ -251,7 +261,7 @@ export function WorldCouncil({ initial, worldId, onBack, skin }: WorldCouncilPro
               </Card>
             </div>
 
-            <div className="order-3 lg:order-3">
+            <div className="order-3 w-full min-w-0 lg:order-3">
               <WorldTabs
                 cast={cast}
                 activePlayer={activePlayer}
@@ -274,7 +284,7 @@ export function WorldCouncil({ initial, worldId, onBack, skin }: WorldCouncilPro
           </div>
         </TabsContent>
 
-        <TabsContent value="messages" className="mt-0">
+        <TabsContent value="messages" className="mt-0 w-full min-w-0">
           <Card className="shadow-none">
             <CardContent className="p-0">
               <Timeline
@@ -290,7 +300,7 @@ export function WorldCouncil({ initial, worldId, onBack, skin }: WorldCouncilPro
           </Card>
         </TabsContent>
 
-        <TabsContent value="branches" className="mt-0">
+        <TabsContent value="branches" className="mt-0 w-full min-w-0">
           <BranchTimeline
             round={round}
             turns={turns}

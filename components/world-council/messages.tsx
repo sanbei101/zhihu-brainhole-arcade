@@ -436,16 +436,20 @@ export function CrisisBanner({ crisis }: { crisis: WorldCrisis }) {
 
   return (
     <div className="border-destructive/40 bg-destructive/5 rounded-md border p-3">
-      <div className="flex flex-wrap items-center gap-2">
-        <TriangleAlert className="text-destructive size-4" />
-        <p className="text-sm font-medium">{crisis.title}</p>
-        <Badge variant={expired ? "destructive" : "secondary"} className="ml-auto">
-          {expired ? "已逾期" : `还剩 ${crisis.roundsLeft} 回合`}
-        </Badge>
-        <Badge variant="outline">{crisisSeverityLabels[crisis.severity]}</Badge>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex min-w-0 flex-1 items-center gap-2">
+          <TriangleAlert className="text-destructive size-4 shrink-0" />
+          <p className="text-sm font-medium break-words">{crisis.title}</p>
+        </div>
+        <div className="flex shrink-0 items-center gap-1.5">
+          <Badge variant={expired ? "destructive" : "secondary"}>
+            {expired ? "已逾期" : `还剩 ${crisis.roundsLeft} 回合`}
+          </Badge>
+          <Badge variant="outline">{crisisSeverityLabels[crisis.severity]}</Badge>
+        </div>
       </div>
-      <p className="text-muted-foreground mt-1.5 text-xs leading-5">{crisis.summary}</p>
-      <p className="text-muted-foreground mt-1 text-xs leading-5">
+      <p className="text-muted-foreground mt-1.5 text-xs leading-5 break-words">{crisis.summary}</p>
+      <p className="text-muted-foreground mt-1 text-xs leading-5 break-words">
         来源:{crisis.source}
         {penaltyText ? ` · 每回合代价:${penaltyText}` : ""}
       </p>
@@ -457,15 +461,17 @@ export function CrisisBanner({ crisis }: { crisis: WorldCrisis }) {
 export function UltimatumBanner({ ultimatum }: { ultimatum: WorldUltimatum }) {
   return (
     <div className="border-destructive/40 bg-destructive/5 rounded-md border p-3">
-      <div className="flex flex-wrap items-center gap-2">
-        <Swords className="text-destructive size-4" />
-        <p className="text-sm font-medium">最后通牒悬而未决</p>
-        <Badge variant="destructive" className="ml-auto">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex min-w-0 flex-1 items-center gap-2">
+          <Swords className="text-destructive size-4 shrink-0" />
+          <p className="text-sm font-medium break-words">最后通牒悬而未决</p>
+        </div>
+        <Badge variant="destructive" className="shrink-0">
           第 {ultimatum.deadlineRound} 回合到期
         </Badge>
       </div>
-      <p className="mt-1.5 text-xs leading-5">要求:{ultimatum.demand}</p>
-      <p className="text-muted-foreground mt-1 text-xs leading-5">
+      <p className="mt-1.5 text-xs leading-5 break-words">要求:{ultimatum.demand}</p>
+      <p className="text-muted-foreground mt-1 text-xs leading-5 break-words">
         若不照做:{ultimatum.penalty}(逾期他将自行其是)
       </p>
     </div>

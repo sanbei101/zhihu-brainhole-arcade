@@ -13,9 +13,9 @@ export default async function CouncilPage({ params }: CouncilPageProps) {
   return (
     <main
       style={skinStyleVars(skin)}
-      className={`bg-background text-foreground min-h-screen ${isDarkSkin(skin) ? "dark" : ""}`}
+      className={`bg-background text-foreground min-h-screen overflow-x-hidden ${isDarkSkin(skin) ? "dark" : ""}`}
     >
-      <section className="mx-auto max-w-7xl px-4 py-5 sm:px-8 sm:py-7">
+      <section className="mx-auto max-w-7xl px-3 py-4 sm:px-8 sm:py-7">
         <WorldCouncilSession worldId={id} skin={skin} />
       </section>
     </main>

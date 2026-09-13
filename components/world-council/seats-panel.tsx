@@ -97,7 +97,7 @@ export function SeatsPanel({
   const playerSpeaking = playerState === "speaking";
 
   return (
-    <Card className="order-2 shadow-none lg:order-1">
+    <Card className="order-2 w-full shadow-none lg:order-1">
       <CardHeader className="border-b">
         <CardTitle className="flex items-center gap-2">
           <UserRound className="size-4" />
@@ -129,7 +129,7 @@ export function SeatsPanel({
                 />
               </div>
             </ItemMedia>
-            <ItemContent className="min-w-0">
+            <ItemContent className="min-w-0 flex-1">
               <ItemTitle>{activePlayer.name}</ItemTitle>
               {playerSpeaking ? (
                 <p className="text-primary text-xs">正在台上</p>
@@ -214,7 +214,7 @@ export function SeatsPanel({
                         />
                       </div>
                     </ItemMedia>
-                    <ItemContent className="min-w-0">
+                    <ItemContent className="min-w-0 flex-1">
                       <ItemTitle>{character.name}</ItemTitle>
                       {speaking ? (
                         <p className="text-primary text-xs">正在台上</p>

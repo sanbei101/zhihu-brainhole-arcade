@@ -60,7 +60,7 @@ export function Timeline({
     <MessageScrollerProvider>
       <MessageScroller className="h-128">
         <MessageScrollerViewport>
-          <MessageScrollerContent className="mx-auto w-full max-w-5xl p-5 sm:p-6 lg:p-8">
+          <MessageScrollerContent className="mx-auto w-full max-w-5xl p-3 sm:p-6 lg:p-8">
             {showOpening ? (
               <MessageScrollerItem>
                 <Message>
