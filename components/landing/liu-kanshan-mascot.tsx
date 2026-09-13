@@ -63,7 +63,7 @@ export function LiuKanshanMascot({ className }: { className?: string }) {
         className,
       )}
     >
-      {/* 刘看山动态立绘 (点击切换动作) */}
+      {/* 刘看山动态立绘 */}
       <button
         type="button"
         onClick={handleNextAction}
