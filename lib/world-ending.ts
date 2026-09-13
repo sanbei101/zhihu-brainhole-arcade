@@ -49,10 +49,10 @@ export const metricsSchema = z.object({
 export type WorldMetrics = z.infer<typeof metricsSchema>;
 
 export const initialWorldMetrics: WorldMetrics = {
-  stability: 62,
-  morale: 74,
+  stability: 52,
+  morale: 54,
   support: 48,
-  resources: 57,
+  resources: 50,
 };
 
 export const metricDeltasSchema = z.object({
@@ -83,13 +83,31 @@ export function zeroAppliedDeltas(): AppliedDeltas {
   return { stability: 0, morale: 0, support: 0, resources: 0 };
 }
 
-export function clampAppliedDeltas(value: AppliedDeltas): AppliedDeltas {
-  const clamp = (input: number) => Math.min(20, Math.max(-60, Math.round(input)));
+export function clampAppliedDeltas(
+  value: AppliedDeltas,
+  currentMetrics?: WorldMetrics,
+): AppliedDeltas {
+  const clampOne = (key: MetricKey, val: number) => {
+    const current = currentMetrics?.[key];
+    // 边际效益阻尼: 指标越高,正向增量阻力越大,避免2~3回合冲破峰值
+    let maxGain = 12;
+    if (typeof current === "number") {
+      if (current >= 85) {
+        maxGain = 3;
+      } else if (current >= 75) {
+        maxGain = 6;
+      } else if (current >= 65) {
+        maxGain = 10;
+      }
+    }
+    return Math.min(maxGain, Math.max(-60, Math.round(val)));
+  };
+
   return {
-    stability: clamp(value.stability),
-    morale: clamp(value.morale),
-    support: clamp(value.support),
-    resources: clamp(value.resources),
+    stability: clampOne("stability", value.stability),
+    morale: clampOne("morale", value.morale),
+    support: clampOne("support", value.support),
+    resources: clampOne("resources", value.resources),
   };
 }
 
@@ -656,22 +674,21 @@ export function endingForMetrics(metrics: WorldMetrics): WorldEnding {
 }
 
 /**
- * 世界是否自己走到了终点(不依赖回合上限):
- * 1. 任一指标 ≤0 → 崩盘
- * 2. 任一指标 ≥95 且均值 ≥70 → 辉煌提前定鼎
- * 否则返回 null,由玩家决定何时主动收束。
+ * 世界是否自己走到了终点(不依赖固定回合上限):
+ * 1. 任一指标 ≤0 → 崩盘失败(任何回合均生效)
+ * 2. 后期(round >= 6)且四维均处于极高盛世状态(min >= 55 且 avg >= 82) → 自动定鼎辉煌
+ * 3. 其余情况均返回 null,由玩家自主决定何时点击'主动收束'进行知乎体结算
  */
-export function checkEnding(metrics: WorldMetrics): WorldEnding | null {
+export function checkEnding(metrics: WorldMetrics, round: number = 1): WorldEnding | null {
   const min = minMetric(metrics);
   if (min.value <= 0) return collapseEnding(metrics);
 
   const avg = averageMetrics(metrics);
-  const hasPeak = metricKeys.some((key) => metrics[key] >= 95);
-  if (hasPeak && avg >= 70) {
+  if (round >= 6 && min.value >= 55 && avg >= 82) {
     return {
       type: "glorious",
-      title: "天命所归,提前定鼎",
-      reason: `世界均值 ${Math.round(avg)} 且有维度突破 95,大势已成,无需再演。`,
+      title: "盛世定鼎,万象咸新",
+      reason: `历经 ${round} 轮深思博弈,四维均稳居高位(均值 ${Math.round(avg)}),无一短板,世界线已成稳固大治之局。`,
     };
   }
 

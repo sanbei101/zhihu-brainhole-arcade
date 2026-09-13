@@ -152,9 +152,10 @@ export async function judgeTurnAction(input: unknown): Promise<ActionResult<Judg
       const entropy = entropyDeltasForRound(metrics, round);
       const deltas = clampAppliedDeltas(
         addDeltas(draft.deltas, entropy, penaltyAsDeltas(crisisStep.penalty)),
+        metrics,
       );
       const nextMetrics = applyMetricDeltas(metrics, deltas);
-      const systemEnding = checkEnding(nextMetrics);
+      const systemEnding = checkEnding(nextMetrics, round);
       const ending = systemEnding
         ? {
             type: systemEnding.type,
