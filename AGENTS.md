@@ -12,7 +12,7 @@
 
 ## 1. 项目概述与架构
 
-本项目基于 **Next.js 16** 构建,使用 App Router 规范,开启 React Compiler,产出 Node `standalone` 服务
+本项目基于 **Next.js 16** 构建,使用 App Router 规范,开启 React Compiler
 
 - **框架**: `next` 16(官方 Turbopack 构建)
 - **运行时**: Node
