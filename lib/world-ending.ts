@@ -55,11 +55,24 @@ export const initialWorldMetrics: WorldMetrics = {
   resources: 50,
 };
 
+const clampMetricDelta = (raw: unknown): unknown => {
+  if (typeof raw === "number") {
+    return Number.isFinite(raw) ? Math.min(30, Math.max(-30, Math.round(raw))) : 0;
+  }
+  if (typeof raw === "string") {
+    const n = Number.parseFloat(raw.trim());
+    return Number.isFinite(n) ? Math.min(30, Math.max(-30, Math.round(n))) : 0;
+  }
+  return 0;
+};
+
+export const singleMetricDeltaSchema = z.preprocess(clampMetricDelta, z.number().min(-30).max(30));
+
 export const metricDeltasSchema = z.object({
-  stability: z.coerce.number().min(-30).max(30),
-  morale: z.coerce.number().min(-30).max(30),
-  support: z.coerce.number().min(-30).max(30),
-  resources: z.coerce.number().min(-30).max(30),
+  stability: singleMetricDeltaSchema.describe("政权稳定变化, -20 到 20"),
+  morale: singleMetricDeltaSchema.describe("军心士气变化, -20 到 20"),
+  support: singleMetricDeltaSchema.describe("民众支持变化, -20 到 20"),
+  resources: singleMetricDeltaSchema.describe("战略资源变化, -20 到 20"),
 });
 export type MetricDeltas = z.infer<typeof metricDeltasSchema>;
 
@@ -231,8 +244,37 @@ export const ultimatumSchema = ultimatumDraftSchema.extend({
 });
 export type WorldUltimatum = z.infer<typeof ultimatumSchema>;
 
-export const ultimatumOutcomeSchema = z.enum(["none", "honored", "defied"]);
-export type UltimatumOutcome = z.infer<typeof ultimatumOutcomeSchema>;
+export const rawUltimatumOutcomeEnum = z.enum(["none", "honored", "defied"]);
+export type UltimatumOutcome = z.infer<typeof rawUltimatumOutcomeEnum>;
+
+const ULTIMATUM_OUTCOME_SYNONYMS: Record<string, UltimatumOutcome> = {
+  none: "none",
+  无: "none",
+  null: "none",
+  未发生: "none",
+  honored: "honored",
+  遵守: "honored",
+  服从: "honored",
+  兑现: "honored",
+  已兑现: "honored",
+  答应: "honored",
+  defied: "defied",
+  违背: "defied",
+  拒绝: "defied",
+  无视: "defied",
+  已被无视: "defied",
+  对抗: "defied",
+};
+
+const normalizeUltimatumOutcome = (raw: unknown): unknown => {
+  if (typeof raw !== "string") return "none";
+  const s = raw.trim().toLowerCase();
+  return ULTIMATUM_OUTCOME_SYNONYMS[s] ?? s;
+};
+
+export const ultimatumOutcomeSchema = z
+  .preprocess(normalizeUltimatumOutcome, rawUltimatumOutcomeEnum)
+  .describe("通牒状态: none(无/未发生) | honored(玩家已兑现) | defied(已被违背无视)");
 
 export const ultimatumOutcomeLabels: Record<UltimatumOutcome, string> = {
   none: "尚无进展",
@@ -350,8 +392,38 @@ export type JudgeResult = z.infer<typeof judgeResultSchema>;
 
 // ==================== 终章 ====================
 
-export const finaleRatingSchema = z.enum(["S", "A", "B", "C"]);
-export type FinaleRating = z.infer<typeof finaleRatingSchema>;
+export const rawFinaleRatingEnum = z.enum(["S", "A", "B", "C"]);
+export type FinaleRating = z.infer<typeof rawFinaleRatingEnum>;
+
+const normalizeRating = (raw: unknown): unknown => {
+  if (typeof raw !== "string") return "B";
+  const s = raw.trim().toUpperCase();
+  if (s.startsWith("S")) return "S";
+  if (s.startsWith("A")) return "A";
+  if (s.startsWith("B")) return "B";
+  if (s.startsWith("C") || s.startsWith("D")) return "C";
+  return "B";
+};
+
+export const finaleRatingSchema = z
+  .preprocess(normalizeRating, rawFinaleRatingEnum)
+  .describe("终局评分评级: S | A | B | C");
+
+export const rawPrivateGoalVerdictEnum = z.enum(["达成", "部分达成", "未达成"]);
+export type PrivateGoalVerdict = z.infer<typeof rawPrivateGoalVerdictEnum>;
+
+const normalizeGoalVerdict = (raw: unknown): unknown => {
+  if (typeof raw !== "string") return "部分达成";
+  const s = raw.trim();
+  if (s.includes("部分")) return "部分达成";
+  if (s.includes("未") || s.includes("失败") || s.includes("否")) return "未达成";
+  if (s.includes("达成") || s.includes("完成") || s.includes("成功")) return "达成";
+  return s;
+};
+
+export const privateGoalVerdictSchema = z
+  .preprocess(normalizeGoalVerdict, rawPrivateGoalVerdictEnum)
+  .describe("私密目标达成情况: 达成 | 部分达成 | 未达成");
 
 /**
  * 终章故事的篇幅预算
@@ -377,7 +449,7 @@ export const finalePlanSchema = z.object({
   verdictLine: z.string().min(1).max(400),
   rating: finaleRatingSchema,
   /** 玩家私密目标的达成情况 */
-  privateGoalVerdict: z.enum(["达成", "部分达成", "未达成"]),
+  privateGoalVerdict: privateGoalVerdictSchema,
   privateGoalNote: z.string().min(1).max(800),
   /** 楔子·旁白:像故事开场那样交代时间、地点与正在发生的危机,旁白腔,不出现'我' */
   prologue: z.string().min(1).max(1500),

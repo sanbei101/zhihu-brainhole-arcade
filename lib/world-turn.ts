@@ -48,6 +48,66 @@ export const ultimatumDraftSchema = z.object({
 });
 export type UltimatumDraft = z.infer<typeof ultimatumDraftSchema>;
 
+export const stanceEnum = z.enum(["support", "oppose", "negotiate", "exploit"]);
+export type AgentStance = z.infer<typeof stanceEnum>;
+
+const STANCE_SYNONYMS: Record<string, AgentStance> = {
+  support: "support",
+  back: "support",
+  agree: "support",
+  支持: "support",
+  赞成: "support",
+  拥护: "support",
+
+  oppose: "oppose",
+  against: "oppose",
+  reject: "oppose",
+  反对: "oppose",
+  抵制: "oppose",
+  拒绝: "oppose",
+
+  negotiate: "negotiate",
+  compromise: "negotiate",
+  bargain: "negotiate",
+  协商: "negotiate",
+  谈判: "negotiate",
+  妥协: "negotiate",
+  观望: "negotiate",
+  中立: "negotiate",
+
+  exploit: "exploit",
+  leverage: "exploit",
+  utilize: "exploit",
+  利用: "exploit",
+  借机利用: "exploit",
+  投机: "exploit",
+};
+
+const normalizeStance = (raw: unknown): unknown => {
+  if (typeof raw !== "string") return raw;
+  const text = raw.trim().toLowerCase();
+  return STANCE_SYNONYMS[text] ?? text;
+};
+
+export const stanceSchema = z
+  .preprocess(normalizeStance, stanceEnum)
+  .describe("态度立场: support(支持) | oppose(反对) | negotiate(协商) | exploit(借机利用)");
+
+const normalizeTrustDelta = (raw: unknown): unknown => {
+  if (typeof raw === "number") {
+    return Number.isFinite(raw) ? Math.min(30, Math.max(-30, Math.round(raw))) : 0;
+  }
+  if (typeof raw === "string") {
+    const num = Number.parseFloat(raw.trim());
+    return Number.isFinite(num) ? Math.min(30, Math.max(-30, Math.round(num))) : 0;
+  }
+  return 0;
+};
+
+export const trustDeltaSchema = z
+  .preprocess(normalizeTrustDelta, z.number().min(-30).max(30))
+  .describe("玩家的这个抉择让你对玩家的信任度变化,-15 到 15;顺你心意给正数,踩到你底线给负数");
+
 export const agentReactionSchema = z.object({
   speech: z
     .string()
@@ -60,17 +120,13 @@ export const agentReactionSchema = z.object({
     .max(60)
     .describe("角色当场采取的即时小动作,短促明确,十到二十字以内,例如'拍案而起下令闭门'"),
   target: z.string().min(1).max(30).describe("行动针对的人物、阵营或资源,十个字以内"),
-  stance: z.enum(["support", "oppose", "negotiate", "exploit"]),
+  stance: stanceSchema,
   impact: z
     .string()
     .min(1)
     .max(60)
     .describe("该动作引发的最直接即时后果,十五字以内,例如'中军守卫全面警戒'"),
-  trustDelta: z.coerce
-    .number()
-    .min(-30)
-    .max(30)
-    .describe("玩家的这个抉择让你对玩家的信任度变化,-15 到 15;顺你心意给正数,踩到你底线给负数"),
+  trustDelta: trustDeltaSchema,
   ultimatum: ultimatumDraftSchema
     .nullish()
     .describe("仅当你已被逼到极限、且当前对你的信任度低于 35 时,才给出最后通牒;否则返回 null"),

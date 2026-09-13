@@ -109,11 +109,49 @@ export const forecastEntrySchema = z.object({
 });
 export type ForecastEntry = z.infer<typeof forecastEntrySchema>;
 
+export const riskEnum = z.enum(["稳", "险", "赌", "狂"]);
+export type RiskLevel = z.infer<typeof riskEnum>;
+
+const RISK_SYNONYMS: Record<string, RiskLevel> = {
+  稳: "稳",
+  稳妥: "稳",
+  保守: "稳",
+  低: "稳",
+  险: "险",
+  危险: "险",
+  激进: "险",
+  中: "险",
+  赌: "赌",
+  冒险: "赌",
+  豪赌: "赌",
+  高: "赌",
+  狂: "狂",
+  疯狂: "狂",
+  天命: "狂",
+  飞升: "狂",
+  天命破壁: "狂",
+};
+
+const normalizeRisk = (raw: unknown): unknown => {
+  if (typeof raw !== "string") return raw;
+  const s = raw.trim();
+  if (RISK_SYNONYMS[s]) return RISK_SYNONYMS[s];
+  if (s.includes("稳")) return "稳";
+  if (s.includes("狂") || s.includes("天命") || s.includes("飞升")) return "狂";
+  if (s.includes("赌") || s.includes("冒")) return "赌";
+  if (s.includes("险") || s.includes("激")) return "险";
+  return s;
+};
+
+export const riskSchema = z
+  .preprocess(normalizeRisk, riskEnum)
+  .describe("选项风险等级: 稳(守正) | 险(铁腕) | 赌(置换) | 狂(天命破壁/群星飞升级抉择)");
+
 export const decisionOptionSchema = z.object({
   id: z.string().describe("选项唯一短 id,如 A/B/C/D"),
   title: z.string().min(1).max(80).describe("选项标题,不超过三十字"),
   desc: z.string().min(1).max(300).describe("选项具体做法与代价,不超过一百二十字"),
-  risk: z.enum(["稳", "险", "赌", "狂"]).describe("选项风险等级,狂为天命破壁/群星飞升级抉择"),
+  risk: riskSchema,
   epigraph: z
     .string()
     .max(120)

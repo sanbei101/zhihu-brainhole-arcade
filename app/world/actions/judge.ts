@@ -49,6 +49,26 @@ const judgeTurnInputSchema = z.object({
   ultimatum: ultimatumSchema.nullable(),
 });
 
+const normalizeCrisisOutcome = (raw: unknown): unknown => {
+  if (typeof raw === "string") {
+    const s = raw.trim().toLowerCase();
+    if (s === "resolved" || s === "已解决" || s === "true" || s === "解决" || s === "yes") {
+      return "resolved";
+    }
+    if (s === "unresolved" || s === "未解决" || s === "false" || s === "未完成" || s === "no") {
+      return "unresolved";
+    }
+  }
+  if (typeof raw === "boolean") {
+    return raw ? "resolved" : "unresolved";
+  }
+  return "unresolved";
+};
+
+const crisisOutcomeSchema = z
+  .preprocess(normalizeCrisisOutcome, z.enum(["resolved", "unresolved"]))
+  .describe("当前危机处理状态: resolved(已解决) | unresolved(未解决)");
+
 const judgeDraftSchema = z.object({
   deltas: metricDeltasSchema.describe("四维指标的单回合增量,每项 -20 到 20 之间"),
   metricReasons: metricReasonsSchema.describe(
@@ -63,7 +83,7 @@ const judgeDraftSchema = z.object({
   nextSituation: z.string().min(1).max(800).describe("下一回合最先逼近玩家的具体危机或待处理后果"),
   timeLeap: z.string().max(100).nullish().describe("时代跃迁纪元标尺,如'【建安十六年 · 三年后】'"),
   mutation: worldMutationSchema.nullish().describe("本回合世界线异化突变与群星风史诗判词"),
-  crisisOutcome: z.enum(["resolved", "unresolved"]),
+  crisisOutcome: crisisOutcomeSchema,
   newCrisis: crisisBodySchema.nullish(),
   ultimatumOutcome: ultimatumOutcomeSchema,
 });

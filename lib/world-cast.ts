@@ -14,7 +14,7 @@ export const worldCastRequestSchema = z.object({
  * 立绘原型:决定议事厅舞台上这个人物的像素造型(冠帽、衣着、手持物)。
  * 只用来选造型,不影响任何玩法数值。
  */
-export const characterArchetypeSchema = z.enum([
+export const rawCharacterArchetypeEnum = z.enum([
   "official",
   "general",
   "envoy",
@@ -22,7 +22,77 @@ export const characterArchetypeSchema = z.enum([
   "technician",
   "commoner",
 ]);
-export type CharacterArchetype = z.infer<typeof characterArchetypeSchema>;
+export type CharacterArchetype = z.infer<typeof rawCharacterArchetypeEnum>;
+
+const ARCHETYPE_SYNONYMS: Record<string, CharacterArchetype> = {
+  official: "official",
+  文臣: "official",
+  官员: "official",
+  学者: "official",
+  幕僚: "official",
+  谋士: "official",
+  文官: "official",
+  minister: "official",
+  civil: "official",
+  scholar: "official",
+
+  general: "general",
+  武将: "general",
+  将军: "general",
+  将帅: "general",
+  武人: "general",
+  军人: "general",
+  统帅: "general",
+  commander: "general",
+  warrior: "general",
+  soldier: "general",
+
+  envoy: "envoy",
+  使者: "envoy",
+  说客: "envoy",
+  外交官: "envoy",
+  中间人: "envoy",
+  diplomat: "envoy",
+
+  magnate: "magnate",
+  商贾: "magnate",
+  商人: "magnate",
+  资本: "magnate",
+  财阀: "magnate",
+  东家: "magnate",
+  merchant: "magnate",
+
+  technician: "technician",
+  技术: "technician",
+  工匠: "technician",
+  科学家: "technician",
+  工程师: "technician",
+  科研: "technician",
+  工程: "technician",
+  engineer: "technician",
+  scientist: "technician",
+
+  commoner: "commoner",
+  平民: "commoner",
+  百姓: "commoner",
+  群众: "commoner",
+  匠人: "commoner",
+  渔农: "commoner",
+  citizen: "commoner",
+  peasant: "commoner",
+};
+
+const normalizeArchetype = (raw: unknown): unknown => {
+  if (typeof raw !== "string") return raw;
+  const text = raw.trim().toLowerCase();
+  return ARCHETYPE_SYNONYMS[text] ?? text;
+};
+
+export const characterArchetypeSchema = z
+  .preprocess(normalizeArchetype, rawCharacterArchetypeEnum)
+  .describe(
+    "角色立绘原型: official(文臣/学者) | general(将帅/武人) | envoy(使者/说客) | magnate(商贾/资本) | technician(技术/科研) | commoner(平民/工匠)",
+  );
 
 export const archetypeLabels: Record<CharacterArchetype, string> = {
   official: "文臣",
