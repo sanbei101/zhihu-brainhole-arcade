@@ -1,10 +1,17 @@
 "use client";
 
-import { Check, Flag, GitFork, LoaderCircle, PauseCircle, ScrollText } from "lucide-react";
+import {
+  Check,
+  Flag,
+  GitFork,
+  LoaderCircle,
+  PauseCircle,
+  ScrollText,
+  Sparkles,
+} from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
 import { CrisisBanner, UltimatumBanner } from "@/components/world-council/messages";
 import { type WorldCast } from "@/lib/world-cast";
 import {
@@ -124,6 +131,63 @@ function ForecastRow({
   );
 }
 
+function OptionsLoadingState() {
+  const branchPreviews = [
+    { label: "分支 A", archetype: "稳妥方案", desc: "平衡风险与收益，稳固基本盘" },
+    { label: "分支 B", archetype: "进取破局", desc: "主动态势突破，争夺关键主动权" },
+    { label: "分支 C", archetype: "权变结盟", desc: "外交拉拢制衡，利益置换解敌意" },
+    { label: "分支 D", archetype: "险策破壁", desc: "高风险博弈，绝境反击押注奇迹" },
+  ];
+
+  return (
+    <div className="space-y-3" role="status" aria-label="AI 正在推演选项">
+      <div className="border-primary/30 bg-primary/5 flex items-center justify-between rounded-lg border px-3.5 py-2.5 text-xs">
+        <div className="flex items-center gap-2">
+          <LoaderCircle className="text-primary size-4 shrink-0 animate-spin" />
+          <span className="text-foreground font-medium">AI 正在推演本回合世界线分叉…</span>
+          <span className="text-muted-foreground hidden sm:inline">根据多方阵营博弈实时演算中</span>
+        </div>
+        <div className="text-primary/80 flex items-center gap-1.5 font-mono text-[11px]">
+          <Sparkles className="size-3.5 animate-pulse text-amber-500" />
+          <span>推演中</span>
+        </div>
+      </div>
+
+      <div className="grid gap-2 sm:grid-cols-2">
+        {branchPreviews.map((branch, idx) => (
+          <div
+            key={idx}
+            className="border-border/80 bg-muted/20 relative flex min-h-[105px] animate-pulse flex-col justify-between rounded-lg border border-dashed p-3.5"
+          >
+            <div>
+              <div className="mb-2 flex items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5">
+                  <span className="bg-primary/10 text-primary rounded px-1.5 py-0.5 font-mono text-[11px] font-semibold">
+                    {branch.label}
+                  </span>
+                  <span className="text-foreground/85 text-xs font-medium">{branch.archetype}</span>
+                </div>
+                <span className="text-muted-foreground flex items-center gap-1 font-mono text-[10px]">
+                  <span className="bg-primary/70 inline-block size-1.5 animate-ping rounded-full" />
+                  生成中
+                </span>
+              </div>
+              <div className="space-y-1.5">
+                <div className="bg-muted-foreground/15 h-3 w-4/5 rounded" />
+                <div className="bg-muted-foreground/10 h-2.5 w-3/5 rounded" />
+              </div>
+            </div>
+            <div className="border-border/40 text-muted-foreground/70 mt-2 flex items-center justify-between border-t pt-2 font-mono text-[10px]">
+              <span>{branch.desc}</span>
+              <span>待选择</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function DecisionPanel({
   cast,
   ended,
@@ -162,13 +226,7 @@ export function DecisionPanel({
 
       {!ended && !currentTurnSettled && !submittedDecision ? (
         <div aria-live="polite">
-          {isGeneratingOptions ? (
-            <div className="grid gap-2 sm:grid-cols-2">
-              {[0, 1, 2, 3].map((index) => (
-                <Skeleton key={index} className="h-28" />
-              ))}
-            </div>
-          ) : null}
+          {isGeneratingOptions || (!options && !optionsError) ? <OptionsLoadingState /> : null}
           {optionsError ? (
             <div className="flex flex-wrap items-center gap-2">
               <p className="text-destructive text-xs" role="alert">
