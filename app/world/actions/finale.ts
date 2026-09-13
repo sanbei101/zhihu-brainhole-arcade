@@ -110,8 +110,7 @@ export async function generateFinaleChapterAction(
     schema: generateFinaleChapterInputSchema,
     input,
     handler: async (data) => {
-      const { scenarioTitle, cast, playerId, turns, metrics, ending, chapterCount, chapter } =
-        data;
+      const { scenarioTitle, cast, playerId, turns, metrics, ending, chapterCount, chapter } = data;
       const player = cast.playerCharacters.find((character) => character.id === playerId);
       if (!player) throw new Error("玩家角色不存在");
 

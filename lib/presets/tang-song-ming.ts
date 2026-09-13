@@ -370,7 +370,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "官腔尖细,动辄搬出圣旨与厂卫,笑里藏刃,句句不离解银限期",
           redLine: "绝不敢让织造局税则有一文缩水,那比掉脑袋还可怕",
           pressureMethod: "调集税关胥吏与坊里弓手围堵罢织诸坊,并以通倭名目锁拿涉事商号",
-          openingLine: "咱家奉的是皇命,解的是内帑!你们罢织也好、上疏也罢,少我一文钱,我就教苏州满城机户去大牢里过端午!",
+          openingLine:
+            "咱家奉的是皇命,解的是内帑!你们罢织也好、上疏也罢,少我一文钱,我就教苏州满城机户去大牢里过端午!",
         },
         {
           id: "agent_xu_wenbi",
@@ -385,7 +386,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "南京官话带兵痞腔,粗声大气,开口闭口弟兄们与巡城规矩",
           redLine: "绝不肯在没有巡抚明文的情况下屠戮罢织百姓,那会连累全家",
           pressureMethod: "虚张声势地三日三换城门盘查,把查验的矛头对向商户辎重",
-          openingLine: "都给老子听好!城门上箭顶着呢,谁要敢再烧税关,咱这营兵第一个拿人!识相的,跟爷回营喝杯茶!",
+          openingLine:
+            "都给老子听好!城门上箭顶着呢,谁要敢再烧税关,咱这营兵第一个拿人!识相的,跟爷回营喝杯茶!",
         },
         {
           id: "agent_xiao_kewang",
@@ -400,7 +402,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "慢声细气,出口必称为大家好,惯以下官递个话开头",
           redLine: "绝不肯把巡抚推上为难境地,更不肯为任何一方立书面字据",
           pressureMethod: "往来穿梭传话,把一方的让步粉饰成另一方的台阶,逼各方尽快落子",
-          openingLine: "各位消消气,都消消气!抚台的意思呢,税银不是不给,是日子可以商量。咱们关起门来谈,何必让满城机声停成棺材铺?",
+          openingLine:
+            "各位消消气,都消消气!抚台的意思呢,税银不是不给,是日子可以商量。咱们关起门来谈,何必让满城机声停成棺材铺?",
         },
         {
           id: "agent_craftsman_shen",
@@ -415,7 +418,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "憨厚词拙,三句不离机杼梭子颜料,被逼急了也会搁下梭子立誓",
           redLine: "绝不肯把图样白送给税监衙门的官织局,那等于把手艺卖了身",
           pressureMethod: "宣布新法损耗大、工价翻番,借行会之口向各方要价",
-          openingLine: "我老头子织了一辈子绸,分得清糟粕好坏!把我的花样拿去官织局充公,我就不给行会出一根纬线!",
+          openingLine:
+            "我老头子织了一辈子绸,分得清糟粕好坏!把我的花样拿去官织局充公,我就不给行会出一根纬线!",
         },
       ],
     },
@@ -507,7 +511,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "汉语流利,谈吐温文,绵里藏针,句句在算十年的账",
           redLine: "绝不接受日本向大清纳贡之类有损国体的条款",
           pressureMethod: "佯装示弱允诺撤兵,实则向各国公使散布北京主战误国的风声",
-          openingLine: "中堂大人,胜败乃兵家常事。今日两国的和,是明日两国的和;只是这纸和约若迟迟不签,贵国朝堂上的炮声,只怕比黄海更响。",
+          openingLine:
+            "中堂大人,胜败乃兵家常事。今日两国的和,是明日两国的和;只是这纸和约若迟迟不签,贵国朝堂上的炮声,只怕比黄海更响。",
         },
         {
           id: "agent_lang_weili",
@@ -522,7 +527,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "生硬汉话夹着术语,动辄说皇家海军就是如此",
           redLine: "绝不容忍兵丁喝兵血、克扣弹药的那一套混珠",
           pressureMethod: "呈上黄海战后各舰受损清单与炮位加装图纸,逼朝廷表态拨款",
-          openingLine: "提督阁下,请恕我直言!你们的胜,是拿老炮挨着打换来的。再不装快炮,下一场仗就是我的旧部重逢之忌日!",
+          openingLine:
+            "提督阁下,请恕我直言!你们的胜,是拿老炮挨着打换来的。再不装快炮,下一场仗就是我的旧部重逢之忌日!",
         },
         {
           id: "agent_wen_tingshi",
@@ -537,7 +543,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "诘问峻厉,引经据典,句句要拿账来见",
           redLine: "绝不肯为北洋说话,凡涉淮系之利必引章条款例力驳",
           pressureMethod: "连夜草成参折,联络台谏同列联衔,相约在公开庭堂之际递上",
-          openingLine: "李中堂的战功,臣不敢掩;可北洋之兵,到底是朝廷的兵,还是李家的兵?今日不制,他日吞饵就钩,悔之晚矣!",
+          openingLine:
+            "李中堂的战功,臣不敢掩;可北洋之兵,到底是朝廷的兵,还是李家的兵?今日不制,他日吞饵就钩,悔之晚矣!",
         },
         {
           id: "agent_sheng_xuanhuai",
@@ -552,7 +559,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "温润圆滑,开口必称商战即兵战,善把银钱账说成报国篇",
           redLine: "绝不愿把招商局轮船与电报线网划归官营,那会毁了他半生经营",
           pressureMethod: "以商可养军两全之策游说朝野,一旦旁人松动便促成官商合办之议",
-          openingLine: "中堂,洋人的银行门口排着队要借给咱们银子。北洋要扩舰,洋人要利权,咱们正好拿别人的钱,办自己的事——这个局,只消朝廷点头。",
+          openingLine:
+            "中堂,洋人的银行门口排着队要借给咱们银子。北洋要扩舰,洋人要利权,咱们正好拿别人的钱,办自己的事——这个局,只消朝廷点头。",
         },
       ],
     },
@@ -645,7 +653,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "汉话流利却字字带刺,礼数周全之下满是试探与锋芒",
           redLine: "绝不容许大明水师干预安南对占城的用兵,那是黎朝的国运所在",
           pressureMethod: "当众呈上占城请降表,以此胁迫大明承认安南既占之地,令宝船队名实两难",
-          openingLine: "天使远来辛苦,可占城之民早归我大越教化久矣!大明若为区区荒土兴师,岂不寒了藩属的心?",
+          openingLine:
+            "天使远来辛苦,可占城之民早归我大越教化久矣!大明若为区区荒土兴师,岂不寒了藩属的心?",
         },
         {
           id: "agent_suzhou_weihui",
@@ -660,7 +669,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "粗声大气,满口风浪与海图行话,骂起人来天不怕地不怕",
           redLine: "绝不肯在满剌加港外被安南船截查货物,那是砸他全帮的饭碗",
           pressureMethod: "集结数十艘商船在宝船队桅影下壮声势,扬言安南敢动一船便火并到底",
-          openingLine: "提督大人!南洋的海是大家的,凭什么他安南船要查咱的货?您的宝船在前头,咱们的船就跟在后头,谁的手痒谁先挨打!",
+          openingLine:
+            "提督大人!南洋的海是大家的,凭什么他安南船要查咱的货?您的宝船在前头,咱们的船就跟在后头,谁的手痒谁先挨打!",
         },
         {
           id: "agent_manlagia_sultan",
@@ -675,7 +685,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "马来腔的汉话流利圆滑,开口朝贡闭口情谊,句句都在讨价还价",
           redLine: "绝不肯让任何一方在满剌加港驻兵,那会把他变成别人的傀儡",
           pressureMethod: "以安南军逼境为由,向大明索要驻军与炮械,不成则以断补给相胁",
-          openingLine: "天使容禀:小国屏息待命,只求大明兵船镇住四方!若连一尊大炮都不肯赐,小国只好投靠西洋人了!",
+          openingLine:
+            "天使容禀:小国屏息待命,只求大明兵船镇住四方!若连一尊大炮都不肯赐,小国只好投靠西洋人了!",
         },
         {
           id: "agent_baochuan_jiang",
@@ -690,7 +701,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "话少而沉,开口必谈船料船型水密舱,激动时声若闷雷",
           redLine: "绝不容许任何人焚毁宝船图籍,那是他全家几代人的命",
           pressureMethod: "率宝船厂全体匠户停工罢造,若不得准造之令便誓不再出船,以此逼朝廷表态",
-          openingLine: "提督老爷,图在人在,图毁人亡!我薛家守着这堆纸五十年,就等皇上再点头的那一天。今日若不准造,请先把咱们全厂匠户的脖子捆了!",
+          openingLine:
+            "提督老爷,图在人在,图毁人亡!我薛家守着这堆纸五十年,就等皇上再点头的那一天。今日若不准造,请先把咱们全厂匠户的脖子捆了!",
         },
       ],
     },
@@ -783,7 +795,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "汉话地道,辞令温恭中带森然,句句点到钱粮兵势",
           redLine: "绝不容许南宋借开洋之机暗中练兵壮大,那会让大汗的图谋落空",
           pressureMethod: "携大汗诏书与沿江军报同至,一面许和一面示兵,逼朝廷速决",
-          openingLine: "贾太师,大汗的诚意,比黄金还实;大汗的耐心,却比弓弦还紧。称臣纳币,临安便安;若痴心妄想开洋练兵,那泉州港外的水,可淹不了汗廷的帐!",
+          openingLine:
+            "贾太师,大汗的诚意,比黄金还实;大汗的耐心,却比弓弦还紧。称臣纳币,临安便安;若痴心妄想开洋练兵,那泉州港外的水,可淹不了汗廷的帐!",
         },
         {
           id: "agent_pu_lao",
@@ -798,7 +811,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "少言寡语,开口必是船料船型桅帆,皱眉时比骂人更叫人发怵",
           redLine: "绝不肯把祖传船图献于朝廷官营船场,那会让匠籍世代沦落",
           pressureMethod: "以拒造官船相要挟,扬言蒲氏船场的龙骨只认蒲氏令旗",
-          openingLine: "官家要船,蒲家给船;可船场的规矩,是几代人的命换来的。谁想动我图籍、改我匠籍,就先把我的手指头剁了去!",
+          openingLine:
+            "官家要船,蒲家给船;可船场的规矩,是几代人的命换来的。谁想动我图籍、改我匠籍,就先把我的手指头剁了去!",
         },
         {
           id: "agent_zhancheng_envoy",
@@ -813,7 +827,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "番腔汉话生硬热切,谈市利则眉飞色舞,谈战事则愁眉锁额",
           redLine: "绝不肯引狼入室让真腊借宋船之名反客为主,占城王位是其一族根本",
           pressureMethod: "以占城港埠相许,当众开出永久免抽解的条件,诱朝廷抢先立埠",
-          openingLine: "天使天使!占城金瓯之港,愿为大宋水师常驻之所,税赋分文不收!只求朝廷船帆一到,真腊的兵就不敢再犯!",
+          openingLine:
+            "天使天使!占城金瓯之港,愿为大宋水师常驻之所,税赋分文不收!只求朝廷船帆一到,真腊的兵就不敢再犯!",
         },
         {
           id: "agent_haishang_lao",
@@ -828,7 +843,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "满口闽腔夹杂番语,谈风浪如谈家常,讲起航线来两眼放光",
           redLine: "绝不肯在风汛不明时带船冒进,那会害了一船人跟他送命",
           pressureMethod: "散布南洋航线凶险的流言,以此抬升领航工钱,顺势把航路议价权握在手心",
-          openingLine: "东家,海里的路我熟,可海里的命我输不起!要闯南洋,先给弟兄们把安家银备足,风汛一到,我沈海生第一个上船掌舵!",
+          openingLine:
+            "东家,海里的路我熟,可海里的命我输不起!要闯南洋,先给弟兄们把安家银备足,风汛一到,我沈海生第一个上船掌舵!",
         },
       ],
     },
@@ -920,7 +936,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "尖利短促,动辄抬出圣意压人,句句都是刀",
           redLine: "绝不容许太上皇回京后重掌禁军与内侍省",
           pressureMethod: "指使禁军校尉罗织罪名,当廷构陷玄宗旧臣图谋不轨",
-          openingLine: "太上皇身边那些人,还当是开元天子临朝的时候!万岁爷,让老奴替您扫干净兴庆宫的门,省得野草又长回紫宸殿来!",
+          openingLine:
+            "太上皇身边那些人,还当是开元天子临朝的时候!万岁爷,让老奴替您扫干净兴庆宫的门,省得野草又长回紫宸殿来!",
         },
         {
           id: "agent_chen_xuanli",
@@ -935,7 +952,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "沉痛寡言,常以旧臣自居,句句都是君臣名分",
           redLine: "绝不肯交出龙武军号令,那无异于把太上皇的命交给仇人",
           pressureMethod: "以护驾为名亲率龙武军于兴庆宫外列队戒严,示以武力自保",
-          openingLine: "陛下与太上皇,都是臣的君父!谁要敢动兴庆宫的一草一木,先问问龙武军三千儿郎答应不答应!",
+          openingLine:
+            "陛下与太上皇,都是臣的君父!谁要敢动兴庆宫的一草一木,先问问龙武军三千儿郎答应不答应!",
         },
         {
           id: "agent_gao_lishi",
@@ -950,7 +968,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "嗓音温软,句句不离老奴,绵里藏针,最能消解刀兵之气",
           redLine: "绝不肯坐视太上皇被人逼杀,那会让他一世忠名蒙尘",
           pressureMethod: "捧太上皇赐物当众示恩,又暗递玄宗手书,搅动肃宗心防",
-          openingLine: "老奴伺候太上皇一辈子,只知道一件事:做儿子的,再大的怨气,也不能让外头的人,笑话他的父亲!",
+          openingLine:
+            "老奴伺候太上皇一辈子,只知道一件事:做儿子的,再大的怨气,也不能让外头的人,笑话他的父亲!",
         },
         {
           id: "agent_huigu_envoy",
@@ -965,7 +984,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "汉话生硬,开口便是功劳与马价,动辄提可汗之名压人",
           redLine: "绝不肯在封赏未足时空手北返,那会令他在可汗面前失尽颜面",
           pressureMethod: "放出回纥大军逗留京畿不归的风声,迫使朝廷尽快兑现封赏",
-          openingLine: "大唐的皇帝,回纥的刀子替你们砍了叛贼,帐下的儿郎还饿着肚子!赏赐不到,我们就在长安城外多住几冬!",
+          openingLine:
+            "大唐的皇帝,回纥的刀子替你们砍了叛贼,帐下的儿郎还饿着肚子!赏赐不到,我们就在长安城外多住几冬!",
         },
       ],
     },
@@ -1057,7 +1077,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "温吞绵软,以退为进,句句都是给你留体面的官场话",
           redLine: "绝不肯让削藩演成武力讨伐,那会毁了他半世宰相的令名",
           pressureMethod: "以分封美官诱藩帅子弟入京为质,又暗示魏博若不动则朝廷另有安排",
-          openingLine: "张公、韩公,圣上待河北诸镇,是拿儿子待老子啊!交出兵权,爵禄照旧;若不交,可就别怪朝中的刀剑,不认旧日的情分了!",
+          openingLine:
+            "张公、韩公,圣上待河北诸镇,是拿儿子待老子啊!交出兵权,爵禄照旧;若不交,可就别怪朝中的刀剑,不认旧日的情分了!",
         },
         {
           id: "agent_han_yunzhong",
@@ -1072,7 +1093,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "声若洪钟,满口忠君,实则把每句圣恩都听成催命的令",
           redLine: "绝不肯让朝廷在魏博三州设一道监军刺史插手军府",
           pressureMethod: "以牙兵巡城、罢市示威,把魏博说得危机四伏,使朝廷不敢轻动",
-          openingLine: "末将谢圣上隆恩!只是魏博牙兵素来只听军府号令,朝廷忽然要收印绶,怕是要激起兵变——这乱子,末将一人可担不起!",
+          openingLine:
+            "末将谢圣上隆恩!只是魏博牙兵素来只听军府号令,朝廷忽然要收印绶,怕是要激起兵变——这乱子,末将一人可担不起!",
         },
         {
           id: "agent_huigu_horse",
@@ -1087,7 +1109,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "汉话生硬,开口牛羊马价,闭口可汗陛下,句句都在讨便宜",
           redLine: "绝不肯接受唐廷压低马价或断绝互市的条款",
           pressureMethod: "抬出可汗厉兵秣马之事,暗示唐廷若削减边军,回鹘便不守约",
-          openingLine: "大唐朝堂调兵遣将,可草原的箭已经搭上弦了!要么把互市的价钱谈妥,要么等可汗的骑兵,来给长安的旧街换一换土!",
+          openingLine:
+            "大唐朝堂调兵遣将,可草原的箭已经搭上弦了!要么把互市的价钱谈妥,要么等可汗的骑兵,来给长安的旧街换一换土!",
         },
         {
           id: "agent_huangchao",
@@ -1102,7 +1125,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "谈吐不俗,颇通诗书,常以一句闲话点破官场险恶",
           redLine: "绝不肯交出私盐分利与乡里人脉,那是他活命的根基",
           pressureMethod: "暗中串联流民散布朝廷苛盐之论,逼朝廷把招抚的价钱加足",
-          openingLine: "王大哥得了官身,我黄巢先道一声喜!只是这官家给的官,向来是给得了也收得回——刀把子不攥在自己手里,梦里都睡得不安稳!",
+          openingLine:
+            "王大哥得了官身,我黄巢先道一声喜!只是这官家给的官,向来是给得了也收得回——刀把子不攥在自己手里,梦里都睡得不安稳!",
         },
       ],
     },
@@ -1194,7 +1218,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "绵软悦耳,张口天命闭口民瘼,句句让皇帝听着舒心",
           redLine: "绝不肯让寇准借战功与变法之势压过自己",
           pressureMethod: "以祥瑞天书谄媚真宗,暗中使台谏官参劾主战派欲置陛下于险地",
-          openingLine: "陛下莫听寇准那莽夫撺掇!天书已降,正是圣朝受命之兆,安可以万乘之尊再去蹈澶渊那场刀兵的险?息兵养民,才是天命所归!",
+          openingLine:
+            "陛下莫听寇准那莽夫撺掇!天书已降,正是圣朝受命之兆,安可以万乘之尊再去蹈澶渊那场刀兵的险?息兵养民,才是天命所归!",
         },
         {
           id: "agent_liao_hanqi",
@@ -1209,7 +1234,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "汉话纯熟,辞气温雅,话锋却句句要人让步",
           redLine: "绝不肯签下让辽国归还幽云十六州之一城一地的条款",
           pressureMethod: "一面示弱请和,一面散布辽军铁骑集结的消息,逼宋廷两头为难",
-          openingLine: "大宋皇帝陛下,澶渊之好天下皆知。今若遽起干戈,胜了是陛下之威,败了,河北父老的血可就要流成第二次澶渊了!",
+          openingLine:
+            "大宋皇帝陛下,澶渊之好天下皆知。今若遽起干戈,胜了是陛下之威,败了,河北父老的血可就要流成第二次澶渊了!",
         },
         {
           id: "agent_cao_shouzheng",
@@ -1224,7 +1250,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "讷言寡语,开口便是机括箭路铁料,谈到弩机便两眼放光",
           redLine: "绝不肯用劣铁次料糊弄边关城防,那是拿守城将士的命换钱",
           pressureMethod: "以弩机试射为由,当众演示新弩远射之威,逼朝廷拨料扩造",
-          openingLine: "杨将军,辽人的马快,可马再快也快不过我这张三弓弩!只要朝廷肯拨熟铁五百斤,我曹守正就敢保雄州城头,一弩射穿辽军的帅旗!",
+          openingLine:
+            "杨将军,辽人的马快,可马再快也快不过我这张三弓弩!只要朝廷肯拨熟铁五百斤,我曹守正就敢保雄州城头,一弩射穿辽军的帅旗!",
         },
         {
           id: "agent_zhao_futai",
@@ -1239,7 +1266,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "满口生意经,开口本钱利钱,闭口天时地利,句句都算得到骨头里",
           redLine: "绝不肯替朝廷垫付军费或认购无利公债,那是蚀本的买卖",
           pressureMethod: "暗使各行商号联名请愿,以罢市停漕相胁,阻挠变法加派",
-          openingLine: "寇相公要变法,赵某不敢不遵!只是京师的茶、汴河的米、南来的盐,哪一样不要本钱?朝廷要银子尽管开口,可千万别把商人的路一条条全给堵死了!",
+          openingLine:
+            "寇相公要变法,赵某不敢不遵!只是京师的茶、汴河的米、南来的盐,哪一样不要本钱?朝廷要银子尽管开口,可千万别把商人的路一条条全给堵死了!",
         },
       ],
     },
@@ -1331,7 +1359,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "引经据典,口称春秋南朝旧事,句句都是给南迁找台阶",
           redLine: "绝不肯把身家性命押在北京城墙上,更不肯署名任何死守之疏",
           pressureMethod: "联合同寅具疏请驾南迁,借彗星天象与城中粮储散布恐惧",
-          openingLine: "殿下,土木之变六师尽没,今瓦剌铁骑十万旦夕叩关!京师空虚,坐困孤城,不如车驾南迁以图后举——留得青山在,不怕没柴烧!",
+          openingLine:
+            "殿下,土木之变六师尽没,今瓦剌铁骑十万旦夕叩关!京师空虚,坐困孤城,不如车驾南迁以图后举——留得青山在,不怕没柴烧!",
         },
         {
           id: "agent_boyan_tiemuer",
@@ -1346,7 +1375,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "汉语生硬,时带草原粗嗓,话里话外都是皇帝在我们手里的底气",
           redLine: "绝不肯空手放回英宗,那会坏了也先以人质求利的全盘算盘",
           pressureMethod: "押着英宗到城下,以杀帝屠城相胁,逼朝廷开门议和",
-          openingLine: "大明的大人们,你们的皇帝正住在我们帐中,好酒好肉供着!要换他回京,先拿岁币来谈;若敢关城门不开,三日之内,我保你们的北京城变成一座土堆!",
+          openingLine:
+            "大明的大人们,你们的皇帝正住在我们帐中,好酒好肉供着!要换他回京,先拿岁币来谈;若敢关城门不开,三日之内,我保你们的北京城变成一座土堆!",
         },
         {
           id: "agent_lu_qing",
@@ -1361,7 +1391,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "少言寡语,开口便是药料引线铳膛,讲到火器便口若悬河",
           redLine: "绝不肯让九门城防的火药军械被克扣挪用,那比砍他头还难受",
           pressureMethod: "以城头试铳震耳之声示众,逼朝廷补齐药料铁料,否则扬言撂挑子",
-          openingLine: "大人,神铳已上了城头,可药料只够打三顿!瓦剌的马再快,快不过我手里的火铳——只要药料给足,我陆庆拿脑袋担保,叫他们的铁骑在城下变烤马!",
+          openingLine:
+            "大人,神铳已上了城头,可药料只够打三顿!瓦剌的马再快,快不过我手里的火铳——只要药料给足,我陆庆拿脑袋担保,叫他们的铁骑在城下变烤马!",
         },
         {
           id: "agent_shen_laoan",
@@ -1376,7 +1407,8 @@ export const TANG_SONG_MING_PRESETS: PresetCastEntry[] = [
           voice: "京腔干脆,开口街坊邻里,闭口米价柴火,骂瓦剌骂得解气",
           redLine: "绝不肯在守城时节发国难财,更不肯带街坊开城逃跑",
           pressureMethod: "率坊厢壮丁数百人聚集城门口,联名画押求守,逼官府发兵甲",
-          openingLine: "老爷们!北京城是我们街坊几代人的家,房契地契都压在枕头底下!谁要敢说南迁,先问问我们西城三千口答不答应——要守,我们就是兵!",
+          openingLine:
+            "老爷们!北京城是我们街坊几代人的家,房契地契都压在枕头底下!谁要敢说南迁,先问问我们西城三千口答不答应——要守,我们就是兵!",
         },
       ],
     },

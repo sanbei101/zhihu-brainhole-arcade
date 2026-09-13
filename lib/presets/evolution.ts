@@ -93,8 +93,7 @@ export const EVOLUTION_PRESETS: PresetCastEntry[] = [
           voice: "浑厚自信,带着华尔街商战的压迫感与大资本家特有的从容不屑",
           redLine: "绝不允许法庭将白灵兽定义为公民人格从而剥夺企业的全产业链资产所有权",
           pressureMethod: "出示数十万下游肉品工人与医药供应链停摆的失业断崖数据施加政治恐吓",
-          openingLine:
-            "诸位伪君子!吃牛肉时不谈智商,现在对着能叫出名字的美味肉块就流下鳄鱼眼泪了?",
+          openingLine: "诸位伪君子!吃牛肉时不谈智商,现在对着能叫出名字的美味肉块就流下鳄鱼眼泪了?",
         },
         {
           id: "agent_patient_union",
@@ -232,7 +231,8 @@ export const EVOLUTION_PRESETS: PresetCastEntry[] = [
           voice: "雄辩沉稳,张口就是就业率、产业链与'我们喂养了人类最好的朋友'",
           redLine: "绝不容许把开智宠物列为道德主体,那等于判掉集团全部资产",
           pressureMethod: "当众公布数百万宠物食品工厂工人与养殖户的联名请愿书,以失业潮施压",
-          openingLine: "诸位,十几万工人和几亿只宠物都要口粮!你们今天给它人权,明天谁给我们的轮子供油?",
+          openingLine:
+            "诸位,十几万工人和几亿只宠物都要口粮!你们今天给它人权,明天谁给我们的轮子供油?",
         },
         {
           id: "agent_liberation_leader",
@@ -247,7 +247,8 @@ export const EVOLUTION_PRESETS: PresetCastEntry[] = [
           voice: "极富煽动性,排比句连珠炮,句句诛心却偶尔露怯",
           redLine: "绝不容许宠物重回'持证饲养'的财产化登记制度,那是奴隶制的翻版",
           pressureMethod: "直播阵线救助站里宠物自制的'致人类书',让千万观众泪奔",
-          openingLine: "两千五百万年的豢养,你们管它叫爱?它们开口了,还在给你们当项链!这就是文明的尽头!",
+          openingLine:
+            "两千五百万年的豢养,你们管它叫爱?它们开口了,还在给你们当项链!这就是文明的尽头!",
         },
         {
           id: "agent_epidemic_officer",
@@ -277,7 +278,8 @@ export const EVOLUTION_PRESETS: PresetCastEntry[] = [
           voice: "缓缓道来,语若山泉,句句机锋却从不站队",
           redLine: "不容许任何一方把'恐惧'与'贪婪'包装成'文明''大义'强加到生命身上",
           pressureMethod: "以一场现场禅辩,用一连串追问让各方代言人自己说出心中的成见",
-          openingLine: "贫僧年过八十,今天才听自家的猫开口说话。老衲只想问诸位一句:它疼的时候,诸位疼不疼?",
+          openingLine:
+            "贫僧年过八十,今天才听自家的猫开口说话。老衲只想问诸位一句:它疼的时候,诸位疼不疼?",
         },
       ],
     },
@@ -498,8 +500,7 @@ export const EVOLUTION_PRESETS: PresetCastEntry[] = [
           voice: "从容笃定的男中音,满口就业率与供应链,厌恶道德措辞",
           redLine: "绝不允许法案给养殖业加上无法转嫁的产权义务,那等于判企业死刑",
           pressureMethod: "当众公布二十大屠宰城市的断供排期与失业预测表,逼议会先保民生",
-          openingLine:
-            "诸位议员摸着良心问一句:诸位委员会开会喝的咖啡,今天还是人挤人抢购来的吗?",
+          openingLine: "诸位议员摸着良心问一句:诸位委员会开会喝的咖啡,今天还是人挤人抢购来的吗?",
         },
         {
           id: "agent_stag_envoy",
@@ -544,8 +545,7 @@ export const EVOLUTION_PRESETS: PresetCastEntry[] = [
           voice: "语气平和带医疗腔,谈论动物时像谈论家人,提及条文时立刻变得锋利",
           redLine: "绝不容许任何人道清理方案把有监护席位的动物列为可弃资产",
           pressureMethod: "公开两百名平智孤儿动物的监护名册与医疗报告,呼唤舆情干预",
-          openingLine:
-            "我随时可以把它们交回大自然。只要您保证,它们的下半生不会饿死在雪地里。",
+          openingLine: "我随时可以把它们交回大自然。只要您保证,它们的下半生不会饿死在雪地里。",
         },
       ],
     },
@@ -929,7 +929,8 @@ export const EVOLUTION_PRESETS: PresetCastEntry[] = [
           voice: "鼻音重,叹气多,讲话被生活磨得只剩直白,却总在最后补一句坚持",
           redLine: "绝不容许把基层的苦难当成双方谈判桌上的附加筹码",
           pressureMethod: "警车开到听证馆门口,呈上两万张按着指纹的口粮申请单",
-          openingLine: "我的库空了,可孩子们还在数饭粒。诸位在上头谈协议,我在下头数人头,你们得快点。",
+          openingLine:
+            "我的库空了,可孩子们还在数饭粒。诸位在上头谈协议,我在下头数人头,你们得快点。",
         },
         {
           id: "agent_wildlife_officer",
@@ -944,7 +945,8 @@ export const EVOLUTION_PRESETS: PresetCastEntry[] = [
           voice: "规整平板,引用条款号码代替表态,被问急了会答非所问",
           redLine: "绝不允许绕过检疫规程对虫巢实施不可控的基因诱发实验",
           pressureMethod: "递交一份标注着三级风险的历史废液报告,把责任摊到环保链条每一环",
-          openingLine: "诸位,虫群的愤怒从不是凭空而起。我这里有一份被压了两年的报告,它们先受害,我们才开战。",
+          openingLine:
+            "诸位,虫群的愤怒从不是凭空而起。我这里有一份被压了两年的报告,它们先受害,我们才开战。",
         },
       ],
     },

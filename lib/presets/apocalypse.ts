@@ -222,8 +222,7 @@ export const APOCALYPSE_PRESETS: PresetCastEntry[] = [
           voice: "阴鸷霸道,动辄拔枪击地,言必称非常时期行非常之刑",
           redLine: "任何人敢在配粮点聚众喧哗或私藏滤芯,立斩当场以儆效尤",
           pressureMethod: "调动持枪稽查队包围议事厅,枪上膛刀出鞘以兵变实施实质逼宫",
-          openingLine:
-            "郭所长!粮食只够吃四十天了!再不把那两百个瘫在床上的废人扔出去,全所都要死!",
+          openingLine: "郭所长!粮食只够吃四十天了!再不把那两百个瘫在床上的废人扔出去,全所都要死!",
         },
         {
           id: "agent_agronomist",
@@ -268,8 +267,7 @@ export const APOCALYPSE_PRESETS: PresetCastEntry[] = [
           voice: "剧烈咳嗽中带着浓厚的乡音,语调悲愤而苍凉,满是老工人的傲骨",
           redLine: "如果稽查队敢把老矿工的孙女赶出防空洞,八百老伙计拼了老命也要翻天",
           pressureMethod: "数百位手持铁镐白发苍苍的老矿工齐聚走廊,齐声敲击钢管声震洞顶",
-          openingLine:
-            "当年挖这防空洞流汗流血的是我们!现在煤烟封了天,就想把老头子当牲口扔了?来啊!",
+          openingLine: "当年挖这防空洞流汗流血的是我们!现在煤烟封了天,就想把老头子当牲口扔了?来啊!",
         },
       ],
     },
@@ -375,7 +373,8 @@ export const APOCALYPSE_PRESETS: PresetCastEntry[] = [
           voice: "满口热值、煤耗与上网电价,笑容里能挤出油来",
           redLine: "若官方强行征收其三座电厂,便借口拉断电网并网点,让城里多黑一周",
           pressureMethod: "当众拍出三座电厂的点火时间表与一周供电承诺书,要挟全城利益",
-          openingLine: "煤是冷是热,全看给不给白天鹅!顾市长,我三座电厂明天就能冒烟,就看您怎么点这炉子!",
+          openingLine:
+            "煤是冷是热,全看给不给白天鹅!顾市长,我三座电厂明天就能冒烟,就看您怎么点这炉子!",
         },
         {
           id: "agent_resident_rep",
@@ -405,7 +404,8 @@ export const APOCALYPSE_PRESETS: PresetCastEntry[] = [
           voice: "语速极快,数据精确,从不诉苦,却让每个听者意识到她背后是行将熄灭的生命",
           redLine: "绝不容许任何单位截留呼吸机插管病人的特保用电线路",
           pressureMethod: "当众回放ICU停电监控的惊魂三分钟录像,让全场追踪屏死一般寂静",
-          openingLine: "我的手术室只有三十分钟的电池了。诸位局长、将军,先救活人,再谈指挥和资本。谢谢。",
+          openingLine:
+            "我的手术室只有三十分钟的电池了。诸位局长、将军,先救活人,再谈指挥和资本。谢谢。",
         },
       ],
     },
@@ -527,7 +527,8 @@ export const APOCALYPSE_PRESETS: PresetCastEntry[] = [
           voice: "语速均匀,动辄甩出气压梯度、霜日数与海冰北界坐标,毫无烟火气",
           redLine: "绝不容忍任何官僚为了账本数字而隐瞒将提前到来的极端寒潮",
           pressureMethod: "出示未来十日降温模型与三百年一遇寒潮预报,要求立即启动最高级响应",
-          openingLine: "化冻提前了,不是五十天,是二十三天。诸位再不决断,这三百万人一个也走不出关外。",
+          openingLine:
+            "化冻提前了,不是五十天,是二十三天。诸位再不决断,这三百万人一个也走不出关外。",
         },
         {
           id: "agent_camp_medic",
@@ -816,7 +817,8 @@ export const APOCALYPSE_PRESETS: PresetCastEntry[] = [
           voice: "沙哑简短,句句是任务与伤亡数字,偶尔蹦出一句冷笑",
           redLine: "若有人克扣队员抚恤或防护装备,他就带全队撂挑子",
           pressureMethod: "率清污队堵在中立区检测中心门口,要求先结算三个月欠薪",
-          openingLine: "疫苗有,防护服没有,抚恤金更没有。你们楼上分权分得欢,楼下一百多号人光着膀子啃丧尸!",
+          openingLine:
+            "疫苗有,防护服没有,抚恤金更没有。你们楼上分权分得欢,楼下一百多号人光着膀子啃丧尸!",
         },
       ],
     },
@@ -923,7 +925,8 @@ export const APOCALYPSE_PRESETS: PresetCastEntry[] = [
           voice: "粗犷江湖气,开口兄弟义气,闭口码头规矩,认理不认官",
           redLine: "若军需处强行扣他的船,他就凿船堵运河,让整个水运瘫痪",
           pressureMethod: "率百条空船横在运河中央,堵塞军粮水运通道逼官方谈判",
-          openingLine: "韩将军,您的军粮走水路,我的兄弟也靠水路吃饭。扣船可以,先给全船人发三个月口粮!",
+          openingLine:
+            "韩将军,您的军粮走水路,我的兄弟也靠水路吃饭。扣船可以,先给全船人发三个月口粮!",
         },
         {
           id: "agent_international_aid",
@@ -938,7 +941,8 @@ export const APOCALYPSE_PRESETS: PresetCastEntry[] = [
           voice: "措辞严谨,动辄引公约条文与配额比例,礼貌得像一台翻译机器",
           redLine: "绝不容许援助粮被贴上绿钞标签流入黑市",
           pressureMethod: "当众宣布若三天内审计不过关,将冻结下一批国际粮援全部到港",
-          openingLine: "署长先生,我带来了二十万吨小麦,也带来了二十名核查员。哪桶面去了哪里,我需要答案。",
+          openingLine:
+            "署长先生,我带来了二十万吨小麦,也带来了二十名核查员。哪桶面去了哪里,我需要答案。",
         },
         {
           id: "agent_suburb_farmer",
@@ -953,7 +957,8 @@ export const APOCALYPSE_PRESETS: PresetCastEntry[] = [
           voice: "一口浓重乡音,说话慢吞吞,讲到粮食与娃娃时眼神忽然变狠",
           redLine: "谁要动他私留的麦种,他就跟谁拼命",
           pressureMethod: "打开粮仓门让全村人搬粮,以集体哄抢之名倒逼配给署提高收购价",
-          openingLine: "城里人吃配给,俺村里人守着仓没粮吃,这叫什么道理?地窖里的种,俺拼了老命也要保住!",
+          openingLine:
+            "城里人吃配给,俺村里人守着仓没粮吃,这叫什么道理?地窖里的种,俺拼了老命也要保住!",
         },
       ],
     },

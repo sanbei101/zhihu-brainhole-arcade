@@ -193,12 +193,7 @@ export function WorldCastPanel({ scenario }: WorldCastProps) {
           throw new Error(message);
         }
         const json: unknown = await response.json();
-        if (
-          typeof json !== "object" ||
-          json === null ||
-          !("ok" in json) ||
-          !("data" in json)
-        ) {
+        if (typeof json !== "object" || json === null || !("ok" in json) || !("data" in json)) {
           throw new Error("世界线角色阵容未完整生成");
         }
 

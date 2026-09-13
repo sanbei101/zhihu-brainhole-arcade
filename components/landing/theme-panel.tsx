@@ -40,7 +40,7 @@ function TopicCard({ topic, order }: { topic: ScenarioTopic; order: number }) {
     >
       <SpotlightCard
         spotlightColor="rgba(255, 255, 255, 0.12)"
-        className="bg-card/85 hover:border-primary/50 h-full p-0 gap-0 shadow-lg backdrop-blur-md transition-all"
+        className="bg-card/85 hover:border-primary/50 h-full gap-0 p-0 shadow-lg backdrop-blur-md transition-all"
       >
         <CardHeader className="gap-2 p-4 sm:p-5">
           <div className="text-muted-foreground flex items-center gap-1.5 font-mono text-[10px]">

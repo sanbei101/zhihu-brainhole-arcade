@@ -1,5 +1,6 @@
-import { getCastPreset } from "./index";
 import { type DecisionOption, type RoundOptions } from "@/lib/world-options";
+
+import { getCastPreset } from "./index";
 
 /**
  * 开局第一回合预制选项独立注册表。
@@ -252,7 +253,8 @@ export function getInitialRoundOptions(input: {
 
   if (Array.isArray(found)) {
     return {
-      situation: fallbackSituation || "世界线第一幕已开启，危机正压在朝堂之上，请作出你的开局抉择。",
+      situation:
+        fallbackSituation || "世界线第一幕已开启，危机正压在朝堂之上，请作出你的开局抉择。",
       options: found,
     };
   }

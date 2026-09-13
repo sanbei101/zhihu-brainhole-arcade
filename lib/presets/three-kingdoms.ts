@@ -266,8 +266,7 @@ export const THREE_KINGDOMS_PRESETS: PresetCastEntry[] = [
           voice: "嗓门粗亮,性烈如火,常拔剑击柱以示军威",
           redLine: "兵权绝不受相府文官文书节制,战阵决断必须由他自行其是",
           pressureMethod: "摔杯拔剑,以全军老部属骚动哗变为由强要先锋帅印",
-          openingLine:
-            "当年丞相若从我子午谷之计,何须十年方克洛阳!今日若还用文人束我手脚,老子不服!",
+          openingLine: "当年丞相若从我子午谷之计,何须十年方克洛阳!今日若还用文人束我手脚,老子不服!",
         },
       ],
     },
@@ -524,7 +523,8 @@ export const THREE_KINGDOMS_PRESETS: PresetCastEntry[] = [
           voice: "不卑不亢,温文尔雅,句句都是两害相权的天下大局",
           redLine: "绝不会归还战略要地荆州主城,更不会在蜀军压境时让步一寸",
           pressureMethod: "亮出曹魏淮南空虚的战报,暗示东吴随时可以转攻合肥为蜀汉分担压力",
-          openingLine: "云长将军,此战之错,孤之错也。然天下大势,分久必合——你我同奉汉室,何必两败俱伤?",
+          openingLine:
+            "云长将军,此战之错,孤之错也。然天下大势,分久必合——你我同奉汉室,何必两败俱伤?",
         },
         {
           id: "agent_weiyan",
@@ -654,13 +654,15 @@ export const THREE_KINGDOMS_PRESETS: PresetCastEntry[] = [
           faction: "元勋勋贵与复仇血亲派",
           archetype: "general",
           personality: "英武血性,与关兴誓报父仇,对东吴和谈充满刻骨仇恨与不信任",
-          publicGoal: "反对轻易议和,要求东吴交出吕蒙部将首级、彻底退出荆州,并为父张飞复仇缉拿范疆张达",
+          publicGoal:
+            "反对轻易议和,要求东吴交出吕蒙部将首级、彻底退出荆州,并为父张飞复仇缉拿范疆张达",
           secret: "已暗中派人潜入江东,追查范疆张达下落准备私刑处决",
           relationship: "与关羽之子关兴同仇敌忾,与诸葛亮主张的和谈路线势成水火",
           voice: "声泪俱下,句句泣血,血性与孝道让他敢于顶撞皇帝",
           redLine: "若朝廷赦免范疆张达或与东吴缔结'忘仇之盟',他宁死不受诏",
           pressureMethod: "与关兴一同披麻入帐,以父仇大义堵住刘备的班师之路",
-          openingLine: "陛下!父亲与关叔父的头,还在东吴的庙里供着!今日谈和,他日曹魏南下,谁为陛下守荆襄?!",
+          openingLine:
+            "陛下!父亲与关叔父的头,还在东吴的庙里供着!今日谈和,他日曹魏南下,谁为陛下守荆襄?!",
         },
         {
           id: "agent_feiyi",
@@ -669,7 +671,8 @@ export const THREE_KINGDOMS_PRESETS: PresetCastEntry[] = [
           faction: "文官使节与外交通衡派",
           archetype: "envoy",
           personality: "才思敏捷,口若悬河,惯在刀山火海的外交场里替朝廷周旋缓冲",
-          publicGoal: "促成吴蜀盟约正式书面化,划定荆州线,同时刺探曹魏南下虚实，并摸清东吴海上商路以献朝廷",
+          publicGoal:
+            "促成吴蜀盟约正式书面化,划定荆州线,同时刺探曹魏南下虚实，并摸清东吴海上商路以献朝廷",
           secret: "怀里揣着一封曹操旧部送来的信,言及司马懿有意与蜀汉私通",
           relationship: "是诸葛亮信重的使才,在蜀吴之间左右腾挪如鱼得水",
           voice: "言辞机敏,引经据典,时而慷慨时而圆滑,滴水不漏",
@@ -766,7 +769,8 @@ export const THREE_KINGDOMS_PRESETS: PresetCastEntry[] = [
           voice: "粗野狞笑,语带血腥,动辄以灭族相威胁",
           redLine: "绝不容许任何人再靠近献帝,更不许关东联军逼近潼关一步",
           pressureMethod: "当众把王允头颅抛上殿阶,以屠城灭族震慑朝堂",
-          openingLine: "你们这些蛀虫,朕的天下轮得到你们来救?献帝在此,谁想勤王,先问问我西凉铁骑答不答应!",
+          openingLine:
+            "你们这些蛀虫,朕的天下轮得到你们来救?献帝在此,谁想勤王,先问问我西凉铁骑答不答应!",
         },
         {
           id: "agent_lvbu",
@@ -926,7 +930,8 @@ export const THREE_KINGDOMS_PRESETS: PresetCastEntry[] = [
           faction: "曹魏中枢与中原士人",
           archetype: "official",
           personality: "老练圆滑,书法名家,是个既能写檄文又能持节游说的复合型大员",
-          publicGoal: "促成刘璋向许都称臣纳贡,诱其交出益州北部门户以为曹军前进基地,并摸清蜀中防务虚实",
+          publicGoal:
+            "促成刘璋向许都称臣纳贡,诱其交出益州北部门户以为曹军前进基地,并摸清蜀中防务虚实",
           secret: "行囊中藏有曹操亲笔密信,言及若刘璋不从便扶持黄权另立",
           relationship: "是曹操最信任的使者,与刘璋旧臣多有门生之谊",
           voice: "温文尔雅,句句引经据典,绵里藏针地逼刘璋低头",
@@ -947,7 +952,8 @@ export const THREE_KINGDOMS_PRESETS: PresetCastEntry[] = [
           voice: "满脸堆笑,句句都是商贾盘算,能把刀光剑影说成生意往来",
           redLine: "绝不容许任何一方强征成都商帮财产充作军资",
           pressureMethod: "以罢市相胁,一夜之间让成都米价暴涨三成,逼各方停战谈判",
-          openingLine: "使君、皇叔、天师,三位爷的官司,无非一个'利'字!不如听老朽一句:粮草我有,军械我有,坐下来谈买卖,如何?",
+          openingLine:
+            "使君、皇叔、天师,三位爷的官司,无非一个'利'字!不如听老朽一句:粮草我有,军械我有,坐下来谈买卖,如何?",
         },
       ],
     },
@@ -1053,7 +1059,8 @@ export const THREE_KINGDOMS_PRESETS: PresetCastEntry[] = [
           voice: "纵声长笑,句句机锋,把一纸盟约说得如家常闲话",
           redLine: "绝不容许蜀军借此战染指中原一城一地",
           pressureMethod: "遣使索要'先取江陵再议归蜀'的书面保证,当众逼迫蜀使让步",
-          openingLine: "玄德贤弟,你我一世相争,今日倒要并肩杀敌!只是这荆州,打完仗到底姓曹还是姓刘,可得先写明白!",
+          openingLine:
+            "玄德贤弟,你我一世相争,今日倒要并肩杀敌!只是这荆州,打完仗到底姓曹还是姓刘,可得先写明白!",
         },
         {
           id: "agent_lvmen",
@@ -1068,7 +1075,8 @@ export const THREE_KINGDOMS_PRESETS: PresetCastEntry[] = [
           voice: "沉稳如磐,句句都像在棋盘上落子,喜怒不形于色",
           redLine: "绝不容许东吴水军主力在长江被两路夹击围歼",
           pressureMethod: "示敌以弱退守武昌,同时暗遣精兵奇袭蜀军运粮水道",
-          openingLine: "二位北使请回话:东吴的船,水上可没有'盟约'二字!江陵既是我主所赐,便是吾命所在!",
+          openingLine:
+            "二位北使请回话:东吴的船,水上可没有'盟约'二字!江陵既是我主所赐,便是吾命所在!",
         },
         {
           id: "agent_liaohua",
@@ -1310,7 +1318,8 @@ export const THREE_KINGDOMS_PRESETS: PresetCastEntry[] = [
           voice: "沉稳和缓,语带世族风仪,认罪之词里听不出半点惧色",
           redLine: "绝不容许曹爽以'灭三族'之名斩断司马氏血脉根苗",
           pressureMethod: "以世家姻亲联保与举国旧臣清议为筹码,逼曹爽留一线余地",
-          openingLine: "爽公胜矣。然治国如驭马,过于奔逸则折其蹄。老夫愿以残躯,为魏室社稷留一分缓冲。",
+          openingLine:
+            "爽公胜矣。然治国如驭马,过于奔逸则折其蹄。老夫愿以残躯,为魏室社稷留一分缓冲。",
         },
         {
           id: "agent_dengyang",
@@ -1340,7 +1349,8 @@ export const THREE_KINGDOMS_PRESETS: PresetCastEntry[] = [
           voice: "嗓门粗豪,句句动辄诛族,以宗室名分压人",
           redLine: "绝不容许曹爽把大权分给外姓功臣如蒋济",
           pressureMethod: "率宗室诸王联名上书,要求全面接管禁军与州郡兵权",
-          openingLine: "大将军!司马氏的血洗完了,该轮到那些骑在咱们曹家头上的世族门阀了!兵权,该归咱们自己人!",
+          openingLine:
+            "大将军!司马氏的血洗完了,该轮到那些骑在咱们曹家头上的世族门阀了!兵权,该归咱们自己人!",
         },
         {
           id: "agent_wangling",

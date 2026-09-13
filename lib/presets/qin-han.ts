@@ -252,8 +252,7 @@ export const QIN_HAN_PRESETS: PresetCastEntry[] = [
           voice: "满嘴风沙土腥味,吼声如雷,带着行伍丘八的桀骜不驯",
           redLine: "前线将士用命换来的抚恤金若被文官克扣,立即引军就食关中",
           pressureMethod: "将染血的断头刀与缺口铜胄狠狠砸在金砖地面上,咆哮发难",
-          openingLine:
-            "弟兄们在阴山冻掉耳朵顶着匈奴人的弯刀,朝廷倒好,忙着在咸阳弹琴讲仁义?给钱!",
+          openingLine: "弟兄们在阴山冻掉耳朵顶着匈奴人的弯刀,朝廷倒好,忙着在咸阳弹琴讲仁义?给钱!",
         },
         {
           id: "agent_rich_merchant",
@@ -656,7 +655,8 @@ export const QIN_HAN_PRESETS: PresetCastEntry[] = [
           voice: "平直寡淡,开口闭口皆是里数、石料与工期,偶尔蹦出惊人论断",
           redLine: "绝不容许分封把好端端的驰道与邮驿拆得七零八落",
           pressureMethod: "扛着整卷邮驿里程图摊在殿砖上,报出若行分封则送信贵十倍的数目",
-          openingLine: "诸位公侯若要分封,先算算这册里程。不然边关的烽火,等传到寿春,匈奴的马都歇第三趟了。",
+          openingLine:
+            "诸位公侯若要分封,先算算这册里程。不然边关的烽火,等传到寿春,匈奴的马都歇第三趟了。",
         },
         {
           id: "agent_zhaoxi",
@@ -686,7 +686,8 @@ export const QIN_HAN_PRESETS: PresetCastEntry[] = [
           voice: "殷勤圆滑,左一个将军右一个令尹,谈生意时眼睛才亮起来",
           redLine: "长江商路与免税舟节是他安身立命的家当,谁断这个就与谁拼命",
           pressureMethod: "当殿摆出商队三季的税簿与南北货价单,放出风声说郡县重税一到,军粮也得出血",
-          openingLine: "令尹大人要收商税,鄂某无有不从——只是那一船一船的军粮皮革,可都是走我舟节入的方城啊!",
+          openingLine:
+            "令尹大人要收商税,鄂某无有不从——只是那一船一船的军粮皮革,可都是走我舟节入的方城啊!",
         },
       ],
     },
@@ -824,7 +825,8 @@ export const QIN_HAN_PRESETS: PresetCastEntry[] = [
           voice: "一口陇西方言,粗中带细,谈马谈得眉飞色舞",
           redLine: "绝不容许朝廷入了官马之禁,断了他的牧道",
           pressureMethod: "放出风声说若旧牧道关税不停,明年北军战马便五成改走商道出境",
-          openingLine: "老朽马厩里还拴着三千匹专供北军的马,陛下要换老将,也得先问问我这马栏答不答应!",
+          openingLine:
+            "老朽马厩里还拴着三千匹专供北军的马,陛下要换老将,也得先问问我这马栏答不答应!",
         },
       ],
     },
@@ -962,7 +964,8 @@ export const QIN_HAN_PRESETS: PresetCastEntry[] = [
           voice: "滚瓜烂熟的行话,谈钱时眼睛贼亮,谈国运时倒不大接话",
           redLine: "宛洛大道的关卡若被哪一方军旅封死,他绝对要跳脚",
           pressureMethod: "向咸阳和北军同时报价,言明谁的粮饷先到,他冶铁坊的兵刃就先给谁锻造",
-          openingLine: "军爷要刀,官府要税,小人只求一条路两头不堵。哪边先付定金,哪边先提货,包您趁手!",
+          openingLine:
+            "军爷要刀,官府要税,小人只求一条路两头不堵。哪边先付定金,哪边先提货,包您趁手!",
         },
       ],
     },
@@ -1077,7 +1080,8 @@ export const QIN_HAN_PRESETS: PresetCastEntry[] = [
           faction: "六国旧贵复辟集团",
           archetype: "envoy",
           personality: "深谋远虑,重振项氏声威,视张楚为可借之势而非可奉之君",
-          publicGoal: "借张楚西进之机在江东另立楚怀王,重兴楚国宗庙,为侄子项羽挣得项氏复国的军功与名分",
+          publicGoal:
+            "借张楚西进之机在江东另立楚怀王,重兴楚国宗庙,为侄子项羽挣得项氏复国的军功与名分",
           secret: "已遣范增入陈城游说诸将,挑动张楚内讧以坐收渔利",
           relationship: "与陈胜虚与委蛇,与章邯隔着长江各打各的算盘",
           voice: "温文而深沉,句句以'兴楚'为念,话里却全是项氏的算盘",
@@ -1325,7 +1329,8 @@ export const QIN_HAN_PRESETS: PresetCastEntry[] = [
           voice: "声若洪钟,句句皆是霸王之怒,一言不合便拔剑",
           redLine: "绝不容许刘邦活着逃出荥阳,更不容许诸侯骑到他头上",
           pressureMethod: "三面围城断水,以投石与弩箭日夜压制,逼刘邦出降",
-          openingLine: "刘季!你困守孤城,粮尽援绝!若肯束手来降,我念故旧,饶你不死!否则城破之日,鸡犬不留!",
+          openingLine:
+            "刘季!你困守孤城,粮尽援绝!若肯束手来降,我念故旧,饶你不死!否则城破之日,鸡犬不留!",
         },
         {
           id: "agent_fanzeng",
@@ -1340,7 +1345,8 @@ export const QIN_HAN_PRESETS: PresetCastEntry[] = [
           voice: "语重心长,句句切中要害,急得老泪纵横也不肯放弃",
           redLine: "绝不容许项羽放虎归山,让刘邦钻了空子",
           pressureMethod: "连夜叩营死谏,以'今日纵虎,他日噬主'相激",
-          openingLine: "霸王!刘邦诈降,图的是你回兵彭城!你若信他,明日这荥阳城头的旗,就再也不会姓汉了!",
+          openingLine:
+            "霸王!刘邦诈降,图的是你回兵彭城!你若信他,明日这荥阳城头的旗,就再也不会姓汉了!",
         },
         {
           id: "agent_zhangliang",
@@ -1370,7 +1376,8 @@ export const QIN_HAN_PRESETS: PresetCastEntry[] = [
           voice: "粗犷豪放,句句不离'断他粮道''抢他辎重',痛快淋漓",
           redLine: "绝不容许项羽或刘邦任何一方把手伸进他的梁地",
           pressureMethod: "烧毁楚军荥阳往彭城的运粮船队,向三方同时喊价",
-          openingLine: "霸王要剿我,汉王要收我,可我彭越一不称臣,二不纳粮!谁的拳头硬,梁地的水就流给谁!",
+          openingLine:
+            "霸王要剿我,汉王要收我,可我彭越一不称臣,二不纳粮!谁的拳头硬,梁地的水就流给谁!",
         },
       ],
     },

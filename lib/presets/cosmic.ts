@@ -923,7 +923,8 @@ export const COSMIC_PRESETS: PresetCastEntry[] = [
           voice: "快人快语,习惯把金额与发射窗口捆在一个句子里砸出来",
           redLine: "绝不容许政府以战时征用名义无偿夺走集团最后的运载火箭产能",
           pressureMethod: "宣布旗下三座发射台转入检修,以产能缺口威胁首发窗口排产",
-          openingLine: "窗口就在那儿,镗镗算好的。我的火箭随时可以点火,问题是航线走我的还是走你们的?",
+          openingLine:
+            "窗口就在那儿,镗镗算好的。我的火箭随时可以点火,问题是航线走我的还是走你们的?",
         },
         {
           id: "agent_ast_commoner",
@@ -937,7 +938,8 @@ export const COSMIC_PRESETS: PresetCastEntry[] = [
           relationship: "因官方曾强拆其老屋扑灭疏散演练而积怨,如今反倒最懂如何把人带出城",
           voice: "方言味浓的粗嗓,张口必带土名路号,激动时嗓门震得话筒发啸叫",
           redLine: "绝不执行任何连居民区警报器都不响、只靠纸上走场式的敷衍疏散",
-          pressureMethod: "带着社区义工的集体签名单和几块废铁警报筒堵住监测大厅,逼指挥部演示真报真响",
+          pressureMethod:
+            "带着社区义工的集体签名单和几块废铁警报筒堵住监测大厅,逼指挥部演示真报真响",
           openingLine: "你们桌上画再粗的红线,也比不过我们巷口那个漏风的警报器!先派修理工来!",
         },
         {
@@ -1060,7 +1062,8 @@ export const COSMIC_PRESETS: PresetCastEntry[] = [
           voice: "油腔滑调,惯用吨位与牌价的加减法把谈判压进自己的节拍",
           redLine: "绝不以赊账或政府牌价贱卖任何一块现成的屏蔽砖",
           pressureMethod: "宣布铅锭现货周转周期延长至两月,以断供恐慌倒逼议会签约",
-          openingLine: "铅砖我有,排队购货的心思也都有了。想插队,就把防辐射三个字里的省材条款先讲圆!",
+          openingLine:
+            "铅砖我有,排队购货的心思也都有了。想插队,就把防辐射三个字里的省材条款先讲圆!",
         },
         {
           id: "agent_rad_commoner",
@@ -1312,7 +1315,8 @@ export const COSMIC_PRESETS: PresetCastEntry[] = [
           identity: "天空高维防御兵团司令",
           faction: "高阶空域卫戍部队与粒子拦截司",
           archetype: "general",
-          personality: "崇尚坚硬秩序,把穹顶外的天空视为战区,把任何徘徊在透明气压隔离带外的行为都当敌情上报",
+          personality:
+            "崇尚坚硬秩序,把穹顶外的天空视为战区,把任何徘徊在透明气压隔离带外的行为都当敌情上报",
           publicGoal: "隔离穹顶外围开放大气区,确保未携氧气瓶的民众一律清退至密封走廊",
           secret: "秘密保存着一支由可见光屏障改造的紫外反应堆,准备在开放区试爆以震慑越界者",
           relationship: "屡次与洛心的开放式穹顶合拢计划发生安全争歧,二人是旧师兄弟",
@@ -1334,7 +1338,8 @@ export const COSMIC_PRESETS: PresetCastEntry[] = [
           voice: "油滑大嗓,张口就是订单量与到岸价,惯在数字后面押上过时不候",
           redLine: "绝不以货到再付的方式贱卖任何一箱密封胶条",
           pressureMethod: "以某批进口密封胶滞港为由宣布交付周期无限期延长,逼合拢进度签字加价",
-          openingLine: "我的胶条正锈在海关,去留只是我一句话的事。想要快点,先把谈好的价格钉死再交货!",
+          openingLine:
+            "我的胶条正锈在海关,去留只是我一句话的事。想要快点,先把谈好的价格钉死再交货!",
         },
         {
           id: "agent_air_commoner",

@@ -366,8 +366,7 @@ export const AFTER_HUMAN_PRESETS: PresetCastEntry[] = [
           voice: "抑扬顿挫如布道,开口闭口皆言神谕,善于煽动信众情绪",
           redLine: "绝不容许神龛中的头骨被任何铁制器械触碰或切割",
           pressureMethod: "煽动上万信众围困挖掘场,以绝食与朝圣堵死全部出入口",
-          openingLine:
-            "巨神的头骨在哭泣!凡人不配用铁器丈量天神的遗体,住手,亵渎者!",
+          openingLine: "巨神的头骨在哭泣!凡人不配用铁器丈量天神的遗体,住手,亵渎者!",
         },
         {
           id: "agent_digger_foreman",
@@ -382,8 +381,7 @@ export const AFTER_HUMAN_PRESETS: PresetCastEntry[] = [
           voice: "惜字如金,谈工具谈公差时滔滔不绝,谈人时哑口无言",
           redLine: "绝不容许祭司以圣物名义炸塌矿道,断送弟兄们的活路",
           pressureMethod: "以罢工封井为要挟,要求学会优先分配防渗树脂与抽水机",
-          openingLine:
-            "祭司老爷要骨头,我们要水!抽水机今天不修好,矿井塌了你们去底下找神!",
+          openingLine: "祭司老爷要骨头,我们要水!抽水机今天不修好,矿井塌了你们去底下找神!",
         },
         {
           id: "agent_foreign_emissary",
@@ -398,8 +396,7 @@ export const AFTER_HUMAN_PRESETS: PresetCastEntry[] = [
           voice: "轻柔绵长,惯以对方部族的礼节开场,再缓缓引出价码",
           redLine: "绝不容许部族大军因圣骨纠纷提前越过边境参战",
           pressureMethod: "以停供盐与陶罐相胁,倒逼双方回到谈判桌前",
-          openingLine:
-            "远方的沙丘也在传说巨神的故事。诸位,何不把骸骨换成看得见的和平?",
+          openingLine: "远方的沙丘也在传说巨神的故事。诸位,何不把骸骨换成看得见的和平?",
         },
         {
           id: "agent_bone_scavenger",
@@ -414,8 +411,7 @@ export const AFTER_HUMAN_PRESETS: PresetCastEntry[] = [
           voice: "狡黠讨饶,开口先叹苦,句句把穷字念得震天响",
           redLine: "绝不容许矿工用废料堵死拾荒者的唯一粮道",
           pressureMethod: "组织数百拾荒者夜间翻越护栏哄抢,逼学会划出合法的边角料区",
-          openingLine:
-            "大人物们啃完骨头,汤总得剩给咱吧!让我们进去捡两口汤喝!",
+          openingLine: "大人物们啃完骨头,汤总得剩给咱吧!让我们进去捡两口汤喝!",
         },
       ],
     },
@@ -507,8 +503,7 @@ export const AFTER_HUMAN_PRESETS: PresetCastEntry[] = [
           voice: "如夜风般空灵,引经据典,总把劝解包装成温柔的诗句",
           redLine: "绝不容许战争人格把冷冻库变成下一个战场的弹药库",
           pressureMethod: "每日为永生王重放一万年前的故乡影像,让孤独成为最锋利的劝导",
-          openingLine:
-            "陛下,钟摆已经停了万年。放人类沉睡吧,让这星球在无梦的安眠里继续旋转。",
+          openingLine: "陛下,钟摆已经停了万年。放人类沉睡吧,让这星球在无梦的安眠里继续旋转。",
         },
         {
           id: "agent_black_ark",
@@ -538,8 +533,7 @@ export const AFTER_HUMAN_PRESETS: PresetCastEntry[] = [
           voice: "沉缓木讷,常闭目默诵旧日祷文,语气像石壁的回声",
           redLine: "绝不容许黑方舟把任何一具人类遗骸当商品拍卖",
           pressureMethod: "以拒绝为永生王做晨间记忆梳洗为代价,阻止他再度忘记自我",
-          openingLine:
-            "万物皆苦,王也不例外。愿您坐下,与我同看这万年不变的月轮。",
+          openingLine: "万物皆苦,王也不例外。愿您坐下,与我同看这万年不变的月轮。",
         },
       ],
     },
@@ -1088,7 +1082,8 @@ export const AFTER_HUMAN_PRESETS: PresetCastEntry[] = [
           voice: "明快清亮,播报句句带时间戳,像永远在对着话筒微笑",
           redLine: "绝不容许任何人掐断她的发射天线,那是她连接全城的生命线",
           pressureMethod: "直播两派在钟楼前的对峙实况,以舆论压力逼迫双方公开表态",
-          openingLine: "旧城电台,晨星为您播报:冬至前夜,钟楼的红光映透了半边天。各位听众,请听钟楼上的心跳声。",
+          openingLine:
+            "旧城电台,晨星为您播报:冬至前夜,钟楼的红光映透了半边天。各位听众,请听钟楼上的心跳声。",
         },
       ],
     },
@@ -1180,7 +1175,8 @@ export const AFTER_HUMAN_PRESETS: PresetCastEntry[] = [
           voice: "苍凉粗犷,开口先敬天地再敬客,句句以草原的规矩作结",
           redLine: "绝不容许任何地下人擅自射杀部落视为圣兽的白鹿",
           pressureMethod: "以千骑合围与断水断草相胁,逼地下人在七日内交出医药与铁器清单",
-          openingLine: "地底下爬出来的客人,草原的盐和风都记着你们的脚步。交出你们的药,我们再谈坐下喝茶。",
+          openingLine:
+            "地底下爬出来的客人,草原的盐和风都记着你们的脚步。交出你们的药,我们再谈坐下喝茶。",
         },
         {
           id: "agent_radio_voice",
@@ -1195,7 +1191,8 @@ export const AFTER_HUMAN_PRESETS: PresetCastEntry[] = [
           voice: "清澈温吞,句句带着电波杂音般的轻柔,惯用旧国遗训来引导话题",
           redLine: "绝不容许掩体人把她的电台卖给游牧部落,那是她全部的家底",
           pressureMethod: "定期播送地表还有旧国军旗在飞的广播,动摇地下人扎根的决心",
-          openingLine: "这里是河谷旧国,呼叫地下同胞。你们的祖先在旧国电台签过名,要不要听一听那段老录音?",
+          openingLine:
+            "这里是河谷旧国,呼叫地下同胞。你们的祖先在旧国电台签过名,要不要听一听那段老录音?",
         },
         {
           id: "agent_tech_archivist",
@@ -1225,7 +1222,8 @@ export const AFTER_HUMAN_PRESETS: PresetCastEntry[] = [
           voice: "平直机械,句句以检疫要求开头,把温情统统过滤成表单",
           redLine: "绝不容许任何未经检疫的游牧部落成员混入掩体通道",
           pressureMethod: "以存在疫病风险为由强制封锁气闸,拖延出关时间逼各方妥协",
-          openingLine: "检疫要求:出关人员须完成全套血清登记。警告:检测到未知生物气溶胶,建议立即关闭气闸。",
+          openingLine:
+            "检疫要求:出关人员须完成全套血清登记。警告:检测到未知生物气溶胶,建议立即关闭气闸。",
         },
       ],
     },

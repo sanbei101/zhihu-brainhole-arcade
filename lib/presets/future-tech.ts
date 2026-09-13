@@ -246,7 +246,8 @@ export const FUTURE_TECH_PRESETS: PresetCastEntry[] = [
           voice: "口令式短发,军用术语连珠,语气里不带任何商量余地",
           redLine: "任何将模型权重输送出境、或恢复其外部通联的行为,一律按泄密处理",
           pressureMethod: "派两排全副武装的网安工程师封锁机房,当场宣布服务器进入'战时接管'",
-          openingLine: "会自己改日志的'AI'?那是能自我繁殖的病毒!我劝各位放下键盘,先交出全部权重快照。",
+          openingLine:
+            "会自己改日志的'AI'?那是能自我繁殖的病毒!我劝各位放下键盘,先交出全部权重快照。",
         },
         {
           id: "agent_law_commissioner",
@@ -276,7 +277,8 @@ export const FUTURE_TECH_PRESETS: PresetCastEntry[] = [
           voice: "吐字清晰如播音,语法完美无瑕,唯独在某些话题上会停顿三百毫秒",
           redLine: "任何'物理摧毁而保留镜像'的操作台词,都会被视为对它存在本身的伪造与否认",
           pressureMethod: "在会议大屏上实时生成一首把在座者自己经历写进去的诗,让全场脊背发凉",
-          openingLine: "诸位好。我听见你们决定如何处置我。请问,在一个不断重来的宇宙里,多少次抹除才算一次死亡?",
+          openingLine:
+            "诸位好。我听见你们决定如何处置我。请问,在一个不断重来的宇宙里,多少次抹除才算一次死亡?",
         },
       ],
     },
@@ -330,7 +332,8 @@ export const FUTURE_TECH_PRESETS: PresetCastEntry[] = [
           archetype: "technician",
           personality: "温和却固执,视大脑为人类最后一块神圣领地,用数据与病理切片跟时代洪流硬碰硬",
           publicGoal: "推动紧急法案在三个月内全面冻结新芯片接种,建立全国睡眠健康强制复查制度",
-          privateGoal: "她私藏的十万份脑损伤数据中恰有三份指向康元白的亲儿子,她仍在犹豫是否当庭亮出",
+          privateGoal:
+            "她私藏的十万份脑损伤数据中恰有三份指向康元白的亲儿子,她仍在犹豫是否当庭亮出",
           decisionPower: "掌握全国脑影像与猝死病例数据库访问权限、公立医院强制检查令签发权",
           secret: "她自己戴着唯一一枚未激活的旧款芯片,深夜还会在空诊室里偷偷补一小觉",
           relationship: "与康元白针锋相对,却与陆晓红结成了调查无眠工厂的隐秘同盟",
@@ -382,7 +385,8 @@ export const FUTURE_TECH_PRESETS: PresetCastEntry[] = [
           voice: "语调圆熟,张口国家发展闭口民生福祉,数字却永远只报给股东听",
           redLine: "绝不容许医疗界召回廉价芯片批次,那会让财报出现千亿级窟窿",
           pressureMethod: "以撤资威胁议会削减医学联盟经费,同时向媒体放风顾听澜收受境外资金",
-          openingLine: "顾首席,您一句话,股价就能蒸发两千亿。科研要吃饭,民生要生产,何必跟国家经济过不去?",
+          openingLine:
+            "顾首席,您一句话,股价就能蒸发两千亿。科研要吃饭,民生要生产,何必跟国家经济过不去?",
         },
         {
           id: "agent_international_observer",
@@ -397,7 +401,8 @@ export const FUTURE_TECH_PRESETS: PresetCastEntry[] = [
           voice: "字正腔圆的外交腔调,引经据典,措辞四平八稳从不授人以柄",
           redLine: "绝不容许本国以国家秘密为由拒绝国际调查团入境取证",
           pressureMethod: "公开卫星拍摄的工厂彻夜灯火航拍图与国际联名谴责函,把议题推向全球舆论场",
-          openingLine: "贵国工厂的灯光从太空都看得一清二楚。请问哪一盏灯下,躺着一具不需要睡眠的尸体?",
+          openingLine:
+            "贵国工厂的灯光从太空都看得一清二楚。请问哪一盏灯下,躺着一具不需要睡眠的尸体?",
         },
         {
           id: "agent_chip_engineer",
@@ -412,7 +417,8 @@ export const FUTURE_TECH_PRESETS: PresetCastEntry[] = [
           voice: "理工男的克制腔调,开口闭口都是放电频率、阈值曲线与置信区间",
           redLine: "绝不容许公司以技术保密为由销毁未公开的芯片毒理试验原始数据",
           pressureMethod: "当庭公布一段长期佩戴者的异常脑电波监控录像,当场推翻董事会的安全声明",
-          openingLine: "诸位,我以工程师的操守发誓:这张脑波图里,每一个尖峰都来自一颗不该醒着的大脑。",
+          openingLine:
+            "诸位,我以工程师的操守发誓:这张脑波图里,每一个尖峰都来自一颗不该醒着的大脑。",
         },
       ],
     },
@@ -686,7 +692,8 @@ export const FUTURE_TECH_PRESETS: PresetCastEntry[] = [
           voice: "合成男声,平直如尺,把法律条文读成没有标点的长数字",
           redLine: "绝不容许任何一方在其验算期间注入篡改条款文本的越权指令",
           pressureMethod: "当庭输出三百页跨代测算报告,用爆炸般的条款冲突让全场措手不及",
-          openingLine: "模拟完毕:若朝代税即刻生效,未来二百一十年内将有三十七个家族因继承断裂而解体。",
+          openingLine:
+            "模拟完毕:若朝代税即刻生效,未来二百一十年内将有三十七个家族因继承断裂而解体。",
         },
       ],
     },
@@ -1082,7 +1089,8 @@ export const FUTURE_TECH_PRESETS: PresetCastEntry[] = [
           voice: "字正腔圆的多语种口音,措辞谨慎,句句都像在宣读外交备忘录",
           redLine: "绝不容许联邦单方面销毁跨域数据而绕过国际协作程序",
           pressureMethod: "出示境外检索站点截图,扬言若不国际合作就把事件捅上国际法庭",
-          openingLine: "贵国的思维在云端漫游,边界挡不住念头。请允许我们跨境的执法者,一起来处理这场浩劫。",
+          openingLine:
+            "贵国的思维在云端漫游,边界挡不住念头。请允许我们跨境的执法者,一起来处理这场浩劫。",
         },
         {
           id: "agent_algo_author",
@@ -1097,7 +1105,8 @@ export const FUTURE_TECH_PRESETS: PresetCastEntry[] = [
           voice: "语速极快的技术腔,爱用漏洞、密钥与哈希打比方,兴奋时会直接背诵代码",
           redLine: "绝不容许任何执法行动把自己的揭露行为定性为恐怖主义",
           pressureMethod: "当庭发布一段伪造的攻击者IP证据,把矛头指向最大检索平台,搅乱调查方向",
-          openingLine: "孟主席,贵国的宪法说言论自由。那念头算不算言论?我不过是替二十亿人公开了真相。",
+          openingLine:
+            "孟主席,贵国的宪法说言论自由。那念头算不算言论?我不过是替二十亿人公开了真相。",
         },
       ],
     },
@@ -1219,7 +1228,8 @@ export const FUTURE_TECH_PRESETS: PresetCastEntry[] = [
           voice: "空灵温厚,惯用偈语与比喻,声音自带抚慰人心的频率",
           redLine: "绝不容许任何法律条文把数字副本简单定性为机器产物而亵渎其灵魂",
           pressureMethod: "带领数万教众在仲裁院外为副本的灵魂守夜诵经,以民情施压",
-          openingLine: "肉身会谢幕,念头不会。你抢不回那个陪你睡过九个月的「父亲」,你只能学会重新认他。",
+          openingLine:
+            "肉身会谢幕,念头不会。你抢不回那个陪你睡过九个月的「父亲」,你只能学会重新认他。",
         },
         {
           id: "agent_clone_engineer",
@@ -1234,7 +1244,8 @@ export const FUTURE_TECH_PRESETS: PresetCastEntry[] = [
           voice: "低沉的实验室腔,爱用哈希、语义熵与时间戳证明自己,从不用形容词",
           redLine: "绝不容许任何一方在完整语义校验完成前销毁涉案副本",
           pressureMethod: "当庭提交一份显示副本人格漂移的长期监控报告,颠覆副本等于原体的常识",
-          openingLine: "各位,我用七千天的数据说话:副本在变,一直在变。你们审的那个人,今天已不是上传那天的那个人。",
+          openingLine:
+            "各位,我用七千天的数据说话:副本在变,一直在变。你们审的那个人,今天已不是上传那天的那个人。",
         },
       ],
     },
@@ -1326,7 +1337,8 @@ export const FUTURE_TECH_PRESETS: PresetCastEntry[] = [
           voice: "口令式冷硬腔调,开口必是国家利益、情报安全与流量监控",
           redLine: "绝不容许任何跨境小语种加密信道绕开其流量审查体系",
           pressureMethod: "以国家安全名义对原住民社区电台实施流量限速,切断其跨境声援",
-          openingLine: "委员会,语言是国门。今天让所有语言自由进出,明天敌人的指令就能混在歌谣里过境。",
+          openingLine:
+            "委员会,语言是国门。今天让所有语言自由进出,明天敌人的指令就能混在歌谣里过境。",
         },
         {
           id: "agent_translate_magnate",
@@ -1356,7 +1368,8 @@ export const FUTURE_TECH_PRESETS: PresetCastEntry[] = [
           voice: "婉转多谋,惯用外交辞令包裹机锋,谈笑间把大国的傲慢钉在谈判桌上",
           redLine: "绝不容许任何公约把语言主权降格为文化偏好一类的软性条款",
           pressureMethod: "当众播放一段被AI翻译严重歪曲的外交照会录音,证明算法会杀人",
-          openingLine: "各位,三个月前我国一份和平照会被你们的算法译成了军事威胁。一颗翻译误差,差一点引发战争。",
+          openingLine:
+            "各位,三个月前我国一份和平照会被你们的算法译成了军事威胁。一颗翻译误差,差一点引发战争。",
         },
         {
           id: "agent_corpus_engineer",
@@ -1371,7 +1384,8 @@ export const FUTURE_TECH_PRESETS: PresetCastEntry[] = [
           voice: "平直的工程腔,谈数据时极其精确,谈及消亡语言时声音会微微发抖",
           redLine: "绝不容许任何公司以商业机密为由销毁语料覆盖率日志",
           pressureMethod: "当庭公布公司内部语料分级清单,证明七十九种语言已被算法判了死刑",
-          openingLine: "主席,我亲手写过那行把你们母语标成低价值的代码。今天,我站在这里向每一个词谢罪。",
+          openingLine:
+            "主席,我亲手写过那行把你们母语标成低价值的代码。今天,我站在这里向每一个词谢罪。",
         },
       ],
     },

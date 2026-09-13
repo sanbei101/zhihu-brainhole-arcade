@@ -42,7 +42,10 @@ ${input.cast.setting.rules.map((rule) => `- ${rule}`).join("\n")}
 
 在场全员阵营与公开诉求:
 ${input.cast.agentCharacters
-  .map((other) => `- ${other.name}(${other.identity} · ${other.faction}): 公开目标【${other.publicGoal}】`)
+  .map(
+    (other) =>
+      `- ${other.name}(${other.identity} · ${other.faction}): 公开目标【${other.publicGoal}】`,
+  )
   .join("\n")}
 
 此前公开推演历史记录:

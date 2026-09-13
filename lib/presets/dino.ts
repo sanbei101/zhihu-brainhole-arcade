@@ -259,7 +259,8 @@ export const DINO_PRESETS: PresetCastEntry[] = [
           voice: "缓慢低沉,带着古老歌谣的余韵,话不多却句句落在法理与尊严上",
           redLine: "任何武装直升机或军用车辆不得越过保留地界碑半步",
           pressureMethod: "当众点燃象征祖先魂灵的鼠尾草,示意若政府强来,部族将以古老法典对抗",
-          openingLine: "白人用铁栅栏圈走了我们的土地,如今又来追猎我们河流里的客人。你们问过地母了吗?",
+          openingLine:
+            "白人用铁栅栏圈走了我们的土地,如今又来追猎我们河流里的客人。你们问过地母了吗?",
         },
         {
           id: "agent_fbi_officer",
@@ -274,7 +275,8 @@ export const DINO_PRESETS: PresetCastEntry[] = [
           voice: "言辞冷峻克制,习惯用'涉嫌''非法''证据链'这类司法黑话施压",
           redLine: "绝不接受任何证人在调查期间被'意外'灭口或失踪",
           pressureMethod: "掏出一纸联邦法院签发的证据保全令与传票,当众让全场气温骤降三度",
-          openingLine: "诸位先生女士,先别急着谈猎杀——有人举报这头'恐龙'本就是桩非法克隆欺诈案,得查!",
+          openingLine:
+            "诸位先生女士,先别急着谈猎杀——有人举报这头'恐龙'本就是桩非法克隆欺诈案,得查!",
         },
       ],
     },
@@ -501,7 +503,8 @@ export const DINO_PRESETS: PresetCastEntry[] = [
           voice: "军令式的短句，动辄战略需求与国防安全，语气不容置疑",
           redLine: "绝不容许卫生部门以疫情名义解散他苦心经营的军犬作战体系",
           pressureMethod: "援引战时动员法，宣布驯化基地进入军管状态并封锁出入口",
-          openingLine: "病毒爆发之日正是用兵之时！从今天起，这只咬人的野兽由军方接管，谁动谁上军事法庭！",
+          openingLine:
+            "病毒爆发之日正是用兵之时！从今天起，这只咬人的野兽由军方接管，谁动谁上军事法庭！",
         },
         {
           id: "agent_pharma",
@@ -546,7 +549,8 @@ export const DINO_PRESETS: PresetCastEntry[] = [
           voice: "专业笃定，句句引用防疫数据与排期，声音冷静得近乎残酷",
           redLine: "绝不容许任何军事或商业利益凌驾于市民健康之上",
           pressureMethod: "当众展示二代病毒变异的时间轴模型，宣布若不禁养则三十日内将跨省失控",
-          openingLine: "诸位，这份模型显示我们只有三十天窗口期！现在不是争论宠物的时候，是保命的时候！",
+          openingLine:
+            "诸位，这份模型显示我们只有三十天窗口期！现在不是争论宠物的时候，是保命的时候！",
         },
       ],
     },
@@ -637,7 +641,8 @@ export const DINO_PRESETS: PresetCastEntry[] = [
           voice: "雷厉风行，张口就是停运损失的数字，谈判桌上寸步不让",
           redLine: "绝不容许生态方案再拖延货运主闸开放一天",
           pressureMethod: "组织上千辆货车围堵市政厅广场，以全市货运停摆施压市长立刻决策",
-          openingLine: "市长大人，货运闸一天不开，全城菜价就涨一毛！您要的共存，先赔我们这些天的损失！",
+          openingLine:
+            "市长大人，货运闸一天不开，全城菜价就涨一毛！您要的共存，先赔我们这些天的损失！",
         },
         {
           id: "agent_worker",
@@ -652,7 +657,8 @@ export const DINO_PRESETS: PresetCastEntry[] = [
           voice: "方言味重，嗓门大，激动时拍着胸脯骂街",
           redLine: "绝不容许市政在未清剿巢穴的情况下再派工人下井",
           pressureMethod: "率三百名管道工人在市政塔下静坐，威胁若不下发护甲就集体罢工",
-          openingLine: "十七个兄弟埋在地下你们看不见，就看见闸口那几头大家伙！要停工可以，先把命钱结清！",
+          openingLine:
+            "十七个兄弟埋在地下你们看不见，就看见闸口那几头大家伙！要停工可以，先把命钱结清！",
         },
         {
           id: "agent_cult",
@@ -682,7 +688,8 @@ export const DINO_PRESETS: PresetCastEntry[] = [
           voice: "公事公办，语气冷硬，动辄援引法规条文与督察通报",
           redLine: "绝不容许地方以维稳名义掩盖生态破坏与账目造假",
           pressureMethod: "当众亮出审计调令，宣布冻结廊道改造专项资金并要求当日交出账本",
-          openingLine: "岑市长，先别谈龙了。中央三号督察令在此——廊道维护费去哪儿了，请今天给我交代！",
+          openingLine:
+            "岑市长，先别谈龙了。中央三号督察令在此——廊道维护费去哪儿了，请今天给我交代！",
         },
       ],
     },
@@ -788,7 +795,8 @@ export const DINO_PRESETS: PresetCastEntry[] = [
           voice: "字斟句酌，满嘴混凝土标号与应力曲线，技术问题上寸步不让",
           redLine: "绝不容许矿业集团以工程名义在坝体上钻孔埋药",
           pressureMethod: "以辞职相胁召开全体技术会，公开坝体裂缝的真实检测数据",
-          openingLine: "这坝再被撞三次就塌！你们要炸、要挪、要撤，先把我这条命和下游三个村一起算进去！",
+          openingLine:
+            "这坝再被撞三次就塌！你们要炸、要挪、要撤，先把我这条命和下游三个村一起算进去！",
         },
         {
           id: "agent_elder",
@@ -803,7 +811,8 @@ export const DINO_PRESETS: PresetCastEntry[] = [
           voice: "苍茫悠长，句句如咒语，夹杂着古语与喘息，让人心神动摇",
           redLine: "绝不容许任何人在圣湖遗迹上再开一铲土",
           pressureMethod: "率全族在坝前跳起通灵之舞，点燃圣香引导兽群绕开村庄直逼矿场",
-          openingLine: "你们抽干了大地母亲的乳汁，还要怪她肚子里的孩子发怒！撤走吧，或者一起沉入泥沼！",
+          openingLine:
+            "你们抽干了大地母亲的乳汁，还要怪她肚子里的孩子发怒！撤走吧，或者一起沉入泥沼！",
         },
         {
           id: "agent_worker",
@@ -924,7 +933,8 @@ export const DINO_PRESETS: PresetCastEntry[] = [
           voice: "外交辞令圆熟，引经据典，习惯以国际社会共识为武器施压",
           redLine: "绝不容许任何国家以主权为由豁免禁猎公约的执行",
           pressureMethod: "搬出联合国安理会决议草案，宣布若再失职将撤销保护区国际认证资格",
-          openingLine: "诸位，公约的红线已经划下。若盐沼再丢一头种龙，这保护区的国际身份就到此为止了。",
+          openingLine:
+            "诸位，公约的红线已经划下。若盐沼再丢一头种龙，这保护区的国际身份就到此为止了。",
         },
         {
           id: "agent_miner",
@@ -939,7 +949,8 @@ export const DINO_PRESETS: PresetCastEntry[] = [
           voice: "粗鲁直白，满嘴产量与税单，动辄把就业民生挂在嘴边压人",
           redLine: "绝不容许保护区管辖权延伸到他的矿权线以内",
           pressureMethod: "策动矿区工人聚众冲击保护区围栏，制造矿工失业的社会议题施压",
-          openingLine: "你们守着一群吃盐的畜生，倒把钻机挡在门外！盐沼南边那几口井，今天不开就永远别开了！",
+          openingLine:
+            "你们守着一群吃盐的畜生，倒把钻机挡在门外！盐沼南边那几口井，今天不开就永远别开了！",
         },
         {
           id: "agent_scout",
@@ -1085,12 +1096,14 @@ export const DINO_PRESETS: PresetCastEntry[] = [
           archetype: "commoner",
           personality: "热情激进，声音是千万绝望者的希望，也是怒火燃烧的引信",
           publicGoal: "为未被抽中的数十亿人发声，要求公开全部名单并拒绝任何特权船票",
-          secret: "她正在追查当年伪造父亲抽签号码的官员，还握有富尔顿私设豪华套房的施工图纸与一段录音证据",
+          secret:
+            "她正在追查当年伪造父亲抽签号码的官员，还握有富尔顿私设豪华套房的施工图纸与一段录音证据",
           relationship: "是米兰算法的坚定支持者，却也是柯林与富尔顿最想封口的喉舌",
           voice: "清亮急遽，字字如连珠炮，能在一夜之间把谣言变成席卷广场的浪潮",
           redLine: "绝不容许任何大国特权凌驾于公开抽签的公平之上",
           pressureMethod: "公布富尔顿豪华套房的图纸并煽动民众围攻方舟入口，把总控舱逼入全面摊牌",
-          openingLine: "各位市民！方舟名单里有六百个位置是给投资人的！我们被算法骗了，今天就问他们要个说法！",
+          openingLine:
+            "各位市民！方舟名单里有六百个位置是给投资人的！我们被算法骗了，今天就问他们要个说法！",
         },
       ],
     },
@@ -1317,7 +1330,8 @@ export const DINO_PRESETS: PresetCastEntry[] = [
           voice: "公文腔冷硬，援引条例数据如数家珍，措辞滴水不漏",
           redLine: "绝不容许在调查取证期间发生大规模暴力冲突导致证据灭失",
           pressureMethod: "当众出示冻结令与传票，宣布对圈养场实行接管审计",
-          openingLine: "交易所即刻休市！诸位，龙母之死疑点重重，在场所有人，包括董事长，都请配合调查！",
+          openingLine:
+            "交易所即刻休市！诸位，龙母之死疑点重重，在场所有人，包括董事长，都请配合调查！",
         },
         {
           id: "agent_analyst",
@@ -1332,7 +1346,8 @@ export const DINO_PRESETS: PresetCastEntry[] = [
           voice: "语速飞快，满嘴点位、杠杆与仓位，声音里透着操纵市场的亢奋",
           redLine: "绝不容许监管机构冻结交易让他到手的利润化为乌有",
           pressureMethod: "通过直播节目散布龙群瘟疫将全面爆发的谣言，诱导市场恐慌性抛售",
-          openingLine: "各位观众，龙母之死只是开始！据我推算，整个圈养场百分之四十的龙群已感染未知疫病！",
+          openingLine:
+            "各位观众，龙母之死只是开始！据我推算，整个圈养场百分之四十的龙群已感染未知疫病！",
         },
         {
           id: "agent_station",
@@ -1366,5 +1381,5 @@ export const DINO_PRESETS: PresetCastEntry[] = [
         },
       ],
     },
-  }
+  },
 ];
