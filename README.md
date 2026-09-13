@@ -143,7 +143,7 @@
 
 ```bash
 # 克隆代码仓库
-git clone https://github.com/sanbei101/zhihu-competition.git
+git clone https://github.com/sanbei101/zhihu-brainhole-arcade.git
 cd zhihu-competition
 pnpm install
 ```
