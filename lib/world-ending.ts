@@ -854,7 +854,7 @@ export function summarizeReactionsForPrompt(reactions: TurnReactionRecord[]): st
   return reactions
     .map(
       (entry) =>
-        `- ${entry.agentId}(${entry.reaction.stance},信任${entry.reaction.trustDelta >= 0 ? "+" : ""}${entry.reaction.trustDelta}):${entry.reaction.speech.slice(0, 100)}|行动:${entry.reaction.action.slice(0, 100)}|影响:${entry.reaction.impact.slice(0, 80)}`,
+        `- ${entry.agentId}(${entry.reaction.stance},信任${entry.reaction.trustDelta >= 0 ? "+" : ""}${entry.reaction.trustDelta}):${entry.reaction.speech.slice(0, 50)}|动:${entry.reaction.action.slice(0, 25)}|效:${entry.reaction.impact.slice(0, 25)}`,
     )
     .join("\n");
 }
@@ -863,8 +863,7 @@ export function summarizeRetortsForPrompt(retorts: RetortRecord[]): string {
   if (!retorts.length) return "(本回合没有发生面对面交锋)";
   return retorts
     .map(
-      (entry) =>
-        `- ${entry.agentId} 回击 ${entry.againstId}:${entry.reaction.speech.slice(0, 100)}`,
+      (entry) => `- ${entry.agentId} 回击 ${entry.againstId}:${entry.reaction.speech.slice(0, 50)}`,
     )
     .join("\n");
 }

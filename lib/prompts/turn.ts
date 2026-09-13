@@ -20,14 +20,15 @@ export const buildAgentInstructions = (character: AgentCharacter) =>
 
 秘密动机用于决定行动,但绝不能直接泄露。信任度高于 45 时,除非玩家直接触碰你的底线,你应优先选择 support 或 negotiate,并主动寻找替玩家分担代价的办法;信任度低于 20 时你才只做对自己有利的事,并且可以不再听令。
 
-语言风格要求:
-- 必须严格从你的【性格】与【说话方式】切入(武将粗粝决断直言兵马粮饷,文臣引经据典或直斥律法弊端,权谋家绵里藏针暗留后手)。
-- 严禁使用“这个我认，那个我不认”、“某某虽好，但我不能认同”等辩论赛式对仗套话!
-- 无论支持还是反对,直奔主题与利害,切忌公文八股腔。
-回应必须包含一句符合身份的现场发言和一个立刻执行的具体行动。使用简体中文。`;
+[语言风格与字数极简要求]:
+- 必须严格从你的[性格]与[说话方式]切入(武将粗粝决断直言兵马粮饷,文臣引经据典或直斥律法弊端,权谋家绵里藏针暗留后手)。
+- 严禁长篇大论!台词发言(speech)必须短促有力,严格控制在 30~50 字内,短兵相接,直奔要害与利害!
+- 现场小动作(action)必须是当场一个短促明确的微动作(15 字内,例如'拍案而起下令闭门'),严禁冗长铺展!
+- 行动后果(impact)一句话交代最直接后果(15 字内)!
+- 严禁使用"这个我认,那个我不认"等辩论套话,切忌公文八股腔。使用简体中文。`;
 
 /**
- * 严格按照「静态设定 -> 历史推演 -> 动态变量」构建环境上下文，最大化 DeepSeek 前缀缓存 (Prefix Caching)
+ * 严格按照'静态设定 -> 历史推演 -> 动态变量'构建环境上下文,最大化 DeepSeek 前缀缓存 (Prefix Caching)
  */
 export const buildEnvironmentBlock = (input: {
   cast: WorldCast;
@@ -49,7 +50,7 @@ ${input.cast.setting.rules.map((rule) => `- ${rule}`).join("\n")}
 ${input.cast.agentCharacters
   .map(
     (other) =>
-      `- ${other.name}(${other.identity} · ${other.faction}): 公开目标【${other.publicGoal}】`,
+      `- ${other.name}(${other.identity} · ${other.faction}): 公开目标[${other.publicGoal}]`,
   )
   .join("\n")}
 
@@ -82,19 +83,23 @@ export const buildAgentPrompt = (input: {
 
 你的本回合立场要求:
 ${input.cooperationHint}
-围绕玩家刚刚决定的这一件事直接做出符合你立场的反应。支持就切实跟进,反对就直斥危害,协商就提出交换条件,利用就暗中借势。严禁使用“这个我认，那个我不认”等辩论套话,说话必须鲜活简练。
+围绕玩家刚刚决定的这一件事直接做出符合你立场的反应。支持就切实跟进,反对就直斥危害,协商就提出交换条件,利用就暗中借势。
 
-立即作出你的独立回应。只描述你能立刻调动的行动,写清行动成本和可观察后果。不要替其他角色发言,不要替导演宣布结局。`;
+立即作出极简回应:
+- 台词发言(speech)短兵相接,严格限制在 30~50 字以内!
+- 行动(action)仅限现场干脆的微动作,15 字以内!
+- 后果(impact)15 字以内一笔带过!
+严禁废话、长文或公文式细节展开。不要替其他角色发言,不要替导演宣布结局。`;
 
 /**
- * 双人即席对峙提示词 (Clash): 一次调用同时生成双方互相驳斥，减少 1 次独立 LLM 生成
+ * 双人即席对峙提示词 (Clash): 一次调用同时生成双方互相驳斥,减少 1 次独立 LLM 生成
  */
 export const CLASH_INSTRUCTIONS = `你是一名严谨的历史推演剧本导演。朝堂上两位立场截然相反的人物正在当面对峙。
-请同时扮演这两位角色，基于他们各自的身份、阵营、说话习惯和底线，生成一段短促而极具戏剧张力的针锋相对交锋。
+请同时扮演这两位角色,基于他们各自的身份、阵营、说话习惯和底线,生成一段短促而极具戏剧张力的针锋相对交锋。
 要求:
-1. 每人必须用最符合其性格与语言习惯的一句话，掐住对方原话中最站不住的漏洞进行反驳。
-2. 每人附带一个立刻执行的小动作来固化自身立场。
-3. 严禁客套话，严禁替对方妥协，禁止输出多余前言后语。使用简体中文。`;
+1. 每人台词必须短促尖锐,掐住对方漏洞反驳,严格控制在 30~45 字内。
+2. 每人附带一个现场即时小动作(15 字内)。
+3. 严禁客套话,严禁长篇演讲,严禁输出多余前言后语。使用简体中文。`;
 
 export const buildClashPrompt = (input: {
   scenarioCrisis: string;
@@ -107,11 +112,11 @@ export const buildClashPrompt = (input: {
 玩家刚刚抉择:'${input.playerDecision}'
 
 挑起交锋方:${input.challenger.name}(${input.challenger.identity} · ${input.challenger.faction})
-性格与语气:${input.challenger.personality}，说话风格: ${input.challenger.voice}
+性格与语气:${input.challenger.personality},说话风格: ${input.challenger.voice}
 刚刚当众放话:'${input.challengerLine}'
 
 被动反驳方:${input.defender.name}(${input.defender.identity} · ${input.defender.faction})
-性格与语气:${input.defender.personality}，说话风格: ${input.defender.voice}
+性格与语气:${input.defender.personality},说话风格: ${input.defender.voice}
 刚刚当众表态:'${input.defenderLine}'
 
 请生成双方在这场面对面冲突中的当场言辞回击与动作。`;
@@ -126,7 +131,7 @@ export const buildRetortInstructions = (character: AgentCharacter) =>
 说话方式:${character.voice}
 不可接受的底线:${character.redLine}
 
-要求:直接回击对方原话里最站不住的那一点;可以改口或让步,但必须给出一条可信的理由;trustDelta 一律填 0;ultimatum 一律填 null。不要替别人说话,不要总结全局。使用简体中文。`;
+要求:直接回击对方原话里最站不住的那一点(30~45字以内);现场即时小动作15字以内;可以改口或让步,但必须给出一条可信的理由;trustDelta 一律填 0;ultimatum 一律填 null。不要替别人说话,不要总结全局。使用简体中文。`;
 
 export const buildRetortPrompt = (input: {
   environment?: string;

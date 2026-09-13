@@ -49,11 +49,23 @@ export const ultimatumDraftSchema = z.object({
 export type UltimatumDraft = z.infer<typeof ultimatumDraftSchema>;
 
 export const agentReactionSchema = z.object({
-  speech: z.string().describe("角色当场说出的话,不超过一百二十字"),
-  action: z.string().describe("角色立刻采取的具体行动"),
-  target: z.string().describe("行动针对的人物、阵营或资源"),
+  speech: z
+    .string()
+    .min(1)
+    .max(180)
+    .describe("角色当场说出的犀利发言,严禁长篇大论,严格控制在三十到五十个字以内,直奔要害与利害"),
+  action: z
+    .string()
+    .min(1)
+    .max(60)
+    .describe("角色当场采取的即时小动作,短促明确,十到二十字以内,例如'拍案而起下令闭门'"),
+  target: z.string().min(1).max(30).describe("行动针对的人物、阵营或资源,十个字以内"),
   stance: z.enum(["support", "oppose", "negotiate", "exploit"]),
-  impact: z.string().describe("该行动可能造成的直接公开影响"),
+  impact: z
+    .string()
+    .min(1)
+    .max(60)
+    .describe("该动作引发的最直接即时后果,十五字以内,例如'中军守卫全面警戒'"),
   trustDelta: z.coerce
     .number()
     .min(-30)

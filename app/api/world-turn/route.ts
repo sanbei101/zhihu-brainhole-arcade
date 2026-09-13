@@ -69,14 +69,18 @@ function pickConflictPair(
 }
 
 const agentClashSchema = z.object({
-  challengerSpeech: z.string().min(1).max(400).describe("挑起交锋方当场驳斥的话,不超过一百四十字"),
-  challengerAction: z.string().min(1).max(300).describe("挑起交锋方随之采取的小动作"),
+  challengerSpeech: z
+    .string()
+    .min(1)
+    .max(180)
+    .describe("挑起交锋方当场驳斥的话,短兵相接,三十到四十五字以内"),
+  challengerAction: z.string().min(1).max(50).describe("挑起交锋方随之采取的即时小动作,十五字以内"),
   defenderSpeech: z
     .string()
     .min(1)
-    .max(400)
-    .describe("被动反驳方针锋相对回击的话,不超过一百四十字"),
-  defenderAction: z.string().min(1).max(300).describe("被动反驳方随之采取的小动作"),
+    .max(180)
+    .describe("被动反驳方针锋相对回击的话,短促尖锐,三十到四十五字以内"),
+  defenderAction: z.string().min(1).max(50).describe("被动反驳方随之采取的即时小动作,十五字以内"),
 });
 
 export async function POST(request: Request) {
@@ -169,7 +173,7 @@ export async function POST(request: Request) {
               }),
               schema: agentClashSchema,
               temperature: 0.85,
-              maxOutputTokens: 600,
+              maxOutputTokens: 350,
               abortSignal: request.signal,
             });
 
@@ -237,7 +241,7 @@ export async function POST(request: Request) {
                 }),
                 schema: agentReactionSchema,
                 temperature: 0.85,
-                maxOutputTokens: 1100,
+                maxOutputTokens: 450,
                 abortSignal: request.signal,
               });
               const parsed = agentReactionSchema.parse(reaction);

@@ -48,18 +48,14 @@ export interface StageBeat {
 }
 
 /**
- * 把'做了什么 / 冲着谁 / 后果'拼成一句旁白。
- * 这三个字段是数据,不是文案;直接摆成带标签的三行会像表单、把人从戏里拽出来,
- * 合成'他做了什么,冲着谁;结果如何'才像史笔。
+ * 极简动作与影响摘要,短促明确,避免冗长拼接
  */
 export function actionNoteOf(beat: StageBeat): string {
-  const clean = (value?: string) => value?.trim().replace(/[。;;、,]+$/, "") ?? "";
-  const parts = [
-    clean(beat.action),
-    beat.target ? `冲着${clean(beat.target)}` : "",
-    clean(beat.impact),
-  ].filter(Boolean);
-  return parts.length ? `${parts.join("。")}。` : "";
+  const clean = (value?: string) => value?.trim().replace(/[。;;、,,]+$/, "") ?? "";
+  const act = clean(beat.action);
+  const imp = clean(beat.impact);
+  if (act && imp) return `${act} · 影响: ${imp}`;
+  return act || imp;
 }
 
 /** 台上的一张立绘(或导演的徽记)。闲置缓慢呼吸,说话时加快;对面那个人压暗一档把视线让出来。 */
@@ -138,7 +134,6 @@ export function SpeechStage({
   const figureName = beat ? (beat.speaker?.name ?? beat.directorName ?? "") : player.name;
   const figureIdentity = beat?.speaker?.identity;
   const stance = beat?.stance ? stanceStyles[beat.stance] : null;
-  const note = beat ? actionNoteOf(beat) : "";
   /** beat 有 speaker 就是角色,没有就是导演 */
   const figureSubject = beat ? (beat.speaker ?? null) : player;
 
@@ -230,10 +225,18 @@ export function SpeechStage({
           )}
         </div>
 
-        {note ? (
-          <p className="text-muted-foreground w-full border-t pt-3 text-center text-xs leading-6 break-words">
-            {note}
-          </p>
+        {beat?.action ? (
+          <div className="text-muted-foreground flex max-w-2xl flex-wrap items-center justify-center gap-2 border-t pt-2.5 text-xs">
+            <span className="bg-muted text-foreground/85 inline-flex items-center gap-1.5 rounded-md px-2.5 py-0.5 font-medium">
+              <span className="bg-primary size-1.5 rounded-full" aria-hidden="true" />
+              <span>行动: {beat.action}</span>
+            </span>
+            {beat.impact ? (
+              <span className="text-muted-foreground/80 inline-flex items-center gap-1 text-[11px]">
+                <span>影响: {beat.impact}</span>
+              </span>
+            ) : null}
+          </div>
         ) : null}
       </div>
     </section>
