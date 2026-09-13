@@ -254,6 +254,18 @@ export const retortRecordSchema = turnReactionRecordSchema.extend({
 });
 export type RetortRecord = z.infer<typeof retortRecordSchema>;
 
+export const worldMutationSchema = z.object({
+  title: z.string().describe("异化里程碑名称,如'大汉巨舰时代启幕'"),
+  epigraph: z
+    .string()
+    .describe(
+      "群星风史诗判词,如'自建安起,中原人不再仰望泰山,他们把目光投向了浩瀚大洋。正史在这里彻底折断。'",
+    ),
+  summary: z.string().describe("宏观蝴蝶效应一句话说明"),
+  tag: z.string().describe("异化标签,如'天命变轨'/'科技异化'/'地缘重构'/'文明飞升'"),
+});
+export type WorldMutation = z.infer<typeof worldMutationSchema>;
+
 export const turnRecordSchema = z.object({
   round: z.number().int().min(1),
   /** 玩家从本回合候选未来中选入的分支编号,旧存档可以没有。 */
@@ -285,6 +297,10 @@ export const turnRecordSchema = z.object({
   ultimatum: ultimatumSchema.nullable(),
   ultimatumOutcome: ultimatumOutcomeSchema,
   nextSituation: z.string().min(1).max(300),
+  /** 时代跃迁纪元标尺,如'【建安十六年 · 三年后】' */
+  timeLeap: z.string().optional(),
+  /** 本回合诱发的世界线异化突变与群星风史诗判词 */
+  mutation: worldMutationSchema.nullable().optional(),
 });
 export type TurnRecord = z.infer<typeof turnRecordSchema>;
 
@@ -325,6 +341,10 @@ export const judgeResultSchema = z.object({
   ultimatumOutcome: ultimatumOutcomeSchema,
   isEnded: z.boolean(),
   ending: endingSchema.nullable(),
+  /** 时代跃迁纪元标尺,如'【建安十六年 · 三年后】' */
+  timeLeap: z.string().optional(),
+  /** 本回合诱发的世界线异化突变与群星风史诗判词 */
+  mutation: worldMutationSchema.nullable().optional(),
 });
 export type JudgeResult = z.infer<typeof judgeResultSchema>;
 

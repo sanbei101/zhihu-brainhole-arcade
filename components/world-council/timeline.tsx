@@ -154,6 +154,8 @@ export function Timeline({
                     events={turn.events}
                     metricReasons={turn.metricReasons}
                     nextSituation={turn.nextSituation}
+                    timeLeap={turn.timeLeap}
+                    mutation={turn.mutation}
                   />
                 </MessageScrollerItem>
               </Fragment>

@@ -1,6 +1,6 @@
 "use client";
 
-import { GitBranch, Swords, TriangleAlert } from "lucide-react";
+import { GitBranch, Hourglass, Sparkles, Swords, TriangleAlert } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
@@ -98,14 +98,56 @@ export function SpeakingAvatar({
   characterName,
   className,
 }: {
-  isTyping: boolean;
-  characterName: string;
+  isTyping?: boolean;
+  characterName?: string;
   className?: string;
 }) {
+  const initial = characterName?.slice(0, 1) || "议";
   return (
-    <MessageAvatar className={`${className ?? "size-8"} ${isTyping ? "animate-pulse" : ""}`}>
-      {characterName.slice(0, 1)}
+    <MessageAvatar className={className}>
+      <span className="font-semibold">{initial}</span>
+      {isTyping ? (
+        <span className="bg-primary absolute -right-0.5 -bottom-0.5 size-2 animate-ping rounded-full" />
+      ) : null}
     </MessageAvatar>
+  );
+}
+
+export function OpeningNarrationMessage({
+  title,
+  opening,
+  rules,
+  animate = true,
+}: {
+  title: string;
+  opening: string;
+  rules: string[];
+  animate?: boolean;
+}) {
+  const { typed, isTyping } = useTypewriter(opening, animate);
+  return (
+    <Message>
+      <MessageAvatar className="bg-primary text-primary-foreground size-8">
+        <GitBranch className="size-4" />
+      </MessageAvatar>
+      <MessageContent>
+        <MessageHeader>{title}</MessageHeader>
+        <div className="border-border bg-muted/60 max-w-4xl rounded-lg border px-4 py-3 leading-7">
+          {typed}
+          <TypingCaret visible={isTyping} />
+        </div>
+        {rules.length ? (
+          <div className="bg-background text-muted-foreground mt-2 max-w-4xl rounded-md border p-3 text-xs leading-5">
+            <span className="text-foreground font-semibold">历史硬约束:</span>
+            <ul className="mt-1 list-disc space-y-1 pl-4">
+              {rules.map((rule, idx) => (
+                <li key={idx}>{rule}</li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+      </MessageContent>
+    </Message>
   );
 }
 
@@ -176,68 +218,46 @@ export function PlayerDecisionMessage({
   );
 }
 
-function ActionNote({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex items-start gap-2">
-      <dt className="w-14 shrink-0">{label}</dt>
-      <dd className="min-w-0">{value}</dd>
-    </div>
-  );
-}
-
 export function ReactionMessage({
   characterName,
   reaction,
-  animate = true,
   againstName,
+  animate = true,
 }: {
   characterName: string;
   reaction: AgentReaction;
-  animate?: boolean;
-  /** 传了就是第二轮交锋:显示成'当场回击某人' */
   againstName?: string;
+  animate?: boolean;
 }) {
   const { typed, isTyping } = useTypewriter(reaction.speech, animate);
-  const stanceStyle = stanceStyles[reaction.stance];
-  const isRetort = Boolean(againstName);
+  const style = stanceStyles[reaction.stance];
 
   return (
     <Message>
       <SpeakingAvatar isTyping={isTyping} characterName={characterName} />
       <MessageContent>
-        <MessageHeader className="flex-wrap gap-2">
+        <MessageHeader className="gap-2">
           <span>{characterName}</span>
-          {isRetort ? (
-            <span className="text-destructive/90 flex items-center gap-1">
-              <Swords className="size-3" />
-              当场回击 {againstName}
-            </span>
-          ) : null}
-          <Badge variant="outline" className={stanceStyle.badge}>
-            {stanceLabels[reaction.stance]}
+          <Badge variant="outline" className={`border text-xs ${style.badge}`}>
+            {againstName ? (
+              <span className="inline-flex items-center gap-1">
+                <Swords className="size-3" />
+                回击 {againstName} · {stanceLabels[reaction.stance]}
+              </span>
+            ) : (
+              stanceLabels[reaction.stance]
+            )}
           </Badge>
-          <TrustDeltaBadge delta={reaction.trustDelta} />
         </MessageHeader>
-        <div
-          className={`border-border max-w-4xl rounded-lg border border-l-4 px-4 py-3 leading-7 ${stanceStyle.bubble} ${
-            isRetort ? "border-r-4 border-r-red-400/70" : ""
-          } ${isTyping ? "ring-primary/40 ring-1" : ""}`}
-        >
-          {typed}
-          <TypingCaret visible={isTyping} />
+        <div className={`max-w-4xl rounded-lg border-l-4 px-4 py-3 leading-7 ${style.bubble}`}>
+          <p className="font-medium">
+            "{typed}"
+            <TypingCaret visible={isTyping} />
+          </p>
+          <p className="text-muted-foreground mt-2 border-t pt-2 text-xs leading-5">
+            <span className="font-semibold">行动:</span> {reaction.action}
+          </p>
         </div>
-        <dl className="text-muted-foreground max-w-4xl space-y-1 text-xs leading-5">
-          <ActionNote label="做了什么" value={reaction.action} />
-          <ActionNote label="冲着谁" value={reaction.target} />
-          <ActionNote label="后果" value={reaction.impact} />
-        </dl>
-        {reaction.ultimatum ? (
-          <UltimatumNotice
-            characterName={characterName}
-            demand={reaction.ultimatum.demand}
-            penalty={reaction.ultimatum.penalty}
-          />
-        ) : null}
       </MessageContent>
     </Message>
   );
@@ -288,6 +308,8 @@ export function DirectorNarrationMessage({
   events,
   metricReasons,
   nextSituation,
+  timeLeap,
+  mutation,
 }: {
   title: string;
   narration: string;
@@ -297,6 +319,8 @@ export function DirectorNarrationMessage({
   events: WorldGameSession["turns"][number]["events"];
   metricReasons: WorldGameSession["turns"][number]["metricReasons"] | null;
   nextSituation: string | null;
+  timeLeap?: string | null;
+  mutation?: WorldGameSession["turns"][number]["mutation"] | null;
 }) {
   const entropyText = deltaSummary(entropy ?? null);
   const penaltyText = deltaSummary(crisisPenalty ?? null);
@@ -307,7 +331,35 @@ export function DirectorNarrationMessage({
         <GitBranch className="size-4" />
       </MessageAvatar>
       <MessageContent>
-        <MessageHeader>{title}</MessageHeader>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <MessageHeader>{title}</MessageHeader>
+          {timeLeap ? (
+            <span className="inline-flex items-center gap-1 rounded-full border border-sky-500/30 bg-sky-500/10 px-2.5 py-0.5 text-xs font-medium text-sky-800 dark:text-sky-300">
+              <Hourglass className="size-3" />
+              <span>时代跃迁: {timeLeap}</span>
+            </span>
+          ) : null}
+        </div>
+
+        {mutation ? (
+          <div className="my-2.5 max-w-4xl overflow-hidden rounded-lg border border-amber-500/40 bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent p-3.5 dark:from-amber-950/40 dark:via-amber-950/20">
+            <div className="flex items-center justify-between gap-2 pb-1.5">
+              <div className="flex items-center gap-1.5">
+                <Sparkles className="size-3.5 animate-pulse text-amber-500" />
+                <span className="text-xs font-semibold text-amber-900 sm:text-sm dark:text-amber-200">
+                  世界异化 · {mutation.title}
+                </span>
+              </div>
+              <Badge className="border-amber-500/40 bg-amber-500/20 px-1.5 py-0 text-[10px] text-amber-800 dark:text-amber-300">
+                {mutation.tag}
+              </Badge>
+            </div>
+            <blockquote className="my-1.5 border-l-2 border-amber-500/60 pl-2.5 font-serif text-xs leading-relaxed text-amber-950/90 italic dark:text-amber-100/90">
+              “{mutation.epigraph}”
+            </blockquote>
+            <p className="text-muted-foreground text-[11px] leading-normal">{mutation.summary}</p>
+          </div>
+        ) : null}
         {deltas ? (
           <div className="flex flex-wrap items-center gap-1.5 pb-1">
             <span className="text-muted-foreground text-xs font-medium">四维增量:</span>

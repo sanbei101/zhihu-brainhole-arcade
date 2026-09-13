@@ -179,32 +179,64 @@ export function DecisionPanel({
                 </div>
               </div>
               <div className="grid gap-2 sm:grid-cols-2">
-                {options.options.map((option, index) => (
-                  <Button
-                    key={option.id}
-                    type="button"
-                    variant="outline"
-                    disabled={choiceDisabled}
-                    onClick={() => onChooseOption(option)}
-                    className="h-auto min-w-0 flex-col items-start gap-2 p-4 text-left"
-                  >
-                    <span className="flex w-full min-w-0 items-start gap-2 whitespace-normal">
-                      <span className="bg-primary text-primary-foreground grid size-6 shrink-0 place-items-center rounded font-mono text-xs">
-                        {["A", "B", "C", "D"][index] ?? index + 1}
+                {options.options.map((option, index) => {
+                  const isWild = option.risk === "狂";
+                  return (
+                    <Button
+                      key={option.id}
+                      type="button"
+                      variant="outline"
+                      disabled={choiceDisabled}
+                      onClick={() => onChooseOption(option)}
+                      className={`h-auto min-w-0 flex-col items-start gap-2 p-4 text-left transition-all ${
+                        isWild
+                          ? "border-amber-500/40 bg-amber-500/5 hover:border-amber-500/70 hover:bg-amber-500/10 dark:border-amber-400/40 dark:bg-amber-950/20"
+                          : ""
+                      }`}
+                    >
+                      <span className="flex w-full min-w-0 items-start gap-2 whitespace-normal">
+                        <span
+                          className={`grid size-6 shrink-0 place-items-center rounded font-mono text-xs ${
+                            isWild
+                              ? "bg-amber-500 font-bold text-amber-950"
+                              : "bg-primary text-primary-foreground"
+                          }`}
+                        >
+                          {["A", "B", "C", "D"][index] ?? index + 1}
+                        </span>
+                        <span className="min-w-0 flex-1 font-medium break-words">
+                          {option.title}
+                        </span>
                       </span>
-                      <span className="min-w-0 flex-1 font-medium break-words">{option.title}</span>
-                    </span>
-                    <span className="flex w-full flex-wrap items-center gap-1.5 pl-7">
-                      {option.crisisAction ? <Badge variant="destructive">处理危机</Badge> : null}
-                      <Badge variant="secondary">{option.risk}</Badge>
-                    </span>
-                    <span className="text-muted-foreground text-xs leading-5 font-normal whitespace-normal">
-                      {option.desc}
-                    </span>
-                    <ImpactRow impact={option.impact} />
-                    <ForecastRow forecast={option.forecast} nameById={nameById} />
-                  </Button>
-                ))}
+                      <span className="flex w-full flex-wrap items-center gap-1.5 pl-7">
+                        {option.crisisAction ? <Badge variant="destructive">处理危机</Badge> : null}
+                        {isWild ? (
+                          <Badge className="border-amber-500/40 bg-amber-500/20 text-amber-800 dark:text-amber-300">
+                            🌟 狂 · 天命破壁
+                          </Badge>
+                        ) : (
+                          <Badge variant="secondary">{option.risk}</Badge>
+                        )}
+                      </span>
+                      {option.epigraph ? (
+                        <div
+                          className={`w-full rounded px-2.5 py-1.5 font-serif text-xs leading-relaxed italic ${
+                            isWild
+                              ? "border-l-2 border-amber-500/70 bg-amber-500/10 text-amber-900 dark:text-amber-200"
+                              : "border-primary/50 bg-muted/50 text-muted-foreground border-l-2"
+                          }`}
+                        >
+                          “{option.epigraph}”
+                        </div>
+                      ) : null}
+                      <span className="text-muted-foreground text-xs leading-5 font-normal whitespace-normal">
+                        {option.desc}
+                      </span>
+                      <ImpactRow impact={option.impact} />
+                      <ForecastRow forecast={option.forecast} nameById={nameById} />
+                    </Button>
+                  );
+                })}
               </div>
               {idleOption ? (
                 <Button
@@ -248,6 +280,11 @@ export function DecisionPanel({
               {submittedBranch.id === "idle" ? "停驻" : submittedBranch.id.toUpperCase()}
             </p>
             <p className="text-muted-foreground mt-1 text-xs leading-5">{submittedBranch.title}</p>
+            {submittedBranch.epigraph ? (
+              <p className="mt-1 font-serif text-xs text-amber-700 italic dark:text-amber-300">
+                “{submittedBranch.epigraph}”
+              </p>
+            ) : null}
           </div>
         </div>
       ) : null}

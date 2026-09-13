@@ -31,7 +31,12 @@ export const decisionOptionSchema = z.object({
   id: z.string().describe("选项唯一短 id,如 A/B/C/D"),
   title: z.string().min(1).max(80).describe("选项标题,不超过三十字"),
   desc: z.string().min(1).max(300).describe("选项具体做法与代价,不超过一百二十字"),
-  risk: z.enum(["稳", "险", "赌"]).describe("选项风险等级"),
+  risk: z.enum(["稳", "险", "赌", "狂"]).describe("选项风险等级,狂为天命破壁/群星飞升级抉择"),
+  epigraph: z
+    .string()
+    .max(120)
+    .optional()
+    .describe("群星风格的燃向宣誓语录或时代判词,15~35字,极具宿命感与史诗感"),
   crisisAction: z
     .boolean()
     .describe("是否直接处理当前未决突发事件;有危机时至少一个选项为 true,无危机时全部为 false"),

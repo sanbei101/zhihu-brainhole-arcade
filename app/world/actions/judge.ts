@@ -27,6 +27,7 @@ import {
   turnRecordSchema,
   ultimatumOutcomeSchema,
   ultimatumSchema,
+  worldMutationSchema,
   judgeResultSchema,
   type JudgeResult,
   type UltimatumDraft,
@@ -60,6 +61,8 @@ const judgeDraftSchema = z.object({
     .describe("一到三个本回合真正发生的公开世界事件,不能只是情绪描述"),
   narration: z.string().min(1).max(1000).describe("不超过三百字的世界旁白,承上启下"),
   nextSituation: z.string().min(1).max(800).describe("下一回合最先逼近玩家的具体危机或待处理后果"),
+  timeLeap: z.string().max(100).nullish().describe("时代跃迁纪元标尺,如'【建安十六年 · 三年后】'"),
+  mutation: worldMutationSchema.nullish().describe("本回合世界线异化突变与群星风史诗判词"),
   crisisOutcome: z.enum(["resolved", "unresolved"]),
   newCrisis: crisisBodySchema.nullish(),
   ultimatumOutcome: ultimatumOutcomeSchema,
@@ -181,6 +184,8 @@ export async function judgeTurnAction(input: unknown): Promise<ActionResult<Judg
         ultimatumOutcome: ultimatumStep.defectedAgentId ? "defied" : draft.ultimatumOutcome,
         isEnded: systemEnding !== null,
         ending,
+        timeLeap: draft.timeLeap ?? undefined,
+        mutation: draft.mutation ?? null,
       });
     },
   });

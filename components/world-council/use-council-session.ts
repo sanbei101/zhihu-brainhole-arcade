@@ -293,6 +293,8 @@ export function useCouncilSession({ initial, worldId }: UseCouncilSessionOptions
           ultimatum: judged.ultimatum,
           ultimatumOutcome: judged.ultimatumOutcome,
           nextSituation: judged.nextSituation,
+          timeLeap: judged.timeLeap,
+          mutation: judged.mutation,
         },
       ]);
       if (judged.isEnded && judged.ending) {
@@ -537,6 +539,8 @@ export function useCouncilSession({ initial, worldId }: UseCouncilSessionOptions
               nextSituation: result.data.nextSituation,
               crisis: result.data.crisis,
               ultimatum: result.data.ultimatum,
+              timeLeap: result.data.timeLeap,
+              mutation: result.data.mutation,
             },
           ];
           void generateOptionsAction({
