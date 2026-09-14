@@ -21,6 +21,24 @@
 
 </div>
 
+## 📸 项目预览
+
+### 桌面端
+
+<p align="center">
+  <img src="./docs/home-desktop.png" width="100%" alt="知乎脑洞游乐园首页桌面端" />
+</p>
+
+<p align="center">
+  <img src="./docs/shot-desktop.png" width="100%" alt="知乎脑洞游乐园世界线展厅桌面端" />
+</p>
+
+### 移动端
+
+<p align="center">
+  <img src="./docs/shot-mobile.png" width="100%" alt="知乎脑洞游乐园移动端" />
+</p>
+
 ---
 
 ## 📖 项目简述
