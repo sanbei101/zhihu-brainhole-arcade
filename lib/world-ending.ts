@@ -206,10 +206,26 @@ export function relationOf(relations: AgentRelation[], agentId: string): AgentRe
 // ==================== 突发事件(带倒计时) ====================
 
 export const crisisPenaltySchema = z.object({
-  stability: z.coerce.number().min(0).max(25),
-  morale: z.coerce.number().min(0).max(25),
-  support: z.coerce.number().min(0).max(25),
-  resources: z.coerce.number().min(0).max(25),
+  stability: z.coerce
+    .number()
+    .min(0)
+    .max(25)
+    .describe("逾期每回合扣除的绝对值,只能填 0 到 25 的非负数"),
+  morale: z.coerce
+    .number()
+    .min(0)
+    .max(25)
+    .describe("逾期每回合扣除的绝对值,只能填 0 到 25 的非负数"),
+  support: z.coerce
+    .number()
+    .min(0)
+    .max(25)
+    .describe("逾期每回合扣除的绝对值,只能填 0 到 25 的非负数"),
+  resources: z.coerce
+    .number()
+    .min(0)
+    .max(25)
+    .describe("逾期每回合扣除的绝对值,只能填 0 到 25 的非负数"),
 });
 export type CrisisPenalty = z.infer<typeof crisisPenaltySchema>;
 
