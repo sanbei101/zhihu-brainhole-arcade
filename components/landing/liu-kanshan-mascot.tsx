@@ -7,7 +7,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const KANSHAN_ACTIONS = [
-  { id: "greeting", file: "/liukanshan/greeting.gif", name: "打招呼", hint: "Hi！我是刘看山～" },
+  { id: "greeting", file: "/liukanshan/greeting.gif", name: "打招呼", hint: "" },
   {
     id: "coding",
     file: "/liukanshan/coding.gif",
@@ -83,26 +83,25 @@ export function LiuKanshanMascot({ className }: { className?: string }) {
 
       {/* 对话气泡与人气奖说明 */}
       <div className="flex flex-1 flex-col items-center gap-1.5 text-center sm:items-start sm:text-left">
-        <div className="text-foreground flex items-center gap-1.5 text-xs font-semibold">
+        <div className="text-foreground flex items-center gap-1.5 text-sm font-semibold">
           <span className="text-primary font-mono text-[11px] tracking-wider uppercase">
             [知乎吉祥物 · 刘看山]
           </span>
-          <span className="text-muted-foreground text-[11px]">{currentAction.hint}</span>
+          {currentAction.hint && (
+            <span className="text-muted-foreground text-xs">{currentAction.hint}</span>
+          )}
         </div>
 
         {hasVoted ? (
           <div className="space-y-1">
-            <p className="flex items-center justify-center gap-1 text-xs font-medium text-amber-500 sm:justify-start">
+            <p className="flex items-center justify-center gap-1 text-sm font-medium text-amber-500 sm:justify-start">
               <Trophy className="size-3.5" />
               <span>感谢老铁！你已为本作成功助力「黑客松人气奖」！</span>
-            </p>
-            <p className="text-muted-foreground text-[11px]">
-              你的知乎授权已计入调用统计，快去下方挑选世界线开始推演吧！
             </p>
           </div>
         ) : (
           <div className="space-y-1.5">
-            <p className="text-foreground/90 text-xs leading-5">
+            <p className="text-foreground/90 text-sm leading-5">
               主办方特设<span className="text-primary font-semibold">【黑客松人气奖】</span>
               ，点击下方通过知乎官方 OAuth 授权，即可为本作品打 Call 助力！
             </p>
