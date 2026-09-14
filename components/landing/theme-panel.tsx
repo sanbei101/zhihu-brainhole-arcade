@@ -36,6 +36,7 @@ function TopicCard({ topic, order }: { topic: ScenarioTopic; order: number }) {
   return (
     <Link
       href={topicHref(topic)}
+      prefetch={false}
       className="focus-visible:ring-ring block h-full rounded-xl focus-visible:ring-2 focus-visible:outline-none"
     >
       <SpotlightCard

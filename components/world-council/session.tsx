@@ -64,7 +64,7 @@ export function WorldCouncilSession({ worldId, skin }: { worldId: string; skin: 
         <CardContent>
           <Button
             nativeButton={false}
-            render={<Link href={`/world/${encodeURIComponent(worldId)}`} />}
+            render={<Link href={`/world/${encodeURIComponent(worldId)}`} prefetch={false} />}
           >
             返回世界线
             <ArrowLeft data-icon="inline-end" />

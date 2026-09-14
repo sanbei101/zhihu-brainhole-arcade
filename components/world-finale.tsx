@@ -365,7 +365,9 @@ export function WorldFinaleView({ worldId }: { worldId: string }) {
         <CardContent>
           <Button
             nativeButton={false}
-            render={<Link href={`/world/${encodeURIComponent(worldId)}/council`} />}
+            render={
+              <Link href={`/world/${encodeURIComponent(worldId)}/council`} prefetch={false} />
+            }
           >
             返回议事厅
             <ArrowLeft data-icon="inline-end" />
@@ -822,7 +824,12 @@ export function WorldFinaleView({ worldId }: { worldId: string }) {
                 <ExternalLink data-icon="inline-end" />
               </Button>
             ) : null}
-            <Button size="sm" variant="ghost" nativeButton={false} render={<Link href="/" />}>
+            <Button
+              size="sm"
+              variant="ghost"
+              nativeButton={false}
+              render={<Link href="/" prefetch={false} />}
+            >
               再开一条世界线
             </Button>
           </CardContent>

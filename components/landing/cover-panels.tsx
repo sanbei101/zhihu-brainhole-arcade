@@ -219,7 +219,7 @@ export function OutroPanel({
           <Button
             variant="outline"
             nativeButton={false}
-            render={<Link href={`#${SCENARIO_THEMES[0]?.id ?? "top"}`} />}
+            render={<Link href={`#${SCENARIO_THEMES[0]?.id ?? "top"}`} prefetch={false} />}
           >
             从第一间副本开始
           </Button>

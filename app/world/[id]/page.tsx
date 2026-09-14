@@ -37,11 +37,21 @@ export default async function WorldPage({ params }: WorldPageProps) {
       >
         <header className="border-border bg-background border-b">
           <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-5 px-5 sm:px-8">
-            <Link href="/" className="flex items-center gap-3" aria-label="返回知乎脑洞游乐园首页">
+            <Link
+              href="/"
+              prefetch={false}
+              className="flex items-center gap-3"
+              aria-label="返回知乎脑洞游乐园首页"
+            >
               <img src="/zhihu.svg" alt="知乎脑洞游乐园" className="size-9 rounded-lg" />
               <span className="font-semibold tracking-tight">知乎脑洞游乐园</span>
             </Link>
-            <Button nativeButton={false} variant="ghost" size="sm" render={<Link href="/" />}>
+            <Button
+              nativeButton={false}
+              variant="ghost"
+              size="sm"
+              render={<Link href="/" prefetch={false} />}
+            >
               <ArrowLeft data-icon="inline-start" />
               返回主题乐园
             </Button>
@@ -58,7 +68,7 @@ export default async function WorldPage({ params }: WorldPageProps) {
               <p className="text-muted-foreground mt-1 font-mono text-xs">ID: {id}</p>
             </CardHeader>
             <CardFooter className="bg-muted border-border flex gap-2 border-t px-6 py-4 sm:px-8">
-              <Button nativeButton={false} render={<Link href="/" />}>
+              <Button nativeButton={false} render={<Link href="/" prefetch={false} />}>
                 <ArrowLeft data-icon="inline-start" />
                 回主题乐园
               </Button>
@@ -79,7 +89,12 @@ export default async function WorldPage({ params }: WorldPageProps) {
     >
       <header className="border-border bg-background/80 sticky top-0 z-40 border-b backdrop-blur-sm">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-5 px-5 sm:px-8">
-          <Link href="/" className="flex items-center gap-3" aria-label="返回知乎脑洞游乐园首页">
+          <Link
+            href="/"
+            prefetch={false}
+            className="flex items-center gap-3"
+            aria-label="返回知乎脑洞游乐园首页"
+          >
             <img src="/zhihu.svg" alt="知乎脑洞游乐园" className="size-9 rounded-lg" />
             <span className="font-semibold tracking-tight">知乎脑洞游乐园</span>
           </Link>
@@ -87,7 +102,7 @@ export default async function WorldPage({ params }: WorldPageProps) {
             nativeButton={false}
             variant="ghost"
             size="sm"
-            render={<Link href={`/#${theme.id}`} />}
+            render={<Link href={`/#${theme.id}`} prefetch={false} />}
           >
             <ArrowLeft data-icon="inline-start" />
             返回{skin.name}
