@@ -1,3 +1,5 @@
+import type { NoObjectGeneratedError} from "ai";
+import { TypeValidationError, JSONParseError } from "ai";
 type LogLevel = "DEBUG" | "WARN" | "ERROR";
 
 const levelWeight: Record<LogLevel, number> = { DEBUG: 10, WARN: 20, ERROR: 30 };
@@ -10,6 +12,20 @@ function minimumLevel(): LogLevel {
   return "WARN";
 }
 
+export function logStructuredFailure(
+  label: string,
+  attempt: number,
+  error: NoObjectGeneratedError,
+): void {
+  const cause = error.cause;
+  const details = TypeValidationError.isInstance(cause)
+    ? { name: cause.name, value: cause.value, cause: cause.cause }
+    : JSONParseError.isInstance(cause)
+      ? { name: cause.name, text: cause.text, cause: cause.cause }
+      : cause;
+
+  logger.error("ai", "结构化输出失败", { label, attempt, cause: details });
+}
 function print(level: LogLevel, tag: string, message: string, data?: unknown): void {
   if (levelWeight[level] < levelWeight[minimumLevel()]) return;
 
