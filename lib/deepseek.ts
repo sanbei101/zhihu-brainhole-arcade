@@ -1,6 +1,7 @@
 import { createDeepSeek } from "@ai-sdk/deepseek";
 import {
   type FlexibleSchema,
+  JSONParseError,
   NoObjectGeneratedError,
   Output,
   TypeValidationError,
@@ -336,7 +337,13 @@ export async function generateStructured<T>(options: StructuredCallOptions<T>): 
             value: error.cause.value,
             cause: error.cause.cause,
           }
-        : error.cause,
+        : JSONParseError.isInstance(error.cause)
+          ? {
+              name: error.cause.name,
+              text: error.cause.text,
+              cause: error.cause.cause,
+            }
+          : error.cause,
     });
 
     // 2. 再给模型一次机会
@@ -361,7 +368,13 @@ export async function generateStructured<T>(options: StructuredCallOptions<T>): 
                 value: retryError.cause.value,
                 cause: retryError.cause.cause,
               }
-            : retryError.cause,
+            : JSONParseError.isInstance(retryError.cause)
+              ? {
+                  name: retryError.cause.name,
+                  text: retryError.cause.text,
+                  cause: retryError.cause.cause,
+                }
+              : retryError.cause,
         });
       }
       throw retryError;
