@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   description: "把知乎的经典脑洞与历史假设做成副本,走进去推演属于你的世界线。",
   icons: { icon: "/zhihu.svg" },
 };
+import { Analytics } from "@vercel/analytics/next";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body className="antialiased">
         <Toaster>{children}</Toaster>
+        <Analytics />
       </body>
     </html>
   );
