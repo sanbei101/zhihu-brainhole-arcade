@@ -18,6 +18,7 @@ import { Separator } from "@/components/ui/separator";
 import TextType from "@/components/ui/TextType";
 import { toast } from "@/components/ui/toast";
 import { errorEnvelopeSchema, userErrorMessage } from "@/lib/app-error";
+import { logger } from "@/lib/logger";
 import { type WorldCast, worldCouncilStorageKey } from "@/lib/world-cast";
 import { createInitialGameSession } from "@/lib/world-ending";
 
@@ -206,7 +207,7 @@ export function WorldCastPanel({ scenario }: WorldCastProps) {
         // 启动从开场到卡牌的严格串行演播
         transitionToPhase("setting", 0);
       } catch (cause) {
-        console.error("世界线推演请求失败", cause);
+        logger.error("cast", "世界线推演请求失败", cause);
         const message = cause instanceof Error ? cause.message : "推演失败";
         setError(message);
         toast.add({ title: "推演失败", description: message, type: "error" });

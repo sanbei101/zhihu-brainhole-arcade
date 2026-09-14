@@ -113,6 +113,7 @@ export async function judgeTurnAction(input: unknown): Promise<ActionResult<Judg
       if (!player) throw new Error("玩家角色不存在");
 
       const draft = await generateStructured({
+        label: `judge:第${round}回合`,
         instructions: JUDGE_INSTRUCTIONS,
         prompt: buildJudgePrompt({
           cast,

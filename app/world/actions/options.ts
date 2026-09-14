@@ -90,6 +90,7 @@ export async function generateOptionsAction(input: unknown): Promise<ActionResul
       }
 
       const object = await generateStructured({
+        label: `options:第${round}回合`,
         instructions: OPTIONS_INSTRUCTIONS,
         prompt: buildOptionsPrompt({
           cast,

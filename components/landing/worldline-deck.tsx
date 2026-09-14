@@ -34,7 +34,7 @@ const NAV_ITEMS: NavItem[] = [
 
 function TopBar({ activeIndex, onJump }: { activeIndex: number; onJump: (index: number) => void }) {
   return (
-    <header className="border-border bg-background/95 md:bg-background/80 absolute inset-x-0 top-0 z-40 border-b md:backdrop-blur-md">
+    <header className="border-border bg-background/95 md:bg-background/80 absolute inset-x-0 top-0 z-40 border-b md:backdrop-blur-sm">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-5 sm:px-8">
         <a
           href="#top"

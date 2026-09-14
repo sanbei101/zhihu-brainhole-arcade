@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { errorResponse, publicError } from "@/lib/app-error";
 import { generateStructured, hasLlmKey, missingLlmKeyMessage } from "@/lib/deepseek";
+import { logger } from "@/lib/logger";
 import {
   buildAgentInstructions,
   buildAgentPrompt,
@@ -126,7 +127,7 @@ export async function POST(request: Request) {
         try {
           controller.enqueue(encoder.encode(`${JSON.stringify(event)}\n`));
         } catch (error) {
-          console.error("回合事件写入失败", error);
+          logger.error("turn", "回合事件写入失败", error);
         }
       };
       let hasAgentFailure = false;
@@ -162,6 +163,7 @@ export async function POST(request: Request) {
 
           try {
             const clash = await generateStructured({
+              label: `clash:${challenger.name} vs ${defender.name}`,
               instructions: CLASH_INSTRUCTIONS,
               prompt: buildClashPrompt({
                 scenarioCrisis: cast.setting.crisis,
@@ -209,7 +211,7 @@ export async function POST(request: Request) {
               },
             });
           } catch (error) {
-            console.error(`交锋生成失败: ${challenger.name} vs ${defender.name}`, error);
+            logger.error("turn", `交锋生成失败: ${challenger.name} vs ${defender.name}`, error);
             hasAgentFailure = true;
             send({
               type: "agent-error",
@@ -227,6 +229,7 @@ export async function POST(request: Request) {
             send({ type: "agent-start", agentId: character.id });
             try {
               const reaction = await generateStructured({
+                label: `agent:${character.name}:第${round}回合`,
                 instructions: buildAgentInstructions(character),
                 prompt: buildAgentPrompt({
                   environment,
@@ -248,7 +251,7 @@ export async function POST(request: Request) {
               firstRound.push({ agentId: character.id, reaction: parsed });
               send({ type: "agent-reaction", agentId: character.id, reaction: parsed });
             } catch (error) {
-              console.error(`${character.name} Agent 回应失败`, error);
+              logger.error("turn", `${character.name} Agent 回应失败`, error);
               hasAgentFailure = true;
               send({
                 type: "agent-error",
@@ -294,7 +297,7 @@ export async function POST(request: Request) {
           close();
         },
         (error) => {
-          console.error("回合推演流异常", error);
+          logger.error("turn", "回合推演流异常", error);
           if (!request.signal.aborted) {
             send({
               type: "error",

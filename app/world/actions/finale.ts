@@ -51,6 +51,7 @@ export async function generateFinalePlanAction(input: unknown): Promise<ActionRe
       const chapterCount = finaleChapterCountFor(turns.length);
 
       const object = await generateStructured({
+        label: "finale:卷目大纲",
         instructions: finalePlanInstructions(chapterCount),
         prompt: buildFinalePlanPrompt({
           scenarioTitle,
@@ -116,6 +117,7 @@ export async function generateFinaleChapterAction(
 
       const isFinalChapter = chapter.index === chapterCount;
       const object = await generateStructured({
+        label: `finale:第${chapter.index}卷/${chapterCount}`,
         instructions: finaleChapterInstructions(chapterCount, isFinalChapter),
         prompt: buildFinaleChapterPrompt({
           scenarioTitle,

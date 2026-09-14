@@ -2,6 +2,7 @@ import type { ZodError, ZodType } from "zod";
 
 import { publicError, type PublicError } from "@/lib/app-error";
 import { hasLlmKey, missingLlmKeyMessage } from "@/lib/deepseek";
+import { logger } from "@/lib/logger";
 
 export type ActionResult<T> = { ok: true; data: T } | { ok: false; error: PublicError };
 
@@ -50,7 +51,7 @@ export async function runCouncilAction<TInput, TOutput>(options: {
     const data = await options.handler(parsed.data);
     return { ok: true, data };
   } catch (error) {
-    console.error(`${options.name}失败`, error);
+    logger.error("action", `${options.name}失败`, error);
     const msg = error instanceof Error ? error.message : `${options.name}失败,请重试`;
     return fail(publicError("UPSTREAM_FAILURE", msg, true));
   }

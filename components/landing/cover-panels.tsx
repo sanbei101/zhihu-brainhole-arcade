@@ -1,5 +1,6 @@
 import { ArrowUp, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 
 import { LiuKanshanMascot } from "@/components/landing/liu-kanshan-mascot";
 import { spritesForSkin } from "@/components/pixel/sprites";
@@ -79,7 +80,7 @@ export function CoverPanel({
         <WorldParade active={active} />
       </div>
 
-      <div className="from-background/95 via-background/75 pointer-events-none absolute inset-0 bg-gradient-to-b to-transparent" />
+      <div className="cover-scrim pointer-events-none absolute inset-0" />
 
       <div className="relative flex h-full flex-col items-center px-5 pt-14 pb-14 text-center">
         {/* 上簇:贴着大字的上沿,把大字顶到页心 */}
@@ -119,8 +120,8 @@ export function CoverPanel({
         <div className="flex w-full flex-1 flex-col items-center justify-start gap-3">
           {/* 移动端: 无缝平滑自动轮转跑马灯 */}
           <div className="relative w-full overflow-hidden sm:hidden">
-            <div className="from-background pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r to-transparent" />
-            <div className="from-background pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l to-transparent" />
+            <div className="edge-fade-l pointer-events-none absolute inset-y-0 left-0 z-10 w-8" />
+            <div className="edge-fade-r pointer-events-none absolute inset-y-0 right-0 z-10 w-8" />
             <div className="animate-badge-marquee flex w-max gap-2 py-1 motion-reduce:animate-none">
               {[...SCENARIO_THEMES, ...SCENARIO_THEMES].map((theme, loopIndex) => {
                 const themeSkin = getSkin(theme.id);
@@ -133,8 +134,8 @@ export function CoverPanel({
                     className={cn(buttonVariants({ variant: "outline", size: "xs" }), "shrink-0")}
                   >
                     <span
-                      className="size-2 rounded-full"
-                      style={{ backgroundColor: themeSkin.accent }}
+                      className="size-2 rounded-full bg-(--theme-accent)"
+                      style={{ "--theme-accent": themeSkin.accent } as CSSProperties}
                       aria-hidden="true"
                     />
                     {themeSkin.name}
@@ -156,8 +157,8 @@ export function CoverPanel({
                   className={cn(buttonVariants({ variant: "outline", size: "xs" }), "shrink-0")}
                 >
                   <span
-                    className="size-2 rounded-full"
-                    style={{ backgroundColor: themeSkin.accent }}
+                    className="size-2 rounded-full bg-(--theme-accent)"
+                    style={{ "--theme-accent": themeSkin.accent } as CSSProperties}
                     aria-hidden="true"
                   />
                   {themeSkin.name}
@@ -196,7 +197,7 @@ export function OutroPanel({
     >
       {mounted ? <ThemeStage skin={skin} active={active} /> : null}
 
-      <div className="from-background/95 via-background/75 pointer-events-none absolute inset-0 bg-gradient-to-b to-transparent" />
+      <div className="cover-scrim pointer-events-none absolute inset-0" />
 
       <div className="relative flex h-full flex-col items-center justify-center px-5 text-center">
         <Badge variant="outline" className="tracking-[0.2em]">
@@ -225,7 +226,7 @@ export function OutroPanel({
         </div>
       </div>
 
-      <footer className="border-border bg-background/70 absolute inset-x-0 bottom-0 border-t backdrop-blur-md">
+      <footer className="border-border bg-background/70 absolute inset-x-0 bottom-0 border-t backdrop-blur-sm">
         <div className="text-muted-foreground mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4 text-[11px] sm:flex-row sm:items-center sm:justify-between sm:px-8">
           <span className="text-foreground font-semibold">知乎脑洞游乐园 / WORLDLINE ARCADE</span>
           <span>题目来自知乎公开问题,推演内容由 AI 生成</span>

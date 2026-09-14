@@ -40,7 +40,7 @@ function TopicCard({ topic, order }: { topic: ScenarioTopic; order: number }) {
     >
       <SpotlightCard
         spotlightColor="rgba(255, 255, 255, 0.12)"
-        className="bg-card/95 md:bg-card/85 hover:border-primary/50 h-full gap-0 p-0 shadow-lg transition-all md:backdrop-blur-md"
+        className="bg-card/95 md:bg-card/85 hover:border-primary/50 h-full gap-0 p-0 shadow-sm transition-all md:backdrop-blur-sm"
       >
         <CardHeader className="gap-2 p-4 sm:p-5">
           <div className="text-muted-foreground flex items-center gap-1.5 font-mono text-[10px]">
@@ -105,12 +105,7 @@ export function ThemePanel({ theme, index, total, active, mounted }: ThemePanelP
       ) : null}
 
       {/* 顶部压深,保证标题在任何皮肤下都读得清 */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `linear-gradient(to bottom, ${skin.bg}f2, ${skin.bg}80 24%, ${skin.bg}00 48%)`,
-        }}
-      />
+      <div className="stage-scrim absolute inset-0" />
 
       {/* 前:标题 + 浮动的副本层,两者都压在演出之上 */}
       <div className="relative flex h-full flex-col pt-14 sm:pt-16">

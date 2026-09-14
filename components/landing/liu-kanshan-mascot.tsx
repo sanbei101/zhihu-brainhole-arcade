@@ -55,7 +55,7 @@ export function LiuKanshanMascot({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative flex flex-col sm:flex-row items-center gap-3 rounded-2xl border border-primary/20 bg-card/60 p-3 sm:p-4 shadow-lg backdrop-blur-md transition-all hover:border-primary/40",
+        "relative flex flex-col sm:flex-row items-center gap-3 rounded-2xl border border-primary/20 bg-card/60 p-3 sm:p-4 shadow-sm backdrop-blur-sm transition-all hover:border-primary/40",
         className,
       )}
     >
@@ -106,7 +106,7 @@ export function LiuKanshanMascot({ className }: { className?: string }) {
                 href="/api/auth/zhihu/login"
                 className={cn(
                   buttonVariants({ variant: "default", size: "sm" }),
-                  "h-7 text-xs gap-1.5 px-3 bg-[#0066ff] hover:bg-[#0052d4] text-white shadow-xs font-medium",
+                  "h-7 text-xs gap-1.5 px-3 bg-zhihu hover:bg-zhihu-dark text-white shadow-xs font-medium",
                 )}
               >
                 <img src="/zhihu.svg" alt="知乎" className="size-3.5 brightness-0 invert" />

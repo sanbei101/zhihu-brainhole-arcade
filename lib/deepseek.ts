@@ -2,6 +2,8 @@ import { createDeepSeek } from "@ai-sdk/deepseek";
 import { type FlexibleSchema, NoObjectGeneratedError, Output, generateText } from "ai";
 import { jsonrepair } from "jsonrepair";
 
+import { logAiError, logAiRequest, logAiResponse, logger } from "@/lib/logger";
+
 globalThis.AI_SDK_LOG_WARNINGS = false;
 
 /**
@@ -92,7 +94,7 @@ let roleRepairLogged = false;
 function noteRoleRepair() {
   if (roleRepairLogged) return;
   roleRepairLogged = true;
-  console.warn(JSON.stringify({ event: "relay.role_repaired" }));
+  logger.warn("relay", "中转站空 role 已修复为 assistant", { event: "relay.role_repaired" });
 }
 
 export const relayTolerantFetch: typeof fetch = async (input, init) => {
@@ -270,6 +272,8 @@ export function salvageStructuredOutput<T>(
 }
 
 interface StructuredCallOptions<T> {
+  /** 日志标签,如 "agent-reaction:诸葛亮" / "judge:第3回合",用于捞日志时定位 */
+  label?: string;
   instructions: string;
   prompt: string;
   schema: FlexibleSchema<T>;
@@ -420,7 +424,8 @@ function logStructuredFailure(error: unknown, attempt: number): void {
     cause instanceof Error ? getSyntaxErrorPointer(rawText, cause.message) : null;
 
   // 3. 完整打印
-  console.error(
+  logger.error(
+    "ai",
     [
       `\n${Color.red}${Color.bold}╔══════════════════════════════ [AI 结构化输出失败] ══════════════════════════════${Color.reset}`,
       `${Color.red}║${Color.reset} ${Color.bold}尝试轮次:${Color.reset} 第 ${attempt} 次 ${attempt === 1 ? `${Color.yellow}(准备重试)` : `${Color.red}(最终失败)`}${Color.reset}`,
@@ -442,10 +447,13 @@ function logStructuredFailure(error: unknown, attempt: number): void {
 }
 /** 结构化对象生成(generateText + Output.object),返回按 schema 解析后的对象。 */
 export async function generateStructured<T>(options: StructuredCallOptions<T>): Promise<T> {
+  const label = options.label ?? "structured";
+  const instructions = `${options.instructions}${JSON_ONLY_INSTRUCTION}`;
+  const { model: modelId } = llmConfig();
   const call = () =>
     generateText({
       model: llmModel(),
-      instructions: `${options.instructions}${JSON_ONLY_INSTRUCTION}`,
+      instructions,
       prompt: options.prompt,
       output: Output.object({ schema: options.schema }),
       providerOptions: llmProviderOptions(),
@@ -454,22 +462,49 @@ export async function generateStructured<T>(options: StructuredCallOptions<T>): 
       abortSignal: options.abortSignal,
     });
 
+  // 请求全量日志:instructions + prompt 完整打印,方便复现排查
+  logAiRequest(label, {
+    model: modelId,
+    temperature: options.temperature,
+    maxOutputTokens: options.maxOutputTokens,
+    instructions,
+    prompt: options.prompt,
+  });
+
+  const timed = async () => {
+    const startedAt = Date.now();
+    try {
+      const result = await call();
+      logAiResponse(label, Date.now() - startedAt, result.output);
+      return result.output;
+    } catch (error) {
+      logAiError(label, `调用异常 (${Date.now() - startedAt}ms)`, error);
+      throw error;
+    }
+  };
+
   try {
-    return (await call()).output;
+    return await timed();
   } catch (error) {
     // 1. 先从原始文本里抢救
     const salvaged = salvageStructuredOutput(error, options.schema);
-    if (salvaged !== undefined) return salvaged;
+    if (salvaged !== undefined) {
+      logger.info("ai", `[${label}] 抢救成功:从异常文本中提取出合法 JSON`, salvaged);
+      return salvaged;
+    }
 
     if (options.abortSignal?.aborted || !NoObjectGeneratedError.isInstance(error)) throw error;
     logStructuredFailure(error, 1);
 
     // 2. 再给模型一次机会
     try {
-      return (await call()).output;
+      return await timed();
     } catch (retryError) {
       const retrySalvaged = salvageStructuredOutput(retryError, options.schema);
-      if (retrySalvaged !== undefined) return retrySalvaged;
+      if (retrySalvaged !== undefined) {
+        logger.info("ai", `[${label}] 重试后抢救成功`, retrySalvaged);
+        return retrySalvaged;
+      }
       logStructuredFailure(retryError, 2);
       throw retryError;
     }

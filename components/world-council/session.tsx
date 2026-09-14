@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { WorldCouncil } from "@/components/world-council/index";
+import { logger } from "@/lib/logger";
 import type { ScenarioSkin } from "@/lib/scenario-skin";
 import { worldCouncilStorageKey } from "@/lib/world-cast";
 import { worldGameSessionSchema, type WorldGameSession } from "@/lib/world-ending";
@@ -31,7 +32,7 @@ export function WorldCouncilSession({ worldId, skin }: { worldId: string; skin: 
       const parsed = worldGameSessionSchema.safeParse(raw);
       setSession(parsed.success && parsed.data.scenarioId === worldId ? parsed.data : null);
     } catch (error) {
-      console.error("对局会话恢复失败", error);
+      logger.error("council", "对局会话恢复失败", error);
       sessionStorage.removeItem(key);
       setSession(null);
     }

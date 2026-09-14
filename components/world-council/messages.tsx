@@ -342,7 +342,7 @@ export function DirectorNarrationMessage({
         </div>
 
         {mutation ? (
-          <div className="my-2.5 max-w-4xl overflow-hidden rounded-lg border border-amber-500/40 bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent p-3.5 dark:from-amber-950/40 dark:via-amber-950/20">
+          <div className="my-2.5 max-w-4xl overflow-hidden rounded-lg border border-amber-500/40 bg-amber-500/10 p-3.5 dark:bg-amber-950/40">
             <div className="flex items-center justify-between gap-2 pb-1.5">
               <div className="flex items-center gap-1.5">
                 <Sparkles className="size-3.5 animate-pulse text-amber-500" />

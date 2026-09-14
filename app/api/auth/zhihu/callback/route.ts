@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
+import { logger } from "@/lib/logger";
 import {
   ZHIHU_OAUTH_STATE_COOKIE,
   ZHIHU_VOTED_COOKIE,
@@ -29,7 +30,7 @@ export async function GET(request: NextRequest) {
   }
 
   if (!state || !savedState || state !== savedState) {
-    console.error("知乎 OAuth state 不匹配或已过期", { state, savedState });
+    logger.error("auth", "知乎 OAuth state 不匹配或已过期", { state, savedState });
     homeUrl.searchParams.set("error", "state_mismatch");
     return NextResponse.redirect(homeUrl);
   }
@@ -60,7 +61,7 @@ export async function GET(request: NextRequest) {
 
     return response;
   } catch (err) {
-    console.error("知乎 OAuth 回调处理异常", err);
+    logger.error("auth", "知乎 OAuth 回调处理异常", err);
     homeUrl.searchParams.set("error", "token_exchange_failed");
     return NextResponse.redirect(homeUrl);
   }

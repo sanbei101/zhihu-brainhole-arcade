@@ -27,6 +27,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/components/ui/toast";
 import { WorldEventPanel } from "@/components/world-event";
 import { userErrorMessage } from "@/lib/app-error";
+import { logger } from "@/lib/logger";
 import { worldCouncilStorageKey } from "@/lib/world-cast";
 import {
   assembleFinaleArticle,
@@ -176,7 +177,7 @@ export function WorldFinaleView({ worldId }: { worldId: string }) {
         setChapters(cachedProgress.chapters);
       }
     } catch (err) {
-      console.error("终章存档恢复失败", err);
+      logger.error("finale", "终章存档恢复失败", err);
       setSession(null);
     }
   }, [worldId]);
@@ -197,7 +198,7 @@ export function WorldFinaleView({ worldId }: { worldId: string }) {
         JSON.stringify({ plan: nextPlan, chapters: nextChapters } satisfies FinaleProgress),
       );
     } catch (err) {
-      console.error("终章断点写入失败", err);
+      logger.error("finale", "终章断点写入失败", err);
     }
   }
 
@@ -239,7 +240,7 @@ export function WorldFinaleView({ worldId }: { worldId: string }) {
       setWritingLabel("卷目大纲与谢邀自述已就绪，等待展开第一片段");
       return activePlan;
     } catch (err) {
-      console.error("卷目大纲生成异常", err);
+      logger.error("finale", "卷目大纲生成异常", err);
       setError("卷目大纲生成失败，请重试");
       return null;
     } finally {
@@ -319,7 +320,7 @@ export function WorldFinaleView({ worldId }: { worldId: string }) {
         try {
           sessionStorage.setItem(finaleCacheKey(worldId), JSON.stringify(assembled));
         } catch (err) {
-          console.error("终章缓存写入失败", err);
+          logger.error("finale", "终章缓存写入失败", err);
         }
         toast.add({
           title: "终章全文完结",
@@ -335,7 +336,7 @@ export function WorldFinaleView({ worldId }: { worldId: string }) {
         });
       }
     } catch (err) {
-      console.error("终章片段生成异常", err);
+      logger.error("finale", "终章片段生成异常", err);
       setError("终章片段生成失败，请重试");
     } finally {
       runningRef.current = false;
@@ -558,7 +559,7 @@ export function WorldFinaleView({ worldId }: { worldId: string }) {
           <div className="space-y-2">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center gap-2">
-                <span className="flex items-center gap-1.5 rounded-full bg-[#0066ff]/10 px-2.5 py-1 font-mono text-[11px] font-medium text-[#0066ff] dark:bg-[#0066ff]/20 dark:text-[#3b82f6]">
+                <span className="bg-zhihu/10 text-zhihu dark:bg-zhihu/20 flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[11px] font-medium dark:text-blue-400">
                   <img src="/zhihu.svg" alt="知乎" className="size-3.5 rounded-sm" />
                   知乎脑洞推演专栏
                 </span>
@@ -585,7 +586,7 @@ export function WorldFinaleView({ worldId }: { worldId: string }) {
           {player ? (
             <div className="bg-muted/40 border-border/70 flex flex-wrap items-center justify-between gap-3 rounded-xl border p-3.5 sm:px-4">
               <div className="flex items-center gap-3">
-                <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#0066ff] font-semibold text-white shadow-sm">
+                <div className="bg-zhihu flex size-10 shrink-0 items-center justify-center rounded-full font-semibold text-white shadow-sm">
                   {player.name.slice(0, 1)}
                 </div>
                 <div>

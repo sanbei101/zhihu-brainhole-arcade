@@ -9,6 +9,7 @@ import type { AgentStatus } from "@/components/world-council/seats-panel";
 import type { StageBeat, StagePhase } from "@/components/world-council/speech-stage";
 import { collectWorldTurn } from "@/components/world-council/turn-stream";
 import { userErrorMessage } from "@/lib/app-error";
+import { logger } from "@/lib/logger";
 import { type WorldCast, worldCouncilStorageKey } from "@/lib/world-cast";
 import {
   MIN_ROUND_TO_CLOSE,
@@ -381,7 +382,7 @@ export function useCouncilSession({ initial, worldId }: UseCouncilSessionOptions
     try {
       sessionStorage.setItem(storageKey, JSON.stringify(session));
     } catch (error) {
-      console.error("对局存档写入失败", error);
+      logger.error("council", "对局存档写入失败", error);
     }
   }, [
     cast,
@@ -443,7 +444,7 @@ export function useCouncilSession({ initial, worldId }: UseCouncilSessionOptions
       })
       .catch((error) => {
         if (cancelled) return;
-        console.error("选项生成请求失败", error);
+        logger.error("council", "选项生成请求失败", error);
         const message = "选项生成失败,请重试";
         setOptionsError(message);
         toast.add({ title: "选项生成失败", description: message, type: "error" });
@@ -570,7 +571,7 @@ export function useCouncilSession({ initial, worldId }: UseCouncilSessionOptions
               }
             })
             .catch((err) => {
-              console.warn("下一轮选项后台预取异常", err);
+              logger.warn("council", "下一轮选项后台预取异常", err);
               if (prefetchedOptionsRoundRef.current === nextRound) {
                 prefetchedOptionsRoundRef.current = null;
               }
@@ -581,7 +582,7 @@ export function useCouncilSession({ initial, worldId }: UseCouncilSessionOptions
             });
         }
       } catch (error) {
-        console.error("冲突裁决请求失败", error);
+        logger.error("council", "冲突裁决请求失败", error);
         const message = "冲突裁决失败,请重试";
         setJudgeError(message);
         toast.add({ title: "冲突裁决失败", description: message, type: "error" });
@@ -666,7 +667,7 @@ export function useCouncilSession({ initial, worldId }: UseCouncilSessionOptions
           applyEvent,
         );
       } catch (error) {
-        console.error("回合响应流失败", error);
+        logger.error("council", "回合响应流失败", error);
         const message = error instanceof Error ? error.message : "回合推演失败";
         setTurnError(message);
         toast.add({ title: "回合推演失败", description: message, type: "error" });

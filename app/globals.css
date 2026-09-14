@@ -205,6 +205,49 @@
   }
 }
 
+@theme {
+  --color-zhihu: #0066ff;
+  --color-zhihu-dark: #0052d4;
+}
+
+@utility stage-sky {
+  background-image: linear-gradient(to bottom, var(--skin-bg), var(--skin-raised));
+}
+
+@utility stage-horizon {
+  background-image: radial-gradient(
+    72% 100% at 50% 100%,
+    var(--skin-accent-soft, var(--skin-accent)),
+    transparent 70%
+  );
+}
+
+@utility stage-scrim {
+  background-image: linear-gradient(
+    to bottom,
+    var(--skin-bg-strong, var(--skin-bg)),
+    var(--skin-bg-soft, transparent) 24%,
+    transparent 48%
+  );
+}
+
+@utility cover-scrim {
+  background-image: linear-gradient(
+    to bottom,
+    var(--background),
+    color-mix(in oklab, var(--background) 75%, transparent),
+    transparent
+  );
+}
+
+@utility edge-fade-l {
+  background-image: linear-gradient(to right, var(--background), transparent);
+}
+
+@utility edge-fade-r {
+  background-image: linear-gradient(to left, var(--background), transparent);
+}
+
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);

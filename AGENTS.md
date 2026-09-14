@@ -36,6 +36,11 @@
 - 第三方纯 CSS 包(`tw-animate-css` 等)在其自身 `exports` 未暴露 CSS 时,用 `node_modules` 相对路径导入。
 - 全局样式和自定义主题变量应放在 `app/globals.css` 中,使用 `@theme` 和 `@import "tailwindcss";` 指令。
 
+### 日志规范
+
+- 禁止直接使用 `console.*`,统一走 `lib/logger.ts` 的 `logger.debug/info/warn/error(tag, message, data)`。
+- 所有 AI 调用收敛在 `lib/deepseek.ts` 的 `generateStructured`,调用方必须传 `label`(如 `agent:诸葛亮:第3回合`),请求(instructions + prompt)与响应(output)全量打印、不截断
+
 ### 工具链约束
 
 - **仅限官方 Next 工具链**:本项目运行在 Next.js 上,而非 Vite/Webpack。请勿建议安装 Vite 插件或 Webpack 加载器。

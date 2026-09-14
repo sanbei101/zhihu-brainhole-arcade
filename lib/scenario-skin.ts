@@ -204,6 +204,12 @@ export function isDarkSkin(skin: ScenarioSkin): boolean {
 /** 把皮肤转成可直接挂到容器上的 shadcn 语义变量覆盖 */
 export function skinStyleVars(skin: ScenarioSkin): CSSProperties {
   return {
+    "--skin-bg": skin.bg,
+    "--skin-raised": skin.raised,
+    "--skin-accent": skin.accent,
+    "--skin-accent-soft": `${skin.accent}22`,
+    "--skin-bg-strong": `${skin.bg}f2`,
+    "--skin-bg-soft": `${skin.bg}80`,
     "--background": skin.bg,
     "--foreground": skin.ink,
     "--card": skin.surface,

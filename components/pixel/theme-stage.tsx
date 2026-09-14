@@ -88,10 +88,7 @@ export function StageBackdrop({ skin }: { skin: ScenarioSkin }) {
       aria-hidden="true"
     >
       {/* 天幕:顶部压深,靠近地平线提亮 */}
-      <div
-        className="absolute inset-0"
-        style={{ backgroundImage: `linear-gradient(to bottom, ${skin.bg}, ${skin.raised})` }}
-      />
+      <div className="stage-sky absolute inset-0" />
 
       {/* 星尘 */}
       <svg className="absolute inset-0 size-full" shapeRendering="crispEdges">
@@ -107,12 +104,7 @@ export function StageBackdrop({ skin }: { skin: ScenarioSkin }) {
       </svg>
 
       {/* 地平线光晕 */}
-      <div
-        className={`absolute inset-x-0 ${GROUND_LINE} h-2/3`}
-        style={{
-          backgroundImage: `radial-gradient(72% 100% at 50% 100%, ${skin.accent}22, transparent 70%)`,
-        }}
-      />
+      <div className={`stage-horizon absolute inset-x-0 ${GROUND_LINE} h-2/3`} />
 
       {/* 远山剪影 */}
       <svg

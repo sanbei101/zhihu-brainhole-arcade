@@ -46,7 +46,7 @@ export function ZhihuVoteButton({ className }: { className?: string }) {
       href="/api/auth/zhihu/login"
       className={cn(
         buttonVariants({ variant: "outline", size: "sm" }),
-        "border-[#0066ff]/40 bg-[#0066ff]/5 text-[#0066ff] hover:bg-[#0066ff]/10 hover:border-[#0066ff]/60 h-8 gap-1.5 px-3 text-xs font-medium transition-all",
+        "border-zhihu/40 bg-zhihu/5 text-zhihu hover:bg-zhihu/10 hover:border-zhihu/60 h-8 gap-1.5 px-3 text-xs font-medium transition-all",
         className,
       )}
       title="通过知乎官方 OAuth 授权，为本作品在黑客松中计入一次人气奖投票"

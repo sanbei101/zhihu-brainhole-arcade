@@ -77,7 +77,7 @@ export default async function WorldPage({ params }: WorldPageProps) {
       style={skinStyleVars(skin)}
       className={`bg-background text-foreground min-h-screen ${isDarkSkin(skin) ? "dark" : ""}`}
     >
-      <header className="border-border bg-background/80 sticky top-0 z-40 border-b backdrop-blur-md">
+      <header className="border-border bg-background/80 sticky top-0 z-40 border-b backdrop-blur-sm">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-5 px-5 sm:px-8">
           <Link href="/" className="flex items-center gap-3" aria-label="返回知乎脑洞游乐园首页">
             <img src="/zhihu.svg" alt="知乎脑洞游乐园" className="size-9 rounded-lg" />
