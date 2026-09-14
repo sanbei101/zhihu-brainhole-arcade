@@ -1,8 +1,14 @@
 import { createDeepSeek } from "@ai-sdk/deepseek";
-import { type FlexibleSchema, NoObjectGeneratedError, Output, generateText } from "ai";
+import {
+  type FlexibleSchema,
+  NoObjectGeneratedError,
+  Output,
+  TypeValidationError,
+  generateText,
+} from "ai";
 import { jsonrepair } from "jsonrepair";
 
-import { logAiError, logAiRequest, logAiResponse, logger } from "@/lib/logger";
+import { logAiError, logAiResponse, logger } from "@/lib/logger";
 
 globalThis.AI_SDK_LOG_WARNINGS = false;
 
@@ -94,7 +100,7 @@ let roleRepairLogged = false;
 function noteRoleRepair() {
   if (roleRepairLogged) return;
   roleRepairLogged = true;
-  logger.warn("relay", "中转站空 role 已修复为 assistant", { event: "relay.role_repaired" });
+  logger.debug("relay", "中转站空 role 已修复为 assistant", { event: "relay.role_repaired" });
 }
 
 export const relayTolerantFetch: typeof fetch = async (input, init) => {
@@ -282,174 +288,10 @@ interface StructuredCallOptions<T> {
   abortSignal?: AbortSignal;
 }
 
-const Color = {
-  reset: "\x1b[0m",
-  bold: "\x1b[1m",
-  dim: "\x1b[2m",
-  red: "\x1b[31m",
-  green: "\x1b[32m",
-  yellow: "\x1b[33m",
-  cyan: "\x1b[36m",
-  magenta: "\x1b[35m",
-  gray: "\x1b[90m",
-} as const;
-
-interface ZodIssueLike {
-  path?: Array<string | number>;
-  message: string;
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null;
-}
-
-function extractZodIssues(error: unknown): ZodIssueLike[] | undefined {
-  if (!isRecord(error)) return undefined;
-
-  if (Array.isArray(error.issues)) {
-    return error.issues.filter(
-      (item): item is ZodIssueLike => isRecord(item) && typeof item.message === "string",
-    );
-  }
-
-  if (isRecord(error.cause) && Array.isArray(error.cause.issues)) {
-    return error.cause.issues.filter(
-      (item): item is ZodIssueLike => isRecord(item) && typeof item.message === "string",
-    );
-  }
-
-  return undefined;
-}
-
-function getSyntaxErrorPointer(rawText: string, message: string): string | null {
-  const match = message.match(/position\s+(\d+)/i);
-  if (!match) return null;
-
-  const pos = Number.parseInt(match[1], 10);
-  if (Number.isNaN(pos) || pos < 0 || pos > rawText.length) return null;
-
-  const start = Math.max(0, pos - 35);
-  const end = Math.min(rawText.length, pos + 35);
-  const snippet = rawText.slice(start, end).replace(/[\r\n]+/g, " ");
-  const offset = pos - start;
-
-  return [
-    `${Color.gray}...${snippet}...${Color.reset}`,
-    `${" ".repeat(offset + 3)}${Color.red}${Color.bold}▲ [语法错误发生在此字符附近 (Index: ${pos})]${Color.reset}`,
-  ].join("\n");
-}
-
-/** 类型收窄提取失败原因 */
-function getErrorMessage(error: unknown): string {
-  if (!error) return "未知错误";
-
-  const issues = extractZodIssues(error);
-  if (issues && issues.length > 0) {
-    const firstIssue = issues[0];
-    const path = firstIssue.path && firstIssue.path.length > 0 ? firstIssue.path.join(".") : "root";
-    return `[Zod 校验未通过] 字段 \`${path}\`: ${firstIssue.message}`;
-  }
-
-  if (error instanceof Error) {
-    return error.message;
-  }
-
-  if (isRecord(error) && typeof error.message === "string") {
-    return error.message;
-  }
-
-  // 基础类型安全转换
-  if (typeof error === "string") return error;
-  if (typeof error === "number" || typeof error === "boolean" || typeof error === "bigint") {
-    return String(error);
-  }
-
-  // 兜底:对象等复杂类型通过 JSON 序列化,避免打印出 [object Object]
-  try {
-    return JSON.stringify(error);
-  } catch {
-    return "[无法序列化的错误]";
-  }
-}
-/** 给格式化后的 JSON 字符串着色 */
-function colorizeJson(jsonStr: string): string {
-  return jsonStr.replace(
-    /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g,
-    (match) => {
-      if (match.startsWith('"')) {
-        if (match.endsWith(":")) {
-          return `${Color.cyan}${match.slice(0, -1)}${Color.reset}:`;
-        }
-        return `${Color.green}${match}${Color.reset}`;
-      }
-      if (match === "true" || match === "false") {
-        return `${Color.magenta}${match}${Color.reset}`;
-      }
-      if (match === "null") {
-        return `${Color.gray}${match}${Color.reset}`;
-      }
-      return `${Color.yellow}${match}${Color.reset}`;
-    },
-  );
-}
-
-/** 美化打印结构化失败信息 */
-function logStructuredFailure(error: unknown, attempt: number): void {
-  if (!NoObjectGeneratedError.isInstance(error)) return;
-
-  const rawText = error.text ?? "";
-  const cause: unknown = error.cause;
-  const errorReason = getErrorMessage(cause);
-
-  // 1. 尝试完整解析与排版
-  let prettyJson = "";
-  let isRepaired = false;
-
-  try {
-    const obj: unknown = JSON.parse(rawText);
-    prettyJson = colorizeJson(JSON.stringify(obj, null, 2));
-  } catch {
-    try {
-      const repaired = jsonrepair(rawText);
-      const obj: unknown = JSON.parse(repaired);
-      prettyJson = colorizeJson(JSON.stringify(obj, null, 2));
-      isRepaired = true;
-    } catch {
-      prettyJson = rawText;
-    }
-  }
-
-  // 2. 语法错误指针推导
-  const syntaxPointer =
-    cause instanceof Error ? getSyntaxErrorPointer(rawText, cause.message) : null;
-
-  // 3. 完整打印
-  logger.error(
-    "ai",
-    [
-      `\n${Color.red}${Color.bold}╔══════════════════════════════ [AI 结构化输出失败] ══════════════════════════════${Color.reset}`,
-      `${Color.red}║${Color.reset} ${Color.bold}尝试轮次:${Color.reset} 第 ${attempt} 次 ${attempt === 1 ? `${Color.yellow}(准备重试)` : `${Color.red}(最终失败)`}${Color.reset}`,
-      `${Color.red}║${Color.reset} ${Color.bold}失败原因:${Color.reset} ${Color.yellow}${errorReason}${Color.reset}`,
-      `${Color.red}║${Color.reset} ${Color.bold}字符总数:${Color.reset} ${rawText.length} 字符`,
-      syntaxPointer
-        ? `${Color.red}╟────────────────────────────── 语法错误精准定位 ──────────────────────────────${Color.reset}\n${syntaxPointer}`
-        : null,
-      `${Color.red}╟────────────────────────────── 模型输出完整 JSON ──────────────────────────────${Color.reset}`,
-      isRepaired
-        ? `${Color.gray}/* (注意: 原始文本存在轻微语法瑕疵,已使用 jsonrepair 自动还原为易读格式) */${Color.reset}`
-        : null,
-      prettyJson,
-      `${Color.red}╚══════════════════════════════════════════════════════════════════════════════════${Color.reset}\n`,
-    ]
-      .filter((line): line is string => typeof line === "string")
-      .join("\n"),
-  );
-}
 /** 结构化对象生成(generateText + Output.object),返回按 schema 解析后的对象。 */
 export async function generateStructured<T>(options: StructuredCallOptions<T>): Promise<T> {
   const label = options.label ?? "structured";
   const instructions = `${options.instructions}${JSON_ONLY_INSTRUCTION}`;
-  const { model: modelId } = llmConfig();
   const call = () =>
     generateText({
       model: llmModel(),
@@ -462,15 +304,6 @@ export async function generateStructured<T>(options: StructuredCallOptions<T>): 
       abortSignal: options.abortSignal,
     });
 
-  // 请求全量日志:instructions + prompt 完整打印,方便复现排查
-  logAiRequest(label, {
-    model: modelId,
-    temperature: options.temperature,
-    maxOutputTokens: options.maxOutputTokens,
-    instructions,
-    prompt: options.prompt,
-  });
-
   const timed = async () => {
     const startedAt = Date.now();
     try {
@@ -478,7 +311,7 @@ export async function generateStructured<T>(options: StructuredCallOptions<T>): 
       logAiResponse(label, Date.now() - startedAt, result.output);
       return result.output;
     } catch (error) {
-      logAiError(label, `调用异常 (${Date.now() - startedAt}ms)`, error);
+      logAiError(label, Date.now() - startedAt, error);
       throw error;
     }
   };
@@ -489,12 +322,22 @@ export async function generateStructured<T>(options: StructuredCallOptions<T>): 
     // 1. 先从原始文本里抢救
     const salvaged = salvageStructuredOutput(error, options.schema);
     if (salvaged !== undefined) {
-      logger.info("ai", `[${label}] 抢救成功:从异常文本中提取出合法 JSON`, salvaged);
+      logger.debug("ai", "结构化输出抢救成功", { label, output: salvaged });
       return salvaged;
     }
 
     if (options.abortSignal?.aborted || !NoObjectGeneratedError.isInstance(error)) throw error;
-    logStructuredFailure(error, 1);
+    logger.error("ai", "结构化输出失败", {
+      label,
+      attempt: 1,
+      cause: TypeValidationError.isInstance(error.cause)
+        ? {
+            name: error.cause.name,
+            value: error.cause.value,
+            cause: error.cause.cause,
+          }
+        : error.cause,
+    });
 
     // 2. 再给模型一次机会
     try {
@@ -502,10 +345,25 @@ export async function generateStructured<T>(options: StructuredCallOptions<T>): 
     } catch (retryError) {
       const retrySalvaged = salvageStructuredOutput(retryError, options.schema);
       if (retrySalvaged !== undefined) {
-        logger.info("ai", `[${label}] 重试后抢救成功`, retrySalvaged);
+        logger.debug("ai", "重试后结构化输出抢救成功", {
+          label,
+          output: retrySalvaged,
+        });
         return retrySalvaged;
       }
-      logStructuredFailure(retryError, 2);
+      if (NoObjectGeneratedError.isInstance(retryError)) {
+        logger.error("ai", "结构化输出失败", {
+          label,
+          attempt: 2,
+          cause: TypeValidationError.isInstance(retryError.cause)
+            ? {
+                name: retryError.cause.name,
+                value: retryError.cause.value,
+                cause: retryError.cause.cause,
+              }
+            : retryError.cause,
+        });
+      }
       throw retryError;
     }
   }
