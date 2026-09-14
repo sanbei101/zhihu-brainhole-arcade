@@ -1,9 +1,13 @@
 import { WorldFinaleView } from "@/components/world-finale";
-import { findScenario } from "@/lib/scenario-library";
+import { SCENARIO_THEMES, findScenario } from "@/lib/scenario-library";
 import { getSkin, isDarkSkin, skinStyleVars } from "@/lib/scenario-skin";
 
 interface FinalePageProps {
   params: Promise<{ id: string }>;
+}
+
+export function generateStaticParams() {
+  return SCENARIO_THEMES.flatMap((theme) => theme.scenarios.map(({ id }) => ({ id })));
 }
 
 export default async function FinalePage({ params }: FinalePageProps) {

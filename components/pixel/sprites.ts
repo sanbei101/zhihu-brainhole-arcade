@@ -83,11 +83,22 @@ function paletteOf(skin: ScenarioSkin): Record<string, string> {
   return { o: skin.pixel.o, x: skin.pixel.x, y: skin.pixel.y, e: skin.pixel.e };
 }
 
+const SPRITES_CACHE = new Map<string, SpriteDef[]>();
+
+export function spritesForSkin(skin: ScenarioSkin): SpriteDef[] {
+  const cached = SPRITES_CACHE.get(skin.id);
+  if (cached) return cached;
+
+  const sprites = buildSpritesForSkin(skin);
+  SPRITES_CACHE.set(skin.id, sprites);
+  return sprites;
+}
+
 /**
  * 每个主题一组像素动图,新增主题只需要在下面补一个 case。
  * 首页分区和议事厅都会自动带上对应的场景。
  */
-export function spritesForSkin(skin: ScenarioSkin): SpriteDef[] {
+function buildSpritesForSkin(skin: ScenarioSkin): SpriteDef[] {
   const palette = paletteOf(skin);
 
   switch (skin.id) {

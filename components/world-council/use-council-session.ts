@@ -94,6 +94,8 @@ export function useCouncilSession({ initial, worldId }: UseCouncilSessionOptions
   const [lastCrisisPenalty, setLastCrisisPenalty] = useState<AppliedDeltas | null>(
     initial.turns.length ? initial.turns[initial.turns.length - 1].crisisPenalty : null,
   );
+  const roundRef = useRef(initial.round);
+  roundRef.current = round;
 
   // 5. 舞台演出队列与调度
   const [playIndex, setPlayIndex] = useState(0);
@@ -112,6 +114,7 @@ export function useCouncilSession({ initial, worldId }: UseCouncilSessionOptions
   const pendingVerdictRef = useRef<JudgeResult | null>(null);
   const [hasPendingVerdict, setHasPendingVerdict] = useState(false);
   const prefetchedOptionsRef = useRef<RoundOptions | null>(null);
+  const prefetchedOptionsRoundRef = useRef<number | null>(null);
 
   const ended = ending !== null;
   const currentTurnSettled = turns.some((turn) => turn.round === round);
@@ -408,6 +411,12 @@ export function useCouncilSession({ initial, worldId }: UseCouncilSessionOptions
       return;
     }
 
+    // 已有后台预取时等待它,避免快速进入下一回合时重复调用模型
+    if (prefetchedOptionsRoundRef.current === round) {
+      setIsGeneratingOptions(true);
+      return;
+    }
+
     let cancelled = false;
     setIsGeneratingOptions(true);
     setOptionsError("");
@@ -509,6 +518,8 @@ export function useCouncilSession({ initial, worldId }: UseCouncilSessionOptions
 
         // 后台静默预取下轮选项
         if (!result.data.isEnded) {
+          const nextRound = round + 1;
+          prefetchedOptionsRoundRef.current = nextRound;
           const nextTurns = [
             ...turns,
             {
@@ -542,10 +553,31 @@ export function useCouncilSession({ initial, worldId }: UseCouncilSessionOptions
             ultimatum: result.data.ultimatum,
           })
             .then((preResult) => {
-              if (preResult.ok) prefetchedOptionsRef.current = preResult.data;
+              if (prefetchedOptionsRoundRef.current === nextRound) {
+                prefetchedOptionsRoundRef.current = null;
+              }
+              if (!preResult.ok) {
+                if (roundRef.current === nextRound) {
+                  setIsGeneratingOptions(false);
+                  setOptionsAttempt((attempt) => attempt + 1);
+                }
+                return;
+              }
+              prefetchedOptionsRef.current = preResult.data;
+              if (roundRef.current === nextRound) {
+                setOptions(preResult.data);
+                setIsGeneratingOptions(false);
+              }
             })
             .catch((err) => {
               console.warn("下一轮选项后台预取异常", err);
+              if (prefetchedOptionsRoundRef.current === nextRound) {
+                prefetchedOptionsRoundRef.current = null;
+              }
+              if (roundRef.current === nextRound) {
+                setIsGeneratingOptions(false);
+                setOptionsAttempt((attempt) => attempt + 1);
+              }
             });
         }
       } catch (error) {

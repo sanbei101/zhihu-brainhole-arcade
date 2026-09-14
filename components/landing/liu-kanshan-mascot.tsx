@@ -5,24 +5,25 @@ import { useEffect, useState } from "react";
 
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { getZhihuVoteStatus } from "@/lib/zhihu-status";
 
 const KANSHAN_ACTIONS = [
-  { id: "greeting", file: "/liukanshan/greeting.gif", name: "打招呼", hint: "" },
+  { id: "greeting", file: "/liukanshan/greeting.webp", name: "打招呼", hint: "" },
   {
     id: "coding",
-    file: "/liukanshan/coding.gif",
+    file: "/liukanshan/coding.webp",
     name: "狂敲代码",
     hint: "正在黑客松通宵肝代码中…",
   },
   {
     id: "stroll",
-    file: "/liukanshan/stroll.gif",
+    file: "/liukanshan/stroll.webp",
     name: "逛脑洞街",
     hint: "在脑洞游乐园里四处晃悠～",
   },
   {
     id: "sleepy",
-    file: "/liukanshan/sleepy.gif",
+    file: "/liukanshan/sleepy.webp",
     name: "打瞌睡",
     hint: "推演太烧脑，看山犯困啦 zzz",
   },
@@ -40,14 +41,9 @@ export function LiuKanshanMascot({ className }: { className?: string }) {
       setActionIndex(1); // 助力成功后切换为敲代码庆祝
     }
 
-    fetch("/api/auth/zhihu/status")
-      .then((res) => res.json())
-      .then((data: { voted?: boolean }) => {
-        if (data.voted) {
-          setHasVoted(true);
-        }
-      })
-      .catch(() => {});
+    void getZhihuVoteStatus().then((voted) => {
+      if (voted) setHasVoted(true);
+    });
   }, []);
 
   const currentAction = KANSHAN_ACTIONS[actionIndex];

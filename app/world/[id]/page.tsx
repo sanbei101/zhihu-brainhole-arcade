@@ -7,11 +7,15 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { WorldCastPanel } from "@/components/world-cast";
-import { findScenario } from "@/lib/scenario-library";
+import { SCENARIO_THEMES, findScenario } from "@/lib/scenario-library";
 import { getSkin, isDarkSkin, skinStyleVars } from "@/lib/scenario-skin";
 
 interface WorldPageProps {
   params: Promise<{ id: string }>;
+}
+
+export function generateStaticParams() {
+  return SCENARIO_THEMES.flatMap((theme) => theme.scenarios.map(({ id }) => ({ id })));
 }
 
 const numberFormatter = new Intl.NumberFormat("zh-CN", {

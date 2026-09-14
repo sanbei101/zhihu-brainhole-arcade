@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { getZhihuVoteStatus } from "@/lib/zhihu-status";
 
 export function ZhihuVoteButton({ className }: { className?: string }) {
   const [hasVoted, setHasVoted] = useState(false);
@@ -20,15 +21,10 @@ export function ZhihuVoteButton({ className }: { className?: string }) {
       window.history.replaceState({}, "", newUrl);
     }
 
-    // 检查本地 Cookie 或接口状态
-    fetch("/api/auth/zhihu/status")
-      .then((res) => res.json())
-      .then((data: { voted?: boolean }) => {
-        if (data.voted) {
-          setHasVoted(true);
-        }
-      })
-      .catch(() => {});
+    // 多个首页组件共享同一个状态请求
+    void getZhihuVoteStatus().then((voted) => {
+      if (voted) setHasVoted(true);
+    });
   }, []);
 
   if (hasVoted) {
