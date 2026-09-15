@@ -77,15 +77,30 @@ export async function exchangeZhihuAccessToken(
   }
 
   const finalRedirectUri = config.redirectUri || defaultRedirectUri;
+  const directTokenEndpoint = "https://openapi.zhihu.com/access_token";
+  const tokenEndpoint = process.env.ZHIHU_OAUTH_TOKEN_ENDPOINT?.trim() || directTokenEndpoint;
+  const proxyKey = process.env.ZHIHU_OAUTH_PROXY_KEY?.trim();
+  const usingProxy = tokenEndpoint !== directTokenEndpoint;
+
+  if (usingProxy && !proxyKey) {
+    throw new Error("配置了 ZHIHU_OAUTH_TOKEN_ENDPOINT 但缺少 ZHIHU_OAUTH_PROXY_KEY");
+  }
+
   const startedAt = Date.now();
-  logger.debug("auth", "知乎 OAuth token 换取开始", { redirectUri: finalRedirectUri });
+  logger.debug("auth", "知乎 OAuth token 换取开始", {
+    redirectUri: finalRedirectUri,
+    viaProxy: usingProxy,
+  });
 
   try {
-    const response = await fetch("https://openapi.zhihu.com/access_token", {
+    const headers = new Headers({
+      "Content-Type": "application/x-www-form-urlencoded",
+    });
+    if (proxyKey) headers.set("X-Proxy-Key", proxyKey);
+
+    const response = await fetch(tokenEndpoint, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
+      headers,
       body: new URLSearchParams({
         app_id: config.appId,
         app_key: config.appKey,
