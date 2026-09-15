@@ -1,4 +1,4 @@
-import type { NoObjectGeneratedError} from "ai";
+import type { NoObjectGeneratedError } from "ai";
 import { TypeValidationError, JSONParseError } from "ai";
 type LogLevel = "DEBUG" | "WARN" | "ERROR";
 

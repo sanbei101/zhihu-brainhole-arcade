@@ -3,6 +3,8 @@
  * 依据知乎黑客松补充资料与开放平台规范实现
  */
 
+import { logger } from "@/lib/logger";
+
 export const ZHIHU_OAUTH_STATE_COOKIE = "zhihu_oauth_state";
 export const ZHIHU_VOTED_COOKIE = "zhihu_voted";
 
@@ -18,6 +20,10 @@ export function getZhihuOAuthConfig(): ZhihuOAuthConfig | null {
   const redirectUri = process.env.ZHIHU_OAUTH_REDIRECT_URI?.trim();
 
   if (!appId || !appKey) {
+    logger.error("auth", "知乎 OAuth 配置缺失", {
+      hasAppId: Boolean(appId),
+      hasAppKey: Boolean(appKey),
+    });
     return null;
   }
 
@@ -44,6 +50,7 @@ export function buildZhihuAuthorizeUrl(defaultRedirectUri: string, state: string
   url.searchParams.set("response_type", "code");
   url.searchParams.set("state", state);
 
+  logger.debug("auth", "知乎 OAuth 授权地址已生成", { redirectUri: finalRedirectUri });
   return url.toString();
 }
 
@@ -70,32 +77,45 @@ export async function exchangeZhihuAccessToken(
   }
 
   const finalRedirectUri = config.redirectUri || defaultRedirectUri;
+  const startedAt = Date.now();
+  logger.debug("auth", "知乎 OAuth token 换取开始", { redirectUri: finalRedirectUri });
 
-  const response = await fetch("https://openapi.zhihu.com/access_token", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: new URLSearchParams({
-      app_id: config.appId,
-      app_key: config.appKey,
-      grant_type: "authorization_code",
-      redirect_uri: finalRedirectUri,
-      code,
-    }),
-    cache: "no-store",
-  });
+  try {
+    const response = await fetch("https://openapi.zhihu.com/access_token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        app_id: config.appId,
+        app_key: config.appKey,
+        grant_type: "authorization_code",
+        redirect_uri: finalRedirectUri,
+        code,
+      }),
+      cache: "no-store",
+    });
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`知乎 OAuth Token 换取失败 (HTTP ${response.status}): ${errorText}`);
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`知乎 OAuth Token 换取失败 (HTTP ${response.status}): ${errorText}`);
+    }
+
+    const data = (await response.json()) as ZhihuTokenResponse;
+
+    if (!data.access_token) {
+      throw new Error(
+        `知乎 OAuth 返回未包含 access_token (code=${String(data.code)}, message=${String(data.message)})`,
+      );
+    }
+
+    logger.debug("auth", "知乎 OAuth token 换取成功", { durationMs: Date.now() - startedAt });
+    return data.access_token;
+  } catch (error) {
+    logger.error("auth", "知乎 OAuth token 换取失败", {
+      durationMs: Date.now() - startedAt,
+      error,
+    });
+    throw error;
   }
-
-  const data = (await response.json()) as ZhihuTokenResponse;
-
-  if (!data.access_token) {
-    throw new Error(`知乎 OAuth 返回未包含 access_token: ${JSON.stringify(data)}`);
-  }
-
-  return data.access_token;
 }

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
+import { logger } from "@/lib/logger";
 import { cn } from "@/lib/utils";
 import { getZhihuVoteStatus } from "@/lib/zhihu-status";
 
@@ -15,6 +16,7 @@ export function ZhihuVoteButton({ className }: { className?: string }) {
     // 检查 URL query 是否刚完成助力
     const params = new URLSearchParams(window.location.search);
     if (params.get("voted") === "1") {
+      logger.debug("auth", "知乎 OAuth 前端回调标记已确认");
       setHasVoted(true);
       // 清除 URL 上的 query 参数避免刷新重复触发
       const newUrl = window.location.pathname;
@@ -23,6 +25,7 @@ export function ZhihuVoteButton({ className }: { className?: string }) {
 
     // 多个首页组件共享同一个状态请求
     void getZhihuVoteStatus().then((voted) => {
+      logger.debug("auth", "知乎助力状态查询完成", { voted });
       if (voted) setHasVoted(true);
     });
   }, []);

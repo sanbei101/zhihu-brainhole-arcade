@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
+import { logger } from "@/lib/logger";
 import {
   ZHIHU_OAUTH_STATE_COOKIE,
   buildZhihuAuthorizeUrl,
@@ -9,6 +10,7 @@ import {
 export async function GET(request: NextRequest) {
   const config = getZhihuOAuthConfig();
   if (!config) {
+    logger.error("auth", "知乎 OAuth 登录初始化失败：配置缺失");
     return NextResponse.json(
       {
         error: "CONFIG_MISSING",
@@ -36,9 +38,11 @@ export async function GET(request: NextRequest) {
       maxAge: 600, // 10 分钟有效期
     });
 
+    logger.debug("auth", "知乎 OAuth 登录跳转已创建", { redirectUri: defaultRedirectUri });
     return response;
   } catch (err) {
     const errorMsg = err instanceof Error ? err.message : String(err);
+    logger.error("auth", "知乎 OAuth 登录初始化异常", { error: err });
     return NextResponse.json({ error: "OAUTH_INIT_ERROR", message: errorMsg }, { status: 500 });
   }
 }

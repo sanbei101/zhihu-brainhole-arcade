@@ -11,6 +11,7 @@ import {
 export async function GET(request: NextRequest) {
   const config = getZhihuOAuthConfig();
   if (!config) {
+    logger.error("auth", "知乎 OAuth 回调失败：配置缺失");
     return NextResponse.json(
       { error: "CONFIG_MISSING", message: "知乎 OAuth 凭证未配置" },
       { status: 503 },
@@ -25,12 +26,21 @@ export async function GET(request: NextRequest) {
   const homeUrl = new URL("/", request.url);
 
   if (!code) {
+    logger.error("auth", "知乎 OAuth 回调缺少授权 code", {
+      providerError: searchParams.get("error"),
+      providerErrorDescription: searchParams.get("error_description"),
+      hasState: Boolean(state),
+    });
     homeUrl.searchParams.set("error", "missing_code");
     return NextResponse.redirect(homeUrl);
   }
 
   if (!state || !savedState || state !== savedState) {
-    logger.error("auth", "知乎 OAuth state 不匹配或已过期", { state, savedState });
+    logger.error("auth", "知乎 OAuth state 不匹配或已过期", {
+      hasState: Boolean(state),
+      hasSavedState: Boolean(savedState),
+      stateMatches: Boolean(state && savedState && state === savedState),
+    });
     homeUrl.searchParams.set("error", "state_mismatch");
     return NextResponse.redirect(homeUrl);
   }
@@ -59,6 +69,7 @@ export async function GET(request: NextRequest) {
     // 清除一次性 state
     response.cookies.delete(ZHIHU_OAUTH_STATE_COOKIE);
 
+    logger.debug("auth", "知乎 OAuth 回调处理成功");
     return response;
   } catch (err) {
     logger.error("auth", "知乎 OAuth 回调处理异常", err);
