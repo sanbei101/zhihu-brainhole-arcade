@@ -38,7 +38,15 @@ function print(level: LogLevel, tag: string, message: string, data?: unknown): v
   const line = JSON.stringify(
     payload,
     (_key, value: unknown) => {
-      if (value instanceof Error) return { name: value.name, message: value.message };
+      if (value instanceof Error) {
+        const error: { name: string; message: string; cause?: unknown; code?: unknown } = {
+          name: value.name,
+          message: value.message,
+        };
+        if (value.cause !== undefined) error.cause = value.cause;
+        if ("code" in value) error.code = value.code;
+        return error;
+      }
       return value;
     },
     2,
