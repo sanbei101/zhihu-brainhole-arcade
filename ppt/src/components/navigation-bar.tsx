@@ -1,8 +1,6 @@
-import { ChevronLeft, ChevronRight, Expand, FileText, Grid, Palette, Shrink } from "lucide-react";
+import { ChevronLeft, ChevronRight, Expand, FileText, Grid, Shrink } from "lucide-react";
 
 import { type ScenarioSkin } from "@/lib/scenario-skin";
-
-import { LIGHT_SKINS } from "../theme";
 
 interface NavigationBarProps {
   currentSlide: number;
@@ -16,7 +14,6 @@ interface NavigationBarProps {
   isFullscreen: boolean;
   onToggleFullscreen: () => void;
   skin: ScenarioSkin;
-  onSelectSkin: (skin: ScenarioSkin) => void;
 }
 
 export function NavigationBar({
@@ -31,7 +28,6 @@ export function NavigationBar({
   isFullscreen,
   onToggleFullscreen,
   skin,
-  onSelectSkin,
 }: NavigationBarProps) {
   const progressPercent = ((currentSlide + 1) / totalSlides) * 100;
 
@@ -76,31 +72,31 @@ export function NavigationBar({
         </button>
       </div>
 
-      {/* 中间：皮肤快捷切换器 */}
-      <div className="hidden items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100/90 px-2 py-1 shadow-xs md:flex">
-        <Palette className="ml-1 size-3.5 text-slate-500" />
-        <span className="mr-1 font-mono text-[11px] font-bold text-slate-600">宇宙换肤:</span>
-        <div className="flex items-center gap-1">
-          {LIGHT_SKINS.slice(0, 6).map((s) => (
-            <button
-              key={s.id}
-              type="button"
-              onClick={() => onSelectSkin(s)}
-              className={`cursor-pointer rounded-full px-2.5 py-0.5 text-[11px] font-medium transition-all ${
-                skin.id === s.id
-                  ? "scale-102 bg-[#0066ff] font-bold text-white shadow-xs"
-                  : "text-slate-600 hover:bg-white hover:text-slate-900"
-              }`}
-              title={`${s.name} · ${s.mood}`}
-            >
-              {s.name}
-            </button>
-          ))}
-        </div>
+      {/* 中间：当前页世界线专属背景状态提示（自动随页流转） */}
+      <div className="hidden items-center gap-2 rounded-full border border-slate-200 bg-slate-50/90 px-3 py-1 shadow-xs md:flex">
+        <span
+          className="size-2 animate-pulse rounded-full shadow-xs"
+          style={{ backgroundColor: skin.accent }}
+        />
+        <span className="font-mono text-[11px] text-slate-500">本页世界线背景:</span>
+        <span className="text-xs font-bold text-slate-800">{skin.name}</span>
+        <span className="font-mono text-[11px] text-slate-400">· {skin.mood}</span>
       </div>
 
-      {/* 右侧：辅助功能按钮 */}
+      {/* 右侧：辅助功能与全屏按键 */}
       <div className="flex items-center gap-1.5 sm:gap-2">
+        {/* 全屏演示按钮：视觉醒目 */}
+        <button
+          type="button"
+          onClick={onToggleFullscreen}
+          className="flex h-8 cursor-pointer items-center gap-1.5 rounded-lg border border-[#0066ff] bg-blue-50 px-2.5 text-xs font-bold text-[#0066ff] shadow-xs transition-all hover:bg-[#0066ff] hover:text-white sm:px-3"
+          title="切换全屏演示 (F 键)"
+          aria-label="全屏"
+        >
+          {isFullscreen ? <Shrink className="size-3.5" /> : <Expand className="size-3.5" />}
+          <span>{isFullscreen ? "退出全屏" : "全屏 (F)"}</span>
+        </button>
+
         {/* 幻灯片大纲抽屉 */}
         <button
           type="button"
@@ -129,17 +125,6 @@ export function NavigationBar({
         >
           <FileText className="size-3.5" />
           <span className="hidden sm:inline">手记</span>
-        </button>
-
-        {/* 全屏按钮 */}
-        <button
-          type="button"
-          onClick={onToggleFullscreen}
-          className="flex size-8 cursor-pointer items-center justify-center rounded-lg border border-slate-200 bg-slate-100/90 text-slate-700 shadow-xs transition-all hover:bg-slate-200"
-          title="切换全屏 (F 键)"
-          aria-label="全屏"
-        >
-          {isFullscreen ? <Shrink className="size-3.5" /> : <Expand className="size-3.5" />}
         </button>
       </div>
     </footer>

@@ -4,7 +4,7 @@ import type { ScenarioSkin } from "@/lib/scenario-skin";
 
 export function Slide2Background({ skin: _skin }: { skin: ScenarioSkin }) {
   return (
-    <div className="relative flex size-full flex-col justify-between gap-6 overflow-hidden rounded-3xl border border-slate-200/90 bg-white/75 p-8 text-slate-900 shadow-2xl backdrop-blur-xl sm:p-12">
+    <div className="relative flex size-full flex-col justify-between gap-6 overflow-hidden rounded-2xl border border-white/80 bg-white/80 p-6 text-slate-900 shadow-2xl backdrop-blur-md sm:rounded-3xl sm:p-10 lg:p-12">
       {/* 顶部主旨 */}
       <div className="space-y-2">
         <div className="flex items-center gap-2 font-mono text-xs font-bold tracking-widest text-[#0066ff] uppercase sm:text-sm">

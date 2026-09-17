@@ -1,5 +1,7 @@
 import { X } from "lucide-react";
 
+import { getSkin } from "@/lib/scenario-skin";
+
 import type { SlideData } from "../types";
 
 interface OverviewDrawerProps {
@@ -64,15 +66,24 @@ export function OverviewDrawer({
                 </span>
               </div>
 
-              <div className="my-4">
+              <div className="my-3">
                 <h3 className="line-clamp-2 text-sm font-black text-slate-900 transition-colors group-hover:text-[#0066ff]">
                   {slide.title}
                 </h3>
                 <p className="mt-1 line-clamp-1 text-xs text-slate-500">{slide.subtitle}</p>
               </div>
 
-              <div className="font-mono text-xs font-bold text-slate-400">
-                {isCurrent ? "● 当前展示中" : "点击跳转 →"}
+              <div className="flex items-center justify-between border-t border-slate-100 pt-2 text-[11px]">
+                <span className="flex items-center gap-1.5 font-medium text-slate-500">
+                  <span
+                    className="size-1.5 rounded-full"
+                    style={{ backgroundColor: getSkin(slide.defaultSkinId).accent }}
+                  />
+                  <span>{getSkin(slide.defaultSkinId).name}</span>
+                </span>
+                <span className="font-mono text-xs font-bold text-slate-400">
+                  {isCurrent ? "● 展示中" : "跳转 →"}
+                </span>
               </div>
             </button>
           );

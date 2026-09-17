@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 
-import { getSkin, type ScenarioSkin } from "@/lib/scenario-skin";
+import { getSkin } from "@/lib/scenario-skin";
 
 import { NavigationBar } from "./components/navigation-bar";
 import { OverviewDrawer } from "./components/overview-drawer";
@@ -10,7 +10,7 @@ import { SLIDES } from "./slides";
 
 export function PresentationApp() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const [manualSkin, setManualSkin] = useState<ScenarioSkin | null>(null);
+  const [direction, setDirection] = useState<"forward" | "backward">("forward");
   const [showNotes, setShowNotes] = useState(false);
   const [showOverview, setShowOverview] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -19,16 +19,28 @@ export function PresentationApp() {
   const totalSlides = SLIDES.length;
   const currentSlide = SLIDES[currentSlideIndex] ?? SLIDES[0];
 
-  // 默认根据当前页的世界线主题自动换肤，若用户手动选择则优先响应
-  const skin = manualSkin ?? getSkin(currentSlide.defaultSkinId);
+  // 每一页自动严格采用其专属世界线主题皮肤，不再提供手动干扰
+  const skin = getSkin(currentSlide.defaultSkinId);
 
   const goToNext = useCallback(() => {
+    setDirection("forward");
     setCurrentSlideIndex((prev) => Math.min(prev + 1, totalSlides - 1));
   }, [totalSlides]);
 
   const goToPrev = useCallback(() => {
+    setDirection("backward");
     setCurrentSlideIndex((prev) => Math.max(prev - 1, 0));
   }, []);
+
+  const jumpToSlide = useCallback(
+    (target: number) => {
+      if (target >= 0 && target < totalSlides) {
+        setDirection(target >= currentSlideIndex ? "forward" : "backward");
+        setCurrentSlideIndex(target);
+      }
+    },
+    [currentSlideIndex, totalSlides],
+  );
 
   const toggleFullscreen = useCallback(() => {
     if (!document.fullscreenElement) {
@@ -64,10 +76,10 @@ export function PresentationApp() {
         goToPrev();
       } else if (e.key === "Home") {
         e.preventDefault();
-        setCurrentSlideIndex(0);
+        jumpToSlide(0);
       } else if (e.key === "End") {
         e.preventDefault();
-        setCurrentSlideIndex(totalSlides - 1);
+        jumpToSlide(totalSlides - 1);
       } else if (e.key === "n" || e.key === "N") {
         setShowNotes((prev) => !prev);
       } else if (e.key === "t" || e.key === "T" || e.key === "o" || e.key === "O") {
@@ -76,15 +88,15 @@ export function PresentationApp() {
         toggleFullscreen();
       } else if (e.key >= "1" && e.key <= "9") {
         const target = Number(e.key) - 1;
-        if (target < totalSlides) {
-          setCurrentSlideIndex(target);
-        }
+        jumpToSlide(target);
+      } else if (e.key === "0") {
+        jumpToSlide(9);
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [goToNext, goToPrev, toggleFullscreen, totalSlides]);
+  }, [goToNext, goToPrev, jumpToSlide, toggleFullscreen, totalSlides]);
 
   // 全屏状态改变同步
   useEffect(() => {
@@ -113,17 +125,22 @@ export function PresentationApp() {
 
   return (
     <div
-      className="relative flex h-screen w-screen flex-col overflow-hidden font-sans text-slate-100"
+      className="relative flex h-screen w-screen flex-col overflow-hidden font-sans text-slate-900"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* 幻灯片主体 */}
-      <div className="slide-enter relative flex-1 overflow-hidden" key={currentSlide.id}>
+      {/* 幻灯片主体：带丝滑的前后方向感知动画 */}
+      <div
+        className={`${direction === "forward" ? "slide-enter-forward" : "slide-enter-backward"} relative flex-1 overflow-hidden`}
+        key={currentSlide.id}
+      >
         <SlideShell
           category={currentSlide.category}
           title={currentSlide.title}
           subtitle={currentSlide.subtitle}
           skin={skin}
+          isFullscreen={isFullscreen}
+          onToggleFullscreen={toggleFullscreen}
         >
           {currentSlide.component({ skin, active: true })}
         </SlideShell>
@@ -142,7 +159,6 @@ export function PresentationApp() {
         isFullscreen={isFullscreen}
         onToggleFullscreen={toggleFullscreen}
         skin={skin}
-        onSelectSkin={(selected) => setManualSkin(selected)}
       />
 
       {/* 演讲者备注抽屉 */}
@@ -154,10 +170,7 @@ export function PresentationApp() {
         currentSlide={currentSlideIndex}
         isOpen={showOverview}
         onClose={() => setShowOverview(false)}
-        onSelectSlide={(idx) => {
-          setCurrentSlideIndex(idx);
-          setManualSkin(null); // 切页时恢复世界线自适应
-        }}
+        onSelectSlide={(idx) => jumpToSlide(idx)}
       />
     </div>
   );
