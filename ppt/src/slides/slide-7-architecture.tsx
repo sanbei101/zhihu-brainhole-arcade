@@ -1,4 +1,4 @@
-import { Cpu, Layers, Network, ShieldCheck, Zap } from "lucide-react";
+import { Cpu, GitBranch, Layers, ShieldCheck, Zap } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -19,13 +19,13 @@ export function Slide7Architecture({ skin: _defaultSkin }: { skin: ScenarioSkin 
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-2">
           <div>
             <div className="flex items-center gap-2">
-              <Badge className="bg-[#e2622c] text-xs text-black font-black px-2 py-0.5">硬核工程突破</Badge>
+              <Badge className="bg-[#e2622c] text-xs text-black font-black px-2 py-0.5">系统架构与工程实现</Badge>
               <span className="font-mono text-xs text-slate-300 font-medium">
-                彻底解决多智能体延迟高、算力贵、渲染卡顿三大痛点
+                轻量化、高响应、低成本的多智能体策略推演底座
               </span>
             </div>
             <h1 className="mt-1 text-lg font-black text-slate-100 sm:text-2xl tracking-tight">
-              底层技术硬实力：前缀缓存降本 × 程序化像素引擎 × 冲突矩阵调度
+              底层架构设计：前缀缓存优化 × 程序化像素引擎 × 状态机推演底座
             </h1>
           </div>
 
@@ -36,7 +36,7 @@ export function Slide7Architecture({ skin: _defaultSkin }: { skin: ScenarioSkin 
         </div>
       </section>
 
-      {/* ⚙️ 3 大硬核工程突破卡片：16:9 比例精准排版 */}
+      {/* ⚙️ 3 大核心架构支撑卡片：16:9 比例精准排版 */}
       <section className="mx-auto w-full max-w-7xl flex-1 px-4 py-3 sm:px-6 sm:py-4">
         <div className="grid h-full grid-cols-1 gap-3.5 lg:grid-cols-3 lg:gap-5">
           {/* 1. Prefix Caching 架构 */}
@@ -47,32 +47,32 @@ export function Slide7Architecture({ skin: _defaultSkin }: { skin: ScenarioSkin 
                   <Zap className="size-4" />
                   <span>PREFIX CACHING</span>
                 </span>
-                <Badge className="bg-[#e2622c] text-[11px] text-black font-black px-2 py-0.5">成本暴降 85%</Badge>
+                <Badge className="bg-[#e2622c] text-[11px] text-black font-black px-2 py-0.5">成本优化 85%</Badge>
               </div>
               <CardTitle className="text-base font-black text-slate-100 sm:text-lg">
-                多轮推演怎么做到单局低于 2 分钱？
+                多轮推演如何实现毫秒级响应与超低成本？
               </CardTitle>
               <p className="text-xs sm:text-[13px] leading-relaxed text-slate-300 font-medium">
-                死磕前缀缓存（KV Cache）：绝不让大模型重复看废话
+                基于前缀缓存（KV Cache）的上下文复用机制
               </p>
 
               <div className="space-y-2 text-xs sm:text-[13px]">
                 <div className="rounded-lg border border-orange-500/30 bg-orange-950/40 p-2.5">
-                  <strong className="block font-black text-orange-300">① 固定规则锁死在最前</strong>
+                  <strong className="block font-black text-orange-300">① 静态规则前置固化</strong>
                   <span className="mt-0.5 block leading-relaxed text-slate-200">
-                    世界背景、阵营人设一次性输入，后续 100% 缓存命中，首字 0.45 秒秒出。
+                    世界观背景与阵营设定固化在提示词前序，实现长前缀高命中率缓存，首字响应缩短至 0.45 秒。
                   </span>
                 </div>
                 <div className="rounded-lg border border-white/10 bg-black/30 p-2.5">
-                  <strong className="block font-black text-slate-200">② 历史战报只追加不重算</strong>
+                  <strong className="block font-black text-slate-200">② 增量历史状态复用</strong>
                   <span className="mt-0.5 block leading-relaxed text-slate-300">
-                    前几回合聊过的内容增量复用，绝不来回倒腾重复花钱。
+                    推演历史以增量形式追加，避免全量上下文重复编码计算，显著降低多轮交互中的无效算力开销。
                   </span>
                 </div>
                 <div className="rounded-lg border border-amber-500/30 bg-amber-950/40 p-2.5">
-                  <strong className="block font-black text-amber-300">③ 每回合只算两句新话</strong>
+                  <strong className="block font-black text-amber-300">③ 动态变量最小化</strong>
                   <span className="mt-0.5 block leading-relaxed text-slate-200">
-                    把每轮动态变量压缩到极简，单局大模型算力成本直接省下 85%。
+                    每轮交互仅提取当前决策变量与关键环境差量，精简输入规模，整体推演算力成本降低 85%。
                   </span>
                 </div>
               </div>
@@ -81,9 +81,9 @@ export function Slide7Architecture({ skin: _defaultSkin }: { skin: ScenarioSkin 
             <CardContent className="mt-3 p-0">
               <div className="rounded-xl border border-orange-500/40 bg-orange-950/30 p-3 text-center">
                 <div className="font-mono text-xl font-black text-orange-400 sm:text-2xl">
-                  0.45s 响应 · 单局 &lt; 2 分钱
+                  0.45s 响应 · 单局成本 &lt; 2 分钱
                 </div>
-                <div className="mt-1 text-xs text-slate-300 font-medium">首字延迟降低 72%，单局算力成本锐减 85%</div>
+                <div className="mt-1 text-xs text-slate-300 font-medium">首字延迟降低 72%，多轮交互算力成本大幅缩减</div>
               </div>
             </CardContent>
           </Card>
@@ -96,32 +96,32 @@ export function Slide7Architecture({ skin: _defaultSkin }: { skin: ScenarioSkin 
                   <Layers className="size-4" />
                   <span>PIXEL ENGINE</span>
                 </span>
-                <Badge className="bg-emerald-600 text-[11px] text-white font-black px-2 py-0.5">稳跑 60 帧</Badge>
+                <Badge className="bg-emerald-600 text-[11px] text-white font-black px-2 py-0.5">性能满帧 60FPS</Badge>
               </div>
               <CardTitle className="text-base font-black text-slate-100 sm:text-lg">
-                0 张外部图片！纯代码手搓像素引擎
+                零外部静态依赖：轻量级程序化像素引擎
               </CardTitle>
               <p className="text-xs sm:text-[13px] leading-relaxed text-slate-300 font-medium">
-                连一张外部 png 都不用加载，打开网页直接秒开
+                纯代码生成动态像素视觉，实现极致首屏与无缝主题切换
               </p>
 
               <div className="space-y-2 text-xs sm:text-[13px]">
                 <div className="rounded-lg border border-emerald-500/30 bg-emerald-950/40 p-2.5">
-                  <strong className="block font-black text-emerald-300">① 纯数学算法当场画小人</strong>
+                  <strong className="block font-black text-emerald-300">① 矢量数学算法实时生成</strong>
                   <span className="mt-0.5 block leading-relaxed text-slate-200">
-                    告别几十兆美术图片包袱，几十行 SVG 代码在内存里毫秒级算出来。
+                    无需加载外部美术切片或图集资源，通过轻量级 SVG 描述与色彩映射在内存中毫秒级构建角色立绘。
                   </span>
                 </div>
                 <div className="rounded-lg border border-white/10 bg-black/30 p-2.5">
-                  <strong className="block font-black text-slate-200">② 数百色块合并为单条路径</strong>
+                  <strong className="block font-black text-slate-200">② 路径压缩与 DOM 节点合并</strong>
                   <span className="mt-0.5 block leading-relaxed text-slate-300">
-                    frameToPaths 算法压缩合并，DOM 节点暴降 85%，千元机也稳如丝滑。
+                    采用色块路径合并算法，将数百像素点汇聚为单一连续路径，DOM 节点开销降低 85%，保障全平台稳定 60 帧。
                   </span>
                 </div>
                 <div className="rounded-lg border border-emerald-500/20 bg-black/30 p-2.5">
-                  <strong className="block font-black text-emerald-200">③ 十大世界一秒换装</strong>
+                  <strong className="block font-black text-emerald-200">③ 多元世界观无缝适配</strong>
                   <span className="mt-0.5 block leading-relaxed text-slate-200">
-                    恐龙灭绝、大秦、三国、末日太阳，切换场景就像换 CSS 主题一样快，零等待。
+                    场景与角色外观完全通过调色板与像素矩阵驱动，变更配置即可即时切换历史、科幻等多题材视觉表现。
                   </span>
                 </div>
               </div>
@@ -132,45 +132,45 @@ export function Slide7Architecture({ skin: _defaultSkin }: { skin: ScenarioSkin 
                 <div className="font-mono text-xl font-black text-emerald-400 sm:text-2xl">
                   0 外部静态图片依赖
                 </div>
-                <div className="mt-1 text-xs text-slate-300 font-medium">单 HTML 文件自包含，断网离线也能极速流畅运行</div>
+                <div className="mt-1 text-xs text-slate-300 font-medium">单 HTML 文件完全自包含，极速首屏加载与断网离线可用</div>
               </div>
             </CardContent>
           </Card>
 
-          {/* 3. 多智能体博弈调度管线 */}
+          {/* 3. 推演状态机与强类型约束架构 */}
           <Card className="flex flex-col justify-between border-white/15 bg-[#26201d]/95 p-4 shadow-lg sm:p-5">
             <CardHeader className="space-y-2.5 p-0">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-1.5 font-mono text-xs font-black text-cyan-400 sm:text-sm">
-                  <Network className="size-4" />
-                  <span>AGENT DISPATCH</span>
+                  <GitBranch className="size-4" />
+                  <span>STATE & SCHEMA</span>
                 </span>
-                <Badge className="bg-cyan-600 text-[11px] text-white font-black px-2 py-0.5">零死锁零卡顿</Badge>
+                <Badge className="bg-cyan-600 text-[11px] text-white font-black px-2 py-0.5">强类型零幻觉</Badge>
               </div>
               <CardTitle className="text-base font-black text-slate-100 sm:text-lg">
-                告别 AI 复读机与慢吞吞排队
+                推演状态机与强类型约束架构
               </CardTitle>
               <p className="text-xs sm:text-[13px] leading-relaxed text-slate-300 font-medium">
-                让四路智能体真正当场“吵起来”，还不卡死
+                解耦数值判定与文本生成，保障世界线分支的确定性与自洽性
               </p>
 
               <div className="space-y-2 text-xs sm:text-[13px]">
                 <div className="rounded-lg border border-cyan-500/30 bg-cyan-950/40 p-2.5">
-                  <strong className="block font-black text-cyan-300">① 四路角色同时开口，不排队</strong>
+                  <strong className="block font-black text-cyan-300">① 有限状态机驱动推演进程</strong>
                   <span className="mt-0.5 block leading-relaxed text-slate-200">
-                    4 位 Agent 并发思考，0.5 秒直接冒出气泡，不用盯着进度条干等。
+                    将玩家抉择、阵营立场反馈与终局结算形式化为离散状态机，保证多回合流程严密演进且具备确定性。
                   </span>
                 </div>
                 <div className="rounded-lg border border-white/10 bg-black/30 p-2.5">
-                  <strong className="block font-black text-slate-200">② 自动挑出最针锋相对的俩人</strong>
+                  <strong className="block font-black text-slate-200">② 强类型 Schema 严格约束</strong>
                   <span className="mt-0.5 block leading-relaxed text-slate-300">
-                    冲突矩阵算法过滤附和废话，专门抓立场最对立的正反双方当面硬刚。
+                    所有模型交互均通过强类型 Schema 校验，将论辩内容与四维数值逻辑解耦，彻底避免数据漂移与格式异常。
                   </span>
                 </div>
                 <div className="rounded-lg border border-cyan-500/20 bg-black/30 p-2.5">
-                  <strong className="block font-black text-cyan-200">③ 单次回合搞定，拒绝无限套娃</strong>
+                  <strong className="block font-black text-cyan-200">③ 环境动态演变与分支可追溯</strong>
                   <span className="mt-0.5 block leading-relaxed text-slate-200">
-                    单次结构化推演搞定双向对抗，节约 50% 耗时并彻底杜绝大模型死锁。
+                    引入环境大势熵增模型驱动资源演化，完整记录各阶段决策路径，实现世界线推演轨迹的全程可回溯。
                   </span>
                 </div>
               </div>
@@ -179,9 +179,9 @@ export function Slide7Architecture({ skin: _defaultSkin }: { skin: ScenarioSkin 
             <CardContent className="mt-3 p-0">
               <div className="rounded-xl border border-cyan-500/40 bg-cyan-950/30 p-3 text-center">
                 <div className="font-mono text-xl font-black text-cyan-400 sm:text-2xl">
-                  智能容灾 · 稳如磐石
+                  100% 状态自洽 · 零格式异常
                 </div>
-                <div className="mt-1 text-xs text-slate-300 font-medium">单个 Agent 异常自动优雅降级，长链路推演绝不崩盘</div>
+                <div className="mt-1 text-xs text-slate-300 font-medium">业务逻辑与模型推理严格解耦，保障长链路推演稳定可靠</div>
               </div>
             </CardContent>
           </Card>

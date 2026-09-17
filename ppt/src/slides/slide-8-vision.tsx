@@ -34,7 +34,7 @@ export function Slide8Vision({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
 
           <div className="flex items-center gap-2 font-mono text-xs text-amber-400">
             <Trophy className="size-4" />
-            <span className="font-bold">2026 知乎黑客松决赛答辩 · 结算闭环</span>
+            <span className="font-bold">2026 知乎黑客松作品答辩 · 结算闭环</span>
           </div>
         </div>
       </section>

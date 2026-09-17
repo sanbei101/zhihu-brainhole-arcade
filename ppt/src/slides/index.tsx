@@ -12,13 +12,13 @@ export const SLIDES: SlideData[] = [
   {
     id: "cover",
     number: 1,
-    title: "知乎脑洞游乐园 · 决赛答辩",
+    title: "知乎脑洞游乐园 · 作品答辩",
     subtitle: "假如地球现在进入冰河时代，人类还能生存下去吗？",
     category: "开篇定调",
     defaultSkinId: "apocalypse",
     fullBleed: true,
     notes: [
-      "向评委问好，自报参赛姓名与项目定位。",
+      "向评委问好，介绍项目定位与知乎生态价值。",
       "点题：精准切入知乎硬核历史区与科幻区最受热捧的'极端假设'文化现象。",
       "亮出核心金句：天冻不住人的路！冰封千里，那就把冰原踏成通衢，走出一个不用叩关的天下！",
     ],
