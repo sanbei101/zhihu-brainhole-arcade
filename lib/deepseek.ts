@@ -250,6 +250,7 @@ async function generateAttempt<T>(
       temperature: options.temperature,
       maxOutputTokens: options.maxOutputTokens,
       abortSignal: options.abortSignal,
+      providerOptions: { deepseek: { thinking: { type: "disabled" } } },
     });
     logAiResponse(label, Date.now() - startedAt, result.output);
     return result.output;
