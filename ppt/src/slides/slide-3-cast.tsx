@@ -209,7 +209,7 @@ export function Slide3Cast({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
             <div className="shrink-0 border-b border-white/10 pb-2">
               <div className="flex items-center justify-between">
                 <Badge className="bg-[#e2622c] text-xs font-black text-black">
-                  STAGE 01 · 破题立局：把知乎神帖做成活沙盘
+                  STAGE 01 · 把脑洞问题转化为沙盘
                 </Badge>
                 <span className="font-mono text-xs font-bold text-orange-400">
                   WORLDLINE / CASTING
@@ -217,10 +217,11 @@ export function Slide3Cast({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
               </div>
               <h2 className="mt-1.5 flex items-center gap-2 text-base font-black text-slate-100 sm:text-lg">
                 <Compass className="size-5 shrink-0 text-orange-400" />
-                <span>知乎高赞母本具象化：不做死板答题，做生死博弈</span>
+                <span>知乎高赞母本具象化：自由选择各方阵营人物</span>
               </h2>
-              <p className="mt-1 text-xs sm:text-sm leading-relaxed text-slate-300">
-                以知乎 7.7w 赞爆款《假如地球进入冰河时代》为母本：不仅是文字脑洞，更是一场生存死局！零下43℃、冰封关隘、三百万人生死倒计时，人人皆可开局执棋！
+              <p className="mt-1 text-xs leading-relaxed text-slate-300 sm:text-sm">
+                以知乎 7.7w 赞爆款《假如地球进入冰河时代》为母本：不仅是文字脑洞,
+                选择一位主角作为开局,写下你的故事
               </p>
             </div>
 
@@ -237,7 +238,7 @@ export function Slide3Cast({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                     <span>【抓核心矛盾】把答主的科学推演，做成逼近眼前的生存死线</span>
                   </h3>
                 </div>
-                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
+                <p className="mt-1 text-xs leading-relaxed text-slate-200 sm:text-[13px]">
                   原帖答主推演了冰盖南移、气温骤降。我们提炼为三大绝境事实：
                   <strong>运河冻死、暴风雪只剩7天倒计时、关口架起重机枪</strong>
                   。玩家一进来不是在做阅读理解，而是必须立刻救下三百万同胞的命！
@@ -255,9 +256,11 @@ export function Slide3Cast({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                     <span>【拒绝上帝视角】每个人都有致命软肋，逼你做痛苦抉择</span>
                   </h3>
                 </div>
-                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
+                <p className="mt-1 text-xs leading-relaxed text-slate-200 sm:text-[13px]">
                   不给玩家开全能外挂！你扮演的是有血有肉的真实当权者：
-                  <strong>军垦师长手里有兵但极度缺粮、知府手握大仓但被朝廷死死卡住、部族女头人掌管唯一驯鹿运输线却一心救族人</strong>
+                  <strong>
+                    军垦师长手里有兵但极度缺粮、知府手握大仓但被朝廷死死卡住、部族女头人掌管唯一驯鹿运输线却一心救族人
+                  </strong>
                   。选谁，谁的软肋就由你来抗！
                 </p>
               </div>
@@ -273,19 +276,18 @@ export function Slide3Cast({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                     <span>【表面大义凛然，背后各打各的利益小算盘】</span>
                   </h3>
                 </div>
-                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
+                <p className="mt-1 text-xs leading-relaxed text-slate-200 sm:text-[13px]">
                   谁说开会都是一团和气？每个角色嘴上都是天下大局，
-                  <strong>水面之下各怀绝密暗盘与利益底线</strong>。明暗交织，AI 朝臣演出来的戏才叫真刀真枪、尔虞我诈！
+                  <strong>水面之下各怀绝密暗盘与利益底线</strong>。明暗交织，AI
+                  朝臣演出来的戏才叫真刀真枪、尔虞我诈！
                 </p>
               </div>
             </div>
 
             {/* 底部技术注记 */}
-            <div className="shrink-0 rounded-lg border border-orange-500/40 bg-orange-950/40 px-3 py-2 text-xs sm:text-[13px] text-orange-300">
+            <div className="shrink-0 rounded-lg border border-orange-500/40 bg-orange-950/40 px-3 py-2 text-xs text-orange-300 sm:text-[13px]">
               <strong className="text-orange-400">💡 演示玩法：</strong>
-              <span>
-                点击左侧 3 位主角卡片直接换人！身份和底牌当场变幻，推演走向立刻翻天覆地！
-              </span>
+              <span>点击左侧 3 位主角卡片直接换人！身份和底牌当场变幻，推演走向立刻翻天覆地！</span>
             </div>
           </aside>
         </div>

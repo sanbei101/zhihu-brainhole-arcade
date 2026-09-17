@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress, ProgressLabel, ProgressValue } from "@/components/ui/progress";
 import { getSkin, isDarkSkin, skinStyleVars, type ScenarioSkin } from "@/lib/scenario-skin";
 
 import { useMockGame } from "../mock/game-state";
@@ -210,55 +209,67 @@ export function Slide6Finale({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
           {/* 右侧：世界终局数据卡与社区飞轮 (占 4 列) */}
           <div className="flex flex-col justify-between gap-2.5 lg:col-span-4 h-full overflow-hidden">
             {/* 世界终局数据卡 */}
-            <Card className="border-white/15 bg-[#26201d]/95 p-3.5 shadow-xs shrink-0">
+            <Card className="border-white/15 bg-[#26201d]/95 p-3.5 shadow-md shrink-0">
               <CardHeader className="border-b border-white/10 p-0 pb-2">
-                <CardTitle className="flex items-center justify-between text-xs sm:text-sm font-bold text-slate-100">
+                <CardTitle className="flex items-center justify-between text-sm sm:text-base font-black text-slate-100">
                   <span>极寒终局存续数据卡</span>
-                  <span className="font-mono text-xs font-bold text-emerald-400">文明存续 92.4%</span>
+                  <Badge className="bg-emerald-500 font-mono text-xs font-black text-black px-2 py-0.5">
+                    文明存续 92.4%
+                  </Badge>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2.5 p-0 pt-2.5">
+              <CardContent className="space-y-3 p-0 pt-3">
                 {[
-                  { label: "族群存续", val: MOCK_FINALE.metricsSummary.morale },
-                  { label: "秩序稳定", val: MOCK_FINALE.metricsSummary.stability },
-                  { label: "民众支持", val: MOCK_FINALE.metricsSummary.support },
-                  { label: "战略资源", val: MOCK_FINALE.metricsSummary.resources },
+                  { label: "族群存续", val: MOCK_FINALE.metricsSummary.morale, color: "from-orange-500 to-amber-400" },
+                  { label: "秩序稳定", val: MOCK_FINALE.metricsSummary.stability, color: "from-blue-500 to-cyan-400" },
+                  { label: "民众支持", val: MOCK_FINALE.metricsSummary.support, color: "from-emerald-500 to-teal-400" },
+                  { label: "战略资源", val: MOCK_FINALE.metricsSummary.resources, color: "from-amber-500 to-yellow-400" },
                 ].map((item) => (
-                  <Progress key={item.label} value={item.val}>
-                    <ProgressLabel className="text-xs font-medium text-slate-300">
-                      {item.label}
-                    </ProgressLabel>
-                    <ProgressValue className="font-mono text-xs font-bold text-orange-400">
-                      {() => item.val}
-                    </ProgressValue>
-                  </Progress>
+                  <div key={item.label} className="space-y-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-black text-slate-200">
+                        {item.label}
+                      </span>
+                      <span className="font-mono text-base sm:text-lg font-black text-orange-400">
+                        {item.val}
+                      </span>
+                    </div>
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-slate-800">
+                      <div
+                        className={`h-full rounded-full bg-gradient-to-r ${item.color} transition-all`}
+                        style={{ width: `${item.val}%` }}
+                      />
+                    </div>
+                  </div>
                 ))}
               </CardContent>
             </Card>
 
             {/* 私密目标达成判定卡 */}
-            <Card className="border-white/15 bg-[#26201d]/95 p-3 shadow-xs shrink-0">
-              <CardHeader className="p-0 pb-1.5">
-                <CardTitle className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-slate-200">
+            <Card className="border-white/15 bg-[#26201d]/95 p-3 shadow-md shrink-0">
+              <CardHeader className="p-0 pb-1.5 border-b border-white/10">
+                <CardTitle className="flex items-center gap-1.5 text-xs sm:text-sm font-black text-slate-100">
                   <ShieldQuestion className="size-4 text-[#e2622c]" />
                   <span>私密目标判定：圆满达成</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-0 text-xs leading-relaxed text-slate-300">
-                <p className="text-orange-200 font-bold">“三百万同胞一个都不能扔在冰原上”</p>
-                <p className="mt-1 text-slate-400 text-xs">
+              <CardContent className="p-0 pt-2 text-xs leading-relaxed text-slate-200">
+                <p className="text-xs sm:text-sm font-black text-orange-300">
+                  “三百万同胞一个都不能扔在冰原上”
+                </p>
+                <p className="mt-1 text-slate-300 text-xs sm:text-[13px] leading-relaxed">
                   以冰上长城绕开防守雷场，护送三百万军民横贯千里直下暖带，开辟极寒自救通衢。
                 </p>
               </CardContent>
             </Card>
 
             {/* 社区飞轮卡 */}
-            <div className="rounded-xl border border-orange-500/30 bg-orange-950/40 p-3 text-xs text-slate-300 shrink-0">
-              <div className="flex items-center gap-1.5 font-bold text-orange-400 text-xs sm:text-sm">
+            <div className="rounded-xl border border-orange-500/40 bg-orange-950/40 p-3 shadow-md shrink-0">
+              <div className="flex items-center gap-1.5 text-xs sm:text-sm font-black text-orange-400">
                 <Repeat className="size-4" />
-                <span>结算即内容社区飞轮</span>
+                <span>结算即内容 · 知乎社区飞轮</span>
               </div>
-              <p className="mt-1 text-slate-300 text-xs leading-relaxed">
+              <p className="mt-1.5 text-xs sm:text-[13px] text-slate-200 leading-relaxed font-medium">
                 一次沙盘推演，天然产出一篇严守知乎体感的万字亲历长回答，一键发回知乎原帖引爆社区讨论！
               </p>
             </div>

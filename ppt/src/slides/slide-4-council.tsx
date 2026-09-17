@@ -149,25 +149,25 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
           </aside>
 
           {/* 👉 右半边（占 6 列）：放人物卡牌与选项卡牌 */}
-          <section className="flex h-full flex-col justify-between gap-2.5 overflow-hidden lg:col-span-6">
+          <section className="flex h-full flex-col justify-between gap-2 overflow-hidden lg:col-span-6">
             {/* 上半部分：人物卡牌（当前执政主角 + 4 位 Agent 议事席位） */}
-            <div className="shrink-0 rounded-xl border border-white/10 bg-[#26201d]/90 p-2.5 shadow-md">
-              <div className="grid grid-cols-1 gap-2 sm:grid-cols-12">
+            <div className="shrink-0 rounded-xl border border-white/10 bg-[#26201d]/90 p-2 shadow-md">
+              <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-12">
                 {/* 执政主角卡 (占 5 列) */}
-                <div className="flex flex-col justify-between rounded-lg border-2 border-orange-500/60 bg-orange-950/40 p-2 sm:col-span-5">
+                <div className="flex flex-col justify-between rounded-lg border-2 border-orange-500/60 bg-orange-950/40 p-1.5 sm:col-span-5">
                   <div className="flex items-center justify-between font-mono text-[10px] text-orange-400">
                     <span className="font-bold">ACTIVE LEADER</span>
                     <span className="py-0.2 rounded bg-orange-500 px-1 text-[9px] font-black text-black">
                       执棋
                     </span>
                   </div>
-                  <div className="mt-1 flex items-center gap-2">
-                    <div className="flex size-16 shrink-0 items-center justify-center rounded-lg border border-white/15 bg-black/70 p-0.5 shadow-inner">
+                  <div className="mt-0.5 flex items-center gap-2">
+                    <div className="flex size-11 shrink-0 items-center justify-center rounded-lg border border-white/15 bg-black/70 p-0.5 shadow-inner">
                       <PixelSprite
                         frames={playerPortrait.frames}
                         palette={playerPortrait.palette}
                         label={playerPortrait.label}
-                        scale={2}
+                        scale={1.4}
                         className={portraitMotionClass(playerPortrait.motion, false)}
                       />
                     </div>
@@ -180,13 +180,13 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                       </span>
                     </div>
                   </div>
-                  <p className="mt-1 line-clamp-1 text-[11px] leading-tight text-slate-300">
+                  <p className="mt-0.5 line-clamp-1 text-[10px] leading-tight text-slate-300">
                     {selectedPlayer.publicGoal}
                   </p>
                 </div>
 
                 {/* 4 位 Agent 议事席位网格 (占 7 列) */}
-                <div className="grid grid-cols-2 gap-1.5 sm:col-span-7">
+                <div className="grid grid-cols-2 gap-1 sm:col-span-7">
                   {agents.map((agent: MockAgentCharacter) => {
                     const spritePortrait = portraitFor(agent, skin);
                     const forecastLean = selectedOption.forecast.find(
@@ -195,16 +195,16 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                     return (
                       <div
                         key={agent.id}
-                        className="flex flex-col justify-between rounded border border-white/10 bg-black/40 px-2 py-1 text-[11px] shadow-xs"
+                        className="flex flex-col justify-between rounded border border-white/10 bg-black/40 px-1.5 py-1 text-[10px] shadow-xs"
                       >
                         <div className="flex items-center justify-between">
                           <div className="flex min-w-0 items-center gap-1.5">
-                            <div className="flex size-5 shrink-0 items-center justify-center rounded bg-white/10">
+                            <div className="flex size-4.5 shrink-0 items-center justify-center rounded bg-white/10">
                               <PixelSprite
                                 frames={spritePortrait.frames}
                                 palette={spritePortrait.palette}
                                 label={spritePortrait.label}
-                                scale={0.8}
+                                scale={0.7}
                                 className={portraitMotionClass(spritePortrait.motion, false)}
                               />
                             </div>
@@ -225,15 +225,15 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                           </span>
                         </div>
                         {/* 信任条 */}
-                        <div className="mt-1 flex items-center gap-1.5 text-[9px] text-slate-400">
+                        <div className="mt-0.5 flex items-center gap-1.5 text-[9px] text-slate-400">
                           <div className="h-1 flex-1 overflow-hidden rounded-full bg-slate-800">
                             <div
                               className={`h-full rounded-full transition-all ${
                                 agent.trust > 60
-                                  ? "bg-emerald-500"
-                                  : agent.trust > 40
-                                    ? "bg-amber-500"
-                                    : "bg-red-500"
+                                    ? "bg-emerald-500"
+                                    : agent.trust > 40
+                                      ? "bg-amber-500"
+                                      : "bg-red-500"
                               }`}
                               style={{ width: `${agent.trust}%` }}
                             />
@@ -249,8 +249,8 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
               </div>
             </div>
 
-            {/* 下半部分：选项卡牌 (ABCD 四卡大字排布) */}
-            <div className="flex flex-1 flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-[#26201d]/90 p-3 shadow-md">
+            {/* 下半部分：选项卡牌 (ABCD 四卡大字排布，紧凑舒展，绝不截断) */}
+            <div className="flex flex-1 flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-[#26201d]/90 p-2.5 shadow-md">
               <div className="flex shrink-0 items-center justify-between border-b border-white/10 pb-1 text-xs">
                 <span className="flex items-center gap-1.5 font-bold text-slate-200">
                   <GitFork className="size-3.5 text-orange-400" />
@@ -259,7 +259,7 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                 <span className="font-mono text-[11px] text-orange-400">4 档战略抉择</span>
               </div>
 
-              <div className="grid flex-1 grid-cols-1 gap-2 overflow-hidden pt-1.5">
+              <div className="flex flex-1 flex-col justify-between gap-1.5 pt-1">
                 {options.map((opt: MockDecisionOption) => {
                   const isSelected = opt.id === selectedOption.id;
                   const isEpic = opt.id === "D";
@@ -267,18 +267,18 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                     <div
                       key={opt.id}
                       onClick={() => setSelectedOptionId(opt.id)}
-                      className={`flex cursor-pointer flex-col justify-between rounded-xl border p-2.5 transition-all ${
+                      className={`flex cursor-pointer flex-col justify-between rounded-lg border px-2.5 py-1.5 transition-all ${
                         isSelected
                           ? isEpic
-                            ? "scale-[1.01] border-amber-400 bg-amber-950/70 shadow-md ring-2 ring-amber-400/50"
-                            : "scale-[1.01] border-[#e2622c] bg-orange-950/70 shadow-md ring-2 ring-[#e2622c]/50"
+                            ? "border-amber-400 bg-amber-950/70 shadow-md ring-2 ring-amber-400/50"
+                            : "border-[#e2622c] bg-orange-950/70 shadow-md ring-2 ring-[#e2622c]/50"
                           : "border-white/10 bg-black/30 hover:border-white/20 hover:bg-white/5"
                       }`}
                     >
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1.5">
                           <span
-                            className={`flex size-5.5 items-center justify-center rounded font-mono text-xs font-black text-black ${
+                            className={`flex size-5 items-center justify-center rounded font-mono text-xs font-black text-black ${
                               isEpic ? "bg-amber-400" : "bg-orange-500"
                             }`}
                           >
@@ -290,7 +290,7 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                         </div>
                         <Badge
                           variant="outline"
-                          className={`h-5 px-1.5 text-[10px] ${
+                          className={`h-4.5 px-1.5 text-[9px] ${
                             isEpic
                               ? "border-amber-400 bg-amber-950/80 font-bold text-amber-300 ring-1 ring-amber-400/50"
                               : "border-white/20 text-slate-300"
@@ -300,19 +300,19 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                         </Badge>
                       </div>
 
-                      <p className="mt-1 line-clamp-1 text-xs leading-normal text-slate-300">
+                      <p className="mt-0.5 line-clamp-1 text-[11px] sm:text-xs leading-tight text-slate-300">
                         {opt.desc}
                       </p>
 
                       {opt.epigraph && (
-                        <div className="mt-1 line-clamp-1 rounded border border-amber-500/40 bg-amber-950/60 px-2 py-0.5 text-xs font-bold text-amber-200">
+                        <div className="mt-0.5 line-clamp-1 rounded border border-amber-500/40 bg-amber-950/60 px-1.5 py-0.2 text-[10px] sm:text-[11px] font-bold text-amber-200">
                           🌟 飞升决议: “{opt.epigraph}”
                         </div>
                       )}
 
                       {/* 指标损益 */}
-                      <div className="mt-1 flex items-center justify-between border-t border-white/5 pt-1 font-mono text-[11px] text-slate-400">
-                        <div className="flex gap-2.5">
+                      <div className="mt-0.5 flex items-center justify-between border-t border-white/5 pt-0.5 font-mono text-[10px] sm:text-[11px] text-slate-400">
+                        <div className="flex gap-2">
                           <span>
                             稳定:{" "}
                             <strong
@@ -355,8 +355,8 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                           </span>
                         </div>
                         {isSelected ? (
-                          <span className="flex items-center gap-1 text-xs font-bold text-orange-400">
-                            <Check className="size-3.5" />
+                          <span className="flex items-center gap-1 text-[11px] font-bold text-orange-400">
+                            <Check className="size-3" />
                             已拟定落子
                           </span>
                         ) : null}
