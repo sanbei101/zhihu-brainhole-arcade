@@ -72,49 +72,49 @@ export function Slide9LiveSandbox({ skin: initialSkin }: { skin: ScenarioSkin })
   const curKanshan = KANSHAN_LIST[kanshanIndex];
 
   return (
-    <div className="relative flex size-full flex-col justify-between gap-6 overflow-hidden rounded-2xl border border-white/80 bg-white/80 p-6 text-slate-900 shadow-2xl backdrop-blur-md sm:rounded-3xl sm:p-10 lg:p-12">
+    <div className="relative flex size-full max-h-full scrollbar-none flex-col justify-between gap-3 overflow-y-auto rounded-2xl border border-white/80 bg-white/80 p-4 text-slate-900 shadow-2xl backdrop-blur-md sm:gap-5 sm:rounded-3xl sm:p-6 lg:p-8">
       {/* 顶部标题 */}
-      <div className="space-y-2">
+      <div className="space-y-1 sm:space-y-2">
         <div className="flex items-center gap-2 font-mono text-xs font-bold tracking-widest text-[#0066ff] uppercase sm:text-sm">
           <span>[现场交互演示舱 · 资产与算法验算]</span>
         </div>
-        <h2 className="text-3xl leading-tight font-black text-slate-900 sm:text-4xl lg:text-5xl">
-          现场沙盘演练：全套程序化资产与刘看山动图互动
+        <h2 className="text-2xl leading-tight font-black text-slate-900 sm:text-3xl lg:text-4xl">
+          现场沙盘演练：全套程序化资产与刘看山动图交互
         </h2>
-        <p className="text-sm text-slate-600 sm:text-lg">
-          评委可现场点击切换 10 大平行世界皮肤、不同角色性格立绘，亲身体验毫秒级渲染与情绪律动。
+        <p className="text-xs text-slate-600 sm:text-sm lg:text-base">
+          现场点击即可切换 10 大平行世界皮肤与不同角色原型立绘，验证纯前端毫秒级渲染与情绪微律动。
         </p>
       </div>
 
       {/* 核心双沙盘演示区 */}
-      <div className="my-auto grid grid-cols-1 gap-6 lg:grid-cols-12">
-        {/* 左侧：大号像素舞台与角色控制器（7列） */}
-        <div className="flex flex-col justify-between space-y-4 rounded-2xl border-2 border-blue-200 bg-white/95 p-6 shadow-xl backdrop-blur-2xl lg:col-span-7">
-          <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-            <span className="flex items-center gap-2 font-mono text-sm font-black text-slate-900 sm:text-base">
+      <div className="my-auto grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-6">
+        {/* 左侧：像素舞台与角色控制器（7列） */}
+        <div className="flex flex-col justify-between space-y-3.5 rounded-2xl border-2 border-blue-200 bg-white/95 p-4 shadow-xl backdrop-blur-2xl sm:p-5 lg:col-span-7">
+          <div className="flex items-center justify-between border-b border-slate-200 pb-2.5">
+            <span className="flex items-center gap-2 font-mono text-xs font-black text-slate-900 sm:text-sm">
               <Eye className="size-4 text-[#0066ff]" />
               <span>程序化议事厅舞台 (Live Stage View)</span>
             </span>
             <button
               type="button"
               onClick={() => setIsTalking(!isTalking)}
-              className="cursor-pointer rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-xs font-bold text-[#0066ff] shadow-xs transition-colors hover:bg-blue-100"
+              className="cursor-pointer rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-bold text-[#0066ff] shadow-xs transition-colors hover:bg-blue-100"
             >
               律动状态: {isTalking ? "即席交锋 (Talk) 🗣️" : "平息待命 (Idle) 🤫"}
             </button>
           </div>
 
-          {/* 舞台背景与当前大号角色 */}
-          <div className="relative flex h-56 flex-col justify-end overflow-hidden rounded-xl border border-slate-300 bg-slate-50 shadow-inner">
+          {/* 舞台背景与当前角色：大号舞台 */}
+          <div className="relative flex h-48 flex-col justify-end overflow-hidden rounded-xl border border-slate-300 bg-slate-50 shadow-inner sm:h-56">
             <div className="absolute inset-0">
               <ThemeScene skin={activeSkin} variant="strip" className="size-full" />
             </div>
 
             {/* 角色与台词气泡 */}
-            <div className="relative z-10 flex items-end justify-between px-8 pb-3">
-              <div className="flex items-end gap-5">
+            <div className="relative z-10 flex items-end justify-between px-5 pb-3 sm:px-6 sm:pb-3.5">
+              <div className="flex items-end gap-3.5 sm:gap-4">
                 <div
-                  className={`drop-shadow-md transition-all duration-300 ${
+                  className={`drop-shadow-lg transition-all duration-300 ${
                     isTalking
                       ? "animate-[portrait-talk_1.05s_ease-in-out_infinite]"
                       : "animate-[portrait-idle_3.2s_ease-in-out_infinite]"
@@ -124,46 +124,48 @@ export function Slide9LiveSandbox({ skin: initialSkin }: { skin: ScenarioSkin })
                     label={curChar.name}
                     frames={portrait.frames}
                     palette={portrait.palette}
-                    scale={5.8}
+                    scale={5.2}
                   />
                 </div>
-                <div className="mb-3 max-w-sm rounded-2xl border-2 border-slate-300 bg-white/95 p-3.5 text-slate-900 shadow-xl backdrop-blur-xl">
+                <div className="mb-2.5 max-w-xs rounded-2xl border-2 border-slate-300 bg-white/95 p-3 text-slate-900 shadow-xl backdrop-blur-xl sm:max-w-sm sm:p-3.5">
                   <div className="font-mono text-xs font-bold text-[#0066ff]">
                     {curChar.name} · {curChar.identity}
                   </div>
-                  <div className="mt-1 text-sm leading-snug font-black text-slate-900 sm:text-base">
+                  <div className="mt-1 text-xs leading-snug font-black text-slate-900 sm:text-sm">
                     “{curChar.quote}”
                   </div>
                 </div>
               </div>
 
-              <div className="mb-3 space-y-0.5 rounded-xl border border-slate-200 bg-white/90 px-3 py-1.5 text-right font-mono text-xs text-slate-600 shadow-xs">
+              <div className="mb-2.5 space-y-0.5 rounded-xl border border-slate-200 bg-white/90 px-3 py-1.5 text-right font-mono text-xs text-slate-600 shadow-xs">
                 <div className="font-bold text-emerald-700">FPS: 60 (Locked)</div>
                 <div>DOM: 1 Path / Color</div>
               </div>
             </div>
           </div>
 
-          {/* 角色切换按钮组：大号按钮 */}
+          {/* 角色切换按钮组 */}
           <div>
-            <div className="mb-2 flex items-center gap-1.5 font-mono text-xs font-bold text-slate-600 sm:text-sm">
-              <User className="size-4 text-[#0066ff]" />
+            <div className="mb-1.5 flex items-center gap-1.5 font-mono text-xs font-bold text-slate-600">
+              <User className="size-3.5 text-[#0066ff]" />
               <span>选择推演角色原型 (Archetype):</span>
             </div>
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-4 gap-2">
               {CHARACTERS.map((char, index) => (
                 <button
                   key={char.id}
                   type="button"
                   onClick={() => setSelectedCharIndex(index)}
-                  className={`cursor-pointer rounded-xl border-2 p-3 text-left transition-all ${
+                  className={`cursor-pointer rounded-xl border-2 p-2.5 text-left transition-all ${
                     selectedCharIndex === index
                       ? "scale-102 border-[#0066ff] bg-blue-50 text-[#0066ff] shadow-md"
                       : "border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                   }`}
                 >
-                  <div className="text-sm font-black sm:text-base">{char.name}</div>
-                  <div className="mt-0.5 truncate text-xs text-slate-500">{char.identity}</div>
+                  <div className="text-xs font-black sm:text-sm">{char.name}</div>
+                  <div className="mt-0.5 truncate text-[11px] text-slate-500 sm:text-xs">
+                    {char.identity}
+                  </div>
                 </button>
               ))}
             </div>
@@ -171,45 +173,47 @@ export function Slide9LiveSandbox({ skin: initialSkin }: { skin: ScenarioSkin })
         </div>
 
         {/* 右侧：刘看山动图互动与 10 大平行世界换肤（5列） */}
-        <div className="flex flex-col justify-between space-y-4 rounded-2xl border-2 border-slate-200 bg-white/95 p-6 shadow-xl backdrop-blur-2xl lg:col-span-5">
+        <div className="flex flex-col justify-between space-y-3 rounded-xl border-2 border-slate-200 bg-white/95 p-3.5 shadow-xl backdrop-blur-2xl sm:rounded-2xl sm:p-5 lg:col-span-5">
           {/* 知乎刘看山动图切换 */}
-          <div className="space-y-3">
-            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-              <span className="flex items-center gap-2 font-mono text-sm font-black text-slate-900 sm:text-base">
-                <Sparkles className="size-4 text-[#0066ff]" />
+          <div className="space-y-2.5">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+              <span className="flex items-center gap-1.5 font-mono text-xs font-black text-slate-900 sm:text-sm">
+                <Sparkles className="size-3.5 text-[#0066ff] sm:size-4" />
                 <span>知乎吉祥物 · 刘看山</span>
               </span>
-              <span className="font-mono text-xs font-bold text-[#0066ff]">点击动作切换</span>
+              <span className="font-mono text-[11px] font-bold text-[#0066ff] sm:text-xs">
+                点击动作切换
+              </span>
             </div>
 
-            <div className="flex items-center gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4 shadow-xs">
-              <div className="size-20 shrink-0 overflow-hidden rounded-2xl border border-slate-200 bg-white p-1.5 shadow-xs sm:size-24">
+            <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-2.5 shadow-xs sm:p-3">
+              <div className="size-14 shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white p-1 shadow-xs sm:size-16">
                 <img
                   src={curKanshan.file}
                   alt={curKanshan.name}
                   className="size-full object-contain"
                 />
               </div>
-              <div className="space-y-1">
-                <div className="flex items-center gap-2 text-base font-black text-slate-900">
+              <div className="space-y-0.5">
+                <div className="flex items-center gap-2 text-xs font-black text-slate-900 sm:text-sm">
                   <span>{curKanshan.name}</span>
-                  <span className="rounded-full border border-blue-200 bg-blue-100 px-2 py-0.5 font-mono text-xs font-bold text-[#0066ff]">
+                  <span className="rounded-full border border-blue-200 bg-blue-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-[#0066ff]">
                     Official Asset
                   </span>
                 </div>
-                <p className="text-xs leading-relaxed font-medium text-slate-600 sm:text-sm">
+                <p className="text-[11px] leading-relaxed font-medium text-slate-600 sm:text-xs">
                   {curKanshan.desc}
                 </p>
               </div>
             </div>
 
-            <div className="flex scrollbar-none gap-2 overflow-x-auto pb-1">
+            <div className="flex scrollbar-none gap-1.5 overflow-x-auto pb-1">
               {KANSHAN_LIST.map((k, idx) => (
                 <button
                   key={k.id}
                   type="button"
                   onClick={() => setKanshanIndex(idx)}
-                  className={`shrink-0 cursor-pointer rounded-lg px-3 py-1.5 font-mono text-xs font-bold transition-all ${
+                  className={`shrink-0 cursor-pointer rounded-lg px-2.5 py-1 font-mono text-xs font-bold transition-all ${
                     kanshanIndex === idx
                       ? "scale-105 bg-[#0066ff] text-white shadow-xs"
                       : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900"
@@ -221,28 +225,28 @@ export function Slide9LiveSandbox({ skin: initialSkin }: { skin: ScenarioSkin })
             </div>
           </div>
 
-          {/* 10 大平行世界皮肤矩阵：大按钮 */}
-          <div className="border-t border-slate-200 pt-3">
-            <div className="mb-2.5 flex items-center justify-between font-mono text-xs font-bold text-slate-600 sm:text-sm">
+          {/* 10 大平行世界皮肤矩阵 */}
+          <div className="border-t border-slate-200 pt-2.5">
+            <div className="mb-2 flex items-center justify-between font-mono text-xs font-bold text-slate-600">
               <span>平行世界动态换肤:</span>
               <span className="text-[#0066ff]">
                 {activeSkin.name} ({activeSkin.mood})
               </span>
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-1.5">
               {LIGHT_SKINS.slice(0, 8).map((s) => (
                 <button
                   key={s.id}
                   type="button"
                   onClick={() => setActiveSkin(s)}
-                  className={`flex cursor-pointer items-center gap-2 rounded-xl border px-3 py-2 text-left text-xs shadow-xs transition-all sm:text-sm ${
+                  className={`flex cursor-pointer items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-left text-xs shadow-xs transition-all ${
                     activeSkin.id === s.id
                       ? "scale-102 border-[#0066ff] bg-blue-50 font-black text-[#0066ff] shadow-xs"
                       : "border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100"
                   }`}
                 >
                   <span
-                    className="size-2.5 shrink-0 rounded-full shadow-xs ring-1 ring-black/10"
+                    className="size-2 shrink-0 rounded-full shadow-xs ring-1 ring-black/10"
                     style={{ backgroundColor: s.accent }}
                   />
                   <span className="truncate font-medium">{s.name}</span>
@@ -254,12 +258,12 @@ export function Slide9LiveSandbox({ skin: initialSkin }: { skin: ScenarioSkin })
       </div>
 
       {/* 底部架构说明 */}
-      <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-6 py-3 text-xs text-slate-600 shadow-xs sm:text-sm">
+      <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-xs text-slate-600 shadow-xs sm:px-6 sm:py-2.5 sm:text-sm">
         <span>
-          全套生成器均为<strong>纯函数无随机数设计</strong>，完全杜绝客户端与服务端水合不一致。
+          全套生成器均为<strong>纯函数确定性设计</strong>，完全杜绝客户端与服务端水合不一致。
         </span>
-        <span className="font-mono text-sm font-bold text-emerald-700">
-          100% Deterministic Code
+        <span className="font-mono text-xs font-bold text-emerald-700 sm:text-sm">
+          100% Deterministic Engine
         </span>
       </div>
     </div>

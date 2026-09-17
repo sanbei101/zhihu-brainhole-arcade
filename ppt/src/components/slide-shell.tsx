@@ -90,10 +90,10 @@ export function SlideShell({
         </div>
       </header>
 
-      {/* 主体展示区：底部留出高度，让地台与巡游精灵完整露脸！ */}
+      {/* 主体展示区：紧凑自适应高度，底部露出地台与行走精灵，低高度笔记本不截断 */}
       <main
-        className={`relative z-10 flex flex-1 flex-col justify-center overflow-hidden ${
-          noPadding ? "" : "px-4 py-2 pb-12 sm:px-10 sm:py-3 sm:pb-16 lg:px-14 lg:pb-22"
+        className={`relative z-10 flex min-h-0 flex-1 flex-col justify-center overflow-hidden ${
+          noPadding ? "" : "px-3 py-1 pb-5 sm:px-6 sm:py-2 sm:pb-7 lg:px-10 lg:pb-10"
         }`}
       >
         {children}
