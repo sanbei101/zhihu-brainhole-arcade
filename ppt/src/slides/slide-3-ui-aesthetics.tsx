@@ -64,10 +64,10 @@ export function Slide3UiAesthetics({ skin: initialSkin }: { skin: ScenarioSkin }
             ⚡ DOM 节点合并 -85%
           </span>
           <span className="rounded-lg border border-emerald-200 bg-emerald-50 px-2.5 py-1 font-mono text-xs font-black text-emerald-700">
-            ⚡ 60fps 极限锁定
+            ⚡ 120fps 极限锁定
           </span>
           <span className="rounded-lg border border-purple-200 bg-purple-50 px-2.5 py-1 font-mono text-xs font-black text-purple-700">
-            ⚡ 0 外部图片依赖
+            ⚡ 0 图片依赖
           </span>
           <span className="rounded-lg border border-amber-200 bg-amber-50 px-2.5 py-1 font-mono text-xs font-black text-amber-700">
             ⚡ 10 大平行宇宙秒级换肤
@@ -83,19 +83,15 @@ export function Slide3UiAesthetics({ skin: initialSkin }: { skin: ScenarioSkin }
           <div className="space-y-2 rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-sm backdrop-blur-xl sm:p-5">
             <div className="flex items-center gap-2 text-base font-black text-[#0066ff] sm:text-lg">
               <Zap className="size-5 shrink-0 text-[#0066ff]" />
-              <span>01. SVG 路径合并算法 (Path Merging Optimization)</span>
+              <span>像素路径优化算法</span>
             </div>
             <p className="text-xs leading-relaxed text-slate-700 sm:text-sm">
               传统点阵使用成百上千个{" "}
               <code className="rounded border border-slate-200 bg-slate-100 px-1 py-0.5 font-mono text-xs text-[#0066ff]">
                 &lt;rect&gt;
               </code>{" "}
-              元素，DOM 树过深极易引发重绘掉帧。本项目自研{" "}
-              <code className="rounded border border-slate-200 bg-slate-100 px-1 py-0.5 font-mono text-xs text-[#0066ff]">
-                frameToPaths
-              </code>{" "}
-              算法，将单帧同色像素批量合并为单条路径定义，DOM 节点数量缩减 85%，锁死 60fps
-              稳定帧率。
+              元素，DOM 树过深极易引发重绘掉帧。本项目对性能进行深度优化
+              将单帧同色像素批量合并为单条路径定义，DOM 节点数量缩减 85%，锁死 120fps 稳定帧率。
             </p>
           </div>
 
@@ -103,7 +99,7 @@ export function Slide3UiAesthetics({ skin: initialSkin }: { skin: ScenarioSkin }
           <div className="space-y-2 rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-sm backdrop-blur-xl sm:p-5">
             <div className="flex items-center gap-2 text-base font-black text-amber-700 sm:text-lg">
               <Eye className="size-5 shrink-0 text-amber-600" />
-              <span>02. 情绪驱动程序化微律动 (Procedural Motion)</span>
+              <span>情绪驱动程序化微律动</span>
             </div>
             <p className="text-xs leading-relaxed text-slate-700 sm:text-sm">
               按躯干、头冠、面容与手持物等部件模块化拼接，支持
@@ -117,7 +113,7 @@ export function Slide3UiAesthetics({ skin: initialSkin }: { skin: ScenarioSkin }
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-base font-black text-emerald-700 sm:text-lg">
                 <Palette className="size-5 shrink-0 text-emerald-600" />
-                <span>03. 语义化 Design Tokens (Zero-CSS Overhead)</span>
+                <span>语义化 Design Tokens</span>
               </div>
               <span className="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 font-mono text-xs text-slate-500">
                 右侧可现场切换
