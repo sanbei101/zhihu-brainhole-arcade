@@ -74,10 +74,10 @@ export function Slide3Cast({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
 
       {/* 🎭 核心双栏：左侧规则指引 + 右侧开场危机与 3 位主角卡片 (16:9 精确比例) */}
       <section className="mx-auto w-full max-w-7xl flex-1 px-4 py-2 sm:px-6 sm:py-2.5">
-        <div className="grid h-full grid-cols-1 gap-3 lg:grid-cols-12 lg:gap-4">
-          {/* 左栏：复刻原版世界线角色召集规则 (占 4 列) */}
-          <aside className="flex flex-col justify-between rounded-xl border border-white/10 bg-[#26201d]/90 p-3 shadow-md lg:col-span-4">
-            <div className="space-y-2">
+        <div className="grid h-full grid-cols-1 gap-3 lg:grid-cols-12 lg:gap-3.5">
+          {/* 左栏：世界线角色召集规则与局势设定 (占 3 列，紧凑精致) */}
+          <aside className="flex flex-col justify-between rounded-xl border border-white/10 bg-[#26201d]/90 p-3 shadow-md lg:col-span-3">
+            <div className="space-y-2.5">
               <div className="flex items-center justify-between border-b border-white/10 pb-1.5">
                 <Badge variant="secondary" className="bg-orange-950/60 text-[10px] text-orange-400">
                   WORLDLINE / CAST
@@ -85,56 +85,56 @@ export function Slide3Cast({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                 <span className="font-mono text-[10px] text-slate-400">STAGE 2</span>
               </div>
               <h2 className="text-sm font-black text-slate-100 sm:text-base">世界线推演与角色召集</h2>
-              <p className="text-[11px] leading-relaxed text-slate-400">
+              <p className="text-xs leading-relaxed text-slate-400">
                 北纬四十度冰盖南压，零下四十三度寒风封江。三百万北方幸存者南迁撞上闭锁关隘。
               </p>
-              <ol className="space-y-1.5 pt-1 text-[11px] text-slate-300">
+              <ol className="space-y-2 pt-1 text-xs text-slate-300">
                 <li className="flex gap-2">
-                  <span className="font-mono font-bold text-orange-400">01</span>
+                  <span className="flex size-4.5 shrink-0 items-center justify-center rounded bg-orange-950/80 font-mono text-[10px] font-bold text-orange-400">01</span>
                   <span>建立时间、地点与极寒资源命门</span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="font-mono font-bold text-orange-400">02</span>
+                  <span className="flex size-4.5 shrink-0 items-center justify-center rounded bg-orange-950/80 font-mono text-[10px] font-bold text-orange-400">02</span>
                   <span>生成权力来源不同的玩家候选角色</span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="font-mono font-bold text-orange-400">03</span>
-                  <span>配置由独立 Agent 扮演的利益相关者</span>
+                  <span className="flex size-4.5 shrink-0 items-center justify-center rounded bg-orange-950/80 font-mono text-[10px] font-bold text-orange-400">03</span>
+                  <span>配置独立 Agent 扮演的利益博弈方</span>
                 </li>
               </ol>
             </div>
 
             {/* 场景时空设定框 */}
-            <div className="rounded-lg border border-orange-500/30 bg-orange-950/30 p-2 text-[10px] text-orange-300">
+            <div className="rounded-lg border border-orange-500/40 bg-orange-950/40 p-2.5 text-xs text-orange-300">
               <span className="font-bold">局势时空：</span>
-              <span>冰河开启第140天 · 松花江双堡关 · 零下43℃</span>
+              <p className="mt-0.5 font-mono text-[11px] text-orange-200">冰河第140天 · 松花江双堡关 · 零下43℃</p>
             </div>
           </aside>
 
-          {/* 右栏：开场横幅 + 选择你的角色 3 张卡片 + 4 路 Agent (占 8 列) */}
-          <section className="flex flex-col justify-between gap-2 lg:col-span-8">
+          {/* 右栏：开场横幅 + 选择你的角色 3 张大卡片 + 4 路 Agent (占 9 列) */}
+          <section className="flex flex-col justify-between gap-2.5 lg:col-span-9">
             {/* 开场危机条 */}
-            <div className="rounded-xl border border-l-4 border-orange-500 border-white/10 bg-black/40 px-3.5 py-2">
+            <div className="rounded-xl border border-l-4 border-orange-500 border-white/10 bg-black/50 px-4 py-2 shadow-xs">
               <div className="flex items-center justify-between">
-                <p className="font-mono text-[10px] font-bold text-orange-400">ACT I / OPENING</p>
-                <span className="font-mono text-[10px] text-slate-400">三百万人的南迁命门</span>
+                <p className="font-mono text-[11px] font-bold text-orange-400">ACT I / OPENING · 绝境开场</p>
+                <span className="font-mono text-[11px] text-slate-400">三百万人的南迁命门</span>
               </div>
-              <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-200">
+              <p className="mt-1 text-xs leading-relaxed text-slate-200">
                 零下四十三度的寒风卷着冰晶，封冻江面上蜿蜒着三百万大迁徙队伍。关隘上重机枪冰冷，关隘下婴儿啼哭。放，则南方粮仓被吃穿；不放，则关外冻尸千里。
               </p>
             </div>
 
-            {/* 3 位玩家候选角色卡片 */}
-            <div>
-              <div className="mb-1.5 flex items-center justify-between">
+            {/* 3 位玩家候选角色卡片：大尺寸立绘与清晰排版 */}
+            <div className="flex-1 flex flex-col justify-between">
+              <div className="mb-2 flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
-                  <UserRound className="size-3.5 text-orange-400" />
-                  <span className="text-xs font-black text-slate-100">选择你的扮演角色（点击立局）</span>
+                  <UserRound className="size-4 text-orange-400" />
+                  <span className="text-sm font-black text-slate-100">选择你的扮演角色（点击立局）</span>
                 </div>
-                <span className="text-[10px] text-slate-400">选择后揭示该角色私密动机</span>
+                <span className="text-xs text-slate-400">选择后揭示该角色私密动机与破局底线</span>
               </div>
 
-              <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 flex-1">
                 {players.map((character: MockPlayerCharacter) => {
                   const isSelected = character.id === selectedPlayer.id;
                   const spritePortrait = portraitFor(character, skin);
@@ -143,57 +143,57 @@ export function Slide3Cast({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                     <Card
                       key={character.id}
                       onClick={() => setSelectedPlayerId(character.id)}
-                      className={`cursor-pointer border-2 bg-[#26201d]/95 p-2.5 shadow-xs transition-all ${
+                      className={`cursor-pointer flex flex-col justify-between border-2 bg-[#26201d]/95 p-3.5 shadow-md transition-all ${
                         isSelected
-                          ? "border-[#e2622c] bg-orange-950/40 ring-1 ring-orange-500/50 shadow-md"
-                          : "border-slate-700/80 hover:border-slate-500"
+                          ? "border-[#e2622c] bg-orange-950/50 ring-2 ring-orange-500/60 shadow-lg scale-[1.01]"
+                          : "border-slate-700/80 hover:border-slate-500 hover:bg-black/30"
                       }`}
                     >
-                      <CardHeader className="p-0 pb-1.5">
-                        <div className="flex items-center justify-between gap-1.5">
-                          <div className="flex items-center gap-2">
-                            <div className="flex size-7 items-center justify-center rounded bg-black/50 p-0.5">
+                      <CardHeader className="p-0 pb-2">
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex items-center gap-3">
+                            <div className="flex size-14 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-black/70 p-1 shadow-inner">
                               <PixelSprite
                                 frames={spritePortrait.frames}
                                 palette={spritePortrait.palette}
                                 label={spritePortrait.label}
-                                scale={1.1}
+                                scale={2.2}
                                 className={portraitMotionClass(spritePortrait.motion, false)}
                               />
                             </div>
                             <div>
-                              <CardTitle className="text-xs font-black text-slate-100">
+                              <CardTitle className="text-base font-black text-slate-100">
                                 {character.name}
                               </CardTitle>
-                              <CardDescription className="text-[9px] text-slate-400">
+                              <CardDescription className="mt-0.5 text-xs font-medium text-slate-400">
                                 {character.identity.split("·")[0]}
                               </CardDescription>
                             </div>
                           </div>
-                          <Badge variant="outline" className="border-orange-500/40 text-[9px] text-orange-300">
+                          <Badge variant="outline" className="border-orange-500/50 text-[10px] font-bold text-orange-300">
                             {character.faction.split("与")[0]}
                           </Badge>
                         </div>
                       </CardHeader>
 
-                      <CardContent className="space-y-1 p-0 text-[10px] leading-tight text-slate-300">
-                        <p className="line-clamp-2 text-slate-400">{character.publicGoal}</p>
-                        <div className="rounded bg-orange-950/40 p-1 text-[10px] text-orange-300">
-                          <strong>私密动机：</strong>
-                          <span className="line-clamp-1">{character.privateGoal}</span>
+                      <CardContent className="space-y-2 p-0 text-xs leading-relaxed text-slate-300 flex-1 flex flex-col justify-around">
+                        <p className="text-slate-300 leading-normal line-clamp-3">{character.publicGoal}</p>
+                        <div className="rounded-lg border border-orange-500/30 bg-orange-950/60 p-2 text-xs text-orange-200">
+                          <strong className="text-orange-400">私密动机：</strong>
+                          <span>{character.privateGoal}</span>
                         </div>
                       </CardContent>
 
-                      <CardFooter className="mt-1.5 p-0">
+                      <CardFooter className="mt-2.5 p-0">
                         <Button
                           variant={isSelected ? "default" : "outline"}
-                          size="xs"
+                          size="sm"
                           className={cn(
-                            "h-6 w-full text-[10px] font-bold",
-                            isSelected ? "bg-[#e2622c] text-black" : "border-slate-700 text-slate-300",
+                            "h-8 w-full text-xs font-bold shadow-xs",
+                            isSelected ? "bg-[#e2622c] text-black hover:bg-orange-500" : "border-slate-700 text-slate-200 hover:bg-white/10",
                           )}
                         >
-                          {isSelected ? "已选定此身份" : `扮演 ${character.name}`}
+                          {isSelected ? "✓ 已选定此执棋身份" : `扮演 ${character.name}`}
                         </Button>
                       </CardFooter>
                     </Card>
@@ -202,22 +202,36 @@ export function Slide3Cast({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
               </div>
             </div>
 
-            {/* 4 位 Agent 预览 */}
-            <div className="rounded-lg border border-white/10 bg-black/30 p-2">
-              <div className="mb-1 flex items-center justify-between text-[11px]">
-                <span className="flex items-center gap-1 font-bold text-slate-300">
-                  <Bot className="size-3 text-orange-400" />
+            {/* 4 位 Agent 预览卡片 */}
+            <div className="rounded-xl border border-white/10 bg-black/40 p-2.5 shadow-xs">
+              <div className="mb-1.5 flex items-center justify-between text-xs">
+                <span className="flex items-center gap-1.5 font-bold text-slate-300">
+                  <Bot className="size-3.5 text-orange-400" />
                   <span>本场 4 位独立 Agent 利益博弈方：</span>
                 </span>
-                <span className="font-mono text-[10px] text-slate-400">各怀死守与自救底线</span>
+                <span className="font-mono text-[11px] text-slate-400">多智能体并发决策 · 各怀死守与自救底线</span>
               </div>
-              <div className="grid grid-cols-2 gap-1 text-[10px] sm:grid-cols-4">
-                {agents.map((agent: MockAgentCharacter) => (
-                  <div key={agent.id} className="rounded bg-white/5 px-2 py-1">
-                    <span className="font-bold text-orange-300">{agent.name}</span>
-                    <span className="text-slate-400"> ({agent.identity.split("·")[0]})</span>
-                  </div>
-                ))}
+              <div className="grid grid-cols-2 gap-2 text-xs sm:grid-cols-4">
+                {agents.map((agent: MockAgentCharacter) => {
+                  const agentSprite = portraitFor(agent, skin);
+                  return (
+                    <div key={agent.id} className="flex items-center gap-2 rounded-lg border border-white/5 bg-white/5 px-2.5 py-1.5">
+                      <div className="flex size-7 shrink-0 items-center justify-center rounded bg-black/60 p-0.5">
+                        <PixelSprite
+                          frames={agentSprite.frames}
+                          palette={agentSprite.palette}
+                          label={agentSprite.label}
+                          scale={1.1}
+                          className={portraitMotionClass(agentSprite.motion, false)}
+                        />
+                      </div>
+                      <div className="min-w-0">
+                        <span className="block font-black text-orange-300 truncate">{agent.name}</span>
+                        <span className="block text-[10px] text-slate-400 truncate">{agent.identity.split("·")[0]}</span>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </section>

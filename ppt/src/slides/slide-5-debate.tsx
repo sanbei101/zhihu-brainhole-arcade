@@ -84,48 +84,48 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
               </span>
             </div>
 
-            {/* 角色立绘对立站位 */}
-            <div className="my-auto flex items-center justify-around py-3 sm:py-4">
+            {/* 角色立绘对立站位：大画幅竞技舞台 */}
+            <div className="my-auto flex items-center justify-around py-4 sm:py-6">
               {/* 发言人 1 */}
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="flex size-16 items-center justify-center overflow-hidden rounded-xl border-2 border-cyan-500/40 bg-slate-900/90 p-1 shadow-lg shadow-cyan-500/10 backdrop-blur-sm sm:size-20">
+              <div className="flex flex-col items-center gap-2">
+                <div className="flex size-28 sm:size-32 lg:size-36 items-center justify-center overflow-hidden rounded-2xl border-2 border-cyan-400/60 bg-gradient-to-b from-slate-900 via-black to-slate-950 p-2 shadow-xl shadow-cyan-500/20 backdrop-blur-md">
                   <PixelSprite
                     frames={speakerPortrait.frames}
                     palette={speakerPortrait.palette}
                     label={speakerPortrait.label}
-                    scale={2.2}
+                    scale={3.8}
                     className={portraitMotionClass(speakerPortrait.motion, true)}
                   />
                 </div>
                 <div className="text-center">
-                  <div className="text-xs font-black text-slate-100">{currentBeat.speaker.name}</div>
-                  <div className="text-[10px] text-slate-400">{currentBeat.speaker.identity.split("·")[0]}</div>
+                  <div className="text-sm sm:text-base font-black text-cyan-300">{currentBeat.speaker.name}</div>
+                  <div className="text-xs font-bold text-slate-400">{currentBeat.speaker.identity.split("·")[0]}</div>
                 </div>
               </div>
 
               {/* 双人短兵相接 VS 标志 */}
               {opponentPortrait && currentBeat.opponent ? (
                 <>
-                  <div className="flex flex-col items-center gap-1 font-mono text-xs font-black text-amber-400">
-                    <div className="flex size-8 animate-pulse items-center justify-center rounded-full border border-amber-400/40 bg-amber-500/20 shadow-lg shadow-amber-500/20">
-                      <Swords className="size-4" />
+                  <div className="flex flex-col items-center gap-1.5 font-mono text-sm font-black text-amber-400">
+                    <div className="flex size-11 animate-pulse items-center justify-center rounded-full border-2 border-amber-400/60 bg-amber-500/30 shadow-xl shadow-amber-500/30">
+                      <Swords className="size-5 text-amber-300" />
                     </div>
-                    <span>VS</span>
+                    <span className="tracking-widest">VS</span>
                   </div>
 
-                  <div className="flex flex-col items-center gap-1.5">
-                    <div className="flex size-16 items-center justify-center overflow-hidden rounded-xl border-2 border-red-500/40 bg-slate-900/90 p-1 shadow-lg shadow-red-500/10 backdrop-blur-sm sm:size-20">
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="flex size-28 sm:size-32 lg:size-36 items-center justify-center overflow-hidden rounded-2xl border-2 border-red-500/60 bg-gradient-to-b from-slate-900 via-black to-slate-950 p-2 shadow-xl shadow-red-500/20 backdrop-blur-md">
                       <PixelSprite
                         frames={opponentPortrait.frames}
                         palette={opponentPortrait.palette}
                         label={opponentPortrait.label}
-                        scale={2.2}
+                        scale={3.8}
                         className={portraitMotionClass(opponentPortrait.motion, true)}
                       />
                     </div>
                     <div className="text-center">
-                      <div className="text-xs font-black text-slate-100">{currentBeat.opponent.name}</div>
-                      <div className="text-[10px] text-slate-400">{currentBeat.opponent.identity.split("·")[0]}</div>
+                      <div className="text-sm sm:text-base font-black text-red-400">{currentBeat.opponent.name}</div>
+                      <div className="text-xs font-bold text-slate-400">{currentBeat.opponent.identity.split("·")[0]}</div>
                     </div>
                   </div>
                 </>
@@ -133,16 +133,16 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
             </div>
 
             {/* 动态台词气泡框 */}
-            <div className="rounded-xl border border-white/10 bg-white/5 p-3 text-xs leading-relaxed text-slate-100 backdrop-blur-md">
-              <div className="mb-1 flex items-center gap-1.5 font-mono text-[10px] font-bold text-amber-300">
-                <Volume2 className="size-3" />
+            <div className="rounded-xl border border-white/15 bg-black/60 p-3.5 text-xs sm:text-sm leading-relaxed text-slate-100 backdrop-blur-md shadow-md">
+              <div className="mb-1.5 flex items-center gap-1.5 font-mono text-xs font-bold text-amber-300">
+                <Volume2 className="size-3.5 text-[#e2622c]" />
                 <span>
                   {currentBeat.opponent
                     ? `${currentBeat.speaker.name} ➔ 对抗驳斥 ➔ ${currentBeat.opponent.name}`
                     : `${currentBeat.speaker.name} 发言中`}
                 </span>
               </div>
-              <p className="font-serif leading-relaxed whitespace-pre-line text-slate-200">
+              <p className="font-serif leading-relaxed whitespace-pre-line text-slate-200 text-xs sm:text-sm">
                 {currentBeat.speech}
               </p>
             </div>

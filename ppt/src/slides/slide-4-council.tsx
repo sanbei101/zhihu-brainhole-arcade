@@ -81,42 +81,42 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
       <section className="mx-auto w-full max-w-7xl flex-1 px-4 py-2 sm:px-6 sm:py-2.5">
         <div className="grid h-full grid-cols-1 gap-2.5 lg:grid-cols-12 lg:gap-3.5">
           {/* 左栏：100% SeatsPanel (玩家席位 + 4 路 Agent 席位，占 3 列) */}
-          <div className="flex flex-col justify-between gap-2 rounded-xl border border-white/10 bg-[#26201d]/90 p-2.5 shadow-md lg:col-span-3">
+          <div className="flex flex-col justify-between gap-2.5 rounded-xl border border-white/10 bg-[#26201d]/90 p-3 shadow-md lg:col-span-3">
             {/* 玩家席位 */}
-            <div className="rounded-lg border border-orange-500/40 bg-orange-950/40 p-2">
-              <div className="flex items-center justify-between text-[9px] font-mono text-orange-400">
-                <span>ACTIVE PLAYER</span>
-                <span className="font-bold">掌印执棋</span>
+            <div className="rounded-xl border-2 border-orange-500/50 bg-orange-950/50 p-2.5 shadow-sm">
+              <div className="flex items-center justify-between text-[10px] font-mono text-orange-400">
+                <span className="font-bold">ACTIVE PLAYER</span>
+                <span className="rounded bg-orange-500 px-1 py-0.2 font-black text-black text-[9px]">掌印执棋</span>
               </div>
-              <div className="mt-1 flex items-center gap-2">
-                <div className="flex size-7 items-center justify-center rounded bg-black/60 p-0.5">
+              <div className="mt-1.5 flex items-center gap-2.5">
+                <div className="flex size-12 shrink-0 items-center justify-center rounded-lg border border-white/15 bg-black/70 p-1 shadow-inner">
                   <PixelSprite
                     frames={playerPortrait.frames}
                     palette={playerPortrait.palette}
                     label={playerPortrait.label}
-                    scale={1}
+                    scale={1.8}
                     className={portraitMotionClass(playerPortrait.motion, false)}
                   />
                 </div>
-                <div>
-                  <span className="text-xs font-black text-slate-100">{selectedPlayer.name}</span>
-                  <span className="block text-[9px] text-slate-400">{selectedPlayer.identity.split("·")[0]}</span>
+                <div className="min-w-0">
+                  <span className="block text-sm font-black text-slate-100 truncate">{selectedPlayer.name}</span>
+                  <span className="block text-xs font-bold text-orange-300 truncate">{selectedPlayer.identity.split("·")[0]}</span>
                 </div>
               </div>
-              <p className="mt-1 line-clamp-1 text-[10px] text-slate-300">{selectedPlayer.publicGoal}</p>
+              <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-slate-300">{selectedPlayer.publicGoal}</p>
             </div>
 
             {/* 4 位 Agent 议事席位 */}
-            <div className="space-y-1">
-              <div className="flex items-center justify-between border-b border-white/10 pb-1 text-[10px] font-mono text-slate-400">
-                <span className="flex items-center gap-1 font-bold text-slate-300">
-                  <Users className="size-3 text-orange-400" />
-                  <span>四方势力席位</span>
+            <div className="space-y-1.5 flex-1 flex flex-col justify-between">
+              <div className="flex items-center justify-between border-b border-white/10 pb-1 text-xs font-mono text-slate-400">
+                <span className="flex items-center gap-1.5 font-bold text-slate-200">
+                  <Users className="size-3.5 text-orange-400" />
+                  <span>四方势力席位 (Seats)</span>
                 </span>
-                <span>SEATS</span>
+                <span className="text-[10px]">博弈态势</span>
               </div>
 
-              <div className="space-y-1">
+              <div className="space-y-1.5">
                 {agents.map((agent: MockAgentCharacter) => {
                   const spritePortrait = portraitFor(agent, skin);
                   const forecastLean = selectedOption.forecast.find(
@@ -125,37 +125,39 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                   return (
                     <div
                       key={agent.id}
-                      className="rounded border border-white/5 bg-black/30 px-2 py-1 text-[10px]"
+                      className="rounded-lg border border-white/10 bg-black/40 px-2.5 py-1.5 text-xs shadow-xs"
                     >
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1.5">
-                          <div className="flex size-5 items-center justify-center rounded bg-white/10 p-0.5">
+                        <div className="flex items-center gap-2">
+                          <div className="flex size-8 shrink-0 items-center justify-center rounded-md border border-white/10 bg-white/10 p-0.5">
                             <PixelSprite
                               frames={spritePortrait.frames}
                               palette={spritePortrait.palette}
                               label={spritePortrait.label}
-                              scale={0.8}
+                              scale={1.3}
                               className={portraitMotionClass(spritePortrait.motion, false)}
                             />
                           </div>
-                          <span className="font-bold text-slate-200">{agent.name}</span>
-                          <span className="text-[9px] text-slate-500">({agent.identity.split("·")[0]})</span>
+                          <div>
+                            <span className="font-bold text-slate-200 text-xs">{agent.name}</span>
+                            <span className="ml-1 text-[10px] text-slate-400">({agent.identity.split("·")[0]})</span>
+                          </div>
                         </div>
                         <span
-                          className={`rounded px-1 text-[9px] font-bold ${
+                          className={`rounded px-1.5 py-0.5 text-[10px] font-bold ${
                             forecastLean === "支持"
-                              ? "bg-emerald-950 text-emerald-400"
+                              ? "bg-emerald-950 text-emerald-400 border border-emerald-500/40"
                               : forecastLean === "反对"
-                                ? "bg-red-950 text-red-400"
-                                : "bg-amber-950 text-amber-400"
+                                ? "bg-red-950 text-red-400 border border-red-500/40"
+                                : "bg-amber-950 text-amber-400 border border-amber-500/40"
                           }`}
                         >
                           {forecastLean ?? agent.attitude}
                         </span>
                       </div>
                       {/* 信任度血条 */}
-                      <div className="mt-1 flex items-center gap-1.5 text-[9px] text-slate-400">
-                        <div className="h-1 flex-1 overflow-hidden rounded-full bg-slate-800">
+                      <div className="mt-1 flex items-center gap-2 text-[10px] text-slate-400">
+                        <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-800">
                           <div
                             className={`h-full rounded-full transition-all ${
                               agent.trust > 60
@@ -167,7 +169,7 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                             style={{ width: `${agent.trust}%` }}
                           />
                         </div>
-                        <span className="font-mono">{agent.trust}%</span>
+                        <span className="font-mono font-bold text-slate-300">{agent.trust}%</span>
                       </div>
                     </div>
                   );
@@ -177,64 +179,67 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
           </div>
 
           {/* 中栏：SpeechStage 像素舞台 + DecisionPanel 梯度抉择 (占 6 列) */}
-          <div className="flex flex-col justify-between gap-2 lg:col-span-6">
-            {/* 🎭 SpeechStage 极寒暗黑对峙舞台 (紧凑 16:9 高度) */}
-            <div className="rounded-xl border border-white/15 bg-gradient-to-b from-black/80 via-black/90 to-black/80 p-2.5 shadow-md">
-              <div className="flex items-center justify-between border-b border-white/10 pb-1 text-[10px]">
+          <div className="flex flex-col justify-between gap-2.5 lg:col-span-6">
+            {/* 🎭 SpeechStage 极寒暗黑对峙舞台 (突出立绘对决) */}
+            <div className="rounded-xl border border-white/15 bg-gradient-to-b from-black/85 via-black/95 to-black/85 p-3 shadow-md">
+              <div className="flex items-center justify-between border-b border-white/10 pb-1 text-xs">
                 <span className="font-mono font-bold text-orange-400">
                   【沈寒山 vs 燕崇山 · 矛与盾尖锐交锋】
                 </span>
-                <span className="rounded bg-red-950/80 px-1.5 py-0.2 font-mono text-[9px] text-red-400">
+                <span className="rounded bg-red-950 px-2 py-0.5 font-mono text-[10px] font-bold text-red-400 border border-red-500/40">
                   短兵相接
                 </span>
               </div>
 
               {/* 两个立绘对峙 */}
-              <div className="flex items-center justify-around py-1.5">
-                <div className="flex flex-col items-center gap-1">
-                  <div className="flex size-11 items-center justify-center rounded-lg border border-cyan-500/40 bg-slate-900 p-0.5">
+              <div className="flex items-center justify-around py-2">
+                <div className="flex flex-col items-center gap-1.5">
+                  <div className="flex size-14 items-center justify-center rounded-xl border-2 border-cyan-500/50 bg-slate-900 p-1 shadow-md">
                     <PixelSprite
                       frames={portraitFor(agents[2], skin).frames}
                       palette={portraitFor(agents[2], skin).palette}
                       label={agents[2].name}
-                      scale={1.5}
+                      scale={2.2}
                       className={portraitMotionClass(portraitFor(agents[2], skin).motion, true)}
                     />
                   </div>
-                  <span className="text-[10px] font-bold text-cyan-300">{agents[2].name}</span>
+                  <span className="text-xs font-bold text-cyan-300">{agents[2].name}</span>
                 </div>
 
-                <div className="font-mono text-xs font-black text-amber-400 animate-pulse">VS</div>
+                <div className="flex flex-col items-center gap-0.5 font-mono text-base font-black text-amber-400 animate-pulse">
+                  <span>⚔️</span>
+                  <span>VS</span>
+                </div>
 
-                <div className="flex flex-col items-center gap-1">
-                  <div className="flex size-11 items-center justify-center rounded-lg border border-red-500/40 bg-slate-900 p-0.5">
+                <div className="flex flex-col items-center gap-1.5">
+                  <div className="flex size-14 items-center justify-center rounded-xl border-2 border-red-500/50 bg-slate-900 p-1 shadow-md">
                     <PixelSprite
                       frames={portraitFor(agents[0], skin).frames}
                       palette={portraitFor(agents[0], skin).palette}
                       label={agents[0].name}
-                      scale={1.5}
+                      scale={2.2}
                       className={portraitMotionClass(portraitFor(agents[0], skin).motion, true)}
                     />
                   </div>
-                  <span className="text-[10px] font-bold text-red-400">{agents[0].name}</span>
+                  <span className="text-xs font-bold text-red-400">{agents[0].name}</span>
                 </div>
               </div>
 
               {/* 动态对话气泡 */}
-              <div className="rounded-lg border border-white/10 bg-white/5 p-2 text-[11px] leading-relaxed text-slate-200">
+              <div className="rounded-lg border border-white/10 bg-white/5 p-2.5 text-xs leading-relaxed text-slate-200">
                 <strong className="text-cyan-300">沈寒山厉声：</strong>
                 <span>“极端寒潮提前二十三天到来，夜间跌破零下五十五度！你闭关死守不是守土，是替暴风雪屠杀三百万同胞！”</span>
               </div>
             </div>
 
-            {/* 🎲 DecisionPanel (ABCD 梯度抉择卡) */}
-            <div className="space-y-1.5 rounded-xl border border-white/10 bg-[#26201d]/90 p-2.5 shadow-md">
-              <div className="flex items-center justify-between text-[10px]">
+            {/* 🎲 DecisionPanel (ABCD 梯度抉择卡：大字清晰排版) */}
+            <div className="space-y-2 rounded-xl border border-white/10 bg-[#26201d]/90 p-3 shadow-md flex-1 flex flex-col justify-between">
+              <div className="flex items-center justify-between text-xs">
                 <span className="font-bold text-slate-200">拟草决策 · 推动世界线分叉</span>
-                <span className="text-slate-400">掌握起草权，点击即刻联动指标</span>
+                <span className="text-slate-400 text-[11px]">掌握起草权，点击即刻联动全局指标</span>
               </div>
 
-              <div className="space-y-1.5">
+              <div className="space-y-2 flex-1 flex flex-col justify-between">
                 {options.map((opt: MockDecisionOption) => {
                   const isSelected = opt.id === selectedOption.id;
                   const isEpic = opt.id === "D";
@@ -242,49 +247,49 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                     <div
                       key={opt.id}
                       onClick={() => setSelectedOptionId(opt.id)}
-                      className={`cursor-pointer rounded-lg border p-2 text-xs transition-all ${
+                      className={`cursor-pointer rounded-xl border p-2.5 transition-all ${
                         isSelected
                           ? isEpic
-                            ? "border-amber-400 bg-amber-950/50 shadow-md ring-1 ring-amber-400/50"
-                            : "border-[#e2622c] bg-orange-950/50 shadow-md ring-1 ring-[#e2622c]/50"
-                          : "border-white/10 bg-black/20 hover:border-white/20"
+                            ? "border-amber-400 bg-amber-950/60 shadow-md ring-2 ring-amber-400/50 scale-[1.01]"
+                            : "border-[#e2622c] bg-orange-950/60 shadow-md ring-2 ring-[#e2622c]/50 scale-[1.01]"
+                          : "border-white/10 bg-black/30 hover:border-white/20 hover:bg-white/5"
                       }`}
                     >
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1.5">
+                        <div className="flex items-center gap-2">
                           <span
-                            className={`flex size-4 items-center justify-center rounded font-mono text-[10px] font-black text-black ${
+                            className={`flex size-5 items-center justify-center rounded font-mono text-xs font-black text-black ${
                               isEpic ? "bg-amber-400" : "bg-orange-500"
                             }`}
                           >
                             {opt.id}
                           </span>
-                          <strong className="text-[11px] font-bold text-slate-100">{opt.title}</strong>
+                          <strong className="text-xs sm:text-sm font-bold text-slate-100">{opt.title}</strong>
                         </div>
-                        <Badge variant="outline" className="h-4 border-white/20 px-1 text-[9px] text-slate-300">
+                        <Badge variant="outline" className="h-5 border-white/20 px-1.5 text-[10px] text-slate-300">
                           {opt.risk}档抉择
                         </Badge>
                       </div>
 
-                      <p className="mt-0.5 line-clamp-1 text-[10px] text-slate-400">{opt.desc}</p>
+                      <p className="mt-1 text-xs text-slate-300 leading-normal line-clamp-1">{opt.desc}</p>
 
                       {opt.epigraph && (
-                        <div className="mt-1 rounded border border-amber-500/40 bg-amber-950/40 px-2 py-0.5 text-[10px] font-bold text-amber-200">
+                        <div className="mt-1.5 rounded border border-amber-500/40 bg-amber-950/50 px-2.5 py-1 text-xs font-bold text-amber-200">
                           🌟 天命破壁: “{opt.epigraph}”
                         </div>
                       )}
 
                       {/* 指标预测 */}
-                      <div className="mt-1 flex items-center justify-between border-t border-white/5 pt-1 text-[9px] font-mono text-slate-400">
-                        <div className="flex gap-2">
+                      <div className="mt-1.5 flex items-center justify-between border-t border-white/5 pt-1 text-[11px] font-mono text-slate-400">
+                        <div className="flex gap-3">
                           <span>稳定: <strong className={opt.deltas.stability >= 0 ? "text-emerald-400" : "text-red-400"}>{opt.impactText.stability}</strong></span>
                           <span>士气: <strong className={opt.deltas.morale >= 0 ? "text-emerald-400" : "text-red-400"}>{opt.impactText.morale}</strong></span>
                           <span>民心: <strong className={opt.deltas.support >= 0 ? "text-emerald-400" : "text-red-400"}>{opt.impactText.support}</strong></span>
                           <span>物资: <strong className={opt.deltas.resources >= 0 ? "text-emerald-400" : "text-red-400"}>{opt.impactText.resources}</strong></span>
                         </div>
                         {isSelected ? (
-                          <span className="flex items-center gap-0.5 font-bold text-orange-400">
-                            <Check className="size-3" />
+                          <span className="flex items-center gap-1 font-bold text-orange-400 text-xs">
+                            <Check className="size-3.5" />
                             已拟定落子
                           </span>
                         ) : null}

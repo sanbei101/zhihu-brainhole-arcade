@@ -1,4 +1,5 @@
-import { Check, Copy, Repeat, ShieldQuestion, Trophy } from "lucide-react";
+import { Check, Copy, Repeat, ShieldQuestion, Sparkles, Trophy } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -26,6 +27,40 @@ export function Slide6Finale({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
   ];
 
   const currentChapter = allChapters[activeChapterIndex] ?? allChapters[0];
+  const fullText = currentChapter.content;
+
+  const [displayedText, setDisplayedText] = useState("");
+  const [isTyping, setIsTyping] = useState(true);
+
+  const replayTyping = useCallback(() => {
+    setDisplayedText("");
+    setIsTyping(true);
+  }, []);
+
+  useEffect(() => {
+    setDisplayedText("");
+    setIsTyping(true);
+
+    let currentIndex = 0;
+    const step = 6; // 极速流式生成：每秒约 350-400 字
+    const timer = setInterval(() => {
+      currentIndex += step;
+      if (currentIndex >= fullText.length) {
+        setDisplayedText(fullText);
+        setIsTyping(false);
+        clearInterval(timer);
+      } else {
+        setDisplayedText(fullText.slice(0, currentIndex));
+      }
+    }, 16);
+
+    return () => clearInterval(timer);
+  }, [fullText]);
+
+  const handleSkipTyping = () => {
+    setDisplayedText(fullText);
+    setIsTyping(false);
+  };
 
   return (
     <main
@@ -99,7 +134,27 @@ export function Slide6Finale({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                   </span>
                   <span className="text-[11px] text-slate-400">· 深度亲历回答</span>
                 </div>
-                <span className="font-mono text-[10px] text-slate-400">全卷共 12,850 字</span>
+                <div className="flex items-center gap-2">
+                  {isTyping ? (
+                    <span className="flex items-center gap-1 font-mono text-[10px] text-orange-400 font-bold animate-pulse">
+                      <Sparkles className="size-3 text-[#e2622c]" />
+                      DeepSeek V4.1 推演生成中...
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-1 font-mono text-[10px] text-emerald-400 font-bold">
+                      <Check className="size-3" />
+                      全文已铸成 · 12,850 字
+                    </span>
+                  )}
+                  <button
+                    type="button"
+                    onClick={replayTyping}
+                    title="重新播放流式生成"
+                    className="flex size-5 items-center justify-center rounded bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white transition-all cursor-pointer"
+                  >
+                    <Repeat className="size-2.5" />
+                  </button>
+                </div>
               </div>
 
               {/* 答主信息 */}
@@ -143,11 +198,28 @@ export function Slide6Finale({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
               </div>
             </CardHeader>
 
-            {/* 正文区域 */}
-            <CardContent className="p-0 pt-2 text-xs">
-              <h4 className="mb-1 text-xs font-black text-orange-300">{currentChapter.title}</h4>
-              <div className="font-serif leading-relaxed whitespace-pre-line text-slate-200 line-clamp-6">
-                {currentChapter.content}
+            {/* 正文区域：打字机极速流式生成 */}
+            <CardContent
+              onClick={handleSkipTyping}
+              className="p-0 pt-2 text-xs flex-1 flex flex-col justify-between cursor-pointer group"
+              title={isTyping ? "点击直接展示全文" : undefined}
+            >
+              <div className="flex items-center justify-between mb-1.5">
+                <h4 className="text-xs sm:text-sm font-black text-orange-300 flex items-center gap-1.5">
+                  <span>{currentChapter.title}</span>
+                </h4>
+                {isTyping && (
+                  <span className="text-[10px] text-slate-400 group-hover:text-orange-400 font-mono transition-colors">
+                    点击跳过生成 ➔
+                  </span>
+                )}
+              </div>
+
+              <div className="font-serif leading-relaxed whitespace-pre-line text-slate-100 text-xs sm:text-[13px] bg-black/40 rounded-xl p-3 border border-white/10 flex-1 min-h-[140px] shadow-inner">
+                {displayedText}
+                {isTyping && (
+                  <span className="inline-block w-1.5 h-4 ml-0.5 bg-[#e2622c] animate-pulse align-middle" />
+                )}
               </div>
             </CardContent>
           </Card>
