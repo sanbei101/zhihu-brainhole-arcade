@@ -235,13 +235,11 @@ export function Slide3Cast({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                   </span>
                   <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
                     <FileText className="size-4 text-orange-400" />
-                    <span>【抓核心矛盾】把答主的科学推演，做成逼近眼前的生存死线</span>
+                    <span>【选择核心人物】正反派由你说了算</span>
                   </h3>
                 </div>
-                <p className="mt-1 text-xs leading-relaxed text-slate-200 sm:text-[13px]">
-                  原帖答主推演了冰盖南移、气温骤降。我们提炼为三大绝境事实：
-                  <strong>运河冻死、暴风雪只剩7天倒计时、关口架起重机枪</strong>
-                  。玩家一进来不是在做阅读理解，而是必须立刻救下三百万同胞的命！
+                <p className="mt-1 text-xs leading-relaxed text-slate-200 sm:text-lg">
+                  系统生成在这个世界观中,各方阵营举足轻重的代表人物,各有各的诉求和性格,增强多元化体验
                 </p>
               </div>
 

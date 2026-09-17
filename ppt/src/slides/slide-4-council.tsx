@@ -259,107 +259,155 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                 <span className="font-mono text-[11px] text-orange-400">4 档战略抉择</span>
               </div>
 
-              <div className="flex flex-1 flex-col justify-between gap-1.5 pt-1">
+              <div className="flex flex-1 flex-col justify-between gap-2 pt-1">
                 {options.map((opt: MockDecisionOption) => {
                   const isSelected = opt.id === selectedOption.id;
                   const isEpic = opt.id === "D";
+
+                  if (!isEpic) {
+                    return (
+                      <div
+                        key={opt.id}
+                        onClick={() => setSelectedOptionId(opt.id)}
+                        className={`flex cursor-pointer flex-col justify-between rounded-xl border p-2.5 sm:p-3 transition-all ${
+                          isSelected
+                            ? "border-[#e2622c] bg-orange-950/70 shadow-md ring-2 ring-[#e2622c]/50"
+                            : "border-white/10 bg-black/40 hover:border-white/20 hover:bg-white/5"
+                        }`}
+                      >
+                        {/* 标题栏 */}
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span className="flex size-5 items-center justify-center rounded bg-orange-500 font-mono text-xs font-black text-black">
+                              {opt.id}
+                            </span>
+                            <strong className="text-xs sm:text-sm font-black text-slate-100">
+                              {opt.title}
+                            </strong>
+                          </div>
+                          <Badge
+                            variant="outline"
+                            className="h-5 px-2 text-[10px] font-bold border-white/20 text-slate-200 bg-black/30"
+                          >
+                            {opt.risk}档抉择
+                          </Badge>
+                        </div>
+
+                        {/* 方案说明（舒展充实大字号） */}
+                        <p className="mt-1 text-xs sm:text-[12.5px] leading-relaxed text-slate-200">
+                          {opt.desc}
+                        </p>
+
+                        {/* 四维损益行 */}
+                        <div className="mt-1 flex items-center justify-between border-t border-white/10 pt-1 font-mono text-xs text-slate-300">
+                          <div className="flex items-center gap-2.5 sm:gap-3">
+                            <span>
+                              稳定:{" "}
+                              <strong className={opt.deltas.stability >= 0 ? "text-emerald-400 font-bold" : "text-red-400 font-bold"}>
+                                {opt.impactText.stability}
+                              </strong>
+                            </span>
+                            <span>
+                              士气:{" "}
+                              <strong className={opt.deltas.morale >= 0 ? "text-emerald-400 font-bold" : "text-red-400 font-bold"}>
+                                {opt.impactText.morale}
+                              </strong>
+                            </span>
+                            <span>
+                              民心:{" "}
+                              <strong className={opt.deltas.support >= 0 ? "text-emerald-400 font-bold" : "text-red-400 font-bold"}>
+                                {opt.impactText.support}
+                              </strong>
+                            </span>
+                            <span>
+                              物资:{" "}
+                              <strong className={opt.deltas.resources >= 0 ? "text-emerald-400 font-bold" : "text-red-400 font-bold"}>
+                                {opt.impactText.resources}
+                              </strong>
+                            </span>
+                          </div>
+
+                          {isSelected ? (
+                            <span className="flex items-center gap-1 text-xs font-black text-orange-400">
+                              <Check className="size-3.5" />
+                              已拟定落子
+                            </span>
+                          ) : (
+                            <span className="text-[10px] text-slate-400 hover:text-slate-200">点击拟定 ➔</span>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  }
+
+                  // 🌟 D 选项：单独做大做强，史诗级群星飞升决议卡
                   return (
                     <div
                       key={opt.id}
                       onClick={() => setSelectedOptionId(opt.id)}
-                      className={`flex cursor-pointer flex-col justify-between rounded-lg border px-2.5 py-1.5 transition-all ${
+                      className={`flex cursor-pointer flex-col justify-between rounded-xl border-2 p-2.5 sm:p-3 transition-all ${
                         isSelected
-                          ? isEpic
-                            ? "border-amber-400 bg-amber-950/70 shadow-md ring-2 ring-amber-400/50"
-                            : "border-[#e2622c] bg-orange-950/70 shadow-md ring-2 ring-[#e2622c]/50"
-                          : "border-white/10 bg-black/30 hover:border-white/20 hover:bg-white/5"
+                          ? "border-amber-400 bg-gradient-to-br from-amber-950/90 via-[#26201d] to-black/90 shadow-xl ring-2 ring-amber-400/50"
+                          : "border-amber-500/40 bg-amber-950/40 hover:border-amber-400/70 hover:bg-amber-950/60"
                       }`}
                     >
+                      {/* 顶部标题与飞升徽章 */}
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1.5">
-                          <span
-                            className={`flex size-5 items-center justify-center rounded font-mono text-xs font-black text-black ${
-                              isEpic ? "bg-amber-400" : "bg-orange-500"
-                            }`}
-                          >
+                        <div className="flex items-center gap-2">
+                          <span className="flex size-5.5 items-center justify-center rounded-md bg-amber-400 font-mono text-xs font-black text-black shadow-sm">
                             {opt.id}
                           </span>
-                          <strong className="text-xs font-black text-slate-100 sm:text-sm">
+                          <strong className="text-xs sm:text-sm font-black text-amber-200 tracking-wide">
                             {opt.title}
                           </strong>
                         </div>
-                        <Badge
-                          variant="outline"
-                          className={`h-4.5 px-1.5 text-[9px] ${
-                            isEpic
-                              ? "border-amber-400 bg-amber-950/80 font-bold text-amber-300 ring-1 ring-amber-400/50"
-                              : "border-white/20 text-slate-300"
-                          }`}
-                        >
-                          {isEpic ? "🌟 飞升抉择" : `${opt.risk}档抉择`}
+                        <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-black text-[10px] font-black px-2 py-0.5 shadow-sm">
+                          🌟 宇宙级飞升决议 · 群星巨构
                         </Badge>
                       </div>
 
-                      <p className="mt-0.5 line-clamp-1 text-[11px] sm:text-xs leading-tight text-slate-300">
+                      {/* 完整方案描述（舒展大字号，绝不省略截断） */}
+                      <p className="mt-1 text-xs sm:text-[12.5px] leading-relaxed text-slate-100 font-medium">
                         {opt.desc}
                       </p>
 
+                      {/* 专属飞升宣誓金句卡 */}
                       {opt.epigraph && (
-                        <div className="mt-0.5 line-clamp-1 rounded border border-amber-500/40 bg-amber-950/60 px-1.5 py-0.2 text-[10px] sm:text-[11px] font-bold text-amber-200">
-                          🌟 飞升决议: “{opt.epigraph}”
+                        <div className="mt-1 rounded-lg border border-amber-500/40 bg-black/50 px-2.5 py-1 text-xs text-amber-200 font-serif italic shadow-inner">
+                          <span className="font-bold text-amber-400 not-italic font-sans mr-1">🌟 飞升宣誓：</span>
+                          “{opt.epigraph}”
                         </div>
                       )}
 
-                      {/* 指标损益 */}
-                      <div className="mt-0.5 flex items-center justify-between border-t border-white/5 pt-0.5 font-mono text-[10px] sm:text-[11px] text-slate-400">
-                        <div className="flex gap-2">
-                          <span>
-                            稳定:{" "}
-                            <strong
-                              className={
-                                opt.deltas.stability >= 0 ? "text-emerald-400" : "text-red-400"
-                              }
-                            >
-                              {opt.impactText.stability}
-                            </strong>
+                      {/* 底部四维损益与决选徽章 */}
+                      <div className="mt-1 flex items-center justify-between border-t border-amber-500/30 pt-1 font-mono text-xs text-slate-300">
+                        <div className="flex items-center gap-3">
+                          <span className="flex items-center gap-1">
+                            <span className="text-slate-400">稳定:</span>
+                            <strong className="text-emerald-400 font-bold">{opt.impactText.stability}</strong>
                           </span>
-                          <span>
-                            士气:{" "}
-                            <strong
-                              className={
-                                opt.deltas.morale >= 0 ? "text-emerald-400" : "text-red-400"
-                              }
-                            >
-                              {opt.impactText.morale}
-                            </strong>
+                          <span className="flex items-center gap-1">
+                            <span className="text-slate-400">士气:</span>
+                            <strong className="text-emerald-400 font-bold text-sm sm:text-base">{opt.impactText.morale} 🚀</strong>
                           </span>
-                          <span>
-                            民心:{" "}
-                            <strong
-                              className={
-                                opt.deltas.support >= 0 ? "text-emerald-400" : "text-red-400"
-                              }
-                            >
-                              {opt.impactText.support}
-                            </strong>
+                          <span className="flex items-center gap-1">
+                            <span className="text-slate-400">民心:</span>
+                            <strong className="text-emerald-400 font-bold">{opt.impactText.support}</strong>
                           </span>
-                          <span>
-                            物资:{" "}
-                            <strong
-                              className={
-                                opt.deltas.resources >= 0 ? "text-emerald-400" : "text-red-400"
-                              }
-                            >
-                              {opt.impactText.resources}
-                            </strong>
+                          <span className="flex items-center gap-1">
+                            <span className="text-slate-400">物资:</span>
+                            <strong className="text-red-400 font-bold">{opt.impactText.resources}</strong>
                           </span>
                         </div>
+
                         {isSelected ? (
-                          <span className="flex items-center gap-1 text-[11px] font-bold text-orange-400">
-                            <Check className="size-3" />
-                            已拟定落子
+                          <span className="flex items-center gap-1 text-xs font-black text-amber-300 bg-amber-950/80 px-2 py-0.5 rounded border border-amber-400/50">
+                            <Check className="size-3.5" />
+                            已拟定最高决议
                           </span>
-                        ) : null}
+                        ) : (
+                          <span className="text-[11px] text-amber-400 font-bold">点击拟定飞升 ➔</span>
+                        )}
                       </div>
                     </div>
                   );
