@@ -20,25 +20,25 @@ export function OverviewDrawer({
   if (!isOpen) return null;
 
   return (
-    <div className="animate-in fade-in absolute inset-0 z-50 flex flex-col bg-black/85 p-6 backdrop-blur-2xl duration-200 sm:p-10">
-      <div className="flex items-center justify-between border-b border-white/10 pb-4">
+    <div className="animate-in fade-in absolute inset-0 z-50 flex flex-col bg-white/95 p-6 text-slate-900 backdrop-blur-2xl duration-200 sm:p-12">
+      <div className="flex items-center justify-between border-b border-slate-200 pb-5">
         <div>
-          <h2 className="text-xl font-bold text-white">答辩幻灯片大纲</h2>
-          <p className="mt-0.5 text-xs text-slate-400">
+          <h2 className="text-2xl font-black text-slate-900">答辩幻灯片大纲</h2>
+          <p className="mt-1 text-xs text-slate-500 sm:text-sm">
             共 {slides.length} 页，点击任意卡片即可直接跳转
           </p>
         </div>
         <button
           type="button"
           onClick={onClose}
-          className="flex size-9 cursor-pointer items-center justify-center rounded-lg border border-white/10 bg-white/5 text-slate-300 hover:bg-white/15"
+          className="flex size-10 cursor-pointer items-center justify-center rounded-xl border border-slate-200 bg-slate-100 text-slate-600 shadow-xs hover:bg-slate-200 hover:text-black"
           aria-label="关闭"
         >
           <X className="size-5" />
         </button>
       </div>
 
-      <div className="mt-6 grid flex-1 grid-cols-2 gap-4 overflow-y-auto pr-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <div className="mt-6 grid flex-1 grid-cols-2 gap-5 overflow-y-auto pr-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {slides.map((slide, index) => {
           const isCurrent = index === currentSlide;
           return (
@@ -49,29 +49,29 @@ export function OverviewDrawer({
                 onSelectSlide(index);
                 onClose();
               }}
-              className={`group flex cursor-pointer flex-col justify-between rounded-xl border p-4 text-left transition-all ${
+              className={`group flex cursor-pointer flex-col justify-between rounded-2xl border-2 p-5 text-left shadow-sm transition-all ${
                 isCurrent
-                  ? "border-[#0066ff] bg-[#0066ff]/15 shadow-lg ring-2 shadow-[#0066ff]/20 ring-[#0066ff]/50"
-                  : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10"
+                  ? "border-[#0066ff] bg-blue-50/90 shadow-md ring-4 shadow-[#0066ff]/15 ring-[#0066ff]/20"
+                  : "border-slate-200 bg-white hover:border-[#0066ff]/50 hover:bg-slate-50/80 hover:shadow-md"
               }`}
             >
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs font-bold text-slate-400 group-hover:text-white">
+                <span className="font-mono text-xs font-black text-slate-400 group-hover:text-[#0066ff]">
                   P{String(slide.number).padStart(2, "0")}
                 </span>
-                <span className="rounded bg-white/10 px-1.5 py-0.5 text-[9px] font-medium text-slate-300">
+                <span className="rounded-full border border-slate-200 bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-600">
                   {slide.category}
                 </span>
               </div>
 
-              <div className="my-3">
-                <h3 className="line-clamp-2 text-xs font-semibold text-white transition-colors group-hover:text-[#0066ff]">
+              <div className="my-4">
+                <h3 className="line-clamp-2 text-sm font-black text-slate-900 transition-colors group-hover:text-[#0066ff]">
                   {slide.title}
                 </h3>
-                <p className="mt-1 line-clamp-1 text-[11px] text-slate-400">{slide.subtitle}</p>
+                <p className="mt-1 line-clamp-1 text-xs text-slate-500">{slide.subtitle}</p>
               </div>
 
-              <div className="font-mono text-[10px] text-slate-500">
+              <div className="font-mono text-xs font-bold text-slate-400">
                 {isCurrent ? "● 当前展示中" : "点击跳转 →"}
               </div>
             </button>
