@@ -343,11 +343,11 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
 
             {/* 竞技擂台舞台：单人时居中且大幅放大立绘，双人时两翼对峙争吵 */}
             <div className="relative flex flex-1 flex-col items-center justify-center overflow-hidden py-1">
-              {/* ===== 阶段 1：沈寒山单独居中登场（立绘大幅放大，气泡打字机冒出） ===== */}
+              {/* ===== 阶段 1：沈寒山单独居中登场（立绘大幅放大，气泡紧随上方） ===== */}
               {stage === 1 && (
-                <div className="animate-in zoom-in-95 fade-in relative flex flex-col items-center gap-2 pt-20 duration-300 sm:pt-24">
+                <div className="animate-in zoom-in-95 fade-in flex flex-col items-center justify-center gap-2.5 duration-300">
                   {/* 居中大打字机气泡 */}
-                  <div className="absolute top-0 z-20 w-72 rounded-2xl border-2 border-emerald-400 bg-black/95 p-3 shadow-2xl shadow-emerald-500/40 sm:w-88">
+                  <div className="relative z-20 w-72 rounded-2xl border-2 border-emerald-400 bg-black/95 p-3 shadow-2xl shadow-emerald-500/40 sm:w-88">
                     <div className="flex items-center justify-between border-b border-emerald-500/30 pb-1">
                       <span className="flex items-center gap-1.5 text-xs font-black text-emerald-400">
                         <CheckCircle2 className="size-4" />
@@ -388,11 +388,11 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                 </div>
               )}
 
-              {/* ===== 阶段 2：燕崇山单独居中登场（立绘大幅放大，气泡打字机冒出） ===== */}
+              {/* ===== 阶段 2：燕崇山单独居中登场（立绘大幅放大，气泡紧随上方） ===== */}
               {stage === 2 && (
-                <div className="animate-in zoom-in-95 fade-in relative flex flex-col items-center gap-2 pt-20 duration-300 sm:pt-24">
+                <div className="animate-in zoom-in-95 fade-in flex flex-col items-center justify-center gap-2.5 duration-300">
                   {/* 居中大打字机气泡 */}
-                  <div className="absolute top-0 z-20 w-72 rounded-2xl border-2 border-red-500 bg-black/95 p-3 shadow-2xl shadow-red-500/40 sm:w-88">
+                  <div className="relative z-20 w-72 rounded-2xl border-2 border-red-500 bg-black/95 p-3 shadow-2xl shadow-red-500/40 sm:w-88">
                     <div className="flex items-center justify-between border-b border-red-500/30 pb-1">
                       <span className="flex items-center gap-1.5 text-xs font-black text-red-400">
                         <XCircle className="size-4" />
@@ -431,11 +431,11 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                 </div>
               )}
 
-              {/* ===== 阶段 3：两人同台对峙，中央 VS 引爆，双气泡互相激烈争吵（防溢出网格布局） ===== */}
+              {/* ===== 阶段 3：两人同台对峙，气泡紧贴人物上方，中央 VS 引爆 ===== */}
               {stage === 3 && (
-                <div className="animate-in zoom-in-95 fade-in flex h-full w-full flex-col items-center justify-between py-0.5 duration-300">
-                  {/* 上部：双人激烈交锋打字机气泡行（自适应 2 列，防溢出） */}
-                  <div className="grid w-full grid-cols-2 gap-2.5 px-1">
+                <div className="animate-in zoom-in-95 fade-in flex w-full flex-col items-center justify-center gap-2.5 duration-300">
+                  {/* 上部：双人激烈交锋打字机气泡行（自适应 2 列，紧密贴近人物） */}
+                  <div className="grid w-full grid-cols-2 gap-3 px-2">
                     {/* 左：沈寒山气泡 */}
                     <div className="relative rounded-xl border-2 border-cyan-400 bg-black/95 p-2 shadow-lg shadow-cyan-500/20">
                       <div className="flex items-center justify-between border-b border-cyan-500/30 pb-0.5">
@@ -480,7 +480,7 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                   </div>
 
                   {/* 下部：双人立绘与中央 VS */}
-                  <div className="flex w-full items-center justify-around px-4 pt-1.5">
+                  <div className="flex w-full items-center justify-around px-4">
                     {/* 左侧：沈寒山 */}
                     <div className="flex flex-col items-center gap-1">
                       <div className="flex size-20 items-center justify-center overflow-hidden rounded-2xl border-2 border-cyan-400 bg-gradient-to-b from-slate-900 via-black to-slate-950 p-1.5 shadow-xl shadow-cyan-500/30 backdrop-blur-md sm:size-24">
