@@ -9,31 +9,8 @@ import { getSkin, isDarkSkin, skinStyleVars, type ScenarioSkin } from "@/lib/sce
 
 import { useMockGame } from "../mock/game-state";
 import { MOCK_FINALE } from "../mock/preset-data";
+import { EPIC_ZHIHU_ARTICLE } from "../mock/epic-zhihu-article";
 import { ASSETS } from "../assets";
-
-const COMPLETE_ARTICLE = `> 谢邀。人在南口双堡关外，刚摘下结满白霜的防毒面具。看着身后三百万同胞在零下四十三度冰原上点亮的连天篝火，我知道，人类文明没有死在这次冰河时代。
-
-【一、绝境封关与三百万命门】
-许多人以为冰河时代到来，最致命的是极寒气温。其实不是，最致命的是‘关门’。当暴雪封死北纬四十度，当南方的粮仓和城墙冷冰冰地闭闸，三百万从黑土地南撤的同胞在冰封江面上排成了望不到头的长队。前是重机枪与封关公文，后是每小时逼近两公里的极寒暴风雪。
-双堡关前的雪是黑色的，混杂着柴油烟尘与冻土粉末。燕崇山的重机枪就在关墙上架着，黑洞洞的枪口直指冰面。黄满仓三十万石陈粮要价万金，桂香抱着发热的婴儿跪在辕门之外。那时军垦联军弹药库里只剩一万发枪弹，粮秣仅够全营七日稀粥。所有人都以为，这一场大雪终将以三百万人的绝望火并收场。
-
-【二、廷争僵局与绝境倒计时】
-就在议事厅僵持不下的深夜，国家极地气象观测站沈寒山带回了绝密通牒：极端寒潮提前二十三天到来，夜间最低温即将跌破零下五十五度！常规通关与借道谈判彻底破产，留给三百万人的时间只有七天。
-“你闭关死守不是守土，是替暴风雪屠杀三百万同胞！”“军令如山，州城粮库仅够三月，大门一开，全州陪葬！”关楼内的咆哮震落屋檐冰棱。常规路线已是全盘死局。
-
-【三、天命破壁·凿冰为渠的惊天狂想】
-那一晚，我们当众撕碎了向南方乞和的请愿书，拔刀断冰，定下了‘天命破壁’之策：不叩关，不乞粮！既然天冻不住人的路，冰封千里，那就把冰原演变成千里通衢，走出一条不用叩关的天下！
-动员三百万军民，利用零下四十度极寒冰层的超强硬度，以拆卸的铁轨为骨架垫底、引封冻运河为平整路基，浇水凝冰修筑一条自北纬四十三度直抵江南暖带的‘冰上长城’！
-
-【四、三万里狂奔与终局存续】
-那是人类工业史与群体生存意志最壮烈的一幕：图雅的两万头驯鹿雪橇组成无休止的穿梭传送带，五万军垦退伍老兵带头三班倒破冰凿渠，以雪水凝冰浇筑出一条宽逾百米的千里通衢。
-队伍避开了设伏雷场的双堡关，绕过盘剥的粮行，借着化冻前仅存的极寒冻土窗口，犹如银龙破雪，浩浩荡荡跨过了北纬三十度暖带防线！
-
-【尾声 · 文明在冰原上重生】
-当南迁大军先锋部队在长江以南重新见到未被完全冰封的江水时，整整三百万人口，最终生还率高达 92.4%。
-知府卫长庚站在空无一人的关楼上长叹，燕崇山的机枪终究没能射出一发阻拦同胞的子弹。三百万人的足迹在冰原上踏出的不仅是一条活路，更是一份文明在绝境中重造天下的壮丽答卷。
-
-—— 知乎特邀答主 · 赵泠 / 执政亲历者联合推演（全卷完）`;
 
 export function Slide6Finale({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
   const { copiedToast, triggerCopyToast, selectedPlayer } = useMockGame();
@@ -43,21 +20,21 @@ export function Slide6Finale({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
   const [isTyping, setIsTyping] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // 哗啦啦自动快速流式输出：每 16ms 吐出 18-24 个字，无需任何点击，瀑布般涌现
+  // 哗啦啦自动快速流式输出：每 16ms 吐出 85 个字，10,000+ 字将在约 2 秒内如瀑布般壮丽涌现并滚动到底部
   useEffect(() => {
     setDisplayedText("");
     setIsTyping(true);
 
     let currentIndex = 0;
-    const step = 20; // 极速瀑布流式
+    const step = 85; // 极速瀑布流式
     const timer = setInterval(() => {
       currentIndex += step;
-      if (currentIndex >= COMPLETE_ARTICLE.length) {
-        setDisplayedText(COMPLETE_ARTICLE);
+      if (currentIndex >= EPIC_ZHIHU_ARTICLE.length) {
+        setDisplayedText(EPIC_ZHIHU_ARTICLE);
         setIsTyping(false);
         clearInterval(timer);
       } else {
-        setDisplayedText(COMPLETE_ARTICLE.slice(0, currentIndex));
+        setDisplayedText(EPIC_ZHIHU_ARTICLE.slice(0, currentIndex));
       }
 
       // 自动跟随流式滚动至底部
@@ -73,20 +50,29 @@ export function Slide6Finale({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
     setDisplayedText("");
     setIsTyping(true);
     let currentIndex = 0;
-    const step = 20;
+    const step = 85;
     const timer = setInterval(() => {
       currentIndex += step;
-      if (currentIndex >= COMPLETE_ARTICLE.length) {
-        setDisplayedText(COMPLETE_ARTICLE);
+      if (currentIndex >= EPIC_ZHIHU_ARTICLE.length) {
+        setDisplayedText(EPIC_ZHIHU_ARTICLE);
         setIsTyping(false);
         clearInterval(timer);
       } else {
-        setDisplayedText(COMPLETE_ARTICLE.slice(0, currentIndex));
+        setDisplayedText(EPIC_ZHIHU_ARTICLE.slice(0, currentIndex));
       }
       if (scrollRef.current) {
         scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
       }
     }, 16);
+  };
+
+  const handleCopyArticle = async () => {
+    try {
+      await navigator.clipboard.writeText(EPIC_ZHIHU_ARTICLE);
+    } catch {
+      // 忽略非安全环境剪贴板异常
+    }
+    triggerCopyToast();
   };
 
   return (
@@ -103,16 +89,16 @@ export function Slide6Finale({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
             <Badge className="bg-[#e2622c] font-mono text-[10px] text-black font-bold">终章结算</Badge>
             <Badge variant="outline" className="border-orange-500/40 text-[10px] text-orange-300">
               <Trophy className="size-2.5 text-[#e2622c] mr-1" />
-              天命破壁 · 逆命结局
+              天命飞升 · 行星巨构结局
             </Badge>
             <Badge variant="secondary" className="bg-orange-950/60 text-[10px] text-orange-300 font-bold">
               终局评级 S+ 级
             </Badge>
             <span className="text-xs font-black text-slate-100 sm:text-sm">
-              【天命破壁 · 踏碎严冬三万里】
+              【天命飞升 · 点燃地心烈焰十万里】
             </span>
             <span className="hidden sm:inline text-[11px] text-slate-400">
-              · 你扮演【{selectedPlayer.name} · {selectedPlayer.identity.split("·")[0]}】历经 3 回合廷争与凿冰决断
+              · 你扮演【{selectedPlayer.name} · {selectedPlayer.identity.split("·")[0]}】历经 3 回合廷争与地幔巨构飞升决断
             </span>
           </div>
 
@@ -124,7 +110,7 @@ export function Slide6Finale({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
             </div>
             <Button
               size="xs"
-              onClick={triggerCopyToast}
+              onClick={handleCopyArticle}
               className={`h-7.5 gap-1.5 px-3 text-xs font-bold transition-all shadow-xs ${
                 copiedToast
                   ? "bg-emerald-600 text-white"
@@ -134,7 +120,7 @@ export function Slide6Finale({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
               {copiedToast ? (
                 <>
                   <Check className="size-3.5" />
-                  已复制知乎长回答！
+                  已复制万字知乎回答！
                 </>
               ) : (
                 <>
@@ -170,7 +156,7 @@ export function Slide6Finale({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                   ) : (
                     <span className="flex items-center gap-1.5 font-mono text-xs text-emerald-400 font-bold">
                       <Check className="size-3.5" />
-                      全文已铸成 · 12,850 字
+                      全文已铸成 · 10,279 字
                     </span>
                   )}
                   <button

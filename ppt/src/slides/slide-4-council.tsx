@@ -134,9 +134,9 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                   </h3>
                 </div>
                 <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
-                  摒弃非黑即白二选一，设立<strong>稳健、险极、妥协、奇径</strong>四阶推演；独创
-                  <strong>天命破壁选项</strong>（如 D
-                  项凿冰为渠·冰上长城），跳出零和博弈围城，开启前所未有的高维破局世界线！
+                  摒弃非黑即白二选一，设立<strong>稳健、险极、妥协、群星巨构</strong>四阶推演；独创
+                  <strong>天命破壁 · 飞升决议</strong>（如 D
+                  项巨构决议·点燃万米地幔熔炉），跳出传统迁徙零和博弈，以行星重工开启宏大星海级破局世界线！
                 </p>
               </div>
             </div>
@@ -293,9 +293,13 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                         </div>
                         <Badge
                           variant="outline"
-                          className="h-5 border-white/20 px-1.5 text-[10px] text-slate-300"
+                          className={`h-5 px-1.5 text-[10px] ${
+                            isEpic
+                              ? "border-amber-400 bg-amber-950/80 font-bold text-amber-300 ring-1 ring-amber-400/50"
+                              : "border-white/20 text-slate-300"
+                          }`}
                         >
-                          {opt.risk}档抉择
+                          {isEpic ? "🌟 飞升抉择" : `${opt.risk}档抉择`}
                         </Badge>
                       </div>
 
@@ -305,7 +309,7 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
 
                       {opt.epigraph && (
                         <div className="mt-1 line-clamp-1 rounded border border-amber-500/40 bg-amber-950/60 px-2 py-0.5 text-xs font-bold text-amber-200">
-                          🌟 天命破壁: “{opt.epigraph}”
+                          🌟 飞升决议: “{opt.epigraph}”
                         </div>
                       )}
 

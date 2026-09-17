@@ -191,7 +191,7 @@ export interface MockDecisionOption {
   id: "A" | "B" | "C" | "D";
   title: string;
   desc: string;
-  risk: "稳" | "险" | "策" | "奇";
+  risk: "稳" | "险" | "策" | "奇" | "飞升";
   epigraph?: string;
   deltas: {
     stability: number;
@@ -256,12 +256,12 @@ export const MOCK_OPTIONS: MockDecisionOption[] = [
   },
   {
     id: "D",
-    title: "凿冰为渠 · 三百万人的冰上长城",
-    desc: "不叩关、不乞粮！动员三百万军民沿封冻运河日夜凿冰筑路，以两万头驯鹿雪橇横贯冰原直下江南，走出一条自己的通衢活路！",
-    risk: "奇",
-    epigraph: "天冻不住人的路！冰封千里，那就把冰原踏成通衢，走出一个不用叩关的天下！",
-    deltas: { stability: 10, morale: 35, support: 35, resources: -20 },
-    impactText: { stability: "+10", morale: "+35", support: "+35", resources: "-20" },
+    title: "巨构决议 · 点燃地幔熔炉与行星级恒温穹顶",
+    desc: "不再叩关乞食，而是直接给整颗星球供暖！决议启动全境地下重工，下凿万米地幔裂变熔炉，沿北纬四十度点燃地心热源，铺设大陆级等离子恒温天幕，将严冬禁地重铸为行星级避难巨构！",
+    risk: "飞升",
+    epigraph: "冰河不过是宇宙给文明的筛选器。凡人向南流徙乞生，星海文明征服行星地貌！点燃地心，我们要让冰川在此止步！",
+    deltas: { stability: 15, morale: 50, support: 45, resources: -30 },
+    impactText: { stability: "+15", morale: "+50", support: "+45", resources: "-30" },
     forecast: [
       { agentId: "agent_south_warlord", lean: "反对" },
       { agentId: "agent_grain_tycoon", lean: "反对" },
@@ -308,17 +308,17 @@ export const MOCK_DEBATE_BEATS: MockDebateBeat[] = [
     opponent: MOCK_AGENTS[0],
     clashType: "矛与盾尖锐交锋",
     speech:
-      "沈寒山扬起卫星云图，厉声喝道：“燕崇山！极端寒潮将在十天内南压五百公里，夜间气温逼近零下五十五度！你闭关死守不是守土，是替暴风雪屠杀三百万同胞！”\n\n燕崇山按枪怒斥：“沈寒山！军令如山，州城粮库仅够三月！大门一开，全州陪葬！谁敢煽动闯关，先问过老子的机枪！”",
+      "沈寒山扬起深层地热勘探图，厉声喝道：“燕崇山！极端寒潮十天内南压，夜间逼近零下五十五度！你的关防只能当棺材，唯有点燃万米地幔熔炉巨构，向大地深处夺取文明活路！”\n\n燕崇山按枪怒斥：“沈寒山！地幔裂变若引发地壳坍塌，全州立刻陪葬！谁敢在防区私启裂变井，先问过老子的机枪！”",
   },
   {
     id: "beat_4",
-    roundTitle: "第 4 拍 · 旗首决断与天命破壁",
-    tag: "【李烽拔刀断冰 · 动员三百万军民】",
+    roundTitle: "第 4 拍 · 旗首决断与天命飞升",
+    tag: "【李烽拔刀下令 · 启动行星地幔巨构】",
     speaker: MOCK_AGENTS[2],
     opponent: MOCK_AGENTS[1],
     clashType: "裁决终局",
     speech:
-      "李烽拔出佩刀斩断冰棱，声震四野：“天冻不住人的路！既然双堡关容不下三百万关外人，我们便不叩这道门！调五万军垦兵团、两万头驯鹿雪橇，凿冰为渠，自修千里坦途直下江南！”",
+      "李烽拔出佩刀斩断冰棱，声震四野：“凡人向南流徙乞生，唯物主义者重塑行星地貌！调集三百万军民全部重型钻机与军用反应堆，下凿万米地幔，我们要在这片冰原上再造一轮人造太阳！”",
   },
 ];
 
