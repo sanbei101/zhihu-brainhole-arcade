@@ -17,6 +17,7 @@ export const SLIDES: SlideData[] = [
     title: "知乎脑洞游乐园 · 决赛答辩",
     subtitle: "一句'如果'，值得用一整个世界来回答",
     category: "开篇定调",
+    defaultSkinId: "qin-han",
     notes: [
       "向评委问好，自报参赛姓名与项目定位。",
       "点题：我们精准切入知乎硬核历史区与科幻区最受热捧的'历史/科学假设'文化现象。",
@@ -30,6 +31,7 @@ export const SLIDES: SlideData[] = [
     title: "立意痛点与知乎生态共振",
     subtitle: "从静态长文跃迁为人人可玩的沙盘推演",
     category: "项目立意",
+    defaultSkinId: "three-kingdoms",
     notes: [
       "对比传统知乎假设题痛点：单向阅读、缺乏多方博弈感、消费即终结。",
       "阐述四步闭环飞轮：知乎母本选题 ➔ 多智能体博弈 ➔ 天命分叉决策 ➔ 结算万字长回答一键发帖。",
@@ -43,6 +45,7 @@ export const SLIDES: SlideData[] = [
     title: "纯前端程序化像素美学引擎",
     subtitle: "SVG 路径合并算法 × 10 大平行宇宙换肤",
     category: "美学架构",
+    defaultSkinId: "future-tech",
     notes: [
       "评委关注点：为什么选用像素风格？如何做到丝滑不卡？",
       "关键突破：frameToPaths 算法将数百个 <rect> 压缩合并为单条 SVG path，减少 85% DOM 节点，锁死 60fps。",
@@ -57,6 +60,7 @@ export const SLIDES: SlideData[] = [
     title: "多端极致响应式适配",
     subtitle: "桌面端三栏全景战局 × 移动端单手掌控",
     category: "工程体验",
+    defaultSkinId: "qin-han",
     notes: [
       "评委关注点：多端体验是否合格？",
       "桌面端：三栏战局（左侧势力谱系，中间议事舞台，右侧四维指标与决策树），全键盘快捷键驱动。",
@@ -71,6 +75,7 @@ export const SLIDES: SlideData[] = [
     title: "严苛的三段式前缀缓存设计",
     subtitle: "最大化 KV Cache 命中，降低 72% 延迟与 85% 成本",
     category: "提示词工程",
+    defaultSkinId: "cosmic",
     notes: [
       "核心攻坚：多回合多 Agent 调用如果不严谨，延迟与成本会指数级失控。",
       "架构设计：严格的三段式Prompt：① 静态世界规则与身份顶层（100% 缓存命中）➔ ② 线性历史记录居中（追加复用）➔ ③ 动态变量置底（极微小增量计算）。",
@@ -84,6 +89,7 @@ export const SLIDES: SlideData[] = [
     title: "情景真实度与 In-Context Few-Shot",
     subtitle: "利益红线博弈 × 范本自适应模仿 × 群星天命破壁",
     category: "提示词工程",
+    defaultSkinId: "three-kingdoms",
     notes: [
       "核心攻坚：如何解决大模型后期文风平庸化、角色说话像套话工具人？",
       "第一：红线与动机硬约束（公开诉求 vs 私密利益），跌破阈值当场逼宫与通牒；Clash 提示词单次合成双人朝堂驳斥。",
@@ -98,6 +104,7 @@ export const SLIDES: SlideData[] = [
     title: "四维国力博弈 × 大势熵增定律",
     subtitle: "数值不是加减法，而是历史宿命与心理压迫",
     category: "机制设计",
+    defaultSkinId: "apocalypse",
     notes: [
       "四维指标权衡：政权稳定、军心士气、民众支持、战略资源。每一个选项都有尖锐代价。",
       "大势熵增定律：随回合推演，局势损耗不可逆增加（从 -0 到 -10/回合），杜绝消极苟活，逼迫玩家做出战略破局。",
@@ -111,6 +118,7 @@ export const SLIDES: SlideData[] = [
     title: "结算即内容：万字知乎体长回答",
     subtitle: "亲历者第一人称自省 × 绝不打破第四面墙",
     category: "内容闭环",
+    defaultSkinId: "tang-song-ming",
     notes: [
       "这是有别于普通模拟器的杀手级体验：对局结束即自动产出一篇格式严密的万字知乎长回答。",
       "严格写作纪律：以'谢邀。人在赤壁，刚下战船'切入，严禁出现'AI/玩家/数值'等出戏词汇。",
@@ -124,6 +132,7 @@ export const SLIDES: SlideData[] = [
     title: "现场沙盘交互演示舱",
     subtitle: "10 大皮肤切换、角色原型立绘与刘看山互动",
     category: "现场演示",
+    defaultSkinId: "alien",
     notes: [
       "邀请评委现场监督交互体验！",
       "直接在幻灯片中点击切换文臣、武将、军师、工匠，观察呼吸动效与台词对峙。",
@@ -138,6 +147,7 @@ export const SLIDES: SlideData[] = [
     title: "未来愿景、知乎 OAuth 助力与致谢",
     subtitle: "为每一个天马行空的脑洞，赋以一整个世界！",
     category: "愿景致谢",
+    defaultSkinId: "qin-han",
     notes: [
       "未来演进：知乎链接一键转沙盘（UGC 开放世界）；社区群体世界线拓扑树。",
       "知乎官方 OAuth 助力闭环：已打通授权，推演完毕可为本作打 Call 助力【黑客松人气奖】。",

@@ -8,6 +8,7 @@ export interface SlideData {
   title: string;
   subtitle: string;
   category: string;
+  defaultSkinId?: string;
   notes: string[];
   component: (props: { skin: ScenarioSkin; active: boolean }) => ReactNode;
 }

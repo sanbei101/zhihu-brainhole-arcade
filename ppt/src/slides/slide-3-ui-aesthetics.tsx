@@ -11,7 +11,7 @@ export function Slide3UiAesthetics({ skin: initialSkin }: { skin: ScenarioSkin }
   const [activeSkin, setActiveSkin] = useState<ScenarioSkin>(initialSkin);
   const [isTalking, setIsTalking] = useState(true);
 
-  // 现场渲染角色立绘 (文臣、武将、谋士、神策)
+  // 现场渲染角色立绘 (文臣、武将、谋士)
   const ministerPortrait = portraitFor(
     {
       id: "minister",
@@ -49,38 +49,38 @@ export function Slide3UiAesthetics({ skin: initialSkin }: { skin: ScenarioSkin }
   const beacon = beaconFrames(12, 18, 4);
 
   return (
-    <div className="relative flex size-full flex-col justify-between gap-4 overflow-hidden rounded-2xl border border-white/10 bg-[#0c101a] p-6 shadow-2xl sm:p-10">
+    <div className="relative flex size-full flex-col justify-between gap-6 overflow-hidden rounded-3xl border border-white/20 bg-black/55 p-8 shadow-2xl backdrop-blur-md sm:p-12">
       {/* 顶部标题 */}
-      <div className="space-y-1">
-        <div className="flex items-center gap-2 font-mono text-xs font-semibold tracking-wider text-[#0066ff] uppercase">
-          <span>[设计哲学与工程实现]</span>
+      <div className="space-y-2">
+        <div className="flex items-center gap-2 font-mono text-xs font-bold tracking-widest text-cyan-400 uppercase sm:text-sm">
+          <span>[美学设计与渲染工程]</span>
         </div>
-        <h2 className="text-2xl font-bold text-white sm:text-3xl">
+        <h2 className="text-3xl leading-tight font-black text-white sm:text-4xl lg:text-5xl">
           纯前端程序化像素引擎 × 10 大平行宇宙动态换肤
         </h2>
-        <p className="text-xs text-slate-300 sm:text-sm">
-          突破重度游戏美术包袱：以轻量 SVG 路径合并与数学网格算法，实现 0
-          图片外链依赖的高清像素动态美学。
+        <p className="text-sm text-slate-300 sm:text-lg">
+          彻底抛弃重度游戏图片美术包袱：以轻量 SVG 路径合并与数学网格算法，实现 0 外链依赖的 60fps
+          动态像素美学。
         </p>
       </div>
 
       {/* 核心亮点矩阵 */}
-      <div className="my-auto grid grid-cols-1 gap-4 lg:grid-cols-12">
-        {/* 左侧说明（7列） */}
-        <div className="space-y-3 lg:col-span-7">
+      <div className="my-auto grid grid-cols-1 gap-6 lg:grid-cols-12">
+        {/* 左侧说明（7列）：大字号排版 */}
+        <div className="space-y-4 lg:col-span-7">
           {/* 突破 1：SVG 路径合并算法 */}
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-            <div className="flex items-center gap-2 text-sm font-bold text-cyan-300">
-              <Zap className="size-4 text-cyan-400" />
+          <div className="space-y-2 rounded-2xl border border-white/15 bg-black/60 p-5 shadow-lg backdrop-blur-xl sm:p-6">
+            <div className="flex items-center gap-2.5 text-base font-black text-cyan-300 sm:text-lg">
+              <Zap className="size-5 shrink-0 text-cyan-400" />
               <span>突破 1：SVG 路径合并算法 (Path Merging Optimization)</span>
             </div>
-            <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
+            <p className="text-xs leading-relaxed text-slate-200 sm:text-sm">
               传统像素组件使用成百上千个{" "}
-              <code className="rounded bg-black/50 px-1 py-0.5 font-mono text-[11px] text-cyan-300">
+              <code className="rounded bg-black/50 px-1.5 py-0.5 font-mono text-xs text-cyan-300">
                 &lt;rect&gt;
               </code>{" "}
               标签，DOM 树过深导致重绘掉帧。本项目手写{" "}
-              <code className="rounded bg-black/50 px-1 py-0.5 font-mono text-[11px] text-cyan-300">
+              <code className="rounded bg-black/50 px-1.5 py-0.5 font-mono text-xs text-cyan-300">
                 frameToPaths
               </code>{" "}
               压缩算法，将单帧同色像素点合并为<strong>唯一定义的单条路径</strong>，DOM 节点数量骤降
@@ -89,30 +89,32 @@ export function Slide3UiAesthetics({ skin: initialSkin }: { skin: ScenarioSkin }
           </div>
 
           {/* 突破 2：角色情绪微律动系统 */}
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-            <div className="flex items-center gap-2 text-sm font-bold text-amber-300">
-              <Eye className="size-4 text-amber-400" />
+          <div className="space-y-2 rounded-2xl border border-white/15 bg-black/60 p-5 shadow-lg backdrop-blur-xl sm:p-6">
+            <div className="flex items-center gap-2.5 text-base font-black text-amber-300 sm:text-lg">
+              <Eye className="size-5 shrink-0 text-amber-400" />
               <span>突破 2：角色情绪微律动系统 (Procedural Motion)</span>
             </div>
-            <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
-              基于身体躯干、头冠、面容、手持物 5 种独立 Handcrafted 部件动态拼接，提供
-              Scribe（抚须沉思）、Guard（持戈警惕）、Plead（急迫进言）等 6
-              种微动作，随台词发言实时加快律动与放大，赋予 AI 鲜活体温。
+            <p className="text-xs leading-relaxed text-slate-200 sm:text-sm">
+              基于身体躯干、头冠、面容、手持物 5 种独立部件动态拼接，提供
+              Scribe（抚须沉思）、Guard（持戈戒备）、Plead（急迫进言）等 6
+              种微动作，随发言情绪加速律动并轻微放大，赋予 AI 朝堂人物鲜活体温。
             </p>
           </div>
 
           {/* 突破 3：10 大平行宇宙语义化皮肤 */}
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+          <div className="space-y-2 rounded-2xl border border-white/15 bg-black/60 p-5 shadow-lg backdrop-blur-xl sm:p-6">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-sm font-bold text-emerald-300">
-                <Palette className="size-4 text-emerald-400" />
+              <div className="flex items-center gap-2.5 text-base font-black text-emerald-300 sm:text-lg">
+                <Palette className="size-5 shrink-0 text-emerald-400" />
                 <span>突破 3：10 大平行宇宙瞬时换肤 (Semantic Tokens)</span>
               </div>
-              <span className="font-mono text-[10px] text-slate-400">点击右侧即时体验</span>
+              <span className="rounded-full bg-white/10 px-2.5 py-0.5 font-mono text-xs text-slate-400">
+                右侧可现场点击
+              </span>
             </div>
-            <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
+            <p className="text-xs leading-relaxed text-slate-200 sm:text-sm">
               通过一套优雅的 CSS 变量语义注入（
-              <code className="font-mono text-[11px] text-emerald-300">
+              <code className="font-mono text-xs text-emerald-300">
                 bg, surface, ink, accent, pixel
               </code>
               ），从秦汉玄黑、三国水墨到赛博霓虹，全局组件秒级换肤。
@@ -120,24 +122,24 @@ export function Slide3UiAesthetics({ skin: initialSkin }: { skin: ScenarioSkin }
           </div>
         </div>
 
-        {/* 右侧互动体验舱（5列）：现场展示立绘与换肤 */}
-        <div className="flex flex-col justify-between rounded-xl border border-cyan-500/30 bg-black/60 p-4 shadow-xl lg:col-span-5">
-          <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+        {/* 右侧互动体验舱（5列）：大号活体人物展示 */}
+        <div className="flex flex-col justify-between rounded-2xl border-2 border-cyan-400/50 bg-black/75 p-5 shadow-2xl backdrop-blur-2xl sm:p-6 lg:col-span-5">
+          <div className="flex items-center justify-between border-b border-white/15 pb-3">
             <div className="flex items-center gap-2">
-              <span className="size-2 animate-pulse rounded-full bg-emerald-400" />
-              <span className="font-mono text-xs font-bold text-white">LIVE PIXEL ENGINE</span>
+              <span className="size-3 animate-pulse rounded-full bg-emerald-400" />
+              <span className="font-mono text-sm font-bold text-white">LIVE PIXEL ENGINE</span>
             </div>
             <button
               type="button"
               onClick={() => setIsTalking(!isTalking)}
-              className="cursor-pointer rounded-full border border-cyan-500/40 bg-cyan-500/20 px-2.5 py-0.5 text-[10px] font-medium text-cyan-200 hover:bg-cyan-500/30"
+              className="cursor-pointer rounded-full border border-cyan-400/50 bg-cyan-500/25 px-3 py-1 text-xs font-bold text-cyan-200 transition-colors hover:bg-cyan-500/40"
             >
-              状态: {isTalking ? "正在交锋发言 🗣️" : "闲置屏息沉思 🤫"}
+              律动: {isTalking ? "即席交锋 🗣️" : "静止沉思 🤫"}
             </button>
           </div>
 
-          {/* 实时活体人物展示 */}
-          <div className="my-3 flex items-end justify-center gap-6 rounded-lg border border-white/5 bg-white/5 py-4">
+          {/* 实时大号人物展示 */}
+          <div className="my-4 flex items-end justify-around rounded-xl border border-white/10 bg-white/5 py-6">
             {/* 文臣 */}
             <div className="text-center">
               <div
@@ -147,11 +149,11 @@ export function Slide3UiAesthetics({ skin: initialSkin }: { skin: ScenarioSkin }
                   label="文臣立绘"
                   frames={ministerPortrait.frames}
                   palette={ministerPortrait.palette}
-                  scale={3.5}
+                  scale={4.8}
                 />
               </div>
-              <span className="mt-2 block font-mono text-[10px] text-slate-300">
-                文官 · 抚须进谏
+              <span className="mt-2.5 block font-mono text-xs font-bold text-slate-200">
+                文官 · 张昭
               </span>
             </div>
 
@@ -164,11 +166,11 @@ export function Slide3UiAesthetics({ skin: initialSkin }: { skin: ScenarioSkin }
                   label="武将立绘"
                   frames={generalPortrait.frames}
                   palette={generalPortrait.palette}
-                  scale={3.5}
+                  scale={4.8}
                 />
               </div>
-              <span className="mt-2 block font-mono text-[10px] text-amber-300">
-                武将 · 铁腕拔剑
+              <span className="mt-2.5 block font-mono text-xs font-bold text-amber-300">
+                武将 · 周瑜
               </span>
             </div>
 
@@ -181,42 +183,42 @@ export function Slide3UiAesthetics({ skin: initialSkin }: { skin: ScenarioSkin }
                   label="谋士立绘"
                   frames={diplomatPortrait.frames}
                   palette={diplomatPortrait.palette}
-                  scale={3.5}
+                  scale={4.8}
                 />
               </div>
-              <span className="mt-2 block font-mono text-[10px] text-cyan-300">
-                军师 · 羽扇定策
+              <span className="mt-2.5 block font-mono text-xs font-bold text-cyan-300">
+                军师 · 诸葛亮
               </span>
             </div>
           </div>
 
           {/* 程序化数学天体展示 */}
-          <div className="flex items-center justify-around border-t border-white/10 pt-2 text-center">
+          <div className="flex items-center justify-around border-t border-white/10 py-2.5 text-center">
             <div>
-              <PixelSprite label="轨道" frames={orb} palette={activeSkin.pixel} scale={2} />
-              <span className="block font-mono text-[9px] text-slate-400">轨道计算</span>
+              <PixelSprite label="轨道" frames={orb} palette={activeSkin.pixel} scale={2.8} />
+              <span className="mt-1 block font-mono text-[11px] text-slate-300">轨道计算</span>
             </div>
             <div>
-              <PixelSprite label="螺旋" frames={helix} palette={activeSkin.pixel} scale={2} />
-              <span className="block font-mono text-[9px] text-slate-400">DNA双螺旋</span>
+              <PixelSprite label="螺旋" frames={helix} palette={activeSkin.pixel} scale={2.8} />
+              <span className="mt-1 block font-mono text-[11px] text-slate-300">DNA双螺旋</span>
             </div>
             <div>
-              <PixelSprite label="灯塔" frames={beacon} palette={activeSkin.pixel} scale={2} />
-              <span className="block font-mono text-[9px] text-slate-400">地标光柱</span>
+              <PixelSprite label="灯塔" frames={beacon} palette={activeSkin.pixel} scale={2.8} />
+              <span className="mt-1 block font-mono text-[11px] text-slate-300">地标光柱</span>
             </div>
           </div>
 
           {/* 实时换肤选择器 */}
-          <div className="mt-3 flex flex-wrap gap-1.5 border-t border-white/10 pt-2">
+          <div className="mt-2 flex flex-wrap gap-2 border-t border-white/10 pt-3">
             {SCENARIO_SKINS.slice(0, 6).map((s) => (
               <button
                 key={s.id}
                 type="button"
                 onClick={() => setActiveSkin(s)}
-                className={`cursor-pointer rounded px-2 py-0.5 font-mono text-[10px] transition-all ${
+                className={`cursor-pointer rounded-lg px-2.5 py-1 font-mono text-xs transition-all ${
                   activeSkin.id === s.id
-                    ? "bg-white font-bold text-black"
-                    : "bg-white/10 text-slate-400 hover:text-white"
+                    ? "scale-105 bg-white font-black text-black shadow-md"
+                    : "bg-white/10 text-slate-300 hover:bg-white/20 hover:text-white"
                 }`}
               >
                 {s.name}

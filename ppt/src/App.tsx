@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 
-import { SCENARIO_SKINS, type ScenarioSkin } from "@/lib/scenario-skin";
+import { getSkin, type ScenarioSkin } from "@/lib/scenario-skin";
 
 import { NavigationBar } from "./components/navigation-bar";
 import { OverviewDrawer } from "./components/overview-drawer";
@@ -10,7 +10,7 @@ import { SLIDES } from "./slides";
 
 export function PresentationApp() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const [skin, setSkin] = useState<ScenarioSkin>(SCENARIO_SKINS[2]); // 默认秦汉帝国 (玄黑青铜)
+  const [manualSkin, setManualSkin] = useState<ScenarioSkin | null>(null);
   const [showNotes, setShowNotes] = useState(false);
   const [showOverview, setShowOverview] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -18,6 +18,9 @@ export function PresentationApp() {
   const touchStartXRef = useRef<number | null>(null);
   const totalSlides = SLIDES.length;
   const currentSlide = SLIDES[currentSlideIndex] ?? SLIDES[0];
+
+  // 默认根据当前页的世界线主题自动换肤，若用户手动选择则优先响应
+  const skin = manualSkin ?? getSkin(currentSlide.defaultSkinId);
 
   const goToNext = useCallback(() => {
     setCurrentSlideIndex((prev) => Math.min(prev + 1, totalSlides - 1));
@@ -110,7 +113,7 @@ export function PresentationApp() {
 
   return (
     <div
-      className="relative flex h-screen w-screen flex-col overflow-hidden bg-[#070a11] font-sans text-slate-100"
+      className="relative flex h-screen w-screen flex-col overflow-hidden font-sans text-slate-100"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -139,7 +142,7 @@ export function PresentationApp() {
         isFullscreen={isFullscreen}
         onToggleFullscreen={toggleFullscreen}
         skin={skin}
-        onSelectSkin={setSkin}
+        onSelectSkin={(selected) => setManualSkin(selected)}
       />
 
       {/* 演讲者备注抽屉 */}
@@ -151,7 +154,10 @@ export function PresentationApp() {
         currentSlide={currentSlideIndex}
         isOpen={showOverview}
         onClose={() => setShowOverview(false)}
-        onSelectSlide={setCurrentSlideIndex}
+        onSelectSlide={(idx) => {
+          setCurrentSlideIndex(idx);
+          setManualSkin(null); // 切页时恢复世界线自适应
+        }}
       />
     </div>
   );

@@ -4,147 +4,148 @@ import type { ScenarioSkin } from "@/lib/scenario-skin";
 
 export function Slide4CrossPlatform({ skin: _skin }: { skin: ScenarioSkin }) {
   return (
-    <div className="relative flex size-full flex-col justify-between gap-4 overflow-hidden rounded-2xl border border-white/10 bg-[#0c101a] p-6 shadow-2xl sm:p-10">
+    <div className="relative flex size-full flex-col justify-between gap-6 overflow-hidden rounded-3xl border border-white/20 bg-black/55 p-8 shadow-2xl backdrop-blur-md sm:p-12">
       {/* 顶部标题 */}
-      <div className="space-y-1">
-        <div className="flex items-center gap-2 font-mono text-xs font-semibold tracking-wider text-[#0066ff] uppercase">
-          <span>[多端工程与响应式体验]</span>
+      <div className="space-y-2">
+        <div className="flex items-center gap-2 font-mono text-xs font-bold tracking-widest text-cyan-400 uppercase sm:text-sm">
+          <span>[多端工程与跨设备体验]</span>
         </div>
-        <h2 className="text-2xl font-bold text-white sm:text-3xl">
-          无缝适配：桌面端三栏全景战局 × 移动端单手掌控
+        <h2 className="text-3xl leading-tight font-black text-white sm:text-4xl lg:text-5xl">
+          极致多端适配：桌面三栏战局大屏 × 移动端单手掌控
         </h2>
-        <p className="text-xs text-slate-300 sm:text-sm">
-          针对不同终端使用场景量身设计布局体系，从 4K 超宽屏到手机竖屏，确保决策沉浸感零损耗。
+        <p className="text-sm text-slate-300 sm:text-lg">
+          针对不同终端交互场景重构布局体系，从 4K 超宽显示器到手机竖屏，确保宏大决策沉浸感零损耗。
         </p>
       </div>
 
-      {/* 终端双模态对比卡片 */}
-      <div className="my-auto grid grid-cols-1 gap-5 md:grid-cols-2">
+      {/* 终端双模态对比卡片：大幅放大线框与文本 */}
+      <div className="my-auto grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* 桌面端布局架构 */}
-        <div className="space-y-4 rounded-xl border border-blue-500/20 bg-blue-950/10 p-5 backdrop-blur-sm">
-          <div className="flex items-center justify-between">
-            <span className="flex items-center gap-2 text-sm font-bold text-blue-400">
-              <Laptop className="size-4" />
+        <div className="space-y-5 rounded-2xl border-2 border-blue-500/30 bg-black/65 p-6 shadow-xl backdrop-blur-xl sm:p-8">
+          <div className="flex items-center justify-between border-b border-blue-500/20 pb-3">
+            <span className="flex items-center gap-2.5 text-lg font-black text-blue-400 sm:text-xl">
+              <Laptop className="size-5" />
               <span>桌面端：全景三栏式权力战局 (Tactical War Room)</span>
             </span>
-            <span className="rounded bg-blue-500/20 px-2 py-0.5 font-mono text-[10px] text-blue-300">
+            <span className="rounded-full bg-blue-500/20 px-3 py-1 font-mono text-xs font-bold text-blue-300">
               宽屏沉浸
             </span>
           </div>
 
-          {/* 桌面端线框模拟 */}
-          <div className="rounded-lg border border-white/10 bg-black/60 p-3">
-            <div className="flex h-28 gap-2">
+          {/* 桌面端线框模拟：放大高度与字号 */}
+          <div className="rounded-xl border border-white/15 bg-black/70 p-4 shadow-inner">
+            <div className="flex h-36 gap-3">
               {/* 左栏 */}
-              <div className="flex w-1/4 flex-col justify-between rounded border border-white/10 bg-white/5 p-1.5">
-                <span className="font-mono text-[9px] text-slate-400">四方势力</span>
-                <div className="space-y-1">
-                  <div className="h-2 w-full rounded bg-cyan-400/40" />
-                  <div className="h-2 w-3/4 rounded bg-amber-400/40" />
-                  <div className="h-2 w-4/5 rounded bg-rose-400/40" />
+              <div className="flex w-1/4 flex-col justify-between rounded-lg border border-white/10 bg-white/5 p-2.5">
+                <span className="font-mono text-xs font-bold text-slate-300">四方势力谱系</span>
+                <div className="space-y-1.5">
+                  <div className="h-2.5 w-full rounded bg-cyan-400/50" />
+                  <div className="h-2.5 w-3/4 rounded bg-amber-400/50" />
+                  <div className="h-2.5 w-4/5 rounded bg-rose-400/50" />
                 </div>
-                <span className="text-[8px] text-slate-500">信任阈值</span>
+                <span className="font-mono text-[11px] text-slate-400">信任阈值监视</span>
               </div>
 
               {/* 中栏 */}
-              <div className="flex flex-1 flex-col justify-between rounded border border-[#0066ff]/30 bg-[#0066ff]/10 p-2">
-                <div className="flex items-center justify-between font-mono text-[9px] text-cyan-300">
+              <div className="flex flex-1 flex-col justify-between rounded-lg border border-[#0066ff]/40 bg-[#0066ff]/15 p-2.5">
+                <div className="flex items-center justify-between font-mono text-xs font-bold text-cyan-300">
                   <span>议事厅推演舞台</span>
-                  <span className="animate-pulse">● 演出中</span>
+                  <span className="animate-pulse text-emerald-400">● 实时演出中</span>
                 </div>
-                <div className="my-auto flex items-end justify-around">
-                  <div className="size-6 rounded bg-white/20" />
-                  <div className="size-7 rounded bg-amber-400/30" />
-                  <div className="size-6 rounded bg-cyan-400/30" />
+                <div className="my-auto flex items-end justify-around py-1">
+                  <div className="size-8 rounded-lg bg-white/20" />
+                  <div className="size-10 rounded-lg bg-amber-400/40" />
+                  <div className="size-8 rounded-lg bg-cyan-400/40" />
                 </div>
-                <div className="h-3 truncate rounded border border-white/10 bg-black/50 px-1 text-[8px] text-slate-300">
+                <div className="truncate rounded border border-white/10 bg-black/60 px-2 py-1 text-[11px] font-medium text-slate-200">
                   周瑜: 誓保江东六郡，决不降曹！
                 </div>
               </div>
 
               {/* 右栏 */}
-              <div className="flex w-1/3 flex-col justify-between rounded border border-white/10 bg-white/5 p-1.5">
-                <span className="font-mono text-[9px] text-slate-400">四维指标 & 决策</span>
+              <div className="flex w-1/3 flex-col justify-between rounded-lg border border-white/10 bg-white/5 p-2.5">
+                <span className="font-mono text-xs font-bold text-slate-300">四维指标 & 决策</span>
                 <div className="space-y-1">
-                  <div className="h-1.5 w-full rounded bg-emerald-400/50" />
-                  <div className="h-1.5 w-2/3 rounded bg-blue-400/50" />
+                  <div className="h-2 w-full rounded bg-emerald-400/50" />
+                  <div className="h-2 w-2/3 rounded bg-blue-400/50" />
                 </div>
                 <div className="space-y-1">
-                  <div className="h-3 rounded bg-amber-400/20 px-1 text-[8px] text-amber-300">
-                    D. 天命破壁
+                  <div className="truncate rounded border border-amber-400/40 bg-amber-400/25 px-1.5 py-0.5 text-[11px] font-bold text-amber-200">
+                    🌟 D. 天命破壁飞升
                   </div>
-                  <div className="h-2.5 rounded bg-white/10" />
+                  <div className="h-4 rounded bg-white/10" />
                 </div>
               </div>
             </div>
           </div>
 
-          <ul className="space-y-1.5 text-xs text-slate-300">
-            <li className="flex items-center gap-2">
-              <CheckCircle2 className="size-3.5 shrink-0 text-blue-400" />
+          <ul className="space-y-2 text-sm text-slate-200 sm:text-base">
+            <li className="flex items-center gap-2.5">
+              <CheckCircle2 className="size-4 shrink-0 text-blue-400" />
               <span>
-                <strong>信息密度充沛</strong>：四维指标、人物阵营、对峙舞台同屏呈现，无需频繁切页。
+                <strong className="text-white">高信息密度同屏呈现</strong>
+                ：指标、立绘、对话、决策无需任何翻页。
               </span>
             </li>
-            <li className="flex items-center gap-2">
-              <CheckCircle2 className="size-3.5 shrink-0 text-blue-400" />
+            <li className="flex items-center gap-2.5">
+              <CheckCircle2 className="size-4 shrink-0 text-blue-400" />
               <span>
-                <strong>全键盘快捷操作</strong>：数字键 1-4 快速决策，Space
-                推进剧本，大屏爽快度拉满。
+                <strong className="text-white">全键盘极速盲操</strong>：数字键 1-4 快速决策，Space
+                推进剧本，大屏爽感拉满。
               </span>
             </li>
           </ul>
         </div>
 
         {/* 移动端布局架构 */}
-        <div className="space-y-4 rounded-xl border border-emerald-500/20 bg-emerald-950/10 p-5 backdrop-blur-sm">
-          <div className="flex items-center justify-between">
-            <span className="flex items-center gap-2 text-sm font-bold text-emerald-400">
-              <Smartphone className="size-4" />
-              <span>移动端：流式卡片与单手掌控 (Single-Hand Card Stream)</span>
+        <div className="space-y-5 rounded-2xl border-2 border-emerald-500/30 bg-black/65 p-6 shadow-xl backdrop-blur-xl sm:p-8">
+          <div className="flex items-center justify-between border-b border-emerald-500/20 pb-3">
+            <span className="flex items-center gap-2.5 text-lg font-black text-emerald-400 sm:text-xl">
+              <Smartphone className="size-5" />
+              <span>移动端：流式卡片与单手掌控 (Card Stream)</span>
             </span>
-            <span className="rounded bg-emerald-500/20 px-2 py-0.5 font-mono text-[10px] text-emerald-300">
+            <span className="rounded-full bg-emerald-500/20 px-3 py-1 font-mono text-xs font-bold text-emerald-300">
               触控优先
             </span>
           </div>
 
           {/* 移动端线框模拟 */}
-          <div className="rounded-lg border border-white/10 bg-black/60 p-3">
-            <div className="flex h-28 items-center justify-center">
-              <div className="flex h-full w-28 flex-col justify-between rounded-lg border border-emerald-500/40 bg-white/5 p-1.5">
-                <div className="flex items-center justify-between font-mono text-[8px] text-emerald-300">
+          <div className="rounded-xl border border-white/15 bg-black/70 p-4 shadow-inner">
+            <div className="flex h-36 items-center justify-center">
+              <div className="flex h-full w-36 flex-col justify-between rounded-xl border-2 border-emerald-500/50 bg-white/5 p-2 shadow-lg">
+                <div className="flex items-center justify-between font-mono text-[10px] font-bold text-emerald-300">
                   <span>WORLDLINE</span>
                   <span>R.2/4</span>
                 </div>
                 {/* 移动端吸附舞台 */}
-                <div className="flex h-9 items-center justify-center gap-1 rounded bg-[#0066ff]/15">
-                  <div className="size-4 rounded bg-white/20" />
-                  <div className="size-5 rounded bg-amber-400/40" />
+                <div className="flex h-12 items-center justify-center gap-1.5 rounded-lg border border-[#0066ff]/30 bg-[#0066ff]/20">
+                  <div className="size-6 rounded bg-white/20" />
+                  <div className="size-7 rounded bg-amber-400/50" />
                 </div>
                 {/* 底部吸附选项 */}
                 <div className="space-y-1">
-                  <div className="h-3 truncate rounded bg-amber-400/20 px-1 text-[7px] text-amber-200">
+                  <div className="truncate rounded border border-amber-400/40 bg-amber-400/25 px-1 py-0.5 text-[9px] font-bold text-amber-200">
                     🌟 破釜沉舟挥师南渡
                   </div>
-                  <div className="h-2.5 rounded bg-white/10" />
+                  <div className="h-3 rounded bg-white/15" />
                 </div>
               </div>
             </div>
           </div>
 
-          <ul className="space-y-1.5 text-xs text-slate-300">
-            <li className="flex items-center gap-2">
-              <CheckCircle2 className="size-3.5 shrink-0 text-emerald-400" />
+          <ul className="space-y-2 text-sm text-slate-200 sm:text-base">
+            <li className="flex items-center gap-2.5">
+              <CheckCircle2 className="size-4 shrink-0 text-emerald-400" />
               <span>
-                <strong>动态视口单位 (dvh)</strong>：完美解决移动端 Safari / Chrome
-                动态地址栏遮挡问题。
+                <strong className="text-white">动态视口单位 (dvh)</strong>：彻底解决 iOS Safari 与
+                Chrome 动态地址栏遮挡问题。
               </span>
             </li>
-            <li className="flex items-center gap-2">
-              <CheckCircle2 className="size-3.5 shrink-0 text-emerald-400" />
+            <li className="flex items-center gap-2.5">
+              <CheckCircle2 className="size-4 shrink-0 text-emerald-400" />
               <span>
-                <strong>大拇指黄金热区</strong>：核心决策项吸附屏幕下半区，点击热区 &gt;
-                48px，杜绝误触。
+                <strong className="text-white">大拇指黄金热区</strong>：决策项吸附下半屏，点击热区
+                &gt; 48px，完全杜绝误触。
               </span>
             </li>
           </ul>
@@ -152,16 +153,18 @@ export function Slide4CrossPlatform({ skin: _skin }: { skin: ScenarioSkin }) {
       </div>
 
       {/* 底部性能支撑 */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs text-slate-300 backdrop-blur-md">
-        <div className="flex items-center gap-2">
-          <ShieldCheck className="size-4 text-cyan-400" />
-          <span className="font-semibold text-white">底层工程支撑:</span>
-          <span>Next.js 16 App Router + React 19 React Compiler 自动记忆化，零冗余重绘。</span>
+      <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-white/15 bg-black/65 px-6 py-3.5 text-sm text-slate-200 shadow-md backdrop-blur-xl">
+        <div className="flex items-center gap-2.5">
+          <ShieldCheck className="size-5 text-cyan-400" />
+          <span className="font-bold text-white">工程底层支撑:</span>
+          <span>
+            Next.js 16 App Router + React 19 React Compiler 自动记忆化，无冗余 re-render。
+          </span>
         </div>
-        <div className="flex items-center gap-2 font-mono text-[11px] text-slate-400">
+        <div className="flex items-center gap-3 font-mono text-xs text-slate-400">
           <span>GPU Keyframe CSS</span>
           <span>•</span>
-          <span>Zero Runtime CSS-in-JS</span>
+          <span>Zero Runtime CSS-in-JS Overhead</span>
         </div>
       </div>
     </div>
