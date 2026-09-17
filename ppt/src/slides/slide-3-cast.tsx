@@ -203,13 +203,13 @@ export function Slide3Cast({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
             </div>
           </section>
 
-          {/* 👉 右半边（占 6 列）：用于 PPT 文字解释（大字号、专业排版与架构亮点） */}
+          {/* 👉 右半边（占 6 列）：用于 PPT 文字解释（大字号、通俗易懂说人话） */}
           <aside className="flex h-full flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-[#26201d]/95 p-4 shadow-xl lg:col-span-6">
             {/* 标题栏 */}
-            <div className="shrink-0 border-b border-white/10 pb-2.5">
+            <div className="shrink-0 border-b border-white/10 pb-2">
               <div className="flex items-center justify-between">
-                <Badge className="bg-[#e2622c] text-[11px] font-black text-black">
-                  STAGE 01 · 破题立局与角色生成
+                <Badge className="bg-[#e2622c] text-xs font-black text-black">
+                  STAGE 01 · 破题立局：把知乎神帖做成活沙盘
                 </Badge>
                 <span className="font-mono text-xs font-bold text-orange-400">
                   WORLDLINE / CASTING
@@ -217,75 +217,74 @@ export function Slide3Cast({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
               </div>
               <h2 className="mt-1.5 flex items-center gap-2 text-base font-black text-slate-100 sm:text-lg">
                 <Compass className="size-5 shrink-0 text-orange-400" />
-                <span>知乎高赞母本具象化：从静态答题到多方沙盘</span>
+                <span>知乎高赞母本具象化：不做死板答题，做生死博弈</span>
               </h2>
-              <p className="mt-1 text-xs leading-relaxed text-slate-400">
-                以知乎 7.7w+
-                赞爆款问题《假如地球进入冰河时代》为母本，提取极限时空冲突，实时具象化为策略博弈沙盘。
+              <p className="mt-1 text-xs sm:text-sm leading-relaxed text-slate-300">
+                以知乎 7.7w 赞爆款《假如地球进入冰河时代》为母本：不仅是文字脑洞，更是一场生存死局！零下43℃、冰封关隘、三百万人生死倒计时，人人皆可开局执棋！
               </p>
             </div>
 
-            {/* 3 个核心设计深度解释卡片 */}
-            <div className="flex flex-1 flex-col justify-around space-y-2.5 overflow-hidden py-2">
+            {/* 3 个核心设计深度解释卡片（说人话、大字体） */}
+            <div className="flex flex-1 flex-col justify-around space-y-2 overflow-hidden py-1.5">
               {/* 卡片 1 */}
               <div className="rounded-xl border border-white/10 bg-black/40 p-3 shadow-xs">
                 <div className="flex items-center gap-2">
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
                     01
                   </span>
-                  <h3 className="flex items-center gap-1.5 text-xs font-black text-slate-100 sm:text-sm">
-                    <FileText className="size-3.5 text-orange-400" />
-                    <span>母本矛盾解构与时空极限定桩</span>
+                  <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
+                    <FileText className="size-4 text-orange-400" />
+                    <span>【抓核心矛盾】把答主的科学推演，做成逼近眼前的生存死线</span>
                   </h3>
                 </div>
-                <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
-                  提炼母本答主的科学推演脉络：
-                  <strong>北纬四十度冰盖封江、零下43℃极寒风暴、三百万南迁难民被阻于双堡关下</strong>
-                  。将文学假设拆解为具有物理限制与倒计时压迫的生死时空。
+                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
+                  原帖答主推演了冰盖南移、气温骤降。我们提炼为三大绝境事实：
+                  <strong>运河冻死、暴风雪只剩7天倒计时、关口架起重机枪</strong>
+                  。玩家一进来不是在做阅读理解，而是必须立刻救下三百万同胞的命！
                 </p>
               </div>
 
               {/* 卡片 2 */}
               <div className="rounded-xl border border-white/10 bg-black/40 p-3 shadow-xs">
                 <div className="flex items-center gap-2">
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
                     02
                   </span>
-                  <h3 className="flex items-center gap-1.5 text-xs font-black text-slate-100 sm:text-sm">
-                    <BrainCircuit className="size-3.5 text-orange-400" />
-                    <span>非同质化权力结构生成（Asymmetric Casts）</span>
+                  <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
+                    <BrainCircuit className="size-4 text-orange-400" />
+                    <span>【拒绝上帝视角】每个人都有致命软肋，逼你做痛苦抉择</span>
                   </h3>
                 </div>
-                <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
-                  拒绝单一的“全知上帝”，让玩家代入具备不同筹码与软肋的真实决策者：
-                  <strong>军垦师长</strong>（拥兵自重与兵变边缘）、<strong>守关知府</strong>
-                  （恪守朝廷律法）、<strong>部族女头人</strong>（掌控唯一的抗寒驯鹿运输线）。
+                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
+                  不给玩家开全能外挂！你扮演的是有血有肉的真实当权者：
+                  <strong>军垦师长手里有兵但极度缺粮、知府手握大仓但被朝廷死死卡住、部族女头人掌管唯一驯鹿运输线却一心救族人</strong>
+                  。选谁，谁的软肋就由你来抗！
                 </p>
               </div>
 
               {/* 卡片 3 */}
               <div className="rounded-xl border border-white/10 bg-black/40 p-3 shadow-xs">
                 <div className="flex items-center gap-2">
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
                     03
                   </span>
-                  <h3 className="flex items-center gap-1.5 text-xs font-black text-slate-100 sm:text-sm">
-                    <Sparkles className="size-3.5 text-orange-400" />
-                    <span>「公开主张」与「私密暗盘」双层博弈引擎</span>
+                  <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
+                    <Sparkles className="size-4 text-orange-400" />
+                    <span>【表面大义凛然，背后各打各的利益小算盘】</span>
                   </h3>
                 </div>
-                <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
-                  每个角色均绑定公开交代的政治姿态与水面之下的私密动机。表面为大局共赴国难，深层各怀利益死线，为后续的
-                  <strong>多智能体廷争抉择与冲突爆发</strong>埋下绝对真实的动力机制。
+                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
+                  谁说开会都是一团和气？每个角色嘴上都是天下大局，
+                  <strong>水面之下各怀绝密暗盘与利益底线</strong>。明暗交织，AI 朝臣演出来的戏才叫真刀真枪、尔虞我诈！
                 </p>
               </div>
             </div>
 
             {/* 底部技术注记 */}
-            <div className="shrink-0 rounded-lg border border-orange-500/40 bg-orange-950/40 px-3 py-2 text-xs text-orange-300">
-              <strong className="text-orange-400">💡 演示要点：</strong>
+            <div className="shrink-0 rounded-lg border border-orange-500/40 bg-orange-950/40 px-3 py-2 text-xs sm:text-[13px] text-orange-300">
+              <strong className="text-orange-400">💡 演示玩法：</strong>
               <span>
-                左侧点击不同角色即可即时变换开局立场与利益暗盘，驱动后续截然不同的世界线推演走向。
+                点击左侧 3 位主角卡片直接换人！身份和底牌当场变幻，推演走向立刻翻天覆地！
               </span>
             </div>
           </aside>

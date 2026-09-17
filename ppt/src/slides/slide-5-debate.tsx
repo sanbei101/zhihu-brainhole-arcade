@@ -173,13 +173,13 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
       {/* 🎭 核心 16:9 双半区：左半边用于 PPT 文字解释，右半边放人物辩论对决舞台 */}
       <section className="mx-auto w-full max-w-7xl flex-1 overflow-hidden px-4 py-2.5 sm:px-6 sm:py-3">
         <div className="grid h-full grid-cols-1 gap-3.5 lg:grid-cols-12 lg:gap-4">
-          {/* 👈 左半边（占 6 列）：用于 PPT 文字解释（根据当前演进状态动态联动高亮） */}
+          {/* 👈 左半边（占 6 列）：用于 PPT 文字解释（大字号、通俗易懂说人话） */}
           <aside className="flex h-full flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-[#26201d]/95 p-4 shadow-xl lg:col-span-6">
             {/* 标题栏 */}
-            <div className="shrink-0 border-b border-white/10 pb-2.5">
+            <div className="shrink-0 border-b border-white/10 pb-2">
               <div className="flex items-center justify-between">
-                <Badge className="bg-[#e2622c] text-[11px] font-black text-black">
-                  STAGE 03 · 调度管线与冲突对齐
+                <Badge className="bg-[#e2622c] text-xs font-black text-black">
+                  STAGE 03 · 智能体对喷：神仙打架是怎么炼成的
                 </Badge>
                 <span className="font-mono text-xs font-bold text-orange-400">
                   DISPATCH PIPELINE
@@ -187,15 +187,15 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
               </div>
               <h2 className="mt-1.5 flex items-center gap-2 text-base font-black text-slate-100 sm:text-lg">
                 <Swords className="size-5 shrink-0 text-orange-400" />
-                <span>多智能体即时冲突矩阵与短兵相接调度管线</span>
+                <span>多智能体调度黑科技：告别排队卡顿，引爆硬核交锋</span>
               </h2>
-              <p className="mt-1 text-xs leading-relaxed text-slate-400">
-                告别单向死板对话，通过算法并发推演与冲突聚焦，将多方利益矛盾实时转化为知乎硬核对峙长文。
+              <p className="mt-1 text-xs sm:text-sm leading-relaxed text-slate-300">
+                多智能体最怕两件事：慢死和复读机。我们用三套调度算法，让 AI 辩论像知乎高赞答主互撕一样精彩、快速、过瘾！
               </p>
             </div>
 
-            {/* 3 个核心算法亮点卡片（动态发光呼应当前阶段） */}
-            <div className="flex flex-1 flex-col justify-around space-y-2.5 overflow-hidden py-2">
+            {/* 3 个核心算法亮点卡片（说人话、大字体） */}
+            <div className="flex flex-1 flex-col justify-around space-y-2 overflow-hidden py-1.5">
               {/* 算法 1：并发扇出表态 */}
               <div
                 className={`rounded-xl border p-3 shadow-xs transition-all ${
@@ -206,24 +206,23 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="flex size-6 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
+                    <span className="flex size-7 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
                       01
                     </span>
-                    <h3 className="flex items-center gap-1.5 text-xs font-black text-slate-100 sm:text-sm">
-                      <Zap className="size-3.5 text-orange-400" />
-                      <span>并发扇出表态（Parallel Fan-Out Dispatch）</span>
+                    <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
+                      <Zap className="size-4 text-orange-400" />
+                      <span>【4 个 AI 同时张嘴】并发并行，秒级上屏不等待</span>
                     </h3>
                   </div>
                   {(stage === 1 || stage === 2) && (
                     <Badge className="animate-pulse border border-emerald-500/40 bg-emerald-950 text-[10px] text-emerald-400">
-                      ● 演示中：单人独立亮相表态
+                      ● 演示中：单人独立表态
                     </Badge>
                   )}
                 </div>
-                <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
-                  使用 <code>Promise.all</code> 并发唤起 4 位独立 Agent
-                  对拟定决策进行并行结构化表态，NDJSON 流式分块返回，<strong>首包秒级上屏</strong>
-                  ，彻底根治多智能体排队延迟。
+                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
+                  用 <code>Promise.all</code> 瞬间唤醒 4 个智能体同时推演，打字机流式吐字，
+                  <strong>彻底消灭一个等一个的漫长排队</strong>，首个字符秒级上屏，丝滑流畅！
                 </p>
               </div>
 
@@ -237,50 +236,51 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="flex size-6 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
+                    <span className="flex size-7 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
                       02
                     </span>
-                    <h3 className="flex items-center gap-1.5 text-xs font-black text-slate-100 sm:text-sm">
-                      <Network className="size-3.5 text-orange-400" />
-                      <span>冲突矩阵对齐算法（pickConflictPair）</span>
+                    <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
+                      <Network className="size-4 text-orange-400" />
+                      <span>【算法挑事：专找矛盾最尖锐的两个人】</span>
                     </h3>
                   </div>
                   {stage === 3 && (
                     <Badge className="animate-pulse border border-red-500/40 bg-red-950 text-[10px] text-red-400">
-                      ● 演示中：两人同台短兵相接
+                      ● 演示中：两人同台激烈争吵
                     </Badge>
                   )}
                 </div>
-                <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
-                  根据各 Agent 利益函数过滤无悬念共识，
-                  <strong>算法精准锁定立场极化权重最高的一对尖锐矛盾</strong>（如沈寒山极限气象预警
-                  vs 燕崇山铁血戒严），凸显戏剧张力。
+                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
+                  大家都赞同的废话直接过滤！
+                  <strong>算法自动计算分歧权重，精准揪出反对最激烈的一对（如气象官 vs 守城总兵）</strong>
+                  ，火药味直接拉满，绝不冷场！
                 </p>
               </div>
 
               {/* 算法 3：单次结构化交锋 */}
               <div className="rounded-xl border border-white/10 bg-black/40 p-3 shadow-xs">
                 <div className="flex items-center gap-2">
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
                     03
                   </span>
-                  <h3 className="flex items-center gap-1.5 text-xs font-black text-slate-100 sm:text-sm">
-                    <Brain className="size-3.5 text-orange-400" />
-                    <span>单次结构化交锋合成（Single-Shot Clash）</span>
+                  <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
+                    <Brain className="size-4 text-orange-400" />
+                    <span>【一次推理搞定互怼】杜绝车轱辘话与死锁</span>
                   </h3>
                 </div>
-                <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
-                  将双方对抗合并为单次模型结构化推演，消除多轮往返产生的死锁与复读，直接合成具有知乎硬核答主辩论感的
-                  <strong>针锋相对、引经据典短兵相接</strong>。
+                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
+                  传统多轮对话最容易陷入无意义的循环复读。我们设计
+                  <strong>单次结构化交锋合成</strong>
+                  ，一次性生成两人针锋相对、引经据典的辩论短兵相接，思辨质感拉爆！
                 </p>
               </div>
             </div>
 
             {/* 底部容灾说明 */}
-            <div className="flex shrink-0 items-center justify-between rounded-lg border border-orange-500/40 bg-orange-950/40 px-3 py-2 text-xs text-orange-300">
+            <div className="flex shrink-0 items-center justify-between rounded-lg border border-orange-500/40 bg-orange-950/40 px-3 py-2 text-xs sm:text-[13px] text-orange-300">
               <div>
-                <strong className="text-orange-400">🛡️ 容灾与超时保护：</strong>
-                <span>采用 AbortController 毫秒级超时熔断，单 Agent 异常不中断主线推演推进。</span>
+                <strong className="text-orange-400">🛡️ 毫秒级熔断保底：</strong>
+                <span>哪怕单个 AI 网络超时，也不会卡死主线，稳如磐石！</span>
               </div>
               <ShieldAlert className="size-4 shrink-0 text-orange-400" />
             </div>

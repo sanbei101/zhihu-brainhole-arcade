@@ -64,13 +64,13 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
       {/* ⚔️ 核心 16:9 双半区：左半边用于 PPT 文字解释，右半边放人物和选项卡牌 */}
       <section className="mx-auto w-full max-w-7xl flex-1 overflow-hidden px-4 py-2.5 sm:px-6 sm:py-3">
         <div className="grid h-full grid-cols-1 gap-3.5 lg:grid-cols-12 lg:gap-4">
-          {/* 👈 左半边（占 6 列）：用于 PPT 文字解释（架构深意、博弈机制与技术攻坚） */}
+          {/* 👉 左半边（占 6 列）：用于 PPT 文字解释（大字号、通俗易懂说人话） */}
           <aside className="flex h-full flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-[#26201d]/95 p-4 shadow-xl lg:col-span-6">
             {/* 标题栏 */}
-            <div className="shrink-0 border-b border-white/10 pb-2.5">
+            <div className="shrink-0 border-b border-white/10 pb-2">
               <div className="flex items-center justify-between">
-                <Badge className="bg-[#e2622c] text-[11px] font-black text-black">
-                  STAGE 02 · 动态议事厅与梯度抉择
+                <Badge className="bg-[#e2622c] text-xs font-black text-black">
+                  STAGE 02 · 廷议交锋：牵一发而动全身的活沙盘
                 </Badge>
                 <span className="font-mono text-xs font-bold text-orange-400">
                   COUNCIL & DECISION
@@ -78,74 +78,71 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
               </div>
               <h2 className="mt-1.5 flex items-center gap-2 text-base font-black text-slate-100 sm:text-lg">
                 <Scale className="size-5 shrink-0 text-orange-400" />
-                <span>高维动态沙盘：四维动态账本、极寒熵增与天命破壁</span>
+                <span>高维动态博弈：四维生死账本、寒潮逼近与群星飞升</span>
               </h2>
-              <p className="mt-1 text-xs leading-relaxed text-slate-400">
-                从扁平分支树升级为动态博弈场，每一次落子都在四维文明存续账本与四大 Agent
-                势力间掀起连锁震荡。
+              <p className="mt-1 text-xs sm:text-sm leading-relaxed text-slate-300">
+                这不是死板的选项树！你每下一个决定，不仅立刻改变四项生存指标，还会当场引爆 4 个 AI 的阵营对抗。
               </p>
             </div>
 
-            {/* 3 个核心机制解析卡片 */}
-            <div className="flex flex-1 flex-col justify-around space-y-2.5 overflow-hidden py-2">
+            {/* 3 个核心机制解析卡片（说人话、大字体） */}
+            <div className="flex flex-1 flex-col justify-around space-y-2 overflow-hidden py-1.5">
               {/* 机制 1 */}
               <div className="rounded-xl border border-white/10 bg-black/40 p-3 shadow-xs">
                 <div className="flex items-center gap-2">
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
                     01
                   </span>
-                  <h3 className="flex items-center gap-1.5 text-xs font-black text-slate-100 sm:text-sm">
-                    <Shield className="size-3.5 text-orange-400" />
-                    <span>四维动态存续账本与极寒大势熵增律</span>
+                  <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
+                    <Shield className="size-4 text-orange-400" />
+                    <span>【极寒步步紧逼！】绝无躺平可能，逼你主动破局</span>
                   </h3>
                 </div>
-                <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
-                  构建<strong>秩序稳定、军民士气、难民支持、战略物资</strong>
-                  四维硬核账本。引入不可逆的「极寒大势熵增定律」（-2/回合），打破任何消极固守的幻象，逼迫决策者发动攻势破局。
+                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
+                  <strong>稳定、士气、民心、物资</strong>四根红线勒在头上！更绝的是加入「极寒倒计时」（每回合气温暴跌、资源消耗），任何拖延固守都是慢性自杀，唯一的活路是主动亮剑！
                 </p>
               </div>
 
               {/* 机制 2 */}
               <div className="rounded-xl border border-white/10 bg-black/40 p-3 shadow-xs">
                 <div className="flex items-center gap-2">
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
                     02
                   </span>
-                  <h3 className="flex items-center gap-1.5 text-xs font-black text-slate-100 sm:text-sm">
-                    <Cpu className="size-3.5 text-orange-400" />
-                    <span>四方 Agent 独立认知建模与立场推演</span>
+                  <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
+                    <Cpu className="size-4 text-orange-400" />
+                    <span>【四路 AI 当场翻脸】绝不死板背台词，真实利益碰撞</span>
                   </h3>
                 </div>
-                <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
-                  四路势力（总兵/粮商/科学家/医官）内置差异化阶层信念，对右侧每一项拟定方案实时推演
-                  <strong>支持 / 反对立场与信任度损益</strong>，绝非死板剧本，而是活生生的博弈生态。
+                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
+                  守城总兵要军纪、粮商东家要暴利、气象专家要真相、前线医官要救人。
+                  <strong>你点任一方案，他们立刻根据各自阶层利益表明支持或反对</strong>，甚至当场拍桌子！
                 </p>
               </div>
 
               {/* 机制 3 */}
               <div className="rounded-xl border border-white/10 bg-black/40 p-3 shadow-xs">
                 <div className="flex items-center gap-2">
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
                     03
                   </span>
-                  <h3 className="flex items-center gap-1.5 text-xs font-black text-slate-100 sm:text-sm">
-                    <Sparkles className="size-3.5 text-orange-400" />
-                    <span>四档梯度抉择与「天命破壁」史诗机制</span>
+                  <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
+                    <Sparkles className="size-4 text-orange-400" />
+                    <span>【格局打开！从逃荒流民到群星级行星飞升】</span>
                   </h3>
                 </div>
-                <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
-                  摒弃非黑即白二选一，设立<strong>稳健、险极、妥协、群星巨构</strong>四阶推演；独创
-                  <strong>天命破壁 · 飞升决议</strong>（如 D
-                  项巨构决议·点燃万米地幔熔炉），跳出传统迁徙零和博弈，以行星重工开启宏大星海级破局世界线！
+                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
+                  拒绝传统的小修小补！除普通方案外，独创
+                  <strong>「天命破壁 · 飞升决议」</strong>（如 D 项直接下凿万米地幔熔炉给整颗星球供暖）。不搞零和博弈，以行星重工重铸文明新世界！
                 </p>
               </div>
             </div>
 
             {/* 底部联动提示 */}
-            <div className="flex shrink-0 items-center justify-between rounded-lg border border-orange-500/40 bg-orange-950/40 px-3 py-2 text-xs text-orange-300">
+            <div className="flex shrink-0 items-center justify-between rounded-lg border border-orange-500/40 bg-orange-950/40 px-3 py-2 text-xs sm:text-[13px] text-orange-300">
               <div>
-                <strong className="text-orange-400">💡 交互说明：</strong>
-                <span>右侧点击 A / B / C / D 选项，可即时联动各方势力态度预测与账本增减！</span>
+                <strong className="text-orange-400">💡 演示玩法：</strong>
+                <span>右侧点击 A / B / C / D 选项，亲眼看看上方指标与四路 AI 态度是如何瞬时联动的！</span>
               </div>
               <Compass className="size-4 shrink-0 text-orange-400" />
             </div>
