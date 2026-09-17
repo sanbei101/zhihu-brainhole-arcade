@@ -4,7 +4,7 @@ import type { ScenarioSkin } from "@/lib/scenario-skin";
 
 export function Slide6PromptEcology({ skin: _skin }: { skin: ScenarioSkin }) {
   return (
-    <div className="relative flex max-h-full w-full scrollbar-none flex-col justify-between overflow-y-auto rounded-2xl border border-white/80 bg-white/85 p-4 text-slate-900 shadow-2xl backdrop-blur-md sm:p-6 lg:p-8">
+    <div className="relative flex size-full max-h-full scrollbar-none flex-col justify-between overflow-y-auto rounded-2xl border border-white/80 bg-white/85 p-4 text-slate-900 shadow-2xl backdrop-blur-md sm:p-6 lg:p-8">
       {/* 顶部标题与调度流概览 */}
       <div className="space-y-2">
         <div className="flex items-center gap-2 font-mono text-xs font-bold tracking-wider text-amber-700 uppercase sm:text-sm">

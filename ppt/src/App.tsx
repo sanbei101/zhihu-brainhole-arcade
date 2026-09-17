@@ -1,25 +1,21 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { ChevronLeft, ChevronRight, Expand, Shrink } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { getSkin } from "@/lib/scenario-skin";
 
-import { NavigationBar } from "./components/navigation-bar";
-import { OverviewDrawer } from "./components/overview-drawer";
-import { PresenterNotes } from "./components/presenter-notes";
 import { SlideShell } from "./components/slide-shell";
 import { SLIDES } from "./slides";
 
 export function PresentationApp() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [direction, setDirection] = useState<"forward" | "backward">("forward");
-  const [showNotes, setShowNotes] = useState(false);
-  const [showOverview, setShowOverview] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const touchStartXRef = useRef<number | null>(null);
   const totalSlides = SLIDES.length;
   const currentSlide = SLIDES[currentSlideIndex] ?? SLIDES[0];
 
-  // 每一页自动严格采用其专属世界线主题皮肤，不再提供手动干扰
+  // 每一页自动采用其专属世界线主题皮肤
   const skin = getSkin(currentSlide.defaultSkinId);
 
   const goToNext = useCallback(() => {
@@ -55,13 +51,6 @@ export function PresentationApp() {
   // 键盘快捷键监听
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // 若处于抽屉打开状态，Esc 退出抽屉
-      if (e.key === "Escape") {
-        setShowOverview(false);
-        setShowNotes(false);
-        return;
-      }
-
       // 翻页操作
       if (
         e.key === "ArrowRight" ||
@@ -80,10 +69,6 @@ export function PresentationApp() {
       } else if (e.key === "End") {
         e.preventDefault();
         jumpToSlide(totalSlides - 1);
-      } else if (e.key === "n" || e.key === "N") {
-        setShowNotes((prev) => !prev);
-      } else if (e.key === "t" || e.key === "T" || e.key === "o" || e.key === "O") {
-        setShowOverview((prev) => !prev);
       } else if (e.key === "f" || e.key === "F") {
         toggleFullscreen();
       } else if (e.key >= "1" && e.key <= "9") {
@@ -125,53 +110,78 @@ export function PresentationApp() {
 
   return (
     <div
-      className="relative flex h-screen w-screen flex-col overflow-hidden font-sans text-slate-900"
+      className="relative flex h-screen w-screen flex-col overflow-hidden font-sans text-slate-900 select-none"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* 幻灯片主体：带丝滑的前后方向感知动画 */}
-      <div
-        className={`${direction === "forward" ? "slide-enter-forward" : "slide-enter-backward"} relative flex-1 overflow-hidden`}
-        key={currentSlide.id}
+      {/* 悬浮全屏控制按钮：置于屏幕右上角，毛玻璃轻巧悬浮，绝不占据内容布局 */}
+      <button
+        type="button"
+        onClick={toggleFullscreen}
+        className="fixed top-3 right-3 z-50 flex cursor-pointer items-center gap-1.5 rounded-full border border-slate-300/80 bg-white/85 px-3.5 py-1.5 text-xs font-black text-slate-700 shadow-xl backdrop-blur-md transition-all hover:scale-105 hover:border-[#0066ff] hover:bg-white hover:text-[#0066ff] active:scale-95 sm:top-4 sm:right-4"
+        title={isFullscreen ? "退出全屏 (F / Esc)" : "全屏演示 (F)"}
       >
-        <SlideShell
-          category={currentSlide.category}
-          title={currentSlide.title}
-          subtitle={currentSlide.subtitle}
-          skin={skin}
-          isFullscreen={isFullscreen}
-          onToggleFullscreen={toggleFullscreen}
+        {isFullscreen ? <Shrink className="size-4" /> : <Expand className="size-4" />}
+        <span className="hidden sm:inline">{isFullscreen ? "退出全屏" : "全屏演示"}</span>
+        <kbd className="hidden rounded bg-slate-100 px-1 py-0.5 font-mono text-[10px] text-slate-500 sm:inline">
+          F
+        </kbd>
+      </button>
+
+      {/* 悬浮轻量翻页状态指示舱：置于屏幕右下角，低透明度，悬浮时高亮 */}
+      <div className="fixed right-3 bottom-3 z-50 flex items-center gap-1 rounded-full border border-slate-300/80 bg-white/80 px-2.5 py-1 text-xs font-bold text-slate-700 opacity-40 shadow-xl backdrop-blur-md transition-opacity hover:opacity-100 sm:right-4 sm:bottom-4">
+        <button
+          type="button"
+          onClick={goToPrev}
+          disabled={currentSlideIndex === 0}
+          className="cursor-pointer rounded-full p-1 hover:bg-slate-100 hover:text-[#0066ff] disabled:cursor-not-allowed disabled:opacity-25"
+          title="上一页 (←)"
         >
-          {currentSlide.component({ skin, active: true })}
-        </SlideShell>
+          <ChevronLeft className="size-4" />
+        </button>
+        <span className="px-1.5 font-mono text-xs font-black">
+          {currentSlideIndex + 1} / {totalSlides}
+        </span>
+        <button
+          type="button"
+          onClick={goToNext}
+          disabled={currentSlideIndex === totalSlides - 1}
+          className="cursor-pointer rounded-full p-1 hover:bg-slate-100 hover:text-[#0066ff] disabled:cursor-not-allowed disabled:opacity-25"
+          title="下一页 (→ / Space)"
+        >
+          <ChevronRight className="size-4" />
+        </button>
       </div>
 
-      {/* 底部控制台 */}
-      <NavigationBar
-        currentSlide={currentSlideIndex}
-        totalSlides={totalSlides}
-        onPrev={goToPrev}
-        onNext={goToNext}
-        onToggleNotes={() => setShowNotes((prev) => !prev)}
-        showNotes={showNotes}
-        onToggleOverview={() => setShowOverview((prev) => !prev)}
-        showOverview={showOverview}
-        isFullscreen={isFullscreen}
-        onToggleFullscreen={toggleFullscreen}
-        skin={skin}
-      />
+      {/* 边缘轻微悬浮翻页热区：鼠标靠近屏幕两侧边缘出现 */}
+      {currentSlideIndex > 0 && (
+        <button
+          type="button"
+          onClick={goToPrev}
+          className="fixed top-1/2 left-2 z-40 -translate-y-1/2 cursor-pointer rounded-full border border-slate-200/60 bg-white/60 p-2 text-slate-600 opacity-0 shadow-lg backdrop-blur-sm transition-all hover:border-[#0066ff] hover:bg-white hover:text-[#0066ff] hover:opacity-100 active:scale-95 sm:left-3"
+          title="上一页 (←)"
+        >
+          <ChevronLeft className="size-5" />
+        </button>
+      )}
+      {currentSlideIndex < totalSlides - 1 && (
+        <button
+          type="button"
+          onClick={goToNext}
+          className="fixed top-1/2 right-2 z-40 -translate-y-1/2 cursor-pointer rounded-full border border-slate-200/60 bg-white/60 p-2 text-slate-600 opacity-0 shadow-lg backdrop-blur-sm transition-all hover:border-[#0066ff] hover:bg-white hover:text-[#0066ff] hover:opacity-100 active:scale-95 sm:right-3"
+          title="下一页 (→ / Space)"
+        >
+          <ChevronRight className="size-5" />
+        </button>
+      )}
 
-      {/* 演讲者备注抽屉 */}
-      <PresenterNotes slide={currentSlide} isOpen={showNotes} onClose={() => setShowNotes(false)} />
-
-      {/* 幻灯片大纲缩略面板 */}
-      <OverviewDrawer
-        slides={SLIDES}
-        currentSlide={currentSlideIndex}
-        isOpen={showOverview}
-        onClose={() => setShowOverview(false)}
-        onSelectSlide={(idx) => jumpToSlide(idx)}
-      />
+      {/* 幻灯片主体：100% 占满全屏显示内容 */}
+      <div
+        className={`${direction === "forward" ? "slide-enter-forward" : "slide-enter-backward"} relative size-full flex-1 overflow-hidden`}
+        key={currentSlide.id}
+      >
+        <SlideShell skin={skin}>{currentSlide.component({ skin, active: true })}</SlideShell>
+      </div>
     </div>
   );
 }

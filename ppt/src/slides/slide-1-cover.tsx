@@ -6,7 +6,7 @@ import { ASSETS } from "../assets";
 
 export function Slide1Cover({ skin: _skin }: { skin: ScenarioSkin }) {
   return (
-    <div className="relative flex max-h-full w-full scrollbar-none flex-col justify-between overflow-y-auto rounded-2xl border border-white/80 bg-white/85 p-4 text-slate-900 shadow-2xl backdrop-blur-md sm:p-6 lg:p-8">
+    <div className="relative flex size-full max-h-full scrollbar-none flex-col justify-between overflow-y-auto rounded-2xl border border-white/80 bg-white/85 p-4 text-slate-900 shadow-2xl backdrop-blur-md sm:p-6 lg:p-8">
       {/* 顶栏重要信息：真实参赛身份与技术栈 */}
       <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 border-b border-slate-200/80 pb-3">
         <div className="flex items-center gap-2 sm:gap-3">
