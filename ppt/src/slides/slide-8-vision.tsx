@@ -22,12 +22,14 @@ export function Slide8Vision({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-2">
           <div>
             <div className="flex items-center gap-2">
-              <Badge className="bg-[#e2622c] text-xs text-black font-black px-2 py-0.5">生态闭环与商业落地</Badge>
-              <span className="font-mono text-xs text-slate-300 font-medium">
+              <Badge className="bg-[#e2622c] px-2 py-0.5 text-xs font-black text-black">
+                生态闭环与商业落地
+              </Badge>
+              <span className="font-mono text-xs font-medium text-slate-300">
                 从一个好奇脑洞，到万字硬核回答，再引爆社区二次狂欢
               </span>
             </div>
-            <h1 className="mt-1 text-lg font-black text-slate-100 sm:text-2xl tracking-tight">
+            <h1 className="mt-1 text-lg font-black tracking-tight text-slate-100 sm:text-2xl">
               知乎生态飞轮与未来演进：为每一个脑洞，赋以一整个世界
             </h1>
           </div>
@@ -40,18 +42,20 @@ export function Slide8Vision({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
       </section>
 
       {/* 🎡 核心生态与商业愿景：纵向充实饱满，绝不留空 */}
-      <section className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between px-4 py-2.5 sm:px-6 sm:py-3.5 gap-3">
+      <section className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between gap-3 px-4 py-2.5 sm:px-6 sm:py-3.5">
         {/* 第一行：知乎生态 4 步闭环飞轮 + 4 大核心实测数据展板 */}
         <div className="grid grid-cols-1 gap-3 lg:grid-cols-12 lg:gap-4">
           {/* 左侧：4 步闭环飞轮 (7 列) */}
           <Card className="border-white/15 bg-[#26201d]/95 p-3.5 shadow-md lg:col-span-7">
-            <CardHeader className="space-y-1 p-0 pb-2 border-b border-white/10">
+            <CardHeader className="space-y-1 border-b border-white/10 p-0 pb-2">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-1.5 font-mono text-xs font-black text-orange-400 sm:text-sm">
                   <Repeat className="size-4" />
                   <span>知乎生态 4 步闭环飞轮</span>
                 </span>
-                <Badge className="bg-[#e2622c] text-[11px] text-black font-black px-2 py-0.5">自循环生态</Badge>
+                <Badge className="bg-[#e2622c] px-2 py-0.5 text-[11px] font-black text-black">
+                  自循环生态
+                </Badge>
               </div>
             </CardHeader>
 
@@ -85,32 +89,40 @@ export function Slide8Vision({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
 
           {/* 右侧：4 项硬核实测数据展板 (5 列) */}
           <Card className="border-white/15 bg-[#26201d]/95 p-3.5 shadow-md lg:col-span-5">
-            <CardHeader className="space-y-1 p-0 pb-2 border-b border-white/10">
+            <CardHeader className="space-y-1 border-b border-white/10 p-0 pb-2">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-1.5 font-mono text-xs font-black text-amber-400 sm:text-sm">
                   <Sparkles className="size-4" />
                   <span>核心实测工程数据指标</span>
                 </span>
-                <Badge className="bg-amber-500 text-[11px] text-black font-black px-2 py-0.5">实测达标</Badge>
+                <Badge className="bg-amber-500 px-2 py-0.5 text-[11px] font-black text-black">
+                  实测达标
+                </Badge>
               </div>
             </CardHeader>
 
             <div className="grid grid-cols-2 gap-2 pt-2 text-center">
               <div className="rounded-lg border border-white/10 bg-black/40 p-2.5">
-                <div className="font-mono text-lg sm:text-xl font-black text-orange-400">77,000+</div>
-                <div className="mt-0.5 text-xs text-slate-200 font-medium">全剧推演上下文</div>
+                <div className="font-mono text-lg font-black text-orange-400 sm:text-xl">
+                  77,000+
+                </div>
+                <div className="mt-0.5 text-xs font-medium text-slate-200">全剧推演上下文</div>
               </div>
               <div className="rounded-lg border border-white/10 bg-black/40 p-2.5">
-                <div className="font-mono text-lg sm:text-xl font-black text-emerald-400">0.45s</div>
-                <div className="mt-0.5 text-xs text-slate-200 font-medium">流式首字极速上屏</div>
+                <div className="font-mono text-lg font-black text-emerald-400 sm:text-xl">0.5s</div>
+                <div className="mt-0.5 text-xs font-medium text-slate-200">流式首字极速上屏</div>
               </div>
               <div className="rounded-lg border border-white/10 bg-black/40 p-2.5">
-                <div className="font-mono text-lg sm:text-xl font-black text-cyan-400">&lt; 2 分钱</div>
-                <div className="mt-0.5 text-xs text-slate-200 font-medium">单局推理算力成本</div>
+                <div className="font-mono text-lg font-black text-cyan-400 sm:text-xl">
+                  &lt; 5 分钱
+                </div>
+                <div className="mt-0.5 text-xs font-medium text-slate-200">单局推理算力成本</div>
               </div>
               <div className="rounded-lg border border-white/10 bg-black/40 p-2.5">
-                <div className="font-mono text-lg sm:text-xl font-black text-amber-400">10,279 字</div>
-                <div className="mt-0.5 text-xs text-slate-200 font-medium">单篇知乎长文生成</div>
+                <div className="font-mono text-lg font-black text-amber-400 sm:text-xl">
+                  10,279 字
+                </div>
+                <div className="mt-0.5 text-xs font-medium text-slate-200">单篇知乎长文生成</div>
               </div>
             </div>
           </Card>
@@ -120,30 +132,42 @@ export function Slide8Vision({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
         <div className="grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-4">
           <Card className="border-white/15 bg-[#26201d]/90 p-3.5 shadow-md">
             <div className="flex items-center gap-2">
-              <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/40 text-xs font-bold px-2 py-0.5">业务场景 1</Badge>
-              <h3 className="text-sm sm:text-base font-black text-slate-100">盘活百万知乎“冷饭”脑洞</h3>
+              <Badge className="border-orange-500/40 bg-orange-500/20 px-2 py-0.5 text-xs font-bold text-orange-300">
+                业务场景 1
+              </Badge>
+              <h3 className="text-sm font-black text-slate-100 sm:text-base">
+                盘活百万知乎“冷饭”脑洞
+              </h3>
             </div>
-            <p className="mt-2 text-xs sm:text-[13px] leading-relaxed text-slate-200">
+            <p className="mt-2 text-xs leading-relaxed text-slate-200 sm:text-[13px]">
               过去十年知乎积攒了海量优质假设题。把静态老回答一键转为可互动沙盘，唤醒沉睡老内容，再造千万级长尾曝光。
             </p>
           </Card>
 
           <Card className="border-white/15 bg-[#26201d]/90 p-3.5 shadow-md">
             <div className="flex items-center gap-2">
-              <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/40 text-xs font-bold px-2 py-0.5">业务场景 2</Badge>
-              <h3 className="text-sm sm:text-base font-black text-slate-100">“边玩边产出”破除创作门槛</h3>
+              <Badge className="border-cyan-500/40 bg-cyan-500/20 px-2 py-0.5 text-xs font-bold text-cyan-300">
+                业务场景 2
+              </Badge>
+              <h3 className="text-sm font-black text-slate-100 sm:text-base">
+                “边玩边产出”破除创作门槛
+              </h3>
             </div>
-            <p className="mt-2 text-xs sm:text-[13px] leading-relaxed text-slate-200">
+            <p className="mt-2 text-xs leading-relaxed text-slate-200 sm:text-[13px]">
               很多答主脑洞极大却不爱动手码长文。玩家沉浸推演一局，系统自动沉淀出结构严谨的万字回答，源源不断反哺社区内容库。
             </p>
           </Card>
 
           <Card className="border-white/15 bg-[#26201d]/90 p-3.5 shadow-md">
             <div className="flex items-center gap-2">
-              <Badge className="bg-emerald-500/20 text-emerald-300 border-emerald-500/40 text-xs font-bold px-2 py-0.5">业务场景 3</Badge>
-              <h3 className="text-sm sm:text-base font-black text-slate-100">盐选专栏与故事 IP 互动变现</h3>
+              <Badge className="border-emerald-500/40 bg-emerald-500/20 px-2 py-0.5 text-xs font-bold text-emerald-300">
+                业务场景 3
+              </Badge>
+              <h3 className="text-sm font-black text-slate-100 sm:text-base">
+                盐选专栏与故事 IP 互动变现
+              </h3>
             </div>
-            <p className="mt-2 text-xs sm:text-[13px] leading-relaxed text-slate-200">
+            <p className="mt-2 text-xs leading-relaxed text-slate-200 sm:text-[13px]">
               联动知乎盐选小说、历史悬疑专栏，把单向付费阅读升级为多结局“互动推演剧”，解锁会员留存与内容付费新形态。
             </p>
           </Card>
@@ -153,9 +177,9 @@ export function Slide8Vision({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
         <div className="grid grid-cols-1 gap-3 lg:grid-cols-12 lg:gap-4">
           {/* 路线图 (7 列) */}
           <Card className="border-white/15 bg-[#26201d]/95 p-3.5 shadow-md lg:col-span-7">
-            <CardHeader className="p-0 pb-1.5 border-b border-white/10">
+            <CardHeader className="border-b border-white/10 p-0 pb-1.5">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-xs sm:text-sm font-black text-slate-200">
+                <div className="flex items-center gap-2 text-xs font-black text-slate-200 sm:text-sm">
                   <Compass className="size-4 text-orange-400" />
                   <span>未来演进蓝图 (Roadmap)</span>
                 </div>
@@ -190,9 +214,13 @@ export function Slide8Vision({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
                   <HeartHandshake className="size-4 text-rose-400" />
-                  <span className="text-xs sm:text-sm font-black text-slate-100">答辩交流与致谢</span>
+                  <span className="text-xs font-black text-slate-100 sm:text-sm">
+                    答辩交流与致谢
+                  </span>
                 </div>
-                <Badge className="bg-[#e2622c] text-[10px] text-black font-black px-1.5 py-0.5">人气奖助力</Badge>
+                <Badge className="bg-[#e2622c] px-1.5 py-0.5 text-[10px] font-black text-black">
+                  人气奖助力
+                </Badge>
               </div>
 
               <div className="flex items-center gap-3 py-1">
@@ -204,10 +232,10 @@ export function Slide8Vision({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                   />
                 </div>
                 <div>
-                  <p className="text-xs sm:text-[13px] font-serif leading-relaxed text-slate-200">
+                  <p className="font-serif text-xs leading-relaxed text-slate-200 sm:text-[13px]">
                     “一句‘如果’，值得用一整个世界来回答。”
                   </p>
-                  <p className="text-[11px] text-slate-400 mt-0.5">
+                  <p className="mt-0.5 text-[11px] text-slate-400">
                     感谢知乎社区提供源源不断的灵感，感谢各位评委老师！
                   </p>
                 </div>
@@ -215,7 +243,7 @@ export function Slide8Vision({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
             </CardHeader>
 
             <CardContent className="mt-1.5 p-0">
-              <Button className="h-8 w-full gap-2 bg-[#e2622c] text-xs sm:text-sm font-black text-black shadow-md hover:bg-orange-500">
+              <Button className="h-8 w-full gap-2 bg-[#e2622c] text-xs font-black text-black shadow-md hover:bg-orange-500 sm:text-sm">
                 <img src={ASSETS.zhihuSvg} alt="知乎" className="size-4 rounded-xs" />
                 <span>知乎 OAuth 登录 · 为本作品投出人气选票</span>
                 <Sparkles className="size-3.5 text-black" />

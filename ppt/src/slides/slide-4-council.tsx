@@ -98,7 +98,7 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                     <span>【四维生存账本】量化决策代价与环境熵增</span>
                   </h3>
                 </div>
-                <p className="mt-1 text-xs sm:text-sm leading-relaxed text-slate-200 font-medium">
+                <p className="mt-1 text-xs leading-relaxed font-medium text-slate-200 sm:text-sm">
                   系统设定稳定、士气、民心、物资四项量化指标，并引入大势环境衰减机制，促使决策者权衡每项方案的现实收益与代价。
                 </p>
               </div>
@@ -114,7 +114,7 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                     <span>【阵营立场演算】多智能体实时反馈支持度</span>
                   </h3>
                 </div>
-                <p className="mt-1 text-xs sm:text-sm leading-relaxed text-slate-200 font-medium">
+                <p className="mt-1 text-xs leading-relaxed font-medium text-slate-200 sm:text-sm">
                   四位智能体代表各自的阶层诉求，在玩家选择不同方案时，系统基于阵营利益模型实时计算并呈现各方的支持或反对态度。
                 </p>
               </div>
@@ -130,17 +130,20 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                     <span>【阶梯式决策档位】常规应对与重大战略决议</span>
                   </h3>
                 </div>
-                <p className="mt-1 text-xs sm:text-sm leading-relaxed text-slate-200 font-medium">
+                <p className="mt-1 text-xs leading-relaxed font-medium text-slate-200 sm:text-sm">
                   系统提供稳健、冒险、权策等多档位方案，并包含高投入高回报的重大工程决议，拓展沙盘推演的战略深度与世界线分支。
                 </p>
               </div>
             </div>
 
             {/* 底部联动提示 */}
-            <div className="flex shrink-0 items-center justify-between rounded-lg border border-orange-500/40 bg-orange-950/40 px-3 py-2 text-xs sm:text-[13px] text-orange-300">
+            <div className="flex shrink-0 items-center justify-between rounded-lg border border-orange-500/40 bg-orange-950/40 px-3 py-2 text-xs text-orange-300 sm:text-[13px]">
               <div>
                 <strong className="text-orange-400">💡 交互说明：</strong>
-                <span>点击右侧 A / B / C / D 选项，可实时预览四维指标预期变化以及各智能体席位的支持度响应。</span>
+                <span>
+                  点击右侧 A / B / C / D
+                  选项，可实时预览四维指标预期变化以及各智能体席位的支持度响应。
+                </span>
               </div>
               <Compass className="size-4 shrink-0 text-orange-400" />
             </div>

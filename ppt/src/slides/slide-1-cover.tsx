@@ -86,7 +86,7 @@ export function Slide1Cover({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
 
           {/* 🌟 核心金句横幅 */}
           <div className="rounded-r-xl border-y border-r border-l-4 border-orange-500 bg-orange-950/40 py-2 pr-3 pl-3.5 font-serif text-xs text-orange-200 italic shadow-xs sm:py-2.5 sm:pl-4 sm:text-sm">
-            “天冻不住人的路！冰封千里，那就把冰原踏成通衢，走出一个不用叩关的天下！”
+            “冰河不过是宇宙给文明的筛选器。凡人向南流徙乞生，星海文明征服行星地貌！点燃地心，我们要让冰川在此止步！”
           </div>
         </div>
       </div>

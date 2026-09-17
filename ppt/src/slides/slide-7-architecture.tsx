@@ -19,12 +19,14 @@ export function Slide7Architecture({ skin: _defaultSkin }: { skin: ScenarioSkin 
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-2">
           <div>
             <div className="flex items-center gap-2">
-              <Badge className="bg-[#e2622c] text-xs text-black font-black px-2 py-0.5">系统架构与工程实现</Badge>
-              <span className="font-mono text-xs text-slate-300 font-medium">
+              <Badge className="bg-[#e2622c] px-2 py-0.5 text-xs font-black text-black">
+                系统架构与工程实现
+              </Badge>
+              <span className="font-mono text-xs font-medium text-slate-300">
                 轻量化、高响应、低成本的多智能体策略推演底座
               </span>
             </div>
-            <h1 className="mt-1 text-lg font-black text-slate-100 sm:text-2xl tracking-tight">
+            <h1 className="mt-1 text-lg font-black tracking-tight text-slate-100 sm:text-2xl">
               底层架构设计：前缀缓存优化 × 程序化像素引擎 × 状态机推演底座
             </h1>
           </div>
@@ -47,20 +49,22 @@ export function Slide7Architecture({ skin: _defaultSkin }: { skin: ScenarioSkin 
                   <Zap className="size-4" />
                   <span>PREFIX CACHING</span>
                 </span>
-                <Badge className="bg-[#e2622c] text-[11px] text-black font-black px-2 py-0.5">成本优化 85%</Badge>
+                <Badge className="bg-[#e2622c] px-2 py-0.5 text-[11px] font-black text-black">
+                  成本优化 85%
+                </Badge>
               </div>
               <CardTitle className="text-base font-black text-slate-100 sm:text-lg">
-                多轮推演如何实现毫秒级响应与超低成本？
+                多轮推演更快更省钱
               </CardTitle>
-              <p className="text-xs sm:text-[13px] leading-relaxed text-slate-300 font-medium">
-                基于前缀缓存（KV Cache）的上下文复用机制
+              <p className="text-xs leading-relaxed font-medium text-slate-300 sm:text-[13px]">
+                基于前缀缓存的上下文复用机制
               </p>
 
               <div className="space-y-2 text-xs sm:text-[13px]">
                 <div className="rounded-lg border border-orange-500/30 bg-orange-950/40 p-2.5">
                   <strong className="block font-black text-orange-300">① 静态规则前置固化</strong>
                   <span className="mt-0.5 block leading-relaxed text-slate-200">
-                    世界观背景与阵营设定固化在提示词前序，实现长前缀高命中率缓存，首字响应缩短至 0.45 秒。
+                    世界观背景与阵营设定固化在提示词前序，实现长前缀高命中率缓存，降低首字延迟
                   </span>
                 </div>
                 <div className="rounded-lg border border-white/10 bg-black/30 p-2.5">
@@ -72,7 +76,7 @@ export function Slide7Architecture({ skin: _defaultSkin }: { skin: ScenarioSkin 
                 <div className="rounded-lg border border-amber-500/30 bg-amber-950/40 p-2.5">
                   <strong className="block font-black text-amber-300">③ 动态变量最小化</strong>
                   <span className="mt-0.5 block leading-relaxed text-slate-200">
-                    每轮交互仅提取当前决策变量与关键环境差量，精简输入规模，整体推演算力成本降低 85%。
+                    每轮交互仅提取当前决策变量与关键环境差量，精简输入规模
                   </span>
                 </div>
               </div>
@@ -81,9 +85,8 @@ export function Slide7Architecture({ skin: _defaultSkin }: { skin: ScenarioSkin 
             <CardContent className="mt-3 p-0">
               <div className="rounded-xl border border-orange-500/40 bg-orange-950/30 p-3 text-center">
                 <div className="font-mono text-xl font-black text-orange-400 sm:text-2xl">
-                  0.45s 响应 · 单局成本 &lt; 2 分钱
+                  单局成本 &lt; 5 分钱
                 </div>
-                <div className="mt-1 text-xs text-slate-300 font-medium">首字延迟降低 72%，多轮交互算力成本大幅缩减</div>
               </div>
             </CardContent>
           </Card>
@@ -96,30 +99,40 @@ export function Slide7Architecture({ skin: _defaultSkin }: { skin: ScenarioSkin 
                   <Layers className="size-4" />
                   <span>PIXEL ENGINE</span>
                 </span>
-                <Badge className="bg-emerald-600 text-[11px] text-white font-black px-2 py-0.5">性能满帧 60FPS</Badge>
+                <Badge className="bg-emerald-600 px-2 py-0.5 text-[11px] font-black text-white">
+                  性能满帧 120FPS
+                </Badge>
               </div>
               <CardTitle className="text-base font-black text-slate-100 sm:text-lg">
                 零外部静态依赖：轻量级程序化像素引擎
               </CardTitle>
-              <p className="text-xs sm:text-[13px] leading-relaxed text-slate-300 font-medium">
+              <p className="text-xs leading-relaxed font-medium text-slate-300 sm:text-[13px]">
                 纯代码生成动态像素视觉，实现极致首屏与无缝主题切换
               </p>
 
               <div className="space-y-2 text-xs sm:text-[13px]">
                 <div className="rounded-lg border border-emerald-500/30 bg-emerald-950/40 p-2.5">
-                  <strong className="block font-black text-emerald-300">① 矢量数学算法实时生成</strong>
+                  <strong className="block font-black text-emerald-300">
+                    ① 矢量数学算法实时生成
+                  </strong>
                   <span className="mt-0.5 block leading-relaxed text-slate-200">
-                    无需加载外部美术切片或图集资源，通过轻量级 SVG 描述与色彩映射在内存中毫秒级构建角色立绘。
+                    无需加载外部美术切片或图集资源，通过轻量级 SVG
+                    描述与色彩映射在内存中毫秒级构建角色立绘。
                   </span>
                 </div>
                 <div className="rounded-lg border border-white/10 bg-black/30 p-2.5">
-                  <strong className="block font-black text-slate-200">② 路径压缩与 DOM 节点合并</strong>
+                  <strong className="block font-black text-slate-200">
+                    ② 路径压缩与 DOM 节点合并
+                  </strong>
                   <span className="mt-0.5 block leading-relaxed text-slate-300">
-                    采用色块路径合并算法，将数百像素点汇聚为单一连续路径，DOM 节点开销降低 85%，保障全平台稳定 60 帧。
+                    采用色块路径合并算法，将数百像素点汇聚为单一连续路径，DOM 节点开销降低
+                    85%，保障全平台稳定 120 帧。
                   </span>
                 </div>
                 <div className="rounded-lg border border-emerald-500/20 bg-black/30 p-2.5">
-                  <strong className="block font-black text-emerald-200">③ 多元世界观无缝适配</strong>
+                  <strong className="block font-black text-emerald-200">
+                    ③ 多元世界观无缝适配
+                  </strong>
                   <span className="mt-0.5 block leading-relaxed text-slate-200">
                     场景与角色外观完全通过调色板与像素矩阵驱动，变更配置即可即时切换历史、科幻等多题材视觉表现。
                   </span>
@@ -130,9 +143,8 @@ export function Slide7Architecture({ skin: _defaultSkin }: { skin: ScenarioSkin 
             <CardContent className="mt-3 p-0">
               <div className="rounded-xl border border-emerald-500/40 bg-emerald-950/30 p-3 text-center">
                 <div className="font-mono text-xl font-black text-emerald-400 sm:text-2xl">
-                  0 外部静态图片依赖
+                  0 图片依赖
                 </div>
-                <div className="mt-1 text-xs text-slate-300 font-medium">单 HTML 文件完全自包含，极速首屏加载与断网离线可用</div>
               </div>
             </CardContent>
           </Card>
@@ -145,32 +157,41 @@ export function Slide7Architecture({ skin: _defaultSkin }: { skin: ScenarioSkin 
                   <GitBranch className="size-4" />
                   <span>STATE & SCHEMA</span>
                 </span>
-                <Badge className="bg-cyan-600 text-[11px] text-white font-black px-2 py-0.5">强类型零幻觉</Badge>
+                <Badge className="bg-cyan-600 px-2 py-0.5 text-[11px] font-black text-white">
+                  强类型零幻觉
+                </Badge>
               </div>
               <CardTitle className="text-base font-black text-slate-100 sm:text-lg">
                 推演状态机与强类型约束架构
               </CardTitle>
-              <p className="text-xs sm:text-[13px] leading-relaxed text-slate-300 font-medium">
+              <p className="text-xs leading-relaxed font-medium text-slate-300 sm:text-[13px]">
                 解耦数值判定与文本生成，保障世界线分支的确定性与自洽性
               </p>
 
               <div className="space-y-2 text-xs sm:text-[13px]">
                 <div className="rounded-lg border border-cyan-500/30 bg-cyan-950/40 p-2.5">
-                  <strong className="block font-black text-cyan-300">① 有限状态机驱动推演进程</strong>
+                  <strong className="block font-black text-cyan-300">
+                    ① 有限状态机驱动推演进程
+                  </strong>
                   <span className="mt-0.5 block leading-relaxed text-slate-200">
                     将玩家抉择、阵营立场反馈与终局结算形式化为离散状态机，保证多回合流程严密演进且具备确定性。
                   </span>
                 </div>
                 <div className="rounded-lg border border-white/10 bg-black/30 p-2.5">
-                  <strong className="block font-black text-slate-200">② 强类型 Schema 严格约束</strong>
+                  <strong className="block font-black text-slate-200">
+                    ② 强类型 Schema 严格约束
+                  </strong>
                   <span className="mt-0.5 block leading-relaxed text-slate-300">
-                    所有模型交互均通过强类型 Schema 校验，将论辩内容与四维数值逻辑解耦，彻底避免数据漂移与格式异常。
+                    所有模型交互均通过类型 Schema
+                    校验，将论辩内容与四维数值逻辑解耦，减少数据漂移与格式异常。
                   </span>
                 </div>
                 <div className="rounded-lg border border-cyan-500/20 bg-black/30 p-2.5">
-                  <strong className="block font-black text-cyan-200">③ 环境动态演变与分支可追溯</strong>
+                  <strong className="block font-black text-cyan-200">
+                    ③ 环境动态演变与分支可追溯
+                  </strong>
                   <span className="mt-0.5 block leading-relaxed text-slate-200">
-                    引入环境大势熵增模型驱动资源演化，完整记录各阶段决策路径，实现世界线推演轨迹的全程可回溯。
+                    引入可视化记录器,结尾可以回顾历史,分享复盘
                   </span>
                 </div>
               </div>
@@ -179,9 +200,8 @@ export function Slide7Architecture({ skin: _defaultSkin }: { skin: ScenarioSkin 
             <CardContent className="mt-3 p-0">
               <div className="rounded-xl border border-cyan-500/40 bg-cyan-950/30 p-3 text-center">
                 <div className="font-mono text-xl font-black text-cyan-400 sm:text-2xl">
-                  100% 状态自洽 · 零格式异常
+                  代码逻辑清晰
                 </div>
-                <div className="mt-1 text-xs text-slate-300 font-medium">业务逻辑与模型推理严格解耦，保障长链路推演稳定可靠</div>
               </div>
             </CardContent>
           </Card>
