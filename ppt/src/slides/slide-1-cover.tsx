@@ -1,80 +1,105 @@
-import { Terminal } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
-import type { ScenarioSkin } from "@/lib/scenario-skin";
+import { ThemeStage } from "@/components/pixel/theme-stage";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { getSkin, isDarkSkin, skinStyleVars, type ScenarioSkin } from "@/lib/scenario-skin";
 
 import { ASSETS } from "../assets";
 
-export function Slide1Cover({ skin: _skin }: { skin: ScenarioSkin }) {
+export function Slide1Cover({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
+  const skin = getSkin("apocalypse");
+
   return (
-    <div className="relative flex size-full max-h-full scrollbar-none flex-col justify-between overflow-y-auto rounded-2xl border border-white/80 bg-white/85 p-4 text-slate-900 shadow-2xl backdrop-blur-md sm:p-6 lg:p-8">
-      {/* 顶栏重要信息：真实参赛身份与技术栈 */}
-      <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 border-b border-slate-200/80 pb-3">
-        <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-100/90 px-3 py-1 font-mono text-xs font-medium text-slate-600">
-          <Terminal className="size-3.5 text-[#0066ff]" />
-          <span>Next.js 16 · React 19 · DeepSeek V4.1 Flash</span>
-        </div>
-      </div>
+    <div
+      style={skinStyleVars(skin)}
+      className={`bg-background text-foreground relative flex size-full h-screen flex-col justify-between overflow-hidden select-none ${
+        isDarkSkin(skin) ? "dark" : ""
+      }`}
+    >
+      {/* 🌌 末日灾变灰烬像素舞台底座 */}
+      <ThemeStage
+        skin={skin}
+        active={true}
+        className="pointer-events-none absolute inset-0 size-full opacity-100 transition-opacity duration-700"
+      />
 
-      {/* 核心主标题区：大气排版，视觉张力十足 */}
-      <div className="relative z-10 my-auto max-w-5xl space-y-4 py-3 sm:space-y-6 sm:py-5">
-        <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/90 px-3.5 py-1 text-xs font-bold text-[#0066ff] shadow-xs sm:text-sm">
-          <span className="size-2 rounded-full bg-[#0066ff]" />
-          <span>知乎硬核“历史假设与科幻脑洞”具象化推演沙盘</span>
-        </div>
-
-        <div className="space-y-2 sm:space-y-3">
-          <h1 className="text-4xl leading-none font-black tracking-tight text-slate-900 sm:text-6xl lg:text-7xl">
-            知乎脑洞游乐园
-          </h1>
-          <h2 className="bg-gradient-to-r from-[#0066ff] via-indigo-600 to-amber-600 bg-clip-text text-2xl font-extrabold text-transparent sm:text-3xl lg:text-5xl">
-            “如果……会怎样” 世界线演变沙盘
-          </h2>
-        </div>
-
-        {/* 三大核心支柱标签组 */}
-        <div className="flex flex-wrap gap-2 pt-1 sm:gap-3">
-          <span className="rounded-xl border border-blue-200 bg-blue-50/90 px-3.5 py-1.5 font-mono text-xs font-bold text-[#0066ff] shadow-xs sm:text-sm">
-            ⚡ 势力 Multi-Agent 冲突调度
-          </span>
-          <span className="rounded-xl border border-emerald-200 bg-emerald-50/90 px-3.5 py-1.5 font-mono text-xs font-bold text-emerald-800 shadow-xs sm:text-sm">
-            ⚡ 沉浸式 Prompts 设计
-          </span>
-          <span className="rounded-xl border border-amber-200 bg-amber-50/90 px-3.5 py-1.5 font-mono text-xs font-bold text-amber-900 shadow-xs sm:text-sm">
-            ⚡ 结算自动沉淀知乎体深度回答
-          </span>
-        </div>
-
-        <p className="max-w-4xl text-xl leading-relaxed text-slate-700">
-          以知乎历史区与科幻区高赞假设题为母本，通过智能体博弈、沉浸式场景抉择，把单向看热闹的文字脑洞，做成人人可亲历、步步有代价的策略文字推演沙盘。
-        </p>
-
-        {/* 金句横幅 */}
-        <div className="rounded-r-2xl border-y border-r border-l-4 border-amber-300 border-amber-500 bg-amber-50/95 py-2.5 pr-3 pl-4 font-serif text-xs text-amber-950 italic shadow-xs sm:py-3 sm:pl-5 sm:text-sm lg:text-base">
-          “天下若容不下汉室，汉室便去重造一个天下！—— 一句‘如果’，值得用一整个世界来回答。”
-        </div>
-      </div>
-
-      {/* 底栏与刘看山交互形象 */}
-      <div className="relative z-10 flex flex-wrap items-end justify-between gap-4 border-t border-slate-200/80 pt-3 sm:pt-4">
-        <div className="flex items-center gap-3 sm:gap-4">
-          <div className="size-16 shrink-0 rounded-2xl border border-slate-200 bg-white p-1.5 shadow-md sm:size-20 lg:size-22">
-            <img
-              src={ASSETS.liukanshan.greeting}
-              alt="刘看山打招呼"
-              className="size-full object-contain"
-            />
+      {/* 🎪 核心主标题排版区：16:9 比例精准适配 */}
+      <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 py-3 sm:px-6 sm:py-4">
+        <div className="space-y-2.5 sm:space-y-3.5">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-orange-500/40 bg-orange-950/60 px-3 py-0.5 text-xs font-bold text-orange-300 shadow-xs">
+            <span className="size-1.5 rounded-full bg-[#e2622c] animate-pulse" />
+            <span>知乎硬核脑洞题具象化 · 经典末日灾变推演沙盘</span>
           </div>
-          <div className="space-y-0.5 sm:space-y-1">
-            <div className="flex items-center gap-2">
-              <span className="rounded-full border border-blue-200 bg-blue-50 px-2 py-0.5 font-mono text-xs font-bold text-[#0066ff]">
-                独立全栈开发
-              </span>
+
+          <div className="space-y-1">
+            <h1 className="text-3xl leading-tight font-black tracking-tight text-slate-100 sm:text-5xl lg:text-6xl">
+              假如地球现在进入冰河时代，
+            </h1>
+            <h2 className="bg-gradient-to-r from-[#e2622c] via-amber-400 to-cyan-400 bg-clip-text text-2xl font-black text-transparent sm:text-4xl lg:text-5xl">
+              人类还能生存下去吗？
+            </h2>
+          </div>
+
+          <p className="max-w-3xl text-xs leading-relaxed text-slate-300 sm:text-sm lg:text-base">
+            以知乎答主赵泠等高赞推演为母本，将零下四十三度冰原大迁徙的极限伦理与生死博弈，做成人人可亲历、四方动态博弈的多智能体文字沙盘。
+          </p>
+
+          {/* 三大支柱徽章 */}
+          <div className="flex flex-wrap gap-2 pt-0.5">
+            <span className="rounded-lg border border-orange-500/40 bg-orange-950/50 px-2.5 py-1 font-mono text-[11px] font-bold text-orange-300">
+              ⚡ 势力 Multi-Agent 动态博弈
+            </span>
+            <span className="rounded-lg border border-amber-500/40 bg-amber-950/50 px-2.5 py-1 font-mono text-[11px] font-bold text-amber-300">
+              ⚡ 严酷道德与资源梯度抉择
+            </span>
+            <span className="rounded-lg border border-cyan-500/40 bg-cyan-950/50 px-2.5 py-1 font-mono text-[11px] font-bold text-cyan-300">
+              ⚡ 终局自动铸成万字知乎体长回答
+            </span>
+          </div>
+
+          {/* 🌟 核心金句横幅 */}
+          <div className="rounded-r-xl border-y border-r border-l-4 border-orange-500/80 border-orange-500 bg-orange-950/40 py-2 pr-3 pl-3.5 font-serif text-xs text-orange-200 italic shadow-xs sm:py-2.5 sm:pl-4 sm:text-sm">
+            “天冻不住人的路！冰封千里，那就把冰原踏成通衢，走出一个不用叩关的天下！”
+          </div>
+        </div>
+      </div>
+
+      {/* 🧭 底栏：领航员刘看山与启动按钮 */}
+      <footer className="relative z-20 shrink-0 border-t border-white/10 bg-black/40 px-4 py-2 sm:px-6 sm:py-2.5 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5">
+            <div className="size-11 shrink-0 rounded-xl border border-white/15 bg-white/10 p-0.5 shadow-sm sm:size-12">
+              <img
+                src={ASSETS.liukanshan.stroll}
+                alt="刘看山极地巡逻"
+                className="size-full object-contain"
+              />
             </div>
-            <p className="text-xs text-slate-600 sm:text-sm">
-              领航员刘看山：硬核历史区 × 脑洞科幻区 × 多智能体推演沙盘
-            </p>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <Badge className="bg-[#e2622c] text-[10px]">极地领航员 · 刘看山</Badge>
+                <span className="font-mono text-[10px] text-slate-400">知乎黑客松参赛作品</span>
+              </div>
+              <p className="text-[11px] font-medium text-slate-300">
+                末日灾变主题 · 零下四十三度全流程对局演示
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Button size="sm" className="h-8 gap-1.5 bg-[#e2622c] px-3.5 text-xs font-bold text-black shadow-md hover:bg-orange-500">
+              <span>进入沙盘全流程演示</span>
+              <ArrowRight className="size-3.5" />
+            </Button>
           </div>
         </div>
+      </footer>
+
+      {/* 悬浮轻巧快捷键提示 */}
+      <div className="pointer-events-none absolute bottom-12 right-4 z-30 hidden sm:flex items-center gap-1 rounded-full border border-white/15 bg-black/70 px-2.5 py-0.5 font-mono text-[10px] text-slate-400 backdrop-blur-md">
+        <Sparkles className="size-2.5 text-orange-400" />
+        <span>按空格或右方向键进入第 1 幕</span>
       </div>
     </div>
   );

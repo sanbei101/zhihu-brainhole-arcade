@@ -3,348 +3,377 @@ import {
   CircleDot,
   Clock3,
   GitFork,
+  ScrollText,
   Shield,
   TrendingDown,
   Users,
 } from "lucide-react";
+import { useState } from "react";
 
 import { PixelSprite } from "@/components/pixel/pixel-sprite";
 import { portraitFor, portraitMotionClass } from "@/components/pixel/portraits";
-import { ThemeScene } from "@/components/pixel/theme-scene";
 import { Badge } from "@/components/ui/badge";
-import type { ScenarioSkin } from "@/lib/scenario-skin";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getSkin, isDarkSkin, skinStyleVars, type ScenarioSkin } from "@/lib/scenario-skin";
 
 import { useMockGame } from "../mock/game-state";
 import { type MockAgentCharacter, type MockDecisionOption } from "../mock/preset-data";
 
-export function Slide4Council({ skin }: { skin: ScenarioSkin }) {
-  const { selectedPlayer, agents, options, selectedOption, setSelectedOptionId, metrics } =
+export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
+  const { selectedPlayer, agents, options, selectedOption, setSelectedOptionId } =
     useMockGame();
+  const skin = getSkin("apocalypse");
+  const [activeTab, setActiveTab] = useState<string>("council");
+
+  const playerPortrait = portraitFor(selectedPlayer, skin);
 
   return (
-    <div className="relative flex size-full max-h-full scrollbar-none flex-col justify-between gap-2.5 overflow-y-auto rounded-2xl border border-white/80 bg-white/90 p-3 text-slate-900 shadow-2xl backdrop-blur-md sm:gap-3.5 sm:p-5 lg:p-6">
-      {/* 顶部原版像素条 Banner */}
-      <ThemeScene
-        skin={skin}
-        variant="strip"
-        className="border-border h-10 shrink-0 rounded-lg border"
-      />
-
-      {/* 原版廷议看板 Header */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200/80 pb-2.5">
-        <div>
+    <main
+      style={skinStyleVars(skin)}
+      className={`bg-background text-foreground relative flex size-full h-screen flex-col justify-between overflow-hidden select-none ${
+        isDarkSkin(skin) ? "dark" : ""
+      }`}
+    >
+      {/* 🏛️ 廷议 Header 条：16:9 紧凑适配 */}
+      <section className="shrink-0 border-b border-white/10 bg-[#26201d]/70 px-4 py-1.5 sm:px-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-2">
           <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-            <Badge className="bg-[#0066ff]">回合 01</Badge>
-            <Badge variant="outline">
-              <CircleDot className="size-3 text-[#0066ff]" />
-              ACT I / 起手变局
+            <Badge className="bg-[#e2622c] font-mono text-[10px] text-black font-bold">回合 01</Badge>
+            <Badge variant="outline" className="border-orange-500/40 text-[10px] text-orange-300">
+              <CircleDot className="size-2.5 text-[#e2622c] mr-1" />
+              ACT I / 起手破局
             </Badge>
-            <Badge variant="outline" className="gap-1 border-red-200 text-red-600">
-              <TrendingDown className="size-3" />
-              大势每回合流失 2
+            <Badge variant="outline" className="border-red-500/40 text-[10px] text-red-400">
+              <TrendingDown className="size-2.5 mr-1" />
+              大势严寒熵增 -2/回合
             </Badge>
-            <Badge variant="secondary">三国乐园 · {selectedPlayer.name}掌印</Badge>
-          </div>
-          <div className="mt-1 flex items-center gap-2">
-            <h2 className="text-base font-black text-slate-900 sm:text-lg">危机议事大厅</h2>
-            <span className="font-mono text-xs text-slate-500">
-              主线焦点: 赤壁全胜 · 杀降抑或怀柔？
+            <span className="text-xs font-black text-slate-100 sm:text-sm">
+              主线焦点：冰河压境 · 开闸放粮抑或死守关防？
             </span>
           </div>
-        </div>
 
-        <div className="flex items-center gap-1 font-mono text-xs text-slate-500">
-          <Clock3 className="size-3.5 text-slate-400" />
-          <span>建安十三年冬十二月 · 许昌中军相府</span>
+          <div className="flex items-center gap-2">
+            <div className="hidden xl:flex items-center gap-1.5 font-mono text-[10px] text-slate-400">
+              <Clock3 className="size-3 text-orange-400" />
+              <span>松花江双堡关 · 零下43℃</span>
+            </div>
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-auto">
+            <TabsList className="h-7 bg-black/40">
+              <TabsTrigger value="council" className="h-6 px-2 text-[10px] font-bold">
+                <Users className="size-3 mr-1" />
+                议事现场
+              </TabsTrigger>
+              <TabsTrigger value="messages" className="h-6 px-2 text-[10px]">
+                <ScrollText className="size-3 mr-1" />
+                历史记录
+              </TabsTrigger>
+              <TabsTrigger value="branches" className="h-6 px-2 text-[10px]">
+                <GitFork className="size-3 mr-1" />
+                世界线
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
         </div>
       </div>
+    </section>
 
-      {/* 核心原版三栏全景战局同屏沙盘 */}
-      <div className="my-auto grid grid-cols-1 items-start gap-3 lg:grid-cols-12 lg:gap-4">
-        {/* 左栏：复刻 SeatsPanel 四路 Agent 席位（占 3 列） */}
-        <div className="flex flex-col gap-2 rounded-xl border border-slate-200 bg-white/95 p-3 shadow-xs lg:col-span-3">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-1.5">
-            <span className="flex items-center gap-1.5 font-mono text-xs font-black text-slate-900">
-              <Users className="size-3.5 text-[#0066ff]" />
-              <span>议事席位 (SeatsPanel)</span>
-            </span>
-            <span className="font-mono text-[10px] text-slate-400">AGENTS</span>
+      {/* ⚔️ 核心 16:9 三栏全景战局沙盘 (SeatsPanel + SpeechStage/DecisionPanel + WorldTabs) */}
+      <section className="mx-auto w-full max-w-7xl flex-1 px-4 py-2 sm:px-6 sm:py-2.5">
+        <div className="grid h-full grid-cols-1 gap-2.5 lg:grid-cols-12 lg:gap-3.5">
+          {/* 左栏：100% SeatsPanel (玩家席位 + 4 路 Agent 席位，占 3 列) */}
+          <div className="flex flex-col justify-between gap-2 rounded-xl border border-white/10 bg-[#26201d]/90 p-2.5 shadow-md lg:col-span-3">
+            {/* 玩家席位 */}
+            <div className="rounded-lg border border-orange-500/40 bg-orange-950/40 p-2">
+              <div className="flex items-center justify-between text-[9px] font-mono text-orange-400">
+                <span>ACTIVE PLAYER</span>
+                <span className="font-bold">掌印执棋</span>
+              </div>
+              <div className="mt-1 flex items-center gap-2">
+                <div className="flex size-7 items-center justify-center rounded bg-black/60 p-0.5">
+                  <PixelSprite
+                    frames={playerPortrait.frames}
+                    palette={playerPortrait.palette}
+                    label={playerPortrait.label}
+                    scale={1}
+                    className={portraitMotionClass(playerPortrait.motion, false)}
+                  />
+                </div>
+                <div>
+                  <span className="text-xs font-black text-slate-100">{selectedPlayer.name}</span>
+                  <span className="block text-[9px] text-slate-400">{selectedPlayer.identity.split("·")[0]}</span>
+                </div>
+              </div>
+              <p className="mt-1 line-clamp-1 text-[10px] text-slate-300">{selectedPlayer.publicGoal}</p>
+            </div>
+
+            {/* 4 位 Agent 议事席位 */}
+            <div className="space-y-1">
+              <div className="flex items-center justify-between border-b border-white/10 pb-1 text-[10px] font-mono text-slate-400">
+                <span className="flex items-center gap-1 font-bold text-slate-300">
+                  <Users className="size-3 text-orange-400" />
+                  <span>四方势力席位</span>
+                </span>
+                <span>SEATS</span>
+              </div>
+
+              <div className="space-y-1">
+                {agents.map((agent: MockAgentCharacter) => {
+                  const spritePortrait = portraitFor(agent, skin);
+                  const forecastLean = selectedOption.forecast.find(
+                    (f) => f.agentId === agent.id,
+                  )?.lean;
+                  return (
+                    <div
+                      key={agent.id}
+                      className="rounded border border-white/5 bg-black/30 px-2 py-1 text-[10px]"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1.5">
+                          <div className="flex size-5 items-center justify-center rounded bg-white/10 p-0.5">
+                            <PixelSprite
+                              frames={spritePortrait.frames}
+                              palette={spritePortrait.palette}
+                              label={spritePortrait.label}
+                              scale={0.8}
+                              className={portraitMotionClass(spritePortrait.motion, false)}
+                            />
+                          </div>
+                          <span className="font-bold text-slate-200">{agent.name}</span>
+                          <span className="text-[9px] text-slate-500">({agent.identity.split("·")[0]})</span>
+                        </div>
+                        <span
+                          className={`rounded px-1 text-[9px] font-bold ${
+                            forecastLean === "支持"
+                              ? "bg-emerald-950 text-emerald-400"
+                              : forecastLean === "反对"
+                                ? "bg-red-950 text-red-400"
+                                : "bg-amber-950 text-amber-400"
+                          }`}
+                        >
+                          {forecastLean ?? agent.attitude}
+                        </span>
+                      </div>
+                      {/* 信任度血条 */}
+                      <div className="mt-1 flex items-center gap-1.5 text-[9px] text-slate-400">
+                        <div className="h-1 flex-1 overflow-hidden rounded-full bg-slate-800">
+                          <div
+                            className={`h-full rounded-full transition-all ${
+                              agent.trust > 60
+                                ? "bg-emerald-500"
+                                : agent.trust > 40
+                                  ? "bg-amber-500"
+                                  : "bg-red-500"
+                            }`}
+                            style={{ width: `${agent.trust}%` }}
+                          />
+                        </div>
+                        <span className="font-mono">{agent.trust}%</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
-          <div className="space-y-1.5">
-            {agents.map((agent: MockAgentCharacter) => {
-              const spritePortrait = portraitFor(agent, skin);
-              const forecastLean = selectedOption.forecast.find(
-                (f) => f.agentId === agent.id,
-              )?.lean;
-              return (
-                <div
-                  key={agent.id}
-                  className="rounded-lg border border-slate-200/80 bg-slate-50/70 p-2 text-xs transition-all hover:bg-slate-100"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="flex size-6 items-center justify-center overflow-hidden rounded bg-white p-0.5 shadow-xs">
-                        <PixelSprite
-                          frames={spritePortrait.frames}
-                          palette={spritePortrait.palette}
-                          label={spritePortrait.label}
-                          scale={1.1}
-                          className={portraitMotionClass(spritePortrait.motion, false)}
-                        />
+          {/* 中栏：SpeechStage 像素舞台 + DecisionPanel 梯度抉择 (占 6 列) */}
+          <div className="flex flex-col justify-between gap-2 lg:col-span-6">
+            {/* 🎭 SpeechStage 极寒暗黑对峙舞台 (紧凑 16:9 高度) */}
+            <div className="rounded-xl border border-white/15 bg-gradient-to-b from-black/80 via-black/90 to-black/80 p-2.5 shadow-md">
+              <div className="flex items-center justify-between border-b border-white/10 pb-1 text-[10px]">
+                <span className="font-mono font-bold text-orange-400">
+                  【沈寒山 vs 燕崇山 · 矛与盾尖锐交锋】
+                </span>
+                <span className="rounded bg-red-950/80 px-1.5 py-0.2 font-mono text-[9px] text-red-400">
+                  短兵相接
+                </span>
+              </div>
+
+              {/* 两个立绘对峙 */}
+              <div className="flex items-center justify-around py-1.5">
+                <div className="flex flex-col items-center gap-1">
+                  <div className="flex size-11 items-center justify-center rounded-lg border border-cyan-500/40 bg-slate-900 p-0.5">
+                    <PixelSprite
+                      frames={portraitFor(agents[2], skin).frames}
+                      palette={portraitFor(agents[2], skin).palette}
+                      label={agents[2].name}
+                      scale={1.5}
+                      className={portraitMotionClass(portraitFor(agents[2], skin).motion, true)}
+                    />
+                  </div>
+                  <span className="text-[10px] font-bold text-cyan-300">{agents[2].name}</span>
+                </div>
+
+                <div className="font-mono text-xs font-black text-amber-400 animate-pulse">VS</div>
+
+                <div className="flex flex-col items-center gap-1">
+                  <div className="flex size-11 items-center justify-center rounded-lg border border-red-500/40 bg-slate-900 p-0.5">
+                    <PixelSprite
+                      frames={portraitFor(agents[0], skin).frames}
+                      palette={portraitFor(agents[0], skin).palette}
+                      label={agents[0].name}
+                      scale={1.5}
+                      className={portraitMotionClass(portraitFor(agents[0], skin).motion, true)}
+                    />
+                  </div>
+                  <span className="text-[10px] font-bold text-red-400">{agents[0].name}</span>
+                </div>
+              </div>
+
+              {/* 动态对话气泡 */}
+              <div className="rounded-lg border border-white/10 bg-white/5 p-2 text-[11px] leading-relaxed text-slate-200">
+                <strong className="text-cyan-300">沈寒山厉声：</strong>
+                <span>“极端寒潮提前二十三天到来，夜间跌破零下五十五度！你闭关死守不是守土，是替暴风雪屠杀三百万同胞！”</span>
+              </div>
+            </div>
+
+            {/* 🎲 DecisionPanel (ABCD 梯度抉择卡) */}
+            <div className="space-y-1.5 rounded-xl border border-white/10 bg-[#26201d]/90 p-2.5 shadow-md">
+              <div className="flex items-center justify-between text-[10px]">
+                <span className="font-bold text-slate-200">拟草决策 · 推动世界线分叉</span>
+                <span className="text-slate-400">掌握起草权，点击即刻联动指标</span>
+              </div>
+
+              <div className="space-y-1.5">
+                {options.map((opt: MockDecisionOption) => {
+                  const isSelected = opt.id === selectedOption.id;
+                  const isEpic = opt.id === "D";
+                  return (
+                    <div
+                      key={opt.id}
+                      onClick={() => setSelectedOptionId(opt.id)}
+                      className={`cursor-pointer rounded-lg border p-2 text-xs transition-all ${
+                        isSelected
+                          ? isEpic
+                            ? "border-amber-400 bg-amber-950/50 shadow-md ring-1 ring-amber-400/50"
+                            : "border-[#e2622c] bg-orange-950/50 shadow-md ring-1 ring-[#e2622c]/50"
+                          : "border-white/10 bg-black/20 hover:border-white/20"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1.5">
+                          <span
+                            className={`flex size-4 items-center justify-center rounded font-mono text-[10px] font-black text-black ${
+                              isEpic ? "bg-amber-400" : "bg-orange-500"
+                            }`}
+                          >
+                            {opt.id}
+                          </span>
+                          <strong className="text-[11px] font-bold text-slate-100">{opt.title}</strong>
+                        </div>
+                        <Badge variant="outline" className="h-4 border-white/20 px-1 text-[9px] text-slate-300">
+                          {opt.risk}档抉择
+                        </Badge>
                       </div>
-                      <div>
-                        <strong className="text-xs font-bold text-slate-900">{agent.name}</strong>
-                        <span className="ml-1 text-[10px] text-slate-400">
-                          ({agent.identity.split("·")[0]})
+
+                      <p className="mt-0.5 line-clamp-1 text-[10px] text-slate-400">{opt.desc}</p>
+
+                      {opt.epigraph && (
+                        <div className="mt-1 rounded border border-amber-500/40 bg-amber-950/40 px-2 py-0.5 text-[10px] font-bold text-amber-200">
+                          🌟 天命破壁: “{opt.epigraph}”
+                        </div>
+                      )}
+
+                      {/* 指标预测 */}
+                      <div className="mt-1 flex items-center justify-between border-t border-white/5 pt-1 text-[9px] font-mono text-slate-400">
+                        <div className="flex gap-2">
+                          <span>稳定: <strong className={opt.deltas.stability >= 0 ? "text-emerald-400" : "text-red-400"}>{opt.impactText.stability}</strong></span>
+                          <span>士气: <strong className={opt.deltas.morale >= 0 ? "text-emerald-400" : "text-red-400"}>{opt.impactText.morale}</strong></span>
+                          <span>民心: <strong className={opt.deltas.support >= 0 ? "text-emerald-400" : "text-red-400"}>{opt.impactText.support}</strong></span>
+                          <span>物资: <strong className={opt.deltas.resources >= 0 ? "text-emerald-400" : "text-red-400"}>{opt.impactText.resources}</strong></span>
+                        </div>
+                        {isSelected ? (
+                          <span className="flex items-center gap-0.5 font-bold text-orange-400">
+                            <Check className="size-3" />
+                            已拟定落子
+                          </span>
+                        ) : null}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* 右栏：WorldTabs / 四维极寒存续动态账本 (占 3 列) */}
+          <div className="flex flex-col justify-between gap-2 rounded-xl border border-white/10 bg-[#26201d]/90 p-2.5 shadow-md lg:col-span-3">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between border-b border-white/10 pb-1 text-[10px] font-mono text-slate-400">
+                <span className="flex items-center gap-1 font-bold text-slate-300">
+                  <Shield className="size-3 text-orange-400" />
+                  <span>四维存续动态账本</span>
+                </span>
+                <span>GAUGES</span>
+              </div>
+
+              <div className="space-y-2 pt-1">
+                {[
+                  { label: "秩序稳定", key: "stability", value: 85, delta: selectedOption.deltas.stability },
+                  { label: "军民士气", key: "morale", value: 92, delta: selectedOption.deltas.morale },
+                  { label: "难民支持", key: "support", value: 95, delta: selectedOption.deltas.support },
+                  { label: "战略物资", key: "resources", value: 78, delta: selectedOption.deltas.resources },
+                ].map((m) => (
+                  <div key={m.key} className="rounded border border-white/5 bg-black/20 p-1.5 text-[10px]">
+                    <div className="flex items-center justify-between">
+                      <span className="text-slate-300">{m.label}</span>
+                      <div className="flex items-center gap-1 font-mono">
+                        <span className="font-black text-slate-100">{m.value}</span>
+                        <span
+                          className={`font-bold ${
+                            m.delta > 0
+                              ? "text-emerald-400"
+                              : m.delta < 0
+                                ? "text-red-400"
+                                : "text-slate-500"
+                          }`}
+                        >
+                          ({m.delta > 0 ? `+${m.delta}` : m.delta})
                         </span>
                       </div>
                     </div>
-                    <span
-                      className={`py-0.2 rounded px-1.5 text-[10px] font-bold ${
-                        forecastLean === "支持"
-                          ? "bg-emerald-100 text-emerald-800"
-                          : forecastLean === "反对"
-                            ? "bg-red-100 text-red-800"
-                            : "bg-amber-100 text-amber-800"
-                      }`}
-                    >
-                      {forecastLean ?? agent.attitude}
-                    </span>
-                  </div>
-
-                  {/* 信任度进度条 */}
-                  <div className="mt-1.5 flex items-center justify-between gap-2 text-[10px] text-slate-500">
-                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-200">
+                    <div className="mt-1 h-1 overflow-hidden rounded-full bg-slate-800">
                       <div
-                        className={`h-full rounded-full transition-all duration-300 ${
-                          agent.trust > 60
-                            ? "bg-emerald-500"
-                            : agent.trust > 40
-                              ? "bg-blue-500"
-                              : "bg-red-500"
+                        className={`h-full rounded-full transition-all ${
+                          m.value > 80 ? "bg-emerald-500" : m.value > 50 ? "bg-orange-500" : "bg-red-500"
                         }`}
-                        style={{ width: `${agent.trust}%` }}
+                        style={{ width: `${m.value}%` }}
                       />
                     </div>
-                    <span className="font-mono font-bold">{agent.trust}%</span>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* 中栏：复刻 DecisionPanel 梯度抉择（占 6 列） */}
-        <div className="flex flex-col gap-2.5 rounded-xl border-2 border-blue-200 bg-white/95 p-3.5 shadow-sm lg:col-span-6">
-          <div className="rounded-lg border border-blue-100 bg-blue-50/60 p-2 text-xs leading-relaxed text-slate-800">
-            <span className="font-black text-[#0066ff]">【大营战局】</span>
-            曹操于赤壁生擒刘备孙权押赴许昌。程昱厉声主杀以立军威，孔融清流名士高呼汉法，天下目光皆聚焦于【
-            {selectedPlayer.name}】如何落子拟诏。
-          </div>
-
-          {/* ABCD 选项 */}
-          <div className="space-y-2">
-            {options.map((opt: MockDecisionOption) => {
-              const isSelected = opt.id === selectedOption.id;
-              const isEpic = opt.id === "D";
-              return (
-                <div
-                  key={opt.id}
-                  onClick={() => setSelectedOptionId(opt.id)}
-                  className={`group relative cursor-pointer rounded-xl border-2 p-2.5 text-xs transition-all ${
-                    isSelected
-                      ? isEpic
-                        ? "border-amber-500 bg-amber-50/70 shadow-md ring-2 ring-amber-400/30"
-                        : "border-[#0066ff] bg-blue-50/70 shadow-md ring-2 ring-[#0066ff]/20"
-                      : "border-slate-200 bg-slate-50/50 hover:border-slate-300 hover:bg-slate-100/60"
-                  }`}
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`flex size-5 items-center justify-center rounded-md font-mono text-xs font-black text-white ${
-                          isEpic
-                            ? "bg-amber-600"
-                            : opt.risk === "稳"
-                              ? "bg-emerald-600"
-                              : opt.risk === "险"
-                                ? "bg-blue-600"
-                                : "bg-purple-600"
-                        }`}
-                      >
-                        {opt.id}
-                      </span>
-                      <strong className="text-xs font-black text-slate-900 sm:text-sm">
-                        {opt.title}
-                      </strong>
-                    </div>
-                    <Badge variant={isEpic ? "default" : "secondary"} className="h-5 text-[10px]">
-                      {opt.risk}档魄力
-                    </Badge>
-                  </div>
-
-                  <p className="mt-1 text-[11px] leading-relaxed text-slate-600">{opt.desc}</p>
-
-                  {/* 🌟 天命破壁燃向誓言金句 */}
-                  {opt.epigraph && (
-                    <div className="mt-1.5 rounded-md border border-amber-300/80 bg-gradient-to-r from-amber-100/90 via-amber-50 to-white px-2 py-1 text-[11px] font-bold text-amber-900">
-                      🌟 天命破壁: “{opt.epigraph}”
-                    </div>
-                  )}
-
-                  {/* 底部指标预测 */}
-                  <div className="mt-2 flex flex-wrap items-center justify-between gap-1 border-t border-slate-200/60 pt-1.5 text-[10px]">
-                    <div className="flex items-center gap-2 font-mono">
-                      <span className="text-slate-500">
-                        稳定:{" "}
-                        <strong
-                          className={
-                            opt.deltas.stability >= 0 ? "text-emerald-700" : "text-red-600"
-                          }
-                        >
-                          {opt.impactText.stability}
-                        </strong>
-                      </span>
-                      <span className="text-slate-500">
-                        军心:{" "}
-                        <strong
-                          className={opt.deltas.morale >= 0 ? "text-emerald-700" : "text-red-600"}
-                        >
-                          {opt.impactText.morale}
-                        </strong>
-                      </span>
-                      <span className="text-slate-500">
-                        民心:{" "}
-                        <strong
-                          className={opt.deltas.support >= 0 ? "text-emerald-700" : "text-red-600"}
-                        >
-                          {opt.impactText.support}
-                        </strong>
-                      </span>
-                      <span className="text-slate-500">
-                        资源:{" "}
-                        <strong
-                          className={
-                            opt.deltas.resources >= 0 ? "text-emerald-700" : "text-red-600"
-                          }
-                        >
-                          {opt.impactText.resources}
-                        </strong>
-                      </span>
-                    </div>
-
-                    {isSelected ? (
-                      <span className="flex items-center gap-1 font-bold text-[#0066ff]">
-                        <Check className="size-3.5" />
-                        <span>已选定落子</span>
-                      </span>
-                    ) : (
-                      <span className="text-slate-400 group-hover:text-slate-700">点击落子</span>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* 右栏：复刻 WorldTabs / 国力动态账本（占 3 列） */}
-        <div className="flex flex-col gap-2 rounded-xl border border-slate-200 bg-white/95 p-3 shadow-xs lg:col-span-3">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-1.5">
-            <span className="flex items-center gap-1.5 font-mono text-xs font-black text-slate-900">
-              <Shield className="size-3.5 text-[#0066ff]" />
-              <span>四维国力动态账本</span>
-            </span>
-            <span className="font-mono text-[10px] text-slate-400">GAUGES</span>
-          </div>
-
-          <div className="space-y-2">
-            {[
-              {
-                label: "政权稳定",
-                key: "stability",
-                value: metrics.stability,
-                delta: selectedOption.deltas.stability,
-              },
-              {
-                label: "军心士气",
-                key: "morale",
-                value: metrics.morale,
-                delta: selectedOption.deltas.morale,
-              },
-              {
-                label: "民众支持",
-                key: "support",
-                value: metrics.support,
-                delta: selectedOption.deltas.support,
-              },
-              {
-                label: "战略资源",
-                key: "resources",
-                value: metrics.resources,
-                delta: selectedOption.deltas.resources,
-              },
-            ].map((m) => (
-              <div
-                key={m.key}
-                className="rounded-lg border border-slate-100 bg-slate-50/80 p-2 text-xs"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-slate-700">{m.label}</span>
-                  <div className="flex items-center gap-1 font-mono">
-                    <span className="font-black text-slate-900">{m.value}</span>
-                    <span
-                      className={`text-[10px] font-bold ${
-                        m.delta > 0
-                          ? "text-emerald-600"
-                          : m.delta < 0
-                            ? "text-red-600"
-                            : "text-slate-400"
-                      }`}
-                    >
-                      ({m.delta > 0 ? `+${m.delta}` : m.delta})
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-slate-200">
-                  <div
-                    className={`h-full rounded-full transition-all duration-300 ${
-                      m.value > 70 ? "bg-emerald-500" : m.value > 40 ? "bg-blue-500" : "bg-red-500"
-                    }`}
-                    style={{ width: `${m.value}%` }}
-                  />
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
-
-          {/* 大势熵增说明 */}
-          <div className="mt-auto rounded-lg border border-red-200 bg-red-50/60 p-2 text-[11px] leading-snug text-red-900">
-            <div className="flex items-center gap-1 font-bold text-red-700">
-              <TrendingDown className="size-3.5" />
-              <span>大势熵增定律</span>
             </div>
-            <p className="mt-1 text-[10px] text-red-800">
-              局势损耗不可逆增加（-2/回合），杜绝消极苟活，逼迫玩家做出战略破局。
-            </p>
+
+            {/* 严寒大势熵增定律 */}
+            <div className="rounded-lg border border-red-500/30 bg-red-950/30 p-2 text-[10px] leading-tight text-red-300">
+              <div className="flex items-center gap-1 font-bold text-red-400">
+                <TrendingDown className="size-3" />
+                <span>极寒大势熵增定律</span>
+              </div>
+              <p className="mt-0.5 text-slate-400">
+                严寒损耗不可逆（-2/回合），杜绝消极防守，逼迫决策者做出战略破局！
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* 底部确认栏 */}
-      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-slate-200 bg-white/95 px-4 py-2 text-xs text-slate-700 shadow-xs sm:text-sm">
-        <span className="flex items-center gap-2">
-          <GitFork className="size-4 text-[#0066ff]" />
-          <span>已提交分叉抉择：</span>
-          <strong className="text-slate-900">
-            [{selectedOption.id}项 · {selectedOption.risk}] {selectedOption.title}
-          </strong>
-        </span>
-        <span className="font-mono text-xs font-bold text-[#0066ff]">
-          下一幕：四路 Agent 并发表态与短兵相接交锋 ➔ (按空格键或右方向键)
-        </span>
-      </div>
-    </div>
+      <footer className="relative z-30 shrink-0 border-t border-white/10 bg-black/60 px-4 py-2 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2">
+            <GitFork className="size-4 text-[#e2622c]" />
+            <span className="text-slate-400">已拟草决策：</span>
+            <strong className="text-slate-100">
+              [{selectedOption.id}项] {selectedOption.title}
+            </strong>
+          </div>
+          <span className="font-mono text-[11px] font-bold text-orange-400">
+            下一幕：智能体当场表态与交锋 (Speech Stage) ➔ (按空格键或右方向键)
+          </span>
+        </div>
+      </footer>
+    </main>
   );
 }

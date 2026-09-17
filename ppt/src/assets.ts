@@ -1,11 +1,3 @@
-import flowAgentsPng from "@/docs/flow/council-agents.png";
-import flowOptionsPng from "@/docs/flow/council-options.png";
-import flowGalleryPng from "@/docs/flow/step-1-gallery.png";
-import flowCastPng from "@/docs/flow/step-2-cast.png";
-import flowCouncilPng from "@/docs/flow/step-3-council.png";
-import flowFinalePng from "@/docs/flow/step-4-finale.png";
-import shotDesktopPng from "@/docs/shot-desktop.png";
-import shotMobilePng from "@/docs/shot-mobile.png";
 import basketballWebp from "@/public/liukanshan/basketball.webp";
 import codingWebp from "@/public/liukanshan/coding.webp";
 import greetingWebp from "@/public/liukanshan/greeting.webp";
@@ -26,20 +18,12 @@ function toSrc(asset: unknown): string {
   return "";
 }
 
+const ZHIHU_INLINE_SVG =
+  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='51.2 51.2 921.6 921.6'%3E%3Cpath fill='%230066FF' d='M656.906 724.29l47.422-33.725h52.69V344.9h-143.32v346.726h35.83z'/%3E%3Cpath fill='%230066FF' d='M849.92 51.2H174.08c-67.866 0-122.88 55.014-122.88 122.88v675.84c0 67.866 55.014 122.88 122.88 122.88h675.84c67.866 0 122.88-55.014 122.88-122.88V174.08c0-67.866-55.014-122.88-122.88-122.88zM495.662 803.348l-101.171-157.05 44.267-31.616 67.451 98.007c-.005 0 23.179 37.995-10.547 90.66zm38.994-276.1v25.292H408.197C357.612 876.068 204.8 807.045 204.8 807.045 344.965 697.18 347.597 552.54 347.597 552.54H208.492c0-57.958 52.162-56.914 52.162-56.914h93.793V343.87h-50.585c-18.965 85.366-99.062 81.152-99.062 81.152s32.67-50.585 54.8-137c22.128-86.421 89.574-76.929 89.574-76.929-20.02 35.83-29.507 76.928-29.507 76.928H485.12c40.049 0 37.94 25.293 37.94 25.293v29.512H411.355v152.806h91.684c33.725 0 31.616 31.616 31.616 31.616zM819.2 747.5H716.974l-88.52 55.848-8.427-55.848h-64.292V288.015H819.2V747.5z'/%3E%3C/svg%3E";
+
 export const ASSETS = {
-  zhihuSvg: toSrc(zhihuSvg),
-  shots: {
-    desktop: toSrc(shotDesktopPng),
-    mobile: toSrc(shotMobilePng),
-  },
-  flow: {
-    gallery: toSrc(flowGalleryPng),
-    cast: toSrc(flowCastPng),
-    council: toSrc(flowCouncilPng),
-    councilOptions: toSrc(flowOptionsPng),
-    councilAgents: toSrc(flowAgentsPng),
-    finale: toSrc(flowFinalePng),
-  },
+  zhihuSvg: toSrc(zhihuSvg) || ZHIHU_INLINE_SVG,
+  zhihu: toSrc(zhihuSvg) || ZHIHU_INLINE_SVG,
   liukanshan: {
     greeting: toSrc(greetingWebp),
     coding: toSrc(codingWebp),

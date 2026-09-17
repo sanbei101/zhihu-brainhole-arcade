@@ -1,15 +1,16 @@
-import { Check, Copy, ShieldQuestion, Trophy } from "lucide-react";
+import { Check, Copy, Repeat, ShieldQuestion, Trophy } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress, ProgressLabel, ProgressValue } from "@/components/ui/progress";
-import type { ScenarioSkin } from "@/lib/scenario-skin";
+import { getSkin, isDarkSkin, skinStyleVars, type ScenarioSkin } from "@/lib/scenario-skin";
 
 import { useMockGame } from "../mock/game-state";
 import { MOCK_FINALE } from "../mock/preset-data";
+import { ASSETS } from "../assets";
 
-export function Slide6Finale({ skin: _skin }: { skin: ScenarioSkin }) {
+export function Slide6Finale({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
   const {
     activeChapterIndex,
     setActiveChapterIndex,
@@ -17,190 +18,214 @@ export function Slide6Finale({ skin: _skin }: { skin: ScenarioSkin }) {
     triggerCopyToast,
     selectedPlayer,
   } = useMockGame();
+  const skin = getSkin("apocalypse");
 
   const allChapters = [
-    { title: "楔子 · 赤壁余烬", content: MOCK_FINALE.prologue },
+    { title: "楔子 · 绝境风雪", content: MOCK_FINALE.prologue },
     ...MOCK_FINALE.chapters,
   ];
 
   const currentChapter = allChapters[activeChapterIndex] ?? allChapters[0];
 
   return (
-    <div className="relative flex size-full max-h-full scrollbar-none flex-col justify-between gap-2.5 overflow-y-auto rounded-2xl border border-white/80 bg-white/90 p-3 text-slate-900 shadow-2xl backdrop-blur-md sm:gap-3.5 sm:p-5 lg:p-6">
-      {/* 顶部标题栏：复刻原版 WorldFinaleView 结算 Header */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200/80 pb-2.5">
-        <div>
+    <main
+      style={skinStyleVars(skin)}
+      className={`bg-background text-foreground relative flex size-full h-screen flex-col justify-between overflow-hidden select-none ${
+        isDarkSkin(skin) ? "dark" : ""
+      }`}
+    >
+      {/* 🏆 终章结算 Header 栏：16:9 紧凑适配 */}
+      <section className="shrink-0 border-b border-white/10 bg-[#26201d]/70 px-4 py-1.5 sm:px-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-2">
           <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-            <Badge className="bg-[#0066ff]">终章结算</Badge>
-            <Badge variant="outline">天命破壁 · 逆命结局</Badge>
-            <Badge variant="secondary">终章评级 S+ 级</Badge>
-            <Badge variant="outline" className="font-mono">
-              12,850 字
+            <Badge className="bg-[#e2622c] font-mono text-[10px] text-black font-bold">终章结算</Badge>
+            <Badge variant="outline" className="border-orange-500/40 text-[10px] text-orange-300">
+              <Trophy className="size-2.5 text-[#e2622c] mr-1" />
+              天命破壁 · 逆命结局
             </Badge>
-          </div>
-          <div className="mt-1 flex items-center gap-2">
-            <h2 className="text-base font-black text-slate-900 sm:text-lg">
-              【天命破壁 · 汉室新开九万里】
-            </h2>
-            <span className="text-xs text-slate-500">
-              你扮演 {selectedPlayer.name}({selectedPlayer.identity}) · 历经 3 回合廷议博弈
+            <Badge variant="secondary" className="bg-orange-950/60 text-[10px] text-orange-300 font-bold">
+              终局评级 S+ 级
+            </Badge>
+            <span className="text-xs font-black text-slate-100 sm:text-sm">
+              【天命破壁 · 踏碎严冬三万里】
+            </span>
+            <span className="hidden sm:inline text-[11px] text-slate-400">
+              · 你扮演【{selectedPlayer.name} · {selectedPlayer.identity.split("·")[0]}】历经 3 回合廷争与凿冰决断
             </span>
           </div>
-        </div>
 
-        <Button
-          size="sm"
-          onClick={triggerCopyToast}
-          className={`h-8 text-xs ${copiedToast ? "bg-emerald-600 hover:bg-emerald-700" : "bg-[#0066ff] hover:bg-blue-600"}`}
-        >
-          {copiedToast ? (
-            <>
-              <Check className="size-3.5" data-icon="inline-start" />
-              已复制万字知乎长回答！
-            </>
-          ) : (
-            <>
-              <Copy className="size-3.5" data-icon="inline-start" />
-              一键复制发回知乎原帖
-            </>
-          )}
-        </Button>
-      </div>
-
-      {/* 核心复刻：左侧 知乎脑洞推演专栏长回答 + 右侧 世界终局数据卡 */}
-      <div className="my-auto grid grid-cols-1 items-start gap-3 lg:grid-cols-12 lg:gap-4">
-        {/* 左侧：知乎专栏长文回答卡片（占 8 列） */}
-        <Card className="border-[#0066ff]/30 bg-white/95 shadow-sm lg:col-span-8">
-          <CardHeader className="gap-2 border-b border-slate-100 p-3.5 sm:p-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="flex items-center gap-1 rounded-full bg-[#0066ff]/10 px-2.5 py-0.5 font-mono text-xs font-bold text-[#0066ff]">
-                  <img src="/zhihu.svg" alt="知乎" className="size-3.5 rounded-xs" />
-                  知乎脑洞推演专栏
-                </span>
-                <span className="text-muted-foreground text-xs font-medium">· 深度亲历回答</span>
-              </div>
-              <span className="font-mono text-xs text-slate-400">
-                原帖点赞: 4.2w+ · 评论: 1,380
-              </span>
+          <div className="flex items-center gap-2">
+            <div className="hidden sm:flex items-center gap-2 font-mono text-[10px] text-slate-400">
+              <span>原帖赞同: 7.7w+</span>
+              <span>·</span>
+              <span>讨论: 1,480 条</span>
             </div>
+            <Button
+              size="xs"
+              onClick={triggerCopyToast}
+              className={`h-7.5 gap-1.5 px-3 text-xs font-bold transition-all shadow-xs ${
+                copiedToast
+                  ? "bg-emerald-600 text-white"
+                  : "bg-[#e2622c] text-black hover:bg-orange-500"
+              }`}
+            >
+              {copiedToast ? (
+                <>
+                  <Check className="size-3.5" />
+                  已复制知乎长回答！
+                </>
+              ) : (
+                <>
+                  <Copy className="size-3.5" />
+                  一键复制发回知乎原帖
+                </>
+              )}
+            </Button>
+          </div>
+        </div>
+      </section>
 
-            {/* 答主信息 */}
-            <div className="flex items-center justify-between rounded-xl border border-slate-200/80 bg-slate-50 p-2.5">
-              <div className="flex items-center gap-2.5">
-                <div className="flex size-9 items-center justify-center rounded-full bg-[#0066ff] font-bold text-white shadow-xs">
-                  {selectedPlayer.name.slice(0, 1)}
+      {/* 📜 核心推演内容：左侧 知乎体深度长文回答 + 右侧 终局世界数据卡 (16:9 比例) */}
+      <section className="mx-auto w-full max-w-7xl flex-1 px-4 py-2 sm:px-6 sm:py-2.5">
+        <div className="grid h-full grid-cols-1 gap-3 lg:grid-cols-12 lg:gap-4">
+          {/* 左侧：知乎专栏长文回答卡片 (占 8 列) */}
+          <Card className="flex flex-col justify-between border-white/15 bg-[#26201d]/95 p-3 shadow-md lg:col-span-8">
+            <CardHeader className="gap-2 border-b border-white/10 p-0 pb-2">
+              <div className="flex items-center justify-between text-xs">
+                <div className="flex items-center gap-2">
+                  <span className="flex items-center gap-1 rounded-full bg-orange-950/60 px-2.5 py-0.5 font-mono text-[10px] font-bold text-orange-400">
+                    <img src={ASSETS.zhihuSvg} alt="知乎" className="size-3 rounded-xs" />
+                    知乎脑洞推演专栏
+                  </span>
+                  <span className="text-[11px] text-slate-400">· 深度亲历回答</span>
                 </div>
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-sm font-black text-slate-900">{selectedPlayer.name}</span>
-                    <Badge variant="secondary" className="px-1.5 py-0 text-[10px]">
-                      当事亲历者
-                    </Badge>
+                <span className="font-mono text-[10px] text-slate-400">全卷共 12,850 字</span>
+              </div>
+
+              {/* 答主信息 */}
+              <div className="flex items-center justify-between rounded-lg border border-white/10 bg-black/30 px-2.5 py-1.5">
+                <div className="flex items-center gap-2">
+                  <div className="flex size-7 items-center justify-center rounded-full bg-[#e2622c] font-bold text-black text-xs">
+                    赵
                   </div>
-                  <p className="text-[10px] text-slate-500">
-                    {selectedPlayer.identity} · 【{selectedPlayer.faction}】核心掌印人
-                  </p>
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs font-black text-slate-100">赵泠</span>
+                      <span className="text-[10px] text-slate-400">(知乎特邀答主) /</span>
+                      <span className="text-xs font-bold text-orange-300">{selectedPlayer.name}</span>
+                      <Badge variant="outline" className="border-orange-500/40 text-[9px] text-orange-300">
+                        当事亲历者
+                      </Badge>
+                    </div>
+                  </div>
                 </div>
+                <Badge className="bg-emerald-950 border border-emerald-500/40 text-[9px] font-mono text-emerald-400">
+                  S+ 破局定鼎
+                </Badge>
               </div>
-              <Badge
-                variant="outline"
-                className="border-[#0066ff]/40 font-mono text-xs text-[#0066ff]"
-              >
-                S+ 破局定鼎
-              </Badge>
-            </div>
 
-            {/* 章节 Tabs */}
-            <div className="flex flex-wrap items-center gap-1.5 pt-1">
-              {allChapters.map((ch, idx) => (
-                <button
-                  key={ch.title}
-                  type="button"
-                  onClick={() => setActiveChapterIndex(idx)}
-                  className={`rounded-lg px-2.5 py-1 text-xs font-bold transition-all ${
-                    idx === activeChapterIndex
-                      ? "bg-slate-900 text-white shadow-xs"
-                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                  }`}
-                >
-                  {ch.title.split("·")[0].trim()}
-                </button>
-              ))}
-            </div>
-          </CardHeader>
-
-          {/* 正文区域 */}
-          <CardContent className="max-h-[220px] overflow-y-auto p-4 text-xs leading-relaxed sm:text-sm">
-            <h4 className="mb-2 font-bold text-slate-900">{currentChapter.title}</h4>
-            <div className="font-serif leading-relaxed whitespace-pre-line text-slate-700">
-              {currentChapter.content}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* 右侧：原版 世界终局数据卡（占 4 列） */}
-        <div className="space-y-3 lg:col-span-4">
-          <Card className="border-slate-200 bg-white/95 shadow-xs">
-            <CardHeader className="border-b border-slate-100 p-3 pb-2">
-              <CardTitle className="flex items-center justify-between text-sm font-bold">
-                <span>世界终局数据卡</span>
-                <span className="font-mono text-xs font-bold text-emerald-600">全域平衡</span>
-              </CardTitle>
+              {/* 章节 Navigation Tabs */}
+              <div className="flex flex-wrap items-center gap-1 pt-0.5">
+                {allChapters.map((ch, idx) => (
+                  <button
+                    key={ch.title}
+                    type="button"
+                    onClick={() => setActiveChapterIndex(idx)}
+                    className={`cursor-pointer rounded px-2 py-0.5 text-[10px] font-bold transition-all ${
+                      idx === activeChapterIndex
+                        ? "bg-orange-500 text-black shadow-xs"
+                        : "bg-white/5 text-slate-300 hover:bg-white/10"
+                    }`}
+                  >
+                    {ch.title.split("·")[0].trim()}
+                  </button>
+                ))}
+              </div>
             </CardHeader>
-            <CardContent className="space-y-2.5 p-3">
-              {[
-                { label: "政权稳定", val: MOCK_FINALE.metricsSummary.stability },
-                { label: "军心士气", val: MOCK_FINALE.metricsSummary.morale },
-                { label: "民众支持", val: MOCK_FINALE.metricsSummary.support },
-                { label: "战略资源", val: MOCK_FINALE.metricsSummary.resources },
-              ].map((item) => (
-                <Progress key={item.label} value={item.val}>
-                  <ProgressLabel className="text-[11px] font-medium text-slate-600">
-                    {item.label}
-                  </ProgressLabel>
-                  <ProgressValue className="font-mono text-xs font-bold">
-                    {() => item.val}
-                  </ProgressValue>
-                </Progress>
-              ))}
+
+            {/* 正文区域 */}
+            <CardContent className="p-0 pt-2 text-xs">
+              <h4 className="mb-1 text-xs font-black text-orange-300">{currentChapter.title}</h4>
+              <div className="font-serif leading-relaxed whitespace-pre-line text-slate-200 line-clamp-6">
+                {currentChapter.content}
+              </div>
             </CardContent>
           </Card>
 
-          {/* 私密目标达成判定卡 */}
-          <Card className="border-slate-200 bg-white/95 shadow-xs">
-            <CardHeader className="p-3 pb-1.5">
-              <CardTitle className="flex items-center gap-1.5 text-xs font-bold text-slate-800">
-                <ShieldQuestion className="size-3.5 text-[#0066ff]" />
-                <span>你的私密目标判定</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-1.5 p-3 pt-0 text-xs">
-              <div className="flex items-center gap-2">
-                <Badge className="bg-emerald-600 text-[10px] text-white">圆满达成</Badge>
-                <span className="text-[11px] text-slate-500">“保全士人脊梁，开辟重洋”</span>
+          {/* 右侧：世界终局数据卡与社区飞轮 (占 4 列) */}
+          <div className="flex flex-col justify-between gap-2 lg:col-span-4">
+            {/* 世界终局数据卡 */}
+            <Card className="border-white/15 bg-[#26201d]/95 p-3 shadow-xs">
+              <CardHeader className="border-b border-white/10 p-0 pb-1.5">
+                <CardTitle className="flex items-center justify-between text-xs font-bold text-slate-100">
+                  <span>极寒终局存续数据卡</span>
+                  <span className="font-mono text-[10px] text-emerald-400">文明存续 92.4%</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2 p-0 pt-2">
+                {[
+                  { label: "族群存续", val: MOCK_FINALE.metricsSummary.morale },
+                  { label: "秩序稳定", val: MOCK_FINALE.metricsSummary.stability },
+                  { label: "民众支持", val: MOCK_FINALE.metricsSummary.support },
+                  { label: "战略资源", val: MOCK_FINALE.metricsSummary.resources },
+                ].map((item) => (
+                  <Progress key={item.label} value={item.val}>
+                    <ProgressLabel className="text-[10px] font-medium text-slate-300">
+                      {item.label}
+                    </ProgressLabel>
+                    <ProgressValue className="font-mono text-[10px] font-bold text-orange-400">
+                      {() => item.val}
+                    </ProgressValue>
+                  </Progress>
+                ))}
+              </CardContent>
+            </Card>
+
+            {/* 私密目标达成判定卡 */}
+            <Card className="border-white/15 bg-[#26201d]/95 p-2.5 shadow-xs">
+              <CardHeader className="p-0 pb-1">
+                <CardTitle className="flex items-center gap-1 text-[11px] font-bold text-slate-200">
+                  <ShieldQuestion className="size-3 text-[#e2622c]" />
+                  <span>私密目标判定：圆满达成</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-0 text-[10px] leading-tight text-slate-300">
+                <p className="text-orange-200">“三百万同胞一个都不能扔在冰原上”</p>
+                <p className="mt-0.5 text-slate-400">
+                  以冰上长城绕开防守雷场，护送三百万军民横贯千里直下暖带，开辟极寒自救通衢。
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* 社区飞轮卡 */}
+            <div className="rounded-lg border border-orange-500/30 bg-orange-950/30 p-2 text-[10px] text-slate-300">
+              <div className="flex items-center gap-1 font-bold text-orange-400">
+                <Repeat className="size-3" />
+                <span>结算即内容社区闭环</span>
               </div>
-              <p className="text-[11px] leading-snug text-slate-600">
-                成功逼退曹操代汉进封魏公之谋，并令刘孙二王远渡南洋，保全天下苍生与汉家天命。
+              <p className="mt-0.5 text-slate-400">
+                一次沙盘推演，天然产出一篇严守知乎体感的万字亲历长回答，一键发回知乎原帖。
               </p>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
       {/* 底部确认栏 */}
-      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-slate-200 bg-white/95 px-4 py-2 text-xs text-slate-700 shadow-xs sm:text-sm">
-        <span className="flex items-center gap-2">
-          <Trophy className="size-4 text-amber-600" />
-          <span>结算即内容闭环：</span>
-          <strong className="text-slate-900">
-            一次对局推演，天然产出一篇严格恪守亲历者纪律的知乎体长回答
-          </strong>
-        </span>
-        <span className="font-mono text-xs font-bold text-[#0066ff]">
-          下一幕：核心工程攻坚 · 架构与算法突破 ➔ (按空格键或右方向键)
-        </span>
-      </div>
-    </div>
+      <footer className="relative z-30 shrink-0 border-t border-white/10 bg-black/60 px-4 py-2 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2">
+            <Trophy className="size-4 text-orange-400" />
+            <span className="text-slate-400">推演全流程闭幕：</span>
+            <strong className="text-slate-100">
+              完成从知乎问题到沙盘推演再到知乎长回答的完整闭环
+            </strong>
+          </div>
+          <span className="font-mono text-[11px] font-bold text-orange-400">
+            下一幕：底层工程攻坚 (Architecture) ➔ (按空格键或右方向键)
+          </span>
+        </div>
+      </footer>
+    </main>
   );
 }

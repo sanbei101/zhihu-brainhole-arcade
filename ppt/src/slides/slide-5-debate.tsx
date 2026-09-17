@@ -1,203 +1,219 @@
-import { ShieldAlert, Swords, Volume2 } from "lucide-react";
+import { ShieldAlert, Swords, Volume2, Zap } from "lucide-react";
 
 import { PixelSprite } from "@/components/pixel/pixel-sprite";
 import { portraitFor, portraitMotionClass } from "@/components/pixel/portraits";
 import { Badge } from "@/components/ui/badge";
-import type { ScenarioSkin } from "@/lib/scenario-skin";
+import { getSkin, isDarkSkin, skinStyleVars, type ScenarioSkin } from "@/lib/scenario-skin";
 
 import { useMockGame } from "../mock/game-state";
 import { MOCK_DEBATE_BEATS, type MockDebateBeat } from "../mock/preset-data";
 
-export function Slide5Debate({ skin }: { skin: ScenarioSkin }) {
+export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
   const { activeDebateIndex, setActiveDebateIndex } = useMockGame();
+  const skin = getSkin("apocalypse");
   const currentBeat = MOCK_DEBATE_BEATS[activeDebateIndex] ?? MOCK_DEBATE_BEATS[0];
 
   const speakerPortrait = portraitFor(currentBeat.speaker, skin);
   const opponentPortrait = currentBeat.opponent ? portraitFor(currentBeat.opponent, skin) : null;
 
   return (
-    <div className="relative flex size-full max-h-full scrollbar-none flex-col justify-between gap-3 overflow-y-auto rounded-2xl border border-white/80 bg-white/90 p-4 text-slate-900 shadow-2xl backdrop-blur-md sm:gap-4 sm:p-6 lg:p-7">
-      {/* 顶部标题栏 */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200/80 pb-2.5">
-        <div className="space-y-1">
+    <main
+      style={skinStyleVars(skin)}
+      className={`bg-background text-foreground relative flex size-full h-screen flex-col justify-between overflow-hidden select-none ${
+        isDarkSkin(skin) ? "dark" : ""
+      }`}
+    >
+      {/* 🎭 顶部状态与 4 个回合快捷切换栏 */}
+      <section className="shrink-0 border-b border-white/10 bg-[#26201d]/70 px-4 py-1.5 sm:px-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <span className="font-mono text-xs font-bold tracking-wider text-[#0066ff] uppercase">
-              [第 4 幕 · 智能体当场表态与交锋]
+            <Badge className="bg-[#e2622c] text-[10px] text-black font-bold">智能体即时交锋</Badge>
+            <span className="text-xs font-black text-slate-100 sm:text-sm">
+              Speech Stage · 动态调度管线现场
             </span>
-            <Badge variant="secondary" className="text-[10px]">
-              SPEECH STAGE & CLASH MATRIX
-            </Badge>
           </div>
-          <h2 className="text-xl font-black text-slate-900 sm:text-2xl lg:text-3xl">
-            一人抉择，四方表态，冲突矩阵短兵相接
-          </h2>
-        </div>
 
-        {/* 4 个回合快捷切换按钮 */}
-        <div className="flex flex-wrap items-center gap-1.5">
-          {MOCK_DEBATE_BEATS.map((beat: MockDebateBeat, idx: number) => {
-            const isActive = idx === activeDebateIndex;
-            return (
-              <button
-                key={beat.id}
-                type="button"
-                onClick={() => setActiveDebateIndex(idx)}
-                className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-bold transition-all ${
-                  isActive
-                    ? "bg-[#0066ff] text-white shadow-sm"
-                    : "border border-slate-200 bg-white text-slate-700 hover:bg-slate-100"
+          {/* 4 个回合快捷切换按钮 */}
+          <div className="flex items-center gap-1">
+            {MOCK_DEBATE_BEATS.map((beat: MockDebateBeat, idx: number) => {
+              const isActive = idx === activeDebateIndex;
+              return (
+                <button
+                  key={beat.id}
+                  type="button"
+                  onClick={() => setActiveDebateIndex(idx)}
+                  className={`flex cursor-pointer items-center gap-1 rounded-md px-2 py-0.5 text-xs font-bold transition-all ${
+                    isActive
+                      ? "bg-[#e2622c] text-black shadow-xs"
+                      : "border border-white/10 bg-black/40 text-slate-300 hover:bg-white/10"
+                  }`}
+                >
+                  <span className="font-mono text-[9px] opacity-75">#{idx + 1}</span>
+                  <span className="text-[10px]">{beat.roundTitle.split("·")[1]?.trim() ?? beat.roundTitle}</span>
+                  {beat.opponent && (
+                    <span className="rounded bg-amber-400 px-1 font-mono text-[8px] font-black text-black">
+                      交锋
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 🎭 核心 16:9 双栏剧场与调度管线 */}
+      <section className="mx-auto w-full max-w-7xl flex-1 px-4 py-2 sm:px-6 sm:py-3">
+        <div className="grid h-full grid-cols-1 gap-3 lg:grid-cols-12 lg:gap-4">
+          {/* 左侧：SpeechStage 像素对决剧场 (占 7 列) */}
+          <div className="flex flex-col justify-between gap-2.5 rounded-xl border border-white/15 bg-gradient-to-b from-black/80 via-black/95 to-black/80 p-4 text-white shadow-xl lg:col-span-7">
+            {/* 舞台顶栏 */}
+            <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-xs">
+              <div className="flex items-center gap-1.5 font-mono font-bold text-orange-400">
+                <Swords className="size-3.5" />
+                <span>{currentBeat.tag}</span>
+              </div>
+              <span
+                className={`rounded px-1.5 py-0.2 font-mono text-[10px] font-bold ${
+                  currentBeat.clashType === "矛与盾尖锐交锋"
+                    ? "border border-red-500/40 bg-red-950/60 text-red-400"
+                    : "border border-blue-500/40 bg-blue-950/60 text-blue-300"
                 }`}
               >
-                <span className="font-mono text-[10px] opacity-75">#{idx + 1}</span>
-                <span>{beat.roundTitle.split("·")[1]?.trim() ?? beat.roundTitle}</span>
-                {beat.opponent && (
-                  <span className="py-0.2 rounded bg-amber-400 px-1 font-mono text-[9px] font-black text-black">
-                    交锋
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* 核心原版舞台复刻：左侧 SpeechStage 像素舞台 + 右侧调度管线解析 */}
-      <div className="my-auto grid grid-cols-1 items-center gap-4 lg:grid-cols-12 lg:gap-6">
-        {/* 左侧：原版 SpeechStage 暗黑像素剧场（占 8 列） */}
-        <div className="flex min-h-[320px] flex-col justify-between gap-3 rounded-2xl border-2 border-slate-800 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 p-4 text-white shadow-xl sm:p-6 lg:col-span-8">
-          {/* 舞台顶栏 */}
-          <div className="flex items-center justify-between border-b border-white/10 pb-2">
-            <div className="flex items-center gap-2 font-mono text-xs font-bold text-slate-300">
-              <Swords className="size-4 text-amber-400" />
-              <span>{currentBeat.tag}</span>
-            </div>
-            <span
-              className={`rounded-full px-2.5 py-0.5 font-mono text-[10px] font-black ${
-                currentBeat.clashType === "矛与盾尖锐交锋"
-                  ? "border border-red-500/30 bg-red-500/20 text-red-400"
-                  : "border border-blue-500/30 bg-blue-500/20 text-blue-300"
-              }`}
-            >
-              {currentBeat.clashType}
-            </span>
-          </div>
-
-          {/* 角色立绘站位区 */}
-          <div className="my-auto flex items-center justify-around py-2 sm:py-4">
-            {/* 发言人 1 */}
-            <div className="flex flex-col items-center gap-2">
-              <div className="flex size-20 items-center justify-center overflow-hidden rounded-2xl border-2 border-blue-400/40 bg-slate-800/80 p-1 shadow-lg shadow-blue-500/10 backdrop-blur-sm sm:size-24">
-                <PixelSprite
-                  frames={speakerPortrait.frames}
-                  palette={speakerPortrait.palette}
-                  label={speakerPortrait.label}
-                  scale={3}
-                  className={portraitMotionClass(speakerPortrait.motion, true)}
-                />
-              </div>
-              <div className="text-center">
-                <div className="text-sm font-black text-white">{currentBeat.speaker.name}</div>
-                <div className="text-[10px] text-slate-400">{currentBeat.speaker.faction}</div>
-              </div>
-            </div>
-
-            {/* 双人交锋中栏 */}
-            {opponentPortrait && currentBeat.opponent ? (
-              <>
-                <div className="flex flex-col items-center gap-1 font-mono text-xs font-black text-amber-400">
-                  <div className="flex size-9 animate-pulse items-center justify-center rounded-full border border-amber-400/40 bg-amber-500/20">
-                    <Swords className="size-4.5" />
-                  </div>
-                  <span>VS</span>
-                </div>
-
-                <div className="flex flex-col items-center gap-2">
-                  <div className="flex size-20 items-center justify-center overflow-hidden rounded-2xl border-2 border-red-400/40 bg-slate-800/80 p-1 shadow-lg shadow-red-500/10 backdrop-blur-sm sm:size-24">
-                    <PixelSprite
-                      frames={opponentPortrait.frames}
-                      palette={opponentPortrait.palette}
-                      label={opponentPortrait.label}
-                      scale={3}
-                      className={portraitMotionClass(opponentPortrait.motion, true)}
-                    />
-                  </div>
-                  <div className="text-center">
-                    <div className="text-sm font-black text-white">{currentBeat.opponent.name}</div>
-                    <div className="text-[10px] text-slate-400">{currentBeat.opponent.faction}</div>
-                  </div>
-                </div>
-              </>
-            ) : null}
-          </div>
-
-          {/* 原版台词气泡框 */}
-          <div className="rounded-xl border border-white/15 bg-white/10 p-3.5 backdrop-blur-md">
-            <div className="mb-1 flex items-center gap-2 font-mono text-xs font-bold text-amber-300">
-              <Volume2 className="size-3.5" />
-              <span>
-                {currentBeat.opponent
-                  ? `${currentBeat.speaker.name} ➔ 对抗驳斥 ➔ ${currentBeat.opponent.name}`
-                  : `${currentBeat.speaker.name} 发言中`}
+                {currentBeat.clashType}
               </span>
             </div>
-            <p className="font-serif text-xs leading-relaxed font-medium whitespace-pre-line text-slate-100 sm:text-sm">
-              {currentBeat.speech}
-            </p>
+
+            {/* 角色立绘对立站位 */}
+            <div className="my-auto flex items-center justify-around py-3 sm:py-4">
+              {/* 发言人 1 */}
+              <div className="flex flex-col items-center gap-1.5">
+                <div className="flex size-16 items-center justify-center overflow-hidden rounded-xl border-2 border-cyan-500/40 bg-slate-900/90 p-1 shadow-lg shadow-cyan-500/10 backdrop-blur-sm sm:size-20">
+                  <PixelSprite
+                    frames={speakerPortrait.frames}
+                    palette={speakerPortrait.palette}
+                    label={speakerPortrait.label}
+                    scale={2.2}
+                    className={portraitMotionClass(speakerPortrait.motion, true)}
+                  />
+                </div>
+                <div className="text-center">
+                  <div className="text-xs font-black text-slate-100">{currentBeat.speaker.name}</div>
+                  <div className="text-[10px] text-slate-400">{currentBeat.speaker.identity.split("·")[0]}</div>
+                </div>
+              </div>
+
+              {/* 双人短兵相接 VS 标志 */}
+              {opponentPortrait && currentBeat.opponent ? (
+                <>
+                  <div className="flex flex-col items-center gap-1 font-mono text-xs font-black text-amber-400">
+                    <div className="flex size-8 animate-pulse items-center justify-center rounded-full border border-amber-400/40 bg-amber-500/20 shadow-lg shadow-amber-500/20">
+                      <Swords className="size-4" />
+                    </div>
+                    <span>VS</span>
+                  </div>
+
+                  <div className="flex flex-col items-center gap-1.5">
+                    <div className="flex size-16 items-center justify-center overflow-hidden rounded-xl border-2 border-red-500/40 bg-slate-900/90 p-1 shadow-lg shadow-red-500/10 backdrop-blur-sm sm:size-20">
+                      <PixelSprite
+                        frames={opponentPortrait.frames}
+                        palette={opponentPortrait.palette}
+                        label={opponentPortrait.label}
+                        scale={2.2}
+                        className={portraitMotionClass(opponentPortrait.motion, true)}
+                      />
+                    </div>
+                    <div className="text-center">
+                      <div className="text-xs font-black text-slate-100">{currentBeat.opponent.name}</div>
+                      <div className="text-[10px] text-slate-400">{currentBeat.opponent.identity.split("·")[0]}</div>
+                    </div>
+                  </div>
+                </>
+              ) : null}
+            </div>
+
+            {/* 动态台词气泡框 */}
+            <div className="rounded-xl border border-white/10 bg-white/5 p-3 text-xs leading-relaxed text-slate-100 backdrop-blur-md">
+              <div className="mb-1 flex items-center gap-1.5 font-mono text-[10px] font-bold text-amber-300">
+                <Volume2 className="size-3" />
+                <span>
+                  {currentBeat.opponent
+                    ? `${currentBeat.speaker.name} ➔ 对抗驳斥 ➔ ${currentBeat.opponent.name}`
+                    : `${currentBeat.speaker.name} 发言中`}
+                </span>
+              </div>
+              <p className="font-serif leading-relaxed whitespace-pre-line text-slate-200">
+                {currentBeat.speech}
+              </p>
+            </div>
+          </div>
+
+          {/* 右侧：多智能体调度算法深度解析 (占 5 列) */}
+          <div className="flex flex-col justify-between gap-2.5 rounded-xl border border-white/10 bg-[#26201d]/90 p-3 shadow-md lg:col-span-5">
+            <div className="border-b border-white/10 pb-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[10px] font-black text-orange-400 uppercase">
+                  MULTI-AGENT DISPATCH PIPELINE
+                </span>
+                <Badge className="bg-[#e2622c] text-[9px] text-black font-bold">调度算法突破</Badge>
+              </div>
+              <h3 className="mt-1 text-sm font-black text-slate-100">多智能体冲突矩阵对齐管线</h3>
+            </div>
+
+            <div className="space-y-2 text-xs">
+              <div className="rounded-lg border border-orange-500/30 bg-orange-950/30 p-2">
+                <strong className="flex items-center gap-1 text-[11px] font-bold text-orange-300">
+                  <Zap className="size-3 text-[#e2622c]" />
+                  <span>1. 并发扇出表态 (Fan-Out)</span>
+                </strong>
+                <p className="mt-0.5 text-[10px] leading-relaxed text-slate-400">
+                  `Promise.all` 瞬间唤起 4 位 Agent 针对同一抉择表态，NDJSON 流式推送，首包秒级上屏。
+                </p>
+              </div>
+
+              <div className="rounded-lg border border-red-500/30 bg-red-950/30 p-2">
+                <strong className="flex items-center gap-1 text-[11px] font-bold text-red-300">
+                  <Swords className="size-3 text-red-400" />
+                  <span>2. 冲突矩阵对齐 (pickConflictPair)</span>
+                </strong>
+                <p className="mt-0.5 text-[10px] leading-relaxed text-slate-400">
+                  算法过滤共识，锁定立场极化权重最高的一对矛与盾（沈寒山极地科学 vs 燕崇山铁血死守）。
+                </p>
+              </div>
+
+              <div className="rounded-lg border border-amber-500/30 bg-amber-950/30 p-2">
+                <strong className="flex items-center gap-1 text-[11px] font-bold text-amber-300">
+                  <Volume2 className="size-3 text-amber-400" />
+                  <span>3. 单次结构化交锋合成 (Single-Shot Clash)</span>
+                </strong>
+                <p className="mt-0.5 text-[10px] leading-relaxed text-slate-400">
+                  合并双人对抗为单次模型结构化推演，消除多轮往返时延，杜绝多智能体死锁。
+                </p>
+              </div>
+            </div>
+
+            <div className="rounded border border-white/5 bg-black/40 p-1.5 text-center font-mono text-[10px] text-slate-400">
+              AbortController 级联容灾：单 Agent 失败不熔断对局长链路
+            </div>
           </div>
         </div>
-
-        {/* 右侧：多智能体调度算法突破解析卡（占 4 列） */}
-        <div className="flex flex-col justify-between gap-3 rounded-2xl border-2 border-slate-200 bg-white/95 p-4 shadow-sm lg:col-span-4">
-          <div className="space-y-1 border-b border-slate-200 pb-2">
-            <span className="font-mono text-[10px] font-bold text-[#0066ff] uppercase">
-              AGENT DISPATCH PIPELINE
-            </span>
-            <h4 className="text-sm font-black text-slate-900">多智能体调度管线突破</h4>
-          </div>
-
-          <div className="space-y-2 text-xs text-slate-700">
-            <div className="rounded-xl border border-blue-200 bg-blue-50/60 p-2.5">
-              <strong className="font-bold text-blue-900">1. 并发扇出表态</strong>
-              <p className="mt-0.5 text-[11px] leading-snug text-slate-600">
-                `Promise.all` 同时唤起 4 位 Agent 针对同一抉择表态，NDJSON 流式推送，首包毫秒直出。
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-purple-200 bg-purple-50/60 p-2.5">
-              <strong className="font-bold text-purple-900">2. 冲突矩阵对齐</strong>
-              <p className="mt-0.5 text-[11px] leading-snug text-slate-600">
-                `pickConflictPair` 算法过滤共识，精准锁定立场极化权重最高的一对矛与盾（程昱 vs
-                鲁肃）。
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-amber-200 bg-amber-50/60 p-2.5">
-              <strong className="font-bold text-amber-900">3. 单次结构化交锋合成</strong>
-              <p className="mt-0.5 text-[11px] leading-snug text-slate-600">
-                合并双人驳斥为单次 LLM 结构化推演，消除多轮往返时延，杜绝多智能体死锁。
-              </p>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-2 text-center font-mono text-[10px] font-bold text-slate-500">
-            故障隔离: 单 Agent 失败不熔断对局长链路
-          </div>
-        </div>
-      </div>
+      </section>
 
       {/* 底部确认栏 */}
-      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-slate-200 bg-white/95 px-4 py-2 text-xs text-slate-700 shadow-xs sm:text-sm">
-        <span className="flex items-center gap-2">
-          <ShieldAlert className="size-4 text-purple-600" />
-          <span>四方交锋终了：</span>
-          <strong className="text-slate-900">
-            天命大权抵定，全盘推演过程已由 AI 自动整理为知乎体万字亲历长文
-          </strong>
-        </span>
-        <span className="font-mono text-xs font-bold text-[#0066ff]">
-          下一幕：终局收束 · 结算即内容 ➔ (按空格键或右方向键)
-        </span>
-      </div>
-    </div>
+      <footer className="relative z-30 shrink-0 border-t border-white/10 bg-black/60 px-4 py-2 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2">
+            <ShieldAlert className="size-4 text-orange-400" />
+            <span className="text-slate-400">四方交锋终了：</span>
+            <strong className="text-slate-100">
+              天命破壁已确立，全盘推演已自动整理为知乎体万字亲历长回答
+            </strong>
+          </div>
+          <span className="font-mono text-[11px] font-bold text-orange-400">
+            下一幕：终局结算万字长文 (Act III) ➔ (按空格键或右方向键)
+          </span>
+        </div>
+      </footer>
+    </main>
   );
 }
