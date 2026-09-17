@@ -1,14 +1,12 @@
 import type { SlideData } from "../types";
 import { Slide1Cover } from "./slide-1-cover";
-import { Slide2Background } from "./slide-2-background";
-import { Slide3UiAesthetics } from "./slide-3-ui-aesthetics";
-import { Slide4CrossPlatform } from "./slide-4-cross-platform";
-import { Slide5PrefixCaching } from "./slide-5-prefix-caching";
-import { Slide6PromptEcology } from "./slide-6-prompt-ecology";
-import { Slide7GameplayEntropy } from "./slide-7-gameplay-entropy";
-import { Slide8ZhihuFinale } from "./slide-8-zhihu-finale";
-import { Slide9LiveSandbox } from "./slide-9-live-sandbox";
-import { Slide10Summary } from "./slide-10-summary";
+import { Slide2Gallery } from "./slide-2-gallery";
+import { Slide3Cast } from "./slide-3-cast";
+import { Slide4Council } from "./slide-4-council";
+import { Slide5Debate } from "./slide-5-debate";
+import { Slide6Finale } from "./slide-6-finale";
+import { Slide7Architecture } from "./slide-7-architecture";
+import { Slide8Vision } from "./slide-8-vision";
 
 export const SLIDES: SlideData[] = [
   {
@@ -26,134 +24,101 @@ export const SLIDES: SlideData[] = [
     component: ({ skin }) => <Slide1Cover skin={skin} />,
   },
   {
-    id: "background",
+    id: "gallery",
     number: 2,
-    title: "立意痛点与知乎生态共振",
-    subtitle: "从静态长文跃迁为人人可玩的沙盘推演",
-    category: "项目立意",
-    defaultSkinId: "qin-han",
-    notes: [
-      "对比传统知乎假设题痛点：单向阅读、缺乏多方博弈感、消费即终结。",
-      "阐述四步闭环飞轮：知乎母本选题 ➔ 多智能体博弈 ➔ 天命分叉决策 ➔ 结算万字长回答一键发帖。",
-      "突出知乎生态契合度：不仅是好玩的独立游戏，更是社区内容的二次生产机器。",
-    ],
-    component: ({ skin }) => <Slide2Background skin={skin} />,
-  },
-  {
-    id: "ui-aesthetics",
-    number: 3,
-    title: "纯前端程序化像素美学引擎",
-    subtitle: "SVG 路径合并算法 × 10 大平行宇宙换肤",
-    category: "美学架构",
-    defaultSkinId: "future-tech",
-    notes: [
-      "评委关注点：为什么选用像素风格？如何做到丝滑不卡？",
-      "关键突破：frameToPaths 算法将数百个 <rect> 压缩合并为单条 SVG path，减少 85% DOM 节点，锁死 60fps。",
-      "手绘 5 类微部件组合出上百种角色立绘，配以 6 种动作情绪律动。",
-      "展示 10 套语义化皮肤瞬间换肤能力。",
-    ],
-    component: ({ skin }) => <Slide3UiAesthetics skin={skin} />,
-  },
-  {
-    id: "cross-platform",
-    number: 4,
-    title: "多端极致响应式适配",
-    subtitle: "桌面端三栏全景战局 × 移动端单手掌控",
-    category: "工程体验",
+    title: "玩法第 1 幕 · 知乎高赞脑洞展厅",
+    subtitle: "从一句知乎提问，到一场多方博弈",
+    category: "推演实操 · 选题",
     defaultSkinId: "three-kingdoms",
     notes: [
-      "评委关注点：多端体验是否合格？",
-      "桌面端：三栏战局（左侧势力谱系，中间议事舞台，右侧四维指标与决策树），全键盘快捷键驱动。",
-      "移动端：卡片流自适应，使用 dvh 单位彻底解决 Safari/Chrome 动态工具栏遮挡，大拇指黄金热区排布。",
-      "底层采用 React 19 Compiler 与 Next.js 16 自动化记忆化，零冗余重绘。",
+      "现场演示：复刻原版题库展厅，点击切换平行宇宙分类与脑洞卡片。",
+      "题库全部来自知乎历史/科幻区高赞提问，保留原帖作者与点赞、评论数。",
+      "默认锁定经典脑洞：《如果赤壁之战曹操大获全胜生擒刘备孙权，历史会怎样走向？》。",
     ],
-    component: ({ skin }) => <Slide4CrossPlatform skin={skin} />,
+    component: ({ skin }) => <Slide2Gallery skin={skin} />,
   },
   {
-    id: "prefix-caching",
+    id: "cast",
+    number: 3,
+    title: "玩法第 2 幕 · 势力立局与选角",
+    subtitle: "三方视角 × 四路 AI：立场互斥的博弈棋局",
+    category: "推演实操 · 选角",
+    defaultSkinId: "three-kingdoms",
+    notes: [
+      "现场演示：复刻原版 WorldCastPanel，点击 3 位候选角色切换主角身份。",
+      "联动查阅不同主角的公开目标、私密动机、底牌绝密与 4 路 Agent 利益红线（Red Line）。",
+      "强调：每个世界线现场生成互斥阵容，拒绝千篇一律。",
+    ],
+    component: ({ skin }) => <Slide3Cast skin={skin} />,
+  },
+  {
+    id: "council",
+    number: 4,
+    title: "玩法第 3 幕 · 议事厅全景战局",
+    subtitle: "三栏战局：势力信任 × 梯度抉择 × 四维国力",
+    category: "推演实操 · 抉择",
+    defaultSkinId: "three-kingdoms",
+    notes: [
+      "现场演示：复刻原版三栏全景战局，左栏 SeatsPanel 信任度血条，右栏四维国力动态账本与大势熵增。",
+      "核心亮点：点击 A/B/C/D 梯度选项，实时联动指标增减预览与各路 Agent 预测。",
+      "特别展示 🌟 D 项【天命破壁】燃向金句：『汉家四百年若只有九州之大，这天下不要也罢！天下若容不下汉室，汉室便去重造一个天下！』",
+    ],
+    component: ({ skin }) => <Slide4Council skin={skin} />,
+  },
+  {
+    id: "debate",
     number: 5,
-    title: "严苛的三段式前缀缓存设计",
-    subtitle: "最大化 KV Cache 命中，降低 72% 延迟与 85% 成本",
-    category: "提示词工程",
+    title: "玩法第 4 幕 · 智能体当场表态与交锋",
+    subtitle: "一人抉择，四方表态，冲突矩阵短兵相接",
+    category: "推演实操 · 交锋",
+    defaultSkinId: "three-kingdoms",
+    notes: [
+      "现场演示：复刻原版 SpeechStage，点击 4 个回合按钮，步进演示四路 Agent 并发表态与短兵相接交锋。",
+      "重点演示 Beat 3【双人短兵相接】：程昱按剑怒叱与鲁肃昂首对质双人同框，程序化像素立绘呼吸律动。",
+      "阐释多智能体调度管线：并发扇出 + pickConflictPair 冲突矩阵对齐 + 单次结构化驳斥合成。",
+    ],
+    component: ({ skin }) => <Slide5Debate skin={skin} />,
+  },
+  {
+    id: "finale",
+    number: 6,
+    title: "玩法第 5 幕 · 终局结算万字长文",
+    subtitle: "结算即内容：万字知乎体亲历长回答",
+    category: "推演实操 · 结算",
+    defaultSkinId: "three-kingdoms",
+    notes: [
+      "现场演示：复刻原版 WorldFinaleView，点击章节 Tab 分卷阅读知乎体长回答。",
+      "展示经典知乎开头：『谢邀。人在赤壁，刚下战船……』，严格亲历者纪律，绝不打破第四面墙。",
+      "点击【一键复制发回知乎】按钮，展示复制成功 Toast 交互反馈；右侧展示四维终局战报卡。",
+    ],
+    component: ({ skin }) => <Slide6Finale skin={skin} />,
+  },
+  {
+    id: "architecture",
+    number: 7,
+    title: "核心工程攻坚 · 架构与算法突破",
+    subtitle: "底层技术硬实力：缓存降本 × 像素引擎 × 冲突调度",
+    category: "底层架构",
     defaultSkinId: "cosmic",
     notes: [
-      "核心攻坚：多回合多 Agent 调用如果不严谨，延迟与成本会指数级失控。",
-      "架构设计：严格的三段式Prompt：① 静态世界规则与身份顶层（100% 缓存命中）➔ ② 线性历史记录居中（追加复用）➔ ③ 动态变量置底（极微小增量计算）。",
-      "实测数据：首字延迟（TTFT）降低 72%（从 1.6s 降至 0.45s），Token 成本降低 85%，单局成本不到 2 分钱！",
+      "硬核工程攻坚 1：严苛三段式 Prefix Caching 架构，首字时延降低 72%，Token 成本锐减 85%，单局推演不到 2 分钱！",
+      "硬核工程攻坚 2：纯前端程序化像素引擎，frameToPaths 算法减少 85% DOM 节点，锁死 60fps，10 大皮肤瞬间换肤。",
+      "硬核工程攻坚 3：多智能体冲突矩阵对齐与 AbortController 级联容灾，保障长链路推演稳定可靠。",
     ],
-    component: ({ skin }) => <Slide5PrefixCaching skin={skin} />,
+    component: ({ skin }) => <Slide7Architecture skin={skin} />,
   },
   {
-    id: "prompt-ecology",
-    number: 6,
-    title: "多智能体博弈调度管线",
-    subtitle: "并发扇出表态 ➔ 冲突矩阵对齐 ➔ 单次结构化交锋",
-    category: "Agent 调度",
-    defaultSkinId: "alien",
-    notes: [
-      "核心攻坚：如何解决多智能体回合演算的高延迟、死锁与机械感？",
-      "阶段一：Promise.all 并发扇出 4 大阵营表态，NDJSON 流式实时推送，前端首包直出零等待。",
-      "阶段二：冲突矩阵对齐算法（pickConflictPair），按立场对抗权重识别出最尖锐的矛与盾，自动剪枝共识。",
-      "阶段三：单次结构化双向交锋合成（Single-Shot Dual Clash），合并双人驳斥 prompt，节约 50% 往返时延并杜绝死锁。",
-      "可靠性保障：AbortController 级联取消与单 Agent 故障隔离，保证长链路推演稳定可靠。",
-    ],
-    component: ({ skin }) => <Slide6PromptEcology skin={skin} />,
-  },
-  {
-    id: "gameplay-entropy",
-    number: 7,
-    title: "四维国力博弈 × 大势熵增定律",
-    subtitle: "数值不是加减法，而是历史宿命与心理压迫",
-    category: "机制设计",
-    defaultSkinId: "apocalypse",
-    notes: [
-      "四维指标权衡：政权稳定、军心士气、民众支持、战略资源。每一个选项都有尖锐代价。",
-      "大势熵增定律：随回合推演，局势损耗不可逆增加（从 -0 到 -10/回合），杜绝消极苟活，逼迫玩家做出战略破局。",
-      "危机倒计时与通牒机制强化游戏节奏张力。",
-    ],
-    component: ({ skin }) => <Slide7GameplayEntropy skin={skin} />,
-  },
-  {
-    id: "zhihu-finale",
+    id: "vision",
     number: 8,
-    title: "结算即内容：万字知乎体长回答",
-    subtitle: "亲历者第一人称自省 × 绝不打破第四面墙",
-    category: "内容闭环",
-    defaultSkinId: "after-human",
-    notes: [
-      "核心机制：对局结束即自动产出一篇格式严密的万字知乎长回答，形成社区内容增量。",
-      "严格写作纪律：以'谢邀。人在赤壁，刚下战船'切入，严禁出现'AI/玩家/数值'等出戏词汇。",
-      "卷目分章叙事 + 四维战报卡 + 一键复制发回知乎原帖，天然的高传播社交货币。",
-    ],
-    component: ({ skin }) => <Slide8ZhihuFinale skin={skin} />,
-  },
-  {
-    id: "live-sandbox",
-    number: 9,
-    title: "现场沙盘交互演示舱",
-    subtitle: "10 大皮肤切换、角色原型立绘与刘看山互动",
-    category: "现场演示",
-    defaultSkinId: "dino",
-    notes: [
-      "邀请评委现场监督交互体验！",
-      "直接在幻灯片中点击切换文臣、武将、军师、工匠，观察呼吸动效与台词对峙。",
-      "点击切换 10 大平行宇宙（白垩纪、三国、秦汉、深空、霓虹等），见证纯函数确定性的毫秒级渲染。",
-      "展示知乎吉祥物刘看山的多姿态互动。",
-    ],
-    component: ({ skin }) => <Slide9LiveSandbox skin={skin} />,
-  },
-  {
-    id: "summary",
-    number: 10,
-    title: "未来愿景、知乎 OAuth 助力与致谢",
-    subtitle: "为每一个天马行空的脑洞，赋以一整个世界！",
-    category: "愿景致谢",
+    title: "生态飞轮与未来演进 · 愿景致谢",
+    subtitle: "为每一个脑洞，赋以一整个世界！",
+    category: "生态愿景",
     defaultSkinId: "evolution",
     notes: [
-      "未来演进：知乎链接一键转沙盘（UGC 开放世界）；社区群体世界线拓扑树。",
-      "知乎官方 OAuth 助力闭环：已打通授权，推演完毕可为本作助力【黑客松人气奖】并点亮刘看山徽章。",
-      "致敬并感谢知乎答主与评委老师！邀请评委提问交流。",
+      "知乎生态闭环飞轮：知乎选题 ➔ 沙盘推演 ➔ 结算长文发回知乎 ➔ 社区二次讨论发酵。",
+      "知乎 OAuth 助力闭环：已打通授权，推演完毕可为本作助力【黑客松人气奖】并点亮专属徽章。",
+      "致敬知乎答主与评委老师！进入 Q&A 互动问答环节。",
     ],
-    component: ({ skin }) => <Slide10Summary skin={skin} />,
+    component: ({ skin }) => <Slide8Vision skin={skin} />,
   },
 ];

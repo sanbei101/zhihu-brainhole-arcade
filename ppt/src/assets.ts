@@ -1,3 +1,9 @@
+import flowAgentsPng from "@/docs/flow/council-agents.png";
+import flowOptionsPng from "@/docs/flow/council-options.png";
+import flowGalleryPng from "@/docs/flow/step-1-gallery.png";
+import flowCastPng from "@/docs/flow/step-2-cast.png";
+import flowCouncilPng from "@/docs/flow/step-3-council.png";
+import flowFinalePng from "@/docs/flow/step-4-finale.png";
 import shotDesktopPng from "@/docs/shot-desktop.png";
 import shotMobilePng from "@/docs/shot-mobile.png";
 import basketballWebp from "@/public/liukanshan/basketball.webp";
@@ -25,6 +31,14 @@ export const ASSETS = {
   shots: {
     desktop: toSrc(shotDesktopPng),
     mobile: toSrc(shotMobilePng),
+  },
+  flow: {
+    gallery: toSrc(flowGalleryPng),
+    cast: toSrc(flowCastPng),
+    council: toSrc(flowCouncilPng),
+    councilOptions: toSrc(flowOptionsPng),
+    councilAgents: toSrc(flowAgentsPng),
+    finale: toSrc(flowFinalePng),
   },
   liukanshan: {
     greeting: toSrc(greetingWebp),
