@@ -220,8 +220,7 @@ export function Slide3Cast({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                 <span>知乎高赞母本具象化：自由选择各方阵营人物</span>
               </h2>
               <p className="mt-1 text-xs leading-relaxed text-slate-300 sm:text-sm">
-                以知乎 7.7w 赞爆款《假如地球进入冰河时代》为母本：不仅是文字脑洞,
-                选择一位主角作为开局,写下你的故事
+                以知乎 7.7w 赞爆款《假如地球进入冰河时代》为母本：将文字脑洞转化为互动沙盘，选择一位核心角色开启你的推演。
               </p>
             </div>
 
@@ -238,8 +237,8 @@ export function Slide3Cast({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                     <span>【选择核心人物】正反派由你说了算</span>
                   </h3>
                 </div>
-                <p className="mt-1 text-xs leading-relaxed text-slate-200 sm:text-lg">
-                  系统生成在这个世界观中,各方阵营举足轻重的代表人物,各有各的诉求和性格,增强多元化体验
+                <p className="mt-1 text-xs leading-relaxed text-slate-200 sm:text-sm font-medium">
+                  系统生成在这个世界观中，各方阵营举足轻重的代表人物，各有各的诉求和性格，增强多元化体验。
                 </p>
               </div>
 
@@ -251,15 +250,11 @@ export function Slide3Cast({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                   </span>
                   <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
                     <BrainCircuit className="size-4 text-orange-400" />
-                    <span>【拒绝上帝视角】每个人都有致命软肋，逼你做痛苦抉择</span>
+                    <span>【双层动机机制】公开主张与私密诉求</span>
                   </h3>
                 </div>
-                <p className="mt-1 text-xs leading-relaxed text-slate-200 sm:text-[13px]">
-                  不给玩家开全能外挂！你扮演的是有血有肉的真实当权者：
-                  <strong>
-                    军垦师长手里有兵但极度缺粮、知府手握大仓但被朝廷死死卡住、部族女头人掌管唯一驯鹿运输线却一心救族人
-                  </strong>
-                  。选谁，谁的软肋就由你来抗！
+                <p className="mt-1 text-xs leading-relaxed text-slate-200 sm:text-sm font-medium">
+                  每个角色均拥有明面的政治立场与隐藏的私信底牌，在应对外部危机时需要权衡公私诉求与阵营利益。
                 </p>
               </div>
 
@@ -271,21 +266,19 @@ export function Slide3Cast({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                   </span>
                   <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
                     <Sparkles className="size-4 text-orange-400" />
-                    <span>【表面大义凛然，背后各打各的利益小算盘】</span>
+                    <span>【初始条件差异】不同的资源与决策权</span>
                   </h3>
                 </div>
-                <p className="mt-1 text-xs leading-relaxed text-slate-200 sm:text-[13px]">
-                  谁说开会都是一团和气？每个角色嘴上都是天下大局，
-                  <strong>水面之下各怀绝密暗盘与利益底线</strong>。明暗交织，AI
-                  朝臣演出来的戏才叫真刀真枪、尔虞我诈！
+                <p className="mt-1 text-xs leading-relaxed text-slate-200 sm:text-sm font-medium">
+                  军备、仓储与运输等不同职权对应着各自的优势与困境，选择不同角色将带来截然不同的决策起点。
                 </p>
               </div>
             </div>
 
             {/* 底部技术注记 */}
             <div className="shrink-0 rounded-lg border border-orange-500/40 bg-orange-950/40 px-3 py-2 text-xs text-orange-300 sm:text-[13px]">
-              <strong className="text-orange-400">💡 演示玩法：</strong>
-              <span>点击左侧 3 位主角卡片直接换人！身份和底牌当场变幻，推演走向立刻翻天覆地！</span>
+              <strong className="text-orange-400">💡 交互说明：</strong>
+              <span>点击左侧角色卡片可切换扮演身份，实时查看不同人物的职权属性与动机设定。</span>
             </div>
           </aside>
         </div>

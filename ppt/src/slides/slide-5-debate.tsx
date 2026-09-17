@@ -1,15 +1,14 @@
 import {
-  Brain,
   CheckCircle2,
   Flame,
-  Network,
+  MessageSquare,
   Radio,
   Repeat,
+  Scale,
   ShieldAlert,
   Swords,
   Volume2,
   XCircle,
-  Zap,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -133,9 +132,9 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
       <section className="shrink-0 border-b border-white/10 bg-[#26201d]/70 px-4 py-1.5 sm:px-6">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <Badge className="bg-[#e2622c] text-[10px] font-bold text-black">智能体即时交锋</Badge>
+            <Badge className="bg-[#e2622c] text-[10px] font-bold text-black">阵营当堂论辩</Badge>
             <span className="text-xs font-black text-slate-100 sm:text-sm">
-              Speech Stage · 动态调度管线现场
+              Speech Stage · 阵营立场辩论现场
             </span>
           </div>
 
@@ -179,24 +178,24 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
             <div className="shrink-0 border-b border-white/10 pb-2">
               <div className="flex items-center justify-between">
                 <Badge className="bg-[#e2622c] text-xs font-black text-black">
-                  STAGE 03 · 智能体对喷：神仙打架是怎么炼成的
+                  STAGE 03 · 廷争辩论：各方阵营当堂交锋
                 </Badge>
                 <span className="font-mono text-xs font-bold text-orange-400">
-                  DISPATCH PIPELINE
+                  DEBATE & CLASH
                 </span>
               </div>
               <h2 className="mt-1.5 flex items-center gap-2 text-base font-black text-slate-100 sm:text-lg">
                 <Swords className="size-5 shrink-0 text-orange-400" />
-                <span>多智能体调度黑科技：告别排队卡顿，引爆硬核交锋</span>
+                <span>廷议交锋：正反双方当堂辩驳与立场碰撞</span>
               </h2>
               <p className="mt-1 text-xs sm:text-sm leading-relaxed text-slate-300">
-                多智能体最怕两件事：慢死和复读机。我们用三套调度算法，让 AI 辩论像知乎高赞答主互撕一样精彩、快速、过瘾！
+                战略决策拟草后，各阵营角色将公开表明态度并展开辩论，展现真实的利益诉求与思想碰撞。
               </p>
             </div>
 
-            {/* 3 个核心算法亮点卡片（说人话、大字体） */}
+            {/* 3 个核心辩论机制卡片（完全非技术，产品机制风格） */}
             <div className="flex flex-1 flex-col justify-around space-y-2 overflow-hidden py-1.5">
-              {/* 算法 1：并发扇出表态 */}
+              {/* 机制 1 */}
               <div
                 className={`rounded-xl border p-3 shadow-xs transition-all ${
                   stage === 1 || stage === 2
@@ -210,23 +209,22 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                       01
                     </span>
                     <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
-                      <Zap className="size-4 text-orange-400" />
-                      <span>【4 个 AI 同时张嘴】并发并行，秒级上屏不等待</span>
+                      <MessageSquare className="size-4 text-orange-400" />
+                      <span>【阵营独立表态】支持与反对各有依据</span>
                     </h3>
                   </div>
                   {(stage === 1 || stage === 2) && (
-                    <Badge className="animate-pulse border border-emerald-500/40 bg-emerald-950 text-[10px] text-emerald-400">
-                      ● 演示中：单人独立表态
+                    <Badge className="border border-emerald-500/40 bg-emerald-950 text-[10px] text-emerald-400 font-bold">
+                      ● 单人独立表态
                     </Badge>
                   )}
                 </div>
-                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
-                  用 <code>Promise.all</code> 瞬间唤醒 4 个智能体同时推演，打字机流式吐字，
-                  <strong>彻底消灭一个等一个的漫长排队</strong>，首个字符秒级上屏，丝滑流畅！
+                <p className="mt-1 text-xs sm:text-sm leading-relaxed text-slate-200 font-medium">
+                  不同立场的角色依据自身代表的群体利益先后发言，明确表达对玩家拟草方案的赞同或质疑。
                 </p>
               </div>
 
-              {/* 算法 2：冲突矩阵对齐 */}
+              {/* 机制 2 */}
               <div
                 className={`rounded-xl border p-3 shadow-xs transition-all ${
                   stage === 3
@@ -240,47 +238,43 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                       02
                     </span>
                     <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
-                      <Network className="size-4 text-orange-400" />
-                      <span>【算法挑事：专找矛盾最尖锐的两个人】</span>
+                      <Swords className="size-4 text-orange-400" />
+                      <span>【观点针锋相对】抓取核心矛盾当面辩驳</span>
                     </h3>
                   </div>
                   {stage === 3 && (
-                    <Badge className="animate-pulse border border-red-500/40 bg-red-950 text-[10px] text-red-400">
-                      ● 演示中：两人同台激烈争吵
+                    <Badge className="border border-red-500/40 bg-red-950 text-[10px] text-red-400 font-bold">
+                      ● 双方同台辩论
                     </Badge>
                   )}
                 </div>
-                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
-                  大家都赞同的废话直接过滤！
-                  <strong>算法自动计算分歧权重，精准揪出反对最激烈的一对（如气象官 vs 守城总兵）</strong>
-                  ，火药味直接拉满，绝不冷场！
+                <p className="mt-1 text-xs sm:text-sm leading-relaxed text-slate-200 font-medium">
+                  系统提取立场分歧最尖锐的正反双方同台辩论，从各自角度阐述利害关系，呈现真实剧烈的思想交锋。
                 </p>
               </div>
 
-              {/* 算法 3：单次结构化交锋 */}
+              {/* 机制 3 */}
               <div className="rounded-xl border border-white/10 bg-black/40 p-3 shadow-xs">
                 <div className="flex items-center gap-2">
                   <span className="flex size-7 shrink-0 items-center justify-center rounded-md border border-orange-500/30 bg-orange-950 font-mono text-xs font-black text-orange-400">
                     03
                   </span>
                   <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
-                    <Brain className="size-4 text-orange-400" />
-                    <span>【一次推理搞定互怼】杜绝车轱辘话与死锁</span>
+                    <Scale className="size-4 text-orange-400" />
+                    <span>【论辩沉淀剧情】言辞交锋写入推演记录</span>
                   </h3>
                 </div>
-                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
-                  传统多轮对话最容易陷入无意义的循环复读。我们设计
-                  <strong>单次结构化交锋合成</strong>
-                  ，一次性生成两人针锋相对、引经据典的辩论短兵相接，思辨质感拉爆！
+                <p className="mt-1 text-xs sm:text-sm leading-relaxed text-slate-200 font-medium">
+                  角色的辩论过程不仅展现当下冲突，更会直接影响其信任评级，并作为重要推演过程写入终局回答。
                 </p>
               </div>
             </div>
 
-            {/* 底部容灾说明 */}
+            {/* 底部交互说明 */}
             <div className="flex shrink-0 items-center justify-between rounded-lg border border-orange-500/40 bg-orange-950/40 px-3 py-2 text-xs sm:text-[13px] text-orange-300">
               <div>
-                <strong className="text-orange-400">🛡️ 毫秒级熔断保底：</strong>
-                <span>哪怕单个 AI 网络超时，也不会卡死主线，稳如磐石！</span>
+                <strong className="text-orange-400">💡 交互说明：</strong>
+                <span>上方可点击回合标签切换不同议题，右侧可观察双方角色的辩论过程与气泡互动。</span>
               </div>
               <ShieldAlert className="size-4 shrink-0 text-orange-400" />
             </div>
@@ -328,7 +322,7 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                       : "bg-white/10 text-slate-400 hover:bg-white/20"
                   }`}
                 >
-                  ③ 两人同台争吵
+                  ③ 两人同台辩论
                 </button>
                 <button
                   type="button"
@@ -441,7 +435,7 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                       <div className="flex items-center justify-between border-b border-cyan-500/30 pb-0.5">
                         <span className="flex items-center gap-1 text-[11px] font-black text-cyan-300">
                           <Flame className="size-3 animate-bounce text-orange-400" />
-                          <span>沈寒山怒斥：</span>
+                          <span>沈寒山质问：</span>
                         </span>
                         <span className="font-mono text-[9px] font-bold text-cyan-400/80">
                           SUPPORT
@@ -541,17 +535,17 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                 <Volume2 className="size-3.5 text-[#e2622c]" />
                 <span>
                   {stage === 1
-                    ? "【步骤 1/3 · 智能体独立亮相】沈寒山单独登场，表明【支持】执政官决策"
+                    ? "【步骤 1/3 · 角色独立表态】沈寒山率先登场，阐述【支持】方案的科学依据"
                     : stage === 2
-                      ? "【步骤 2/3 · 智能体独立亮相】燕崇山单独登场，表明【反对】执政官决策"
-                      : "【步骤 3/3 · 冲突矩阵对齐交锋】两人同台短兵相接，针锋相对互相激烈争吵！"}
+                      ? "【步骤 2/3 · 角色独立表态】燕崇山紧随反驳，申明【反对】方案的防务红线"
+                      : "【步骤 3/3 · 双方同台辩驳】正反双方各执己见，围绕文明去向当堂激烈交锋"}
                 </span>
               </div>
               <p className="line-clamp-2 font-serif text-[11px] leading-relaxed text-slate-300 sm:text-xs">
                 {stage === 1
                   ? "玩家选定【D项·群星飞升决议】点燃地幔熔炉后，国家极地气象站沈寒山断定常规守关必死，率先单独登场力挺地幔熔炉方案。"
                   : stage === 2
-                    ? "守防总兵官燕崇山随后单独亮相，手按配枪断然否决。其阶层利益绑定关防军纪，严厉警告私启万米裂变井将引发地质崩塌灾难。"
+                    ? "守防总兵官燕崇山随后发言，手按配枪断然否决。其立场代表关防守军与秩序防线，严厉警告私启万米裂变井将引发地质崩塌灾难。"
                     : currentBeat.speech}
               </p>
             </div>

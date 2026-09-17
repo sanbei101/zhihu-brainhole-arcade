@@ -78,14 +78,14 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
               </div>
               <h2 className="mt-1.5 flex items-center gap-2 text-base font-black text-slate-100 sm:text-lg">
                 <Scale className="size-5 shrink-0 text-orange-400" />
-                <span>高维动态博弈：四维生死账本、寒潮逼近与群星飞升</span>
+                <span>动态博弈：四维指标量化与阵营立场联动</span>
               </h2>
-              <p className="mt-1 text-xs sm:text-sm leading-relaxed text-slate-300">
-                这不是死板的选项树！你每下一个决定，不仅立刻改变四项生存指标，还会当场引爆 4 个 AI 的阵营对抗。
+              <p className="mt-1 text-xs leading-relaxed text-slate-300 sm:text-sm">
+                玩家拟草决策时，系统不仅计算四维生存资源的即时损益，还将实时驱动多智能体进行动态立场反馈。
               </p>
             </div>
 
-            {/* 3 个核心机制解析卡片（说人话、大字体） */}
+            {/* 3 个核心机制解析卡片（产品机制风格，客观严谨） */}
             <div className="flex flex-1 flex-col justify-around space-y-2 overflow-hidden py-1.5">
               {/* 机制 1 */}
               <div className="rounded-xl border border-white/10 bg-black/40 p-3 shadow-xs">
@@ -95,11 +95,11 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                   </span>
                   <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
                     <Shield className="size-4 text-orange-400" />
-                    <span>【极寒步步紧逼！】绝无躺平可能，逼你主动破局</span>
+                    <span>【四维生存账本】量化决策代价与环境熵增</span>
                   </h3>
                 </div>
-                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
-                  <strong>稳定、士气、民心、物资</strong>四根红线勒在头上！更绝的是加入「极寒倒计时」（每回合气温暴跌、资源消耗），任何拖延固守都是慢性自杀，唯一的活路是主动亮剑！
+                <p className="mt-1 text-xs sm:text-sm leading-relaxed text-slate-200 font-medium">
+                  系统设定稳定、士气、民心、物资四项量化指标，并引入大势环境衰减机制，促使决策者权衡每项方案的现实收益与代价。
                 </p>
               </div>
 
@@ -111,12 +111,11 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                   </span>
                   <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
                     <Cpu className="size-4 text-orange-400" />
-                    <span>【四路 AI 当场翻脸】绝不死板背台词，真实利益碰撞</span>
+                    <span>【阵营立场演算】多智能体实时反馈支持度</span>
                   </h3>
                 </div>
-                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
-                  守城总兵要军纪、粮商东家要暴利、气象专家要真相、前线医官要救人。
-                  <strong>你点任一方案，他们立刻根据各自阶层利益表明支持或反对</strong>，甚至当场拍桌子！
+                <p className="mt-1 text-xs sm:text-sm leading-relaxed text-slate-200 font-medium">
+                  四位智能体代表各自的阶层诉求，在玩家选择不同方案时，系统基于阵营利益模型实时计算并呈现各方的支持或反对态度。
                 </p>
               </div>
 
@@ -128,12 +127,11 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                   </span>
                   <h3 className="flex items-center gap-1.5 text-sm font-black text-slate-100 sm:text-base">
                     <Sparkles className="size-4 text-orange-400" />
-                    <span>【格局打开！从逃荒流民到群星级行星飞升】</span>
+                    <span>【阶梯式决策档位】常规应对与重大战略决议</span>
                   </h3>
                 </div>
-                <p className="mt-1 text-xs sm:text-[13px] leading-relaxed text-slate-200">
-                  拒绝传统的小修小补！除普通方案外，独创
-                  <strong>「天命破壁 · 飞升决议」</strong>（如 D 项直接下凿万米地幔熔炉给整颗星球供暖）。不搞零和博弈，以行星重工重铸文明新世界！
+                <p className="mt-1 text-xs sm:text-sm leading-relaxed text-slate-200 font-medium">
+                  系统提供稳健、冒险、权策等多档位方案，并包含高投入高回报的重大工程决议，拓展沙盘推演的战略深度与世界线分支。
                 </p>
               </div>
             </div>
@@ -141,8 +139,8 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
             {/* 底部联动提示 */}
             <div className="flex shrink-0 items-center justify-between rounded-lg border border-orange-500/40 bg-orange-950/40 px-3 py-2 text-xs sm:text-[13px] text-orange-300">
               <div>
-                <strong className="text-orange-400">💡 演示玩法：</strong>
-                <span>右侧点击 A / B / C / D 选项，亲眼看看上方指标与四路 AI 态度是如何瞬时联动的！</span>
+                <strong className="text-orange-400">💡 交互说明：</strong>
+                <span>点击右侧 A / B / C / D 选项，可实时预览四维指标预期变化以及各智能体席位的支持度响应。</span>
               </div>
               <Compass className="size-4 shrink-0 text-orange-400" />
             </div>
@@ -230,10 +228,10 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                             <div
                               className={`h-full rounded-full transition-all ${
                                 agent.trust > 60
-                                    ? "bg-emerald-500"
-                                    : agent.trust > 40
-                                      ? "bg-amber-500"
-                                      : "bg-red-500"
+                                  ? "bg-emerald-500"
+                                  : agent.trust > 40
+                                    ? "bg-amber-500"
+                                    : "bg-red-500"
                               }`}
                               style={{ width: `${agent.trust}%` }}
                             />
@@ -269,7 +267,7 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                       <div
                         key={opt.id}
                         onClick={() => setSelectedOptionId(opt.id)}
-                        className={`flex cursor-pointer flex-col justify-between rounded-xl border p-2.5 sm:p-3 transition-all ${
+                        className={`flex cursor-pointer flex-col justify-between rounded-xl border p-2.5 transition-all sm:p-3 ${
                           isSelected
                             ? "border-[#e2622c] bg-orange-950/70 shadow-md ring-2 ring-[#e2622c]/50"
                             : "border-white/10 bg-black/40 hover:border-white/20 hover:bg-white/5"
@@ -281,20 +279,20 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                             <span className="flex size-5 items-center justify-center rounded bg-orange-500 font-mono text-xs font-black text-black">
                               {opt.id}
                             </span>
-                            <strong className="text-xs sm:text-sm font-black text-slate-100">
+                            <strong className="text-xs font-black text-slate-100 sm:text-sm">
                               {opt.title}
                             </strong>
                           </div>
                           <Badge
                             variant="outline"
-                            className="h-5 px-2 text-[10px] font-bold border-white/20 text-slate-200 bg-black/30"
+                            className="h-5 border-white/20 bg-black/30 px-2 text-[10px] font-bold text-slate-200"
                           >
                             {opt.risk}档抉择
                           </Badge>
                         </div>
 
                         {/* 方案说明（舒展充实大字号） */}
-                        <p className="mt-1 text-xs sm:text-[12.5px] leading-relaxed text-slate-200">
+                        <p className="mt-1 text-xs leading-relaxed text-slate-200 sm:text-[12.5px]">
                           {opt.desc}
                         </p>
 
@@ -303,25 +301,49 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                           <div className="flex items-center gap-2.5 sm:gap-3">
                             <span>
                               稳定:{" "}
-                              <strong className={opt.deltas.stability >= 0 ? "text-emerald-400 font-bold" : "text-red-400 font-bold"}>
+                              <strong
+                                className={
+                                  opt.deltas.stability >= 0
+                                    ? "font-bold text-emerald-400"
+                                    : "font-bold text-red-400"
+                                }
+                              >
                                 {opt.impactText.stability}
                               </strong>
                             </span>
                             <span>
                               士气:{" "}
-                              <strong className={opt.deltas.morale >= 0 ? "text-emerald-400 font-bold" : "text-red-400 font-bold"}>
+                              <strong
+                                className={
+                                  opt.deltas.morale >= 0
+                                    ? "font-bold text-emerald-400"
+                                    : "font-bold text-red-400"
+                                }
+                              >
                                 {opt.impactText.morale}
                               </strong>
                             </span>
                             <span>
                               民心:{" "}
-                              <strong className={opt.deltas.support >= 0 ? "text-emerald-400 font-bold" : "text-red-400 font-bold"}>
+                              <strong
+                                className={
+                                  opt.deltas.support >= 0
+                                    ? "font-bold text-emerald-400"
+                                    : "font-bold text-red-400"
+                                }
+                              >
                                 {opt.impactText.support}
                               </strong>
                             </span>
                             <span>
                               物资:{" "}
-                              <strong className={opt.deltas.resources >= 0 ? "text-emerald-400 font-bold" : "text-red-400 font-bold"}>
+                              <strong
+                                className={
+                                  opt.deltas.resources >= 0
+                                    ? "font-bold text-emerald-400"
+                                    : "font-bold text-red-400"
+                                }
+                              >
                                 {opt.impactText.resources}
                               </strong>
                             </span>
@@ -333,7 +355,9 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                               已拟定落子
                             </span>
                           ) : (
-                            <span className="text-[10px] text-slate-400 hover:text-slate-200">点击拟定 ➔</span>
+                            <span className="text-[10px] text-slate-400 hover:text-slate-200">
+                              点击拟定 ➔
+                            </span>
                           )}
                         </div>
                       </div>
@@ -345,7 +369,7 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                     <div
                       key={opt.id}
                       onClick={() => setSelectedOptionId(opt.id)}
-                      className={`flex cursor-pointer flex-col justify-between rounded-xl border-2 p-2.5 sm:p-3 transition-all ${
+                      className={`flex cursor-pointer flex-col justify-between rounded-xl border-2 p-2.5 transition-all sm:p-3 ${
                         isSelected
                           ? "border-amber-400 bg-gradient-to-br from-amber-950/90 via-[#26201d] to-black/90 shadow-xl ring-2 ring-amber-400/50"
                           : "border-amber-500/40 bg-amber-950/40 hover:border-amber-400/70 hover:bg-amber-950/60"
@@ -357,24 +381,26 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                           <span className="flex size-5.5 items-center justify-center rounded-md bg-amber-400 font-mono text-xs font-black text-black shadow-sm">
                             {opt.id}
                           </span>
-                          <strong className="text-xs sm:text-sm font-black text-amber-200 tracking-wide">
+                          <strong className="text-xs font-black tracking-wide text-amber-200 sm:text-sm">
                             {opt.title}
                           </strong>
                         </div>
-                        <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-black text-[10px] font-black px-2 py-0.5 shadow-sm">
+                        <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 px-2 py-0.5 text-[10px] font-black text-black shadow-sm">
                           🌟 宇宙级飞升决议 · 群星巨构
                         </Badge>
                       </div>
 
                       {/* 完整方案描述（舒展大字号，绝不省略截断） */}
-                      <p className="mt-1 text-xs sm:text-[12.5px] leading-relaxed text-slate-100 font-medium">
+                      <p className="mt-1 text-xs leading-relaxed font-medium text-slate-100 sm:text-[12.5px]">
                         {opt.desc}
                       </p>
 
                       {/* 专属飞升宣誓金句卡 */}
                       {opt.epigraph && (
-                        <div className="mt-1 rounded-lg border border-amber-500/40 bg-black/50 px-2.5 py-1 text-xs text-amber-200 font-serif italic shadow-inner">
-                          <span className="font-bold text-amber-400 not-italic font-sans mr-1">🌟 飞升宣誓：</span>
+                        <div className="mt-1 rounded-lg border border-amber-500/40 bg-black/50 px-2.5 py-1 font-serif text-xs text-amber-200 italic shadow-inner">
+                          <span className="mr-1 font-sans font-bold text-amber-400 not-italic">
+                            🌟 飞升宣誓：
+                          </span>
                           “{opt.epigraph}”
                         </div>
                       )}
@@ -384,29 +410,39 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
                         <div className="flex items-center gap-3">
                           <span className="flex items-center gap-1">
                             <span className="text-slate-400">稳定:</span>
-                            <strong className="text-emerald-400 font-bold">{opt.impactText.stability}</strong>
+                            <strong className="font-bold text-emerald-400">
+                              {opt.impactText.stability}
+                            </strong>
                           </span>
                           <span className="flex items-center gap-1">
                             <span className="text-slate-400">士气:</span>
-                            <strong className="text-emerald-400 font-bold text-sm sm:text-base">{opt.impactText.morale} 🚀</strong>
+                            <strong className="text-sm font-bold text-emerald-400 sm:text-base">
+                              {opt.impactText.morale} 🚀
+                            </strong>
                           </span>
                           <span className="flex items-center gap-1">
                             <span className="text-slate-400">民心:</span>
-                            <strong className="text-emerald-400 font-bold">{opt.impactText.support}</strong>
+                            <strong className="font-bold text-emerald-400">
+                              {opt.impactText.support}
+                            </strong>
                           </span>
                           <span className="flex items-center gap-1">
                             <span className="text-slate-400">物资:</span>
-                            <strong className="text-red-400 font-bold">{opt.impactText.resources}</strong>
+                            <strong className="font-bold text-red-400">
+                              {opt.impactText.resources}
+                            </strong>
                           </span>
                         </div>
 
                         {isSelected ? (
-                          <span className="flex items-center gap-1 text-xs font-black text-amber-300 bg-amber-950/80 px-2 py-0.5 rounded border border-amber-400/50">
+                          <span className="flex items-center gap-1 rounded border border-amber-400/50 bg-amber-950/80 px-2 py-0.5 text-xs font-black text-amber-300">
                             <Check className="size-3.5" />
                             已拟定最高决议
                           </span>
                         ) : (
-                          <span className="text-[11px] text-amber-400 font-bold">点击拟定飞升 ➔</span>
+                          <span className="text-[11px] font-bold text-amber-400">
+                            点击拟定飞升 ➔
+                          </span>
                         )}
                       </div>
                     </div>
@@ -429,7 +465,7 @@ export function Slide4Council({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
             </strong>
           </div>
           <span className="font-mono text-[11px] font-bold text-orange-400">
-            下一幕：智能体当场表态与交锋 (Speech Stage) ➔ (按空格键或右方向键)
+            下一幕：各方角色当堂表态与交锋 (Speech Stage) ➔ (按空格键或右方向键)
           </span>
         </div>
       </footer>
