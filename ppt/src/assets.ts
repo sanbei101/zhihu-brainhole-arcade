@@ -1,3 +1,5 @@
+import shotDesktopPng from "@/docs/shot-desktop.png";
+import shotMobilePng from "@/docs/shot-mobile.png";
 import basketballWebp from "@/public/liukanshan/basketball.webp";
 import codingWebp from "@/public/liukanshan/coding.webp";
 import greetingWebp from "@/public/liukanshan/greeting.webp";
@@ -20,6 +22,10 @@ function toSrc(asset: unknown): string {
 
 export const ASSETS = {
   zhihuSvg: toSrc(zhihuSvg),
+  shots: {
+    desktop: toSrc(shotDesktopPng),
+    mobile: toSrc(shotMobilePng),
+  },
   liukanshan: {
     greeting: toSrc(greetingWebp),
     coding: toSrc(codingWebp),
