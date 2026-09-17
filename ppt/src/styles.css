@@ -220,34 +220,3 @@
 @utility stage-scrim {
   background-image: linear-gradient(to bottom, var(--skin-bg, #14161a), transparent 48%);
 }
-
-/* 幻灯片平滑换页动效：支持前后方向感知与平滑渐变 */
-.slide-enter-forward {
-  animation: slideInRight 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.slide-enter-backward {
-  animation: slideInLeft 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes slideInRight {
-  0% {
-    opacity: 0;
-    transform: translate3d(40px, 0, 0) scale(0.985);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-}
-
-@keyframes slideInLeft {
-  0% {
-    opacity: 0;
-    transform: translate3d(-40px, 0, 0) scale(0.985);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-}

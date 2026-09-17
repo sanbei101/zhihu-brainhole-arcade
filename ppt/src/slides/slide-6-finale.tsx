@@ -11,7 +11,13 @@ import { MOCK_FINALE } from "../mock/preset-data";
 import { EPIC_ZHIHU_ARTICLE } from "../mock/epic-zhihu-article";
 import { ASSETS } from "../assets";
 
-export function Slide6Finale({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
+export function Slide6Finale({
+  skin: _defaultSkin,
+  active = true,
+}: {
+  skin: ScenarioSkin;
+  active?: boolean;
+}) {
   const { copiedToast, triggerCopyToast, selectedPlayer } = useMockGame();
   const skin = getSkin("apocalypse");
 
@@ -21,6 +27,7 @@ export function Slide6Finale({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
 
   // 哗啦啦自动快速流式输出：每 16ms 吐出 85 个字，10,000+ 字将在约 2 秒内如瀑布般壮丽涌现并滚动到底部
   useEffect(() => {
+    if (!active) return;
     setDisplayedText("");
     setIsTyping(true);
 
@@ -43,7 +50,7 @@ export function Slide6Finale({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
     }, 16);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [active]);
 
   const replayStreaming = () => {
     setDisplayedText("");

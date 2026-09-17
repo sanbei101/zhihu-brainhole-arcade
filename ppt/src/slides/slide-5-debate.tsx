@@ -51,7 +51,13 @@ function useTypewriter(text: string, speed = 25, active = true) {
   return { displayed, isTyping };
 }
 
-export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
+export function Slide5Debate({
+  skin: _defaultSkin,
+  active = true,
+}: {
+  skin: ScenarioSkin;
+  active?: boolean;
+}) {
   const { activeDebateIndex, setActiveDebateIndex } = useMockGame();
   const skin = getSkin("apocalypse");
   const currentBeat = MOCK_DEBATE_BEATS[activeDebateIndex] ?? MOCK_DEBATE_BEATS[0];
@@ -91,11 +97,16 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
   };
 
   useEffect(() => {
+    if (!active) {
+      timersRef.current.forEach(clearTimeout);
+      timersRef.current = [];
+      return;
+    }
     startAutoProgression(1);
     return () => {
       timersRef.current.forEach(clearTimeout);
     };
-  }, [activeDebateIndex]);
+  }, [activeDebateIndex, active]);
 
   // 台词定义（群星风格 · 行星地幔巨构飞升）
   const speakerStanceText =
@@ -109,11 +120,11 @@ export function Slide5Debate({ skin: _defaultSkin }: { skin: ScenarioSkin }) {
     "“沈寒山！军令如山，州城粮库仅够三月！大门一开全州陪葬！谁敢煽动私启地热裂变井，先问过老子的机枪！”";
 
   // 逐字打字机绑定
-  const speakerStanceType = useTypewriter(speakerStanceText, 22, stage === 1);
-  const opponentStanceType = useTypewriter(opponentStanceText, 22, stage === 2);
+  const speakerStanceType = useTypewriter(speakerStanceText, 22, active && stage === 1);
+  const opponentStanceType = useTypewriter(opponentStanceText, 22, active && stage === 2);
 
-  const speakerClashType = useTypewriter(speakerClashText, 22, stage === 3);
-  const opponentClashType = useTypewriter(opponentClashText, 22, stage === 3);
+  const speakerClashType = useTypewriter(speakerClashText, 22, active && stage === 3);
+  const opponentClashType = useTypewriter(opponentClashText, 22, active && stage === 3);
 
   const handleManualStep = (targetStage: 1 | 2 | 3) => {
     timersRef.current.forEach(clearTimeout);

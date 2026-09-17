@@ -82,7 +82,7 @@ export const SLIDES: SlideData[] = [
       "重点演示 Beat 3【矛与盾尖锐交锋】：气象学家沈寒山与防务总兵燕崇山双人同框对峙，程序化像素立绘呼吸律动。",
       "阐释多智能体调度管线：并发扇出 + pickConflictPair 冲突矩阵对齐 + 单次结构化交锋合成。",
     ],
-    component: ({ skin }) => <Slide5Debate skin={skin} />,
+    component: ({ skin, active }) => <Slide5Debate skin={skin} active={active} />,
   },
   {
     id: "finale",
@@ -97,7 +97,7 @@ export const SLIDES: SlideData[] = [
       "严格亲历者纪律，展现人类工业组织力与意志奇迹。",
       "点击【一键复制发回知乎原帖】按钮展示 Toast 交互反馈；右侧展示 92.4% 文明存续战报卡。",
     ],
-    component: ({ skin }) => <Slide6Finale skin={skin} />,
+    component: ({ skin, active }) => <Slide6Finale skin={skin} active={active} />,
   },
   {
     id: "architecture",

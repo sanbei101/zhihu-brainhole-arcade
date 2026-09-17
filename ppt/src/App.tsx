@@ -9,34 +9,26 @@ import { SLIDES } from "./slides";
 
 export function PresentationApp() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const [direction, setDirection] = useState<"forward" | "backward">("forward");
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const touchStartXRef = useRef<number | null>(null);
   const totalSlides = SLIDES.length;
-  const currentSlide = SLIDES[currentSlideIndex] ?? SLIDES[0];
-
-  // 每一页自动采用其专属世界线主题皮肤
-  const skin = getSkin(currentSlide.defaultSkinId);
 
   const goToNext = useCallback(() => {
-    setDirection("forward");
     setCurrentSlideIndex((prev) => Math.min(prev + 1, totalSlides - 1));
   }, [totalSlides]);
 
   const goToPrev = useCallback(() => {
-    setDirection("backward");
     setCurrentSlideIndex((prev) => Math.max(prev - 1, 0));
   }, []);
 
   const jumpToSlide = useCallback(
     (target: number) => {
       if (target >= 0 && target < totalSlides) {
-        setDirection(target >= currentSlideIndex ? "forward" : "backward");
         setCurrentSlideIndex(target);
       }
     },
-    [currentSlideIndex, totalSlides],
+    [totalSlides],
   );
 
   const toggleFullscreen = useCallback(() => {
@@ -177,12 +169,31 @@ export function PresentationApp() {
           </button>
         )}
 
-        {/* 幻灯片主体：100% 占满全屏显示内容 */}
-        <div
-          className={`${direction === "forward" ? "slide-enter-forward" : "slide-enter-backward"} relative size-full flex-1 overflow-hidden`}
-          key={currentSlide.id}
-        >
-          <SlideShell skin={skin}>{currentSlide.component({ skin, active: true })}</SlideShell>
+        {/* 幻灯片横向连贯推移轨道：彻底消除黑屏与闪烁，如同胶片推移般无缝丝滑 */}
+        <div className="relative size-full flex-1 overflow-hidden">
+          <div
+            className="flex size-full will-change-transform"
+            style={{
+              transform: `translate3d(-${currentSlideIndex * 100}%, 0, 0)`,
+              transition: "transform 0.65s cubic-bezier(0.25, 1, 0.5, 1)",
+            }}
+          >
+            {SLIDES.map((slide, idx) => {
+              const isActive = idx === currentSlideIndex;
+              const slideSkin = getSkin(slide.defaultSkinId);
+              return (
+                <div
+                  key={slide.id}
+                  className="relative size-full shrink-0 overflow-hidden"
+                  aria-hidden={!isActive}
+                >
+                  <SlideShell skin={slideSkin}>
+                    {slide.component({ skin: slideSkin, active: isActive })}
+                  </SlideShell>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </MockGameProvider>
