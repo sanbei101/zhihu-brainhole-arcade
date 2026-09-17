@@ -8,7 +8,6 @@ import {
   Sparkles,
   ThumbsUp,
   UserCheck,
-  UserRound,
 } from "lucide-react";
 
 import { PixelSprite } from "@/components/pixel/pixel-sprite";
